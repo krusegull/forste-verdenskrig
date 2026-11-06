@@ -155,6 +155,24 @@ svg.map{display:block;width:100%;height:auto;touch-action:manipulation}
 .norway p{margin:0 0 10px;max-width:62ch}
 .norway .flagbar{display:flex;height:6px;border-radius:3px;overflow:hidden;margin-bottom:12px;width:72px}
 .flagbar i:nth-child(1){flex:6;background:#ba0c2f}.flagbar i:nth-child(2){flex:1;background:#fff}.flagbar i:nth-child(3){flex:2;background:#00205b}.flagbar i:nth-child(4){flex:1;background:#fff}.flagbar i:nth-child(5){flex:12;background:#ba0c2f}
+.dyrtid{border-top:4px solid var(--central);margin-top:20px}
+.dyrtid h2{font-family:var(--f-display);font-weight:800;font-size:30px;line-height:1;letter-spacing:.01em;margin:0 0 8px}
+.mel-demo{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:16px;margin:18px 0}
+.mel-head h3{margin:2px 0 2px;font-size:18px}
+.mel-head p{margin:4px 0 0;max-width:62ch}
+.mel-slider-row{display:flex;flex-direction:column;gap:6px;font-size:14px;margin-top:14px}
+.mel-slider-row input{width:100%}
+.mel-sacks{font-size:19px;line-height:1.5;letter-spacing:1px;margin:12px 0 10px;word-break:break-all}
+.mel-price{font-family:var(--f-mono);font-weight:600;font-size:15px;padding:8px 12px;border-radius:6px;display:inline-block;background:var(--card);border:1px solid var(--line)}
+.mel-price.low{color:var(--new)}
+.mel-price.mid{color:var(--central)}
+.mel-price.high{color:var(--central);font-weight:700}
+.mel-price.vhigh{color:var(--front);font-weight:700}
+.chalkboard{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px;margin:18px 0}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:8px}
+.flow span{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:6px 10px;font-size:13.5px}
+.flow .arrow{background:none;border:0;padding:0;color:var(--muted);font-size:18px}
+.flow .result{background:var(--front);color:#fff;border-color:var(--front);font-weight:700}
 
 footer{font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
 footer ul{margin:6px 0 0;padding-left:18px;columns:2;column-gap:28px}
@@ -221,6 +239,43 @@ footer ul{margin:6px 0 0;padding-left:18px;columns:2;column-gap:28px}
       <div id="norway"></div>
     </section>
   </div>
+
+  <section class="panel dyrtid" id="dyrtid" aria-labelledby="dyrtidTitle">
+    <h2 id="dyrtidTitle">Dyrtid: hvorfor steg prisene under krigen?</h2>
+    <p class="sub">Prisene i Norge økte kraftig under første verdenskrig fordi det ble vanskeligere å få tak i varer, samtidig som folk fortsatt trengte dem. Det var særlig fire årsaker.</p>
+    <ul class="events" id="dyrtidCauses"></ul>
+
+    <div class="mel-demo">
+      <div class="mel-head">
+        <span class="label">Prøv selv</span>
+        <h3>Melbutikken</h3>
+        <p>🏠 100 familier ønsker å kjøpe en sekk mel hver. Dra i glidebryteren og se hva som skjer med prisen når det blir færre sekker igjen i butikken.</p>
+      </div>
+      <label class="mel-slider-row" for="melSlider">
+        <span>Sekker mel i butikken: <strong id="melVal">100</strong> av 100</span>
+        <input type="range" id="melSlider" min="10" max="100" step="5" value="100">
+      </label>
+      <div class="mel-sacks" id="melSacks" aria-hidden="true"></div>
+      <div class="mel-price" id="melPrice">Like dyrt som før krigen</div>
+    </div>
+
+    <div class="chalkboard">
+      <div class="label">En enkel forklaring på tavla</div>
+      <div class="flow">
+        <span>Første verdenskrig</span><span class="arrow" aria-hidden="true">→</span>
+        <span>Vanskeligere handel og dyrere transport</span><span class="arrow" aria-hidden="true">→</span>
+        <span>Færre varer i butikkene</span><span class="arrow" aria-hidden="true">→</span>
+        <span class="result">Prisene stiger!</span>
+      </div>
+      <p class="sub" style="margin:10px 0 0">Dette kalles <b>inflasjon</b> eller <b>dyrtid</b>.</p>
+    </div>
+
+    <div class="reflect">
+      <h3>Viktig poeng</h3>
+      <p>Selv om lønningene også steg for mange, steg prisene ofte raskere. Derfor fikk mange vanlige familier dårligere råd.</p>
+      <p style="margin-top:10px"><b>Spørsmål til slutt:</b> Hvorfor kunne en skipsreder bli rik under krigen, mens en vanlig arbeiderfamilie ble fattigere?</p>
+    </div>
+  </section>
 
   <footer>
     <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center">
@@ -400,12 +455,20 @@ const TAG={1914:'Krigen bryter ut',1915:'Krigen sprer seg',1916:'De store slagen
 
 const NORWAY={
 1914:['Norge erklærer seg nøytralt så snart krigen bryter ut, og samarbeider med Sverige og Danmark om å holde seg utenfor. I desember møtes kongene i de tre landene i Malmö.','Marinen og hæren settes til nøytralitetsvakt langs kysten og grensen.'],
-1915:['Jobbetiden: Norske rederier og eksportører tjener store penger fordi begge sider trenger skip, fisk og andre varer. Noen blir rike veldig fort.','Samtidig stiger prisene, og mange vanlige familier får det vanskeligere.'],
+1915:['Jobbetiden: Norske rederier og eksportører tjener store penger fordi begge sider trenger skip, fisk og andre varer. Noen blir rike veldig fort.','Samtidig stiger prisene, og mange vanlige familier får det vanskeligere. <a href="#dyrtid">Hvorfor steg prisene så mye? Se «Dyrtid under krigen» nedenfor ↓</a>'],
 1916:['Storbritannia presser Norge til å stanse fiskeeksporten til Tyskland, og i 1916 må Norge inngå en fiskeavtale med britene.','Norge blir kalt «den nøytrale allierte» fordi landet i praksis støttet Storbritannia. Bare høsten 1916 ble 143 norske skip senket.'],
 1917:['Den uinnskrenkede ubåtkrigen rammer Norge hardt. 1917 er året Norge mister flest skip og flest sjøfolk: 423 skip og 730 sjøfolk.','Våren 1917 er verst, før skipene begynner å seile i beskyttede konvoier.'],
 1918:['Fra nyttår 1918 blir vanlige varer rasjonert, og familiene får rasjoneringskort.','Høsten 1918 kommer spanskesyken. Mellom 13 000 og 15 000 mennesker i Norge dør av den.','I hele krigen mistet over 2000 norske sjøfolk livet, og Norge mistet omtrent halvparten av handelsflåten.'],
 1919:['Etter krigen blir Norge medlem av Folkeforbundet. Stortinget vedtok det 4. mars 1920.','Svalbardtraktaten blir undertegnet i Paris 9. februar 1920, og Norge får Svalbard.','Jobbetiden tar slutt. Fra 1920 kommer det flere økonomiske kriser.']
 };
+
+/* Dyrtid: hvorfor prisene steg under krigen. Egen seksjon, uavhengig av årstall. */
+const DYRTID=[
+ {t:'Det ble mangel på varer',x:'Norge importerte mye mat, kull og andre nødvendige varer fra utlandet. Krigen gjorde det vanskeligere å få varene til Norge fordi skip ble senket, havner ble blokkert og handelen ble begrenset.'},
+ {t:'Tilbud og etterspørsel',x:'Når det er få varer tilgjengelig, men mange som ønsker å kjøpe dem, stiger prisene. Før krigen hadde en butikk for eksempel 100 sekker mel til 100 familier. Under krigen fikk butikken bare 30 sekker, men fortsatt ønsket 100 familier å kjøpe. Da stiger prisen kraftig fordi mange konkurrerer om de få sekkene. Prøv selv i eksempelet under.'},
+ {t:'Det ble dyrere å frakte varer',x:'Tyske ubåter angrep handelsskip, og det ble farligere å transportere varer over havet. Rederiene krevde høyere betaling for transporten, og forsikringene ble dyrere. Disse kostnadene ble ofte lagt til prisen på varene.'},
+ {t:'Mer penger i omløp',x:'Under krigen økte pengemengden og kreditten i Norge, og enkelte bedrifter og skipsredere tjente svært mye penger. Når det ble mer penger i omløp uten at mengden varer økte tilsvarende, bidro det til ytterligere prisstigning.'}
+];
 
 /* Oppdrag. kind: country | event | choice */
 const MISSIONS={
@@ -453,7 +516,7 @@ const REFLECT=[
 /* ---------- state ---------- */
 const store={get(){try{return JSON.parse(localStorage.getItem('fvk-progress')||'{}')}catch(e){return{}}},set(v){try{localStorage.setItem('fvk-progress',JSON.stringify(v))}catch(e){}}};
 let progress=store.get();
-let yi=0, activeMission=null, selEvent=null, selCountry=null;
+let yi=0, activeMission=null, selEvent=null, selCountry=null, selDyrtid=null, melSekker=100;
 const tries={};
 
 /* ---------- map ---------- */
@@ -582,6 +645,28 @@ function renderNorway(){
   document.getElementById('nTitle').textContent=`Norge i ${y}`;
   document.getElementById('norway').innerHTML=NORWAY[y].map(p=>`<p>${p}</p>`).join('');
 }
+/* ---------- dyrtid (årstalluavhengig) ---------- */
+function renderDyrtid(){
+  const ul=document.getElementById('dyrtidCauses'); ul.innerHTML='';
+  DYRTID.forEach((c,i)=>{
+    const li=document.createElement('li');
+    const open=selDyrtid===i;
+    li.innerHTML=`<button type="button" class="ev-btn" aria-expanded="${open}" id="dyb-${i}"><span class="n">${i+1}</span><span><span class="t">${c.t}</span></span></button>${open?`<p class="ev-body">${c.x}</p>`:''}`;
+    li.querySelector('button').onclick=()=>{selDyrtid=open?null:i;renderDyrtid()};
+    ul.appendChild(li);
+  });
+}
+function renderMel(){
+  const sacks=melSekker, slots=20, filled=Math.round(sacks/5);
+  document.getElementById('melVal').textContent=sacks;
+  document.getElementById('melSacks').innerHTML=
+    `<span style="color:var(--ink)">${'🌾'.repeat(filled)}</span><span style="color:var(--line)">${'▫'.repeat(Math.max(0,slots-filled))}</span>`;
+  const el=document.getElementById('melPrice');
+  if(sacks>=100){el.textContent='Like dyrt som før krigen';el.className='mel-price low';return}
+  const mult=100/sacks, m=mult.toLocaleString('nb-NO',{maximumFractionDigits:1});
+  el.textContent=`Omtrent ${m} ganger så dyrt som før krigen`;
+  el.className='mel-price '+(mult<2?'mid':mult<4?'high':'vhigh');
+}
 function kindLabel(k){return k==='country'?'Svar i kartet · klikk på et land':k==='event'?'Svar i kartet · klikk på en markør':'Velg ett svar'}
 function renderMissions(){
   const y=YEARS[yi];
@@ -681,9 +766,14 @@ rs.onclick=()=>{
   if(rs.classList.contains('confirm')){progress={};store.set(progress);for(const k in tries)delete tries[k];rs.classList.remove('confirm');rs.textContent='Nullstill oppdragene mine';clearTimeout(rsT);setYear(yi);return}
   rs.classList.add('confirm');rs.textContent='Klikk igjen for å nullstille';rsT=setTimeout(()=>{rs.classList.remove('confirm');rs.textContent='Nullstill oppdragene mine'},4000);
 };
-function fromHash(){const m=/^#aar-(\d{4})$/.exec(location.hash);const i=m?YEARS.indexOf(+m[1]):-1;return i<0?0:i}
-window.addEventListener('hashchange',()=>{const i=fromHash();if(i!==yi)setYear(i)});
-setYear(fromHash());
+function fromHash(){const m=/^#aar-(\d{4})$/.exec(location.hash);return m?YEARS.indexOf(+m[1]):-1}
+window.addEventListener('hashchange',()=>{const i=fromHash();if(i>=0&&i!==yi)setYear(i)});
+setYear(Math.max(0,fromHash()));
+
+/* ---------- dyrtid init (uavhengig av årstall) ---------- */
+document.getElementById('melSlider').oninput=e=>{melSekker=+e.target.value;renderMel()};
+renderDyrtid();
+renderMel();
 </script>
 
 </body>
