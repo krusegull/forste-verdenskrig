@@ -184,7 +184,14 @@ svg.map{display:block;width:100%;height:auto;touch-action:manipulation}
 .textlink{background:none;border:0;padding:0;margin:0;color:var(--front);text-decoration:underline;cursor:pointer;font:inherit}
 .guess-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
 .guess-card{background:var(--paper);border:1.5px solid var(--line);border-radius:8px;padding:14px;display:flex;flex-direction:column;gap:10px}
-.guess-card.revealed{border-color:var(--ok)}
+.guess-card.revealed{border-color:var(--ok);animation:guesspop .25s ease}
+.guess-card.lost{border-color:var(--bad)}
+.guess-pts{font-family:var(--f-mono);color:var(--front)}
+.guess-opts{display:flex;gap:6px;flex-wrap:wrap}
+.guess-opts .opt{flex:1 1 90px;text-align:center;padding:7px 8px;font-size:13px}
+@keyframes guesspop{0%{transform:scale(.96)}60%{transform:scale(1.02)}100%{transform:scale(1)}}
+.score-bar{display:flex;align-items:baseline;gap:8px;background:var(--ink);color:var(--paper);border-radius:8px;padding:12px 16px;margin-bottom:16px;font-family:var(--f-mono);font-size:13px}
+.score-bar strong{font-family:var(--f-display);font-size:26px;color:var(--central)}
 .guess-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
 .guess-head strong{font-family:var(--f-display);font-weight:800;font-size:18px}
 .guess-hints{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:13.5px}
@@ -339,9 +346,13 @@ footer ul{margin:6px 0 0;padding-left:18px;columns:2;column-gap:28px}
   </div>
 
   <div id="cat-laererbok" hidden>
+    <div class="score-bar" id="lbScoreBar">
+      <span>🏆 Poengsum</span><strong id="lbScoreVal">0</strong><span>av <span id="lbScoreMax">400</span></span>
+    </div>
+
     <section class="panel laererbok" aria-labelledby="lbTitle">
       <h2 id="lbTitle">Veivalget etter krigen</h2>
-      <p class="sub">Fra Arena 9, del 2: «Første verdenskrig – årsaker og konsekvenser». Flere land slet med lave lønninger og politisk uro etter krigen — men valgte helt ulike veier videre. Avslør hint for hint, og gjett hvilket land det er snakk om.</p>
+      <p class="sub">Fra Arena 9, del 2: «Første verdenskrig – årsaker og konsekvenser». Hvert land er verdt 100 poeng. Gjett med en gang for sjansen til full pott — eller kjøp et hint for 20 poeng hvis du vil være sikrere. Bommer du, mister du poeng, så ikke gjett helt vilt!</p>
       <div class="guess-grid" id="guessGrid"></div>
     </section>
 
@@ -664,7 +675,8 @@ const LAERE_QUIZ=[
 const store={get(){try{return JSON.parse(localStorage.getItem('fvk-progress')||'{}')}catch(e){return{}}},set(v){try{localStorage.setItem('fvk-progress',JSON.stringify(v))}catch(e){}}};
 let progress=store.get();
 let yi=0, activeMission=null, selEvent=null, selCountry=null, selDyrtid=null, melSekker=100, cat='hendelser';
-const veiHints={}, veiRevealed={}, lbAnswered={}, lbTries={};
+const veiHints={}, veiLocked={}, veiCorrect={}, veiWrong={}, veiGaveUp={}, lbAnswered={}, lbTries={};
+const HINT_COST=20, WRONG_PENALTY=30;
 const tries={};
 
 /* ---------- map ---------- */
@@ -828,25 +840,53 @@ function renderMel(){
   el.className='mel-price '+(mult<2?'mid':mult<4?'high':'vhigh');
 }
 /* ---------- lærerboka: veivalget (gjett landet) + quiz ---------- */
+function veiPoints(i){
+  if(veiGaveUp[i]) return 0;
+  const hintCost=(veiHints[i]||0)*HINT_COST;
+  const wrongCost=((veiWrong[i]||[]).length)*WRONG_PENALTY;
+  return Math.max(0,100-hintCost-wrongCost);
+}
 function renderVeivalg(){
   const grid=document.getElementById('guessGrid'); grid.innerHTML='';
+  const names=VEIVALG.map(l=>l.navn);
   VEIVALG.forEach((land,i)=>{
-    const shown=veiHints[i]||0, revealed=!!veiRevealed[i];
+    const shown=veiHints[i]||0, locked=!!veiLocked[i], correct=!!veiCorrect[i], pts=veiPoints(i);
     const card=document.createElement('article');
-    card.className='guess-card'+(revealed?' revealed':'');
-    let h=`<div class="guess-head"><span class="label">Land ${String.fromCharCode(65+i)}</span>${revealed?`<strong>${land.flagg} ${land.navn}</strong>`:'<strong>?</strong>'}</div>`;
+    card.className='guess-card'+(locked?(correct?' revealed':' lost'):'');
+    let h=`<div class="guess-head"><span class="label">Land ${String.fromCharCode(65+i)}</span>`;
+    h+=locked?`<strong>${land.flagg} ${land.navn}</strong>`:`<strong class="guess-pts">${pts} poeng</strong>`;
+    h+='</div>';
     h+='<ol class="guess-hints">'+land.hint.slice(0,shown).map((t,j)=>`<li><span class="n">${j+1}</span>${t}</li>`).join('')+'</ol>';
-    if(!revealed){
-      if(shown<land.hint.length) h+=`<button type="button" class="mapbtn" data-act="hint" data-i="${i}">Vis hint ${shown+1} av ${land.hint.length}</button>`;
-      if(shown>0) h+=`<button type="button" class="mapbtn ghost" data-act="reveal" data-i="${i}">Jeg tror jeg vet det — avslør svaret</button>`;
+    if(!locked){
+      const wrongSoFar=veiWrong[i]||[];
+      h+='<div class="guess-opts">'+names.map(n=>{
+        const tried=wrongSoFar.includes(n);
+        return `<button type="button" class="opt${tried?' wrong':''}" data-act="guess" data-i="${i}" data-name="${n}" ${tried?'disabled':''}>${n}</button>`;
+      }).join('')+'</div>';
+      if(shown<land.hint.length) h+=`<button type="button" class="mapbtn ghost" data-act="hint" data-i="${i}">Kjøp hint ${shown+1} av ${land.hint.length} (−${HINT_COST} poeng)</button>`;
+      h+=`<button type="button" class="textlink" data-act="giveup" data-i="${i}">Jeg gir opp</button>`;
     } else {
-      h+=`<div class="fb ok"><strong>${land.fasit}</strong>${land.fasitTekst}</div>`;
+      h+=`<div class="fb ${correct?'ok':'no'}"><strong>${correct?`Riktig! +${pts} poeng`:'Ingen poeng denne runden'}</strong>${land.fasitTekst}</div>`;
     }
     card.innerHTML=h;
     grid.appendChild(card);
   });
-  grid.querySelectorAll('[data-act="hint"]').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;veiHints[i]=(veiHints[i]||0)+1;renderVeivalg()});
-  grid.querySelectorAll('[data-act="reveal"]').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;veiRevealed[i]=true;veiHints[i]=VEIVALG[i].hint.length;renderVeivalg()});
+  grid.querySelectorAll('[data-act="hint"]').forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.i; veiHints[i]=(veiHints[i]||0)+1; renderVeivalg(); updateLbScore();
+  });
+  grid.querySelectorAll('[data-act="guess"]').forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.i, name=b.dataset.name;
+    if(name===VEIVALG[i].navn){ veiLocked[i]=true; veiCorrect[i]=true; }
+    else {
+      (veiWrong[i]=veiWrong[i]||[]).push(name);
+      if(veiPoints(i)<=0){ veiLocked[i]=true; veiCorrect[i]=false; }
+    }
+    renderVeivalg(); updateLbScore();
+  });
+  grid.querySelectorAll('[data-act="giveup"]').forEach(b=>b.onclick=()=>{
+    const i=+b.dataset.i; veiGaveUp[i]=true; veiLocked[i]=true; veiCorrect[i]=false;
+    renderVeivalg(); updateLbScore();
+  });
 }
 function renderLbQuiz(){
   const ol=document.getElementById('lbQuiz'); ol.innerHTML='';
@@ -858,15 +898,24 @@ function renderLbQuiz(){
       let cls='opt'; if(done&&oi===q.a) cls+=' right'; if(!done&&lbTries[j]&&lbTries[j].includes(oi)) cls+=' wrong';
       return `<button type="button" class="${cls}" data-oi="${oi}" ${done?'disabled':''}>${o}</button>`;
     }).join('')+'</div>';
-    if(done) h+=`<div class="fb ok" role="status"><strong>Riktig!</strong>${q.ok.replace(/^Riktig! ?/,'')}</div>`;
+    if(done){
+      const pts=(lbTries[j]&&lbTries[j].length)?5:20;
+      h+=`<div class="fb ok" role="status"><strong>Riktig! +${pts} poeng</strong>${q.ok.replace(/^Riktig! ?/,'')}</div>`;
+    }
     li.innerHTML=h;
     li.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
       const oi=+b.dataset.oi;
       if(oi===q.a) lbAnswered[j]=true; else (lbTries[j]=lbTries[j]||[]).push(oi);
-      renderLbQuiz();
+      renderLbQuiz(); updateLbScore();
     });
     ol.appendChild(li);
   });
+}
+function updateLbScore(){
+  let total=0;
+  VEIVALG.forEach((land,i)=>{ if(veiLocked[i]) total+=veiPoints(i); });
+  LAERE_QUIZ.forEach((q,j)=>{ if(lbAnswered[j]) total+=(lbTries[j]&&lbTries[j].length)?5:20; });
+  document.getElementById('lbScoreVal').textContent=total;
 }
 function kindLabel(k){return k==='country'?'Svar i kartet · klikk på et land':k==='event'?'Svar i kartet · klikk på en markør':'Velg ett svar'}
 function renderMissions(){
@@ -979,6 +1028,7 @@ renderMel();
 /* ---------- lærerboka init (kategori- og årstalluavhengig) ---------- */
 renderVeivalg();
 renderLbQuiz();
+updateLbScore();
 document.getElementById('goTo1919').onclick=()=>{
   setCat('hendelser');
   setYear(YEARS.indexOf(1919));
