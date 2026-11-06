@@ -288,17 +288,17 @@ footer ul{margin:6px 0 0;padding-left:18px;columns:2;column-gap:28px}
       </aside>
     </div>
 
+    <section class="panel decision" aria-labelledby="decisionTitle">
+      <h2 id="decisionTitle">Hva hadde du gjort?</h2>
+      <p class="sub">Sett deg i sko til noen som måtte ta et reelt valg under krigen. Velg først — se så hva som faktisk skjedde. Det finnes ikke ett riktig svar her, bare det historien forteller oss at ble gjort.</p>
+      <div id="decisionList"></div>
+    </section>
+
     <section class="panel missions" aria-labelledby="mTitle">
       <h2 id="mTitle">Oppdrag 1914</h2>
       <p class="sub">Svarene finner du i kartet og hendelsene over. Får du feil, kan du prøve igjen.</p>
       <ol class="mlist" id="missions"></ol>
       <div class="reflect" id="reflect"></div>
-    </section>
-
-    <section class="panel decision" aria-labelledby="decisionTitle">
-      <h2 id="decisionTitle">Hva hadde du gjort?</h2>
-      <p class="sub">Sett deg i sko til noen som måtte ta et reelt valg under krigen. Velg først — se så hva som faktisk skjedde. Det finnes ikke ett riktig svar her, bare det historien forteller oss at ble gjort.</p>
-      <div id="decisionList"></div>
     </section>
   </div>
 
@@ -353,6 +353,12 @@ footer ul{margin:6px 0 0;padding-left:18px;columns:2;column-gap:28px}
         <p>Selv om lønningene også steg for mange, steg prisene ofte raskere. Derfor fikk mange vanlige familier dårligere råd.</p>
         <p style="margin-top:10px"><b>Spørsmål til slutt:</b> Hvorfor kunne en skipsreder bli rik under krigen, mens en vanlig arbeiderfamilie ble fattigere?</p>
       </div>
+    </section>
+
+    <section class="panel decision" aria-labelledby="decisionNatTitle">
+      <h2 id="decisionNatTitle">Hva hadde du gjort som nordmann?</h2>
+      <p class="sub">Samme type oppgave som i Hendelser-kategorien, men denne gangen fra et norsk ståsted. Velg først — se så hva som faktisk skjedde.</p>
+      <div id="decisionListNat"></div>
     </section>
   </div>
 
@@ -647,7 +653,7 @@ const DECISIONS={
    valg:['Krever at Serbia stilles til ansvar, og erklærer krig','Lar saken ligge og satser på diplomati','Ber Tyskland angripe Serbia i deres sted','Tilbyr Serbia økonomisk støtte for å roe konflikten'],
    faktisk:0,
    fasit:'Østerrike-Ungarn ga Serbia skylden og erklærte krig 28. juli 1914. Fordi alliansesystemet dro de andre stormaktene inn i løpet av en uke, ble et snevert attentat til en verdenskrig.'},
-  {rolle:'Du er statsminister i Norge, august 1914',
+  {rolle:'Du er statsminister i Norge, august 1914',norge:true,
    sporsmal:'Krigen har akkurat brutt ut mellom Europas stormakter. Hva gjør du?',
    valg:['Erklærer Norge nøytralt, i samarbeid med Sverige og Danmark','Velger side med Storbritannia, Norges viktigste handelspartner','Velger side med Tyskland','Søker om å bli en del av det britiske imperiet for beskyttelse'],
    faktisk:0,
@@ -661,7 +667,7 @@ const DECISIONS={
    fasit:'Italia erklærte krig mot Østerrike-Ungarn i mai 1915, etter løfter om nye landområder. Det ble harde og blodige kamper i fjellene og ved elva Isonzo.'}
  ],
  1916:[
-  {rolle:'Du er statsminister i Norge, 1916',
+  {rolle:'Du er statsminister i Norge, 1916',norge:true,
    sporsmal:'Storbritannia presser Norge til å stanse all fiskeeksport til Tyskland — ellers truer de med å stanse handelen med Norge. Hva gjør du?',
    valg:['Inngår en fiskeavtale med britene for å berge handelen','Nekter, og fortsetter å selge fisk til begge sider','Stanser all eksport til begge sider for å virke mer nøytral','Bryter forbindelsene med Storbritannia'],
    faktisk:0,
@@ -684,14 +690,24 @@ const DECISIONS={
    sporsmal:'Sjømenn i Kiel nekter å seile ut til et siste, håpløst slag, og opprøret sprer seg til flere tyske byer. Den militære ledelsen sier krigen er tapt. Hva gjør du?',
    valg:['Går av og drar i eksil','Beordrer hæren til å slå ned opprøret med makt','Fortsetter krigen uansett hva det koster','Overlater makten til generalene, men beholder tittelen keiser'],
    faktisk:0,
-   fasit:'9. november 1918 ble Tyskland republikk, og dagen etter dro keiser Wilhelm 2. i eksil til Nederland. Våpenhvilen ble undertegnet to dager senere, 11. november.'}
+   fasit:'9. november 1918 ble Tyskland republikk, og dagen etter dro keiser Wilhelm 2. i eksil til Nederland. Våpenhvilen ble undertegnet to dager senere, 11. november.'},
+  {rolle:'Du er i den norske regjeringen, nyttår 1918',norge:true,
+   sporsmal:'Varemangelen er nå så stor at vanlige familier sliter med å få tak i mat og nødvendige varer. Hva gjør dere?',
+   valg:['Innfører rasjonering med rasjoneringskort, slik at alle får sin del','Lar prisene stige fritt og stoler på markedet','Stenger grensene for all eksport av mat','Gjør ingenting og håper situasjonen bedrer seg av seg selv'],
+   faktisk:0,
+   fasit:'Fra nyttår 1918 ble vanlige varer rasjonert, og familiene fikk rasjoneringskort. Samme høst kom også spanskesyken til Norge, som tok mellom 13 000 og 15 000 liv.'}
  ],
  1919:[
   {rolle:'Du er en av seierherrene ved fredsforhandlingene i Versailles, 1919',
    sporsmal:'Tyskland har tapt krigen, og dere skal forhandle frem freden. Krever dere hevn, eller satser dere på forsoning for å bygge en varig fred?',
    valg:['Hard fred: Tyskland må ta skylden, betale store erstatninger og miste landområder','Forsoning: nedrustning for alle parter, rettferdig handel, ingen krigsskyld-krav','Deler Tyskland opp i mange småstater','Ingen fredsavtale — bare en løpende våpenhvile'],
    faktisk:0,
-   fasit:'Særlig Storbritannia og Frankrike krevde en hard fred. Tyskland måtte ta på seg skylden for krigen (krigsskyldparagrafen), betale store krigsskadeerstatninger og miste landområder og kolonier. Mange tyskere opplevde dette som ydmykende — noe som skulle få store konsekvenser bare tjue år senere.'}
+   fasit:'Særlig Storbritannia og Frankrike krevde en hard fred. Tyskland måtte ta på seg skylden for krigen (krigsskyldparagrafen), betale store krigsskadeerstatninger og miste landområder og kolonier. Mange tyskere opplevde dette som ydmykende — noe som skulle få store konsekvenser bare tjue år senere.'},
+  {rolle:'Du er i den norske regjeringen, rett etter krigen',norge:true,
+   sporsmal:'Den nye organisasjonen Folkeforbundet, som skal forebygge nye kriger, inviterer Norge til å bli medlem. Hva gjør dere?',
+   valg:['Blir medlem av Folkeforbundet','Takker nei og fortsetter som nøytral utenfor alle allianser','Krever å få sitte i ledelsen som vilkår for å bli med','Venter og ser hva Sverige og Danmark gjør først'],
+   faktisk:0,
+   fasit:'Norge ble medlem av Folkeforbundet; Stortinget vedtok det 4. mars 1920. Få dager senere, 9. februar 1920, ble også Svalbardtraktaten undertegnet i Paris, og Norge fikk Svalbard.'}
  ]
 };
 
@@ -1019,33 +1035,41 @@ function renderMissions(){
     document.getElementById('nextYear').onclick=()=>{setYear(yi+1);document.getElementById('years').scrollIntoView({behavior:'smooth',block:'start'})};
   }else r.innerHTML='';
 }
-function renderDecision(){
-  const y=YEARS[yi], list=DECISIONS[y]||[];
-  const wrap=document.getElementById('decisionList');
-  if(!list.length){
-    wrap.innerHTML=`<p class="sub" style="margin:0">Ingen beslutning for ${y} ennå — se hendelsene og oppdragene over i stedet.</p>`;
-    return;
+function decisionCardHTML(d,key){
+  const picked=decisionPicks[key], answered=picked!=null;
+  let h=`<p class="decision-role">${d.rolle}</p><p class="mq">${d.sporsmal}</p>`;
+  h+='<div class="opts">'+d.valg.map((v,vi)=>{
+    let cls='opt';
+    if(answered){ if(vi===picked) cls+=' picked'; if(vi===d.faktisk) cls+=' right'; }
+    return `<button type="button" class="${cls}" data-key="${key}" data-vi="${vi}" ${answered?'disabled':''}>${v}</button>`;
+  }).join('')+'</div>';
+  if(answered){
+    const matched=picked===d.faktisk;
+    h+=`<div class="fb ${matched?'ok':'no'}" role="status"><strong>${matched?'Du valgte det samme som historien!':'Dette er hva som faktisk skjedde:'}</strong>${d.fasit}</div>`;
   }
+  return h;
+}
+function renderDecisionsInto(containerId,entries,emptyMsg){
+  const wrap=document.getElementById(containerId);
+  if(!entries.length){ wrap.innerHTML=`<p class="sub" style="margin:0">${emptyMsg}</p>`; return; }
   wrap.innerHTML='';
-  list.forEach((d,j)=>{
-    const key=y+'-'+j, picked=decisionPicks[key];
-    const answered=picked!=null;
+  entries.forEach(({d,key})=>{
     const card=document.createElement('article');
     card.className='decision-card';
-    let h=`<p class="decision-role">${d.rolle}</p><p class="mq">${d.sporsmal}</p>`;
-    h+='<div class="opts">'+d.valg.map((v,vi)=>{
-      let cls='opt';
-      if(answered){ if(vi===picked) cls+=' picked'; if(vi===d.faktisk) cls+=' right'; }
-      return `<button type="button" class="${cls}" data-key="${key}" data-vi="${vi}" ${answered?'disabled':''}>${v}</button>`;
-    }).join('')+'</div>';
-    if(answered){
-      const matched=picked===d.faktisk;
-      h+=`<div class="fb ${matched?'ok':'no'}" role="status"><strong>${matched?'Du valgte det samme som historien!':'Dette er hva som faktisk skjedde:'}</strong>${d.fasit}</div>`;
-    }
-    card.innerHTML=h;
-    card.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{decisionPicks[key]=+b.dataset.vi;renderDecision()});
+    card.innerHTML=decisionCardHTML(d,key);
+    card.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{decisionPicks[key]=+b.dataset.vi;renderDecision();renderDecisionNat()});
     wrap.appendChild(card);
   });
+}
+function renderDecision(){
+  const y=YEARS[yi];
+  const entries=(DECISIONS[y]||[]).map((d,j)=>({d,key:y+'-'+j}));
+  renderDecisionsInto('decisionList',entries,`Ingen beslutning for ${y} ennå — se hendelsene og oppdragene over i stedet.`);
+}
+function renderDecisionNat(){
+  const y=YEARS[yi];
+  const entries=(DECISIONS[y]||[]).map((d,j)=>({d,key:y+'-'+j})).filter(e=>e.d.norge);
+  renderDecisionsInto('decisionListNat',entries,`Ingen Norge-beslutning for ${y} ennå.`);
 }
 function setBanner(){
   const b=document.getElementById('banner'), box=document.getElementById('mapbox');
@@ -1100,7 +1124,7 @@ function setYear(i){
   const ni=Math.max(0,Math.min(5,i)); if((ni===5)!==(yi===5)) selCountry=null; yi=ni; activeMission=null; selEvent=null;
   try{history.replaceState(null,'','#aar-'+YEARS[yi])}catch(e){}
   drawCountries();drawFronts();drawLabels();drawMarkers();
-  renderYears();renderLegend();renderCountryInfo();renderEvents();renderNat();renderMissions();renderDecision();setBanner();
+  renderYears();renderLegend();renderCountryInfo();renderEvents();renderNat();renderMissions();renderDecision();renderDecisionNat();setBanner();
 }
 document.addEventListener('keydown',e=>{
   if(e.target.closest('input,textarea')) return;
