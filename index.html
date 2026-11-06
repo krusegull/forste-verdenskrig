@@ -130,7 +130,7 @@ svg.map{display:block;width:100%;height:auto;touch-action:manipulation}
 .ev-body{padding:0 4px 14px 42px;margin:0;max-width:62ch}
 
 /* missions */
-.missions h2,.neutralitet h2,.dyrtid h2,.laererbok h2{font-family:var(--f-display);font-weight:800;font-size:30px;line-height:1;letter-spacing:.01em}
+.missions h2,.neutralitet h2,.dyrtid h2,.laererbok h2,.decision h2{font-family:var(--f-display);font-weight:800;font-size:30px;line-height:1;letter-spacing:.01em}
 .sub{color:var(--muted);margin:4px 0 14px;font-size:14px}
 .mlist{display:flex;flex-direction:column;gap:12px;list-style:none;margin:0;padding:0}
 .mission{border:1px solid var(--line);border-radius:8px;padding:14px;display:flex;flex-direction:column;gap:10px;background:var(--paper)}
@@ -207,6 +207,11 @@ svg.map{display:block;width:100%;height:auto;touch-action:manipulation}
 @media (max-width:640px){.guess-grid,.beforeafter{grid-template-columns:1fr}}
 .flagbar i:nth-child(1){flex:6;background:#ba0c2f}.flagbar i:nth-child(2){flex:1;background:#fff}.flagbar i:nth-child(3){flex:2;background:#00205b}.flagbar i:nth-child(4){flex:1;background:#fff}.flagbar i:nth-child(5){flex:12;background:#ba0c2f}
 .dyrtid{border-top:4px solid var(--central);margin-top:20px}
+.decision{border-top:4px solid var(--entente);margin-top:20px}
+.decision-card{background:var(--paper);border:1.5px solid var(--line);border-radius:8px;padding:14px;display:flex;flex-direction:column;gap:10px;margin-bottom:12px}
+.decision-card:last-child{margin-bottom:0}
+.decision-role{font-family:var(--f-mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0}
+.opt.picked:not(.right){border-color:var(--entente);background:color-mix(in srgb,var(--entente) 14%,var(--card))}
 .dyrtid h2{font-family:var(--f-display);font-weight:800;font-size:30px;line-height:1;letter-spacing:.01em;margin:0 0 8px}
 .mel-demo{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:16px;margin:18px 0}
 .mel-head h3{margin:2px 0 2px;font-size:18px}
@@ -288,6 +293,12 @@ footer ul{margin:6px 0 0;padding-left:18px;columns:2;column-gap:28px}
       <p class="sub">Svarene finner du i kartet og hendelsene over. Får du feil, kan du prøve igjen.</p>
       <ol class="mlist" id="missions"></ol>
       <div class="reflect" id="reflect"></div>
+    </section>
+
+    <section class="panel decision" aria-labelledby="decisionTitle">
+      <h2 id="decisionTitle">Hva hadde du gjort?</h2>
+      <p class="sub">Sett deg i sko til noen som måtte ta et reelt valg under krigen. Velg først — se så hva som faktisk skjedde. Det finnes ikke ett riktig svar her, bare det historien forteller oss at ble gjort.</p>
+      <div id="decisionList"></div>
     </section>
   </div>
 
@@ -627,6 +638,63 @@ const REFLECT=[
  'Var Versaillestraktaten rettferdig? Hvilke problemer kunne den skape senere?'
 ];
 
+/* Beslutninger: sett deg i sko til noen som måtte ta et reelt valg. Ingen poeng —
+   bare velg, og sammenlign med det som faktisk skjedde. kind: en forklarende tittel. */
+const DECISIONS={
+ 1914:[
+  {rolle:'Du er utenriksminister i Østerrike-Ungarn, juli 1914',
+   sporsmal:'Tronfølgeren Franz Ferdinand er nettopp skutt i Sarajevo av en bosnisk serber. Hva gjør dere?',
+   valg:['Krever at Serbia stilles til ansvar, og erklærer krig','Lar saken ligge og satser på diplomati','Ber Tyskland angripe Serbia i deres sted','Tilbyr Serbia økonomisk støtte for å roe konflikten'],
+   faktisk:0,
+   fasit:'Østerrike-Ungarn ga Serbia skylden og erklærte krig 28. juli 1914. Fordi alliansesystemet dro de andre stormaktene inn i løpet av en uke, ble et snevert attentat til en verdenskrig.'},
+  {rolle:'Du er statsminister i Norge, august 1914',
+   sporsmal:'Krigen har akkurat brutt ut mellom Europas stormakter. Hva gjør du?',
+   valg:['Erklærer Norge nøytralt, i samarbeid med Sverige og Danmark','Velger side med Storbritannia, Norges viktigste handelspartner','Velger side med Tyskland','Søker om å bli en del av det britiske imperiet for beskyttelse'],
+   faktisk:0,
+   fasit:'Norge erklærte seg nøytralt så snart krigen brøt ut og samarbeidet med Sverige og Danmark om å holde seg utenfor. I desember 1914 møttes de tre landenes konger i Malmö.'}
+ ],
+ 1915:[
+  {rolle:'Du er statsminister i Italia, våren 1915',
+   sporsmal:'Italia har en gammel alliansepakt med Tyskland og Østerrike-Ungarn, men holdt seg utenfor i 1914. Nå tilbyr ententen nye landområder mot at Italia blir med på deres side. Hva gjør dere?',
+   valg:['Bryter den gamle alliansen og erklærer krig mot Østerrike-Ungarn','Holder Italia nøytralt gjennom hele krigen','Går inn på sentralmaktenes side, som den gamle avtalen tilsa','Tilbyr dere som fredsmeklere mellom blokkene'],
+   faktisk:0,
+   fasit:'Italia erklærte krig mot Østerrike-Ungarn i mai 1915, etter løfter om nye landområder. Det ble harde og blodige kamper i fjellene og ved elva Isonzo.'}
+ ],
+ 1916:[
+  {rolle:'Du er statsminister i Norge, 1916',
+   sporsmal:'Storbritannia presser Norge til å stanse all fiskeeksport til Tyskland — ellers truer de med å stanse handelen med Norge. Hva gjør du?',
+   valg:['Inngår en fiskeavtale med britene for å berge handelen','Nekter, og fortsetter å selge fisk til begge sider','Stanser all eksport til begge sider for å virke mer nøytral','Bryter forbindelsene med Storbritannia'],
+   faktisk:0,
+   fasit:'Norge måtte i 1916 inngå en fiskeavtale med britene. I praksis ble landet kalt «den nøytrale allierte», fordi det støttet Storbritannia i handel selv om det formelt var nøytralt.'}
+ ],
+ 1917:[
+  {rolle:'Du er tsar Nikolaj 2. av Russland, mars 1917',
+   sporsmal:'Streiker og demonstrasjoner brer seg i hovedstaden. Soldatene som skulle slå ned opprøret, nekter å skyte på folket. Hva gjør du?',
+   valg:['Går av som tsar','Setter inn mer militærmakt for å knuse opprøret','Flykter til utlandet med familien','Lover raskt en ny grunnlov, men beholder tronen'],
+   faktisk:0,
+   fasit:'Tsaren ble tvunget til å gå av i mars 1917. Den nye regjeringen ville likevel fortsette den upopulære krigen — det åpnet veien for at Lenin og bolsjevikene tok makten samme høst.'},
+  {rolle:'Du er president Woodrow Wilson i USA, tidlig 1917',
+   sporsmal:'Tyskland har nettopp kunngjort uinnskrenket ubåtkrig — de vil senke skip uten varsel, også fra nøytrale land som USA. Hva gjør du?',
+   valg:['Erklærer krig mot Tyskland','Holder USA nøytralt, men fordømmer handlingen offentlig','Erklærer krig mot alle krigførende land, uansett side','Inngår en hemmelig handelsavtale med Tyskland i stedet'],
+   faktisk:0,
+   fasit:'USA erklærte krig mot Tyskland 6. april 1917, blant annet på grunn av den uinnskrenkede ubåtkrigen. De første amerikanske soldatene ankom Frankrike samme sommer.'}
+ ],
+ 1918:[
+  {rolle:'Du er keiser Wilhelm 2. av Tyskland, november 1918',
+   sporsmal:'Sjømenn i Kiel nekter å seile ut til et siste, håpløst slag, og opprøret sprer seg til flere tyske byer. Den militære ledelsen sier krigen er tapt. Hva gjør du?',
+   valg:['Går av og drar i eksil','Beordrer hæren til å slå ned opprøret med makt','Fortsetter krigen uansett hva det koster','Overlater makten til generalene, men beholder tittelen keiser'],
+   faktisk:0,
+   fasit:'9. november 1918 ble Tyskland republikk, og dagen etter dro keiser Wilhelm 2. i eksil til Nederland. Våpenhvilen ble undertegnet to dager senere, 11. november.'}
+ ],
+ 1919:[
+  {rolle:'Du er en av seierherrene ved fredsforhandlingene i Versailles, 1919',
+   sporsmal:'Tyskland har tapt krigen, og dere skal forhandle frem freden. Krever dere hevn, eller satser dere på forsoning for å bygge en varig fred?',
+   valg:['Hard fred: Tyskland må ta skylden, betale store erstatninger og miste landområder','Forsoning: nedrustning for alle parter, rettferdig handel, ingen krigsskyld-krav','Deler Tyskland opp i mange småstater','Ingen fredsavtale — bare en løpende våpenhvile'],
+   faktisk:0,
+   fasit:'Særlig Storbritannia og Frankrike krevde en hard fred. Tyskland måtte ta på seg skylden for krigen (krigsskyldparagrafen), betale store krigsskadeerstatninger og miste landområder og kolonier. Mange tyskere opplevde dette som ydmykende — noe som skulle få store konsekvenser bare tjue år senere.'}
+ ]
+};
+
 /* Tall hentet rett fra Norge-sporet, vist som store nøkkeltall i Norges nøytralitet-kategorien. */
 const NAT_STATS={
  1914:[], 1915:[],
@@ -676,6 +744,7 @@ const store={get(){try{return JSON.parse(localStorage.getItem('fvk-progress')||'
 let progress=store.get();
 let yi=0, activeMission=null, selEvent=null, selCountry=null, selDyrtid=null, melSekker=100, cat='hendelser';
 const veiHints={}, veiLocked={}, veiCorrect={}, veiWrong={}, veiGaveUp={}, lbAnswered={}, lbTries={};
+const decisionPicks={};
 const HINT_COST=20, WRONG_PENALTY=30;
 const tries={};
 
@@ -950,6 +1019,34 @@ function renderMissions(){
     document.getElementById('nextYear').onclick=()=>{setYear(yi+1);document.getElementById('years').scrollIntoView({behavior:'smooth',block:'start'})};
   }else r.innerHTML='';
 }
+function renderDecision(){
+  const y=YEARS[yi], list=DECISIONS[y]||[];
+  const wrap=document.getElementById('decisionList');
+  if(!list.length){
+    wrap.innerHTML=`<p class="sub" style="margin:0">Ingen beslutning for ${y} ennå — se hendelsene og oppdragene over i stedet.</p>`;
+    return;
+  }
+  wrap.innerHTML='';
+  list.forEach((d,j)=>{
+    const key=y+'-'+j, picked=decisionPicks[key];
+    const answered=picked!=null;
+    const card=document.createElement('article');
+    card.className='decision-card';
+    let h=`<p class="decision-role">${d.rolle}</p><p class="mq">${d.sporsmal}</p>`;
+    h+='<div class="opts">'+d.valg.map((v,vi)=>{
+      let cls='opt';
+      if(answered){ if(vi===picked) cls+=' picked'; if(vi===d.faktisk) cls+=' right'; }
+      return `<button type="button" class="${cls}" data-key="${key}" data-vi="${vi}" ${answered?'disabled':''}>${v}</button>`;
+    }).join('')+'</div>';
+    if(answered){
+      const matched=picked===d.faktisk;
+      h+=`<div class="fb ${matched?'ok':'no'}" role="status"><strong>${matched?'Du valgte det samme som historien!':'Dette er hva som faktisk skjedde:'}</strong>${d.fasit}</div>`;
+    }
+    card.innerHTML=h;
+    card.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{decisionPicks[key]=+b.dataset.vi;renderDecision()});
+    wrap.appendChild(card);
+  });
+}
 function setBanner(){
   const b=document.getElementById('banner'), box=document.getElementById('mapbox');
   if(activeMission){
@@ -1003,7 +1100,7 @@ function setYear(i){
   const ni=Math.max(0,Math.min(5,i)); if((ni===5)!==(yi===5)) selCountry=null; yi=ni; activeMission=null; selEvent=null;
   try{history.replaceState(null,'','#aar-'+YEARS[yi])}catch(e){}
   drawCountries();drawFronts();drawLabels();drawMarkers();
-  renderYears();renderLegend();renderCountryInfo();renderEvents();renderNat();renderMissions();setBanner();
+  renderYears();renderLegend();renderCountryInfo();renderEvents();renderNat();renderMissions();renderDecision();setBanner();
 }
 document.addEventListener('keydown',e=>{
   if(e.target.closest('input,textarea')) return;
