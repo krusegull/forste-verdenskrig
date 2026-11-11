@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Krigsarkivet 1914</title>
+<meta name="robots" content="noindex">
+<style>
+:root{
+  /* Layout: mørkt arkivrom, ett papirark i midten per rom, messinglåser i toppen */
+  --ink:#10201f; --ink2:#1a302e; --paper:#ece6d6; --paper2:#dcd3bd; --text:#1c2423;
+  --brass:#c9a24a; --stamp:#b3261e; --ok:#2f7d4f; --line:#3a5552; --mut:#9fb3ae;
+  --display:"Oswald","Arial Narrow",sans-serif; --body:"Source Sans 3","Segoe UI",sans-serif; --type:"Special Elite","Courier New",monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--ink);color:var(--paper);font-family:var(--body);font-size:18px;line-height:1.45;min-height:100vh;
+  background-image:radial-gradient(circle at 50% -10%,#24403d 0,var(--ink) 60%)}
+header{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--line)}
+h1{font-family:var(--display);font-size:26px;letter-spacing:.06em;text-transform:uppercase;margin:0}
+h1 span{color:var(--brass)}
+.hud{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.locks{display:flex;gap:6px}
+.lock{width:30px;height:30px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-family:var(--display);font-size:14px;color:var(--mut)}
+.lock.now{border-color:var(--brass);color:var(--brass)}
+.lock.done{background:var(--brass);border-color:var(--brass);color:var(--ink)}
+.code{display:flex;gap:4px}
+.digit{width:28px;height:36px;border-radius:4px;background:var(--ink2);border:1px solid var(--line);display:grid;place-items:center;font-family:var(--type);font-size:22px;color:var(--brass)}
+#timer{font-family:var(--type);font-size:22px;font-variant-numeric:tabular-nums;min-width:74px;text-align:right}
+main{max-width:860px;margin:0 auto;padding:24px 16px 60px}
+.sheet{background:var(--paper);color:var(--text);border-radius:6px;padding:28px clamp(18px,4vw,40px);box-shadow:0 18px 40px rgba(0,0,0,.45);position:relative}
+.sheet::before{content:attr(data-stamp);position:absolute;top:18px;right:20px;font-family:var(--display);font-size:13px;letter-spacing:.14em;color:var(--stamp);border:2px solid var(--stamp);padding:2px 10px;border-radius:3px;transform:rotate(3deg);opacity:.85}
+h2{font-family:var(--display);font-size:32px;line-height:1.15;margin:0 0 4px;text-wrap:balance;padding-right:120px}
+.where{font-family:var(--type);font-size:15px;color:#5d5a4c;margin:0 0 16px}
+p{margin:0 0 14px;max-width:66ch}
+.task{font-weight:700;margin-top:18px}
+.zones{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:12px 0}
+.zone{border:2px dashed #8d866f;border-radius:6px;padding:10px;min-height:120px;background:var(--paper2)}
+.zone h3,.pool h3{font-family:var(--display);font-size:17px;letter-spacing:.05em;text-transform:uppercase;margin:0 0 8px}
+.zone.target{border-color:var(--stamp);border-style:solid}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+button{font:inherit;cursor:pointer}
+.chip{background:#fff;border:2px solid #6f6a57;border-radius:20px;padding:6px 14px;color:var(--text);font-weight:600}
+.chip.sel{background:var(--text);color:var(--paper);border-color:var(--text)}
+.chip.bad{border-color:var(--stamp);color:var(--stamp)}
+.chip.good{border-color:var(--ok);color:var(--ok)}
+.btn{background:var(--text);color:var(--paper);border:0;border-radius:4px;padding:10px 20px;font-family:var(--display);font-size:17px;letter-spacing:.06em;text-transform:uppercase}
+.btn.ghost{background:transparent;color:var(--text);border:2px solid var(--text)}
+.btn.brass{background:var(--brass);color:var(--ink)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:16px}
+.msg{min-height:1.5em;font-weight:600;margin:12px 0 0}
+.msg.bad{color:var(--stamp)} .msg.good{color:var(--ok)}
+.hint{background:#fff8d8;border-left:5px solid var(--brass);padding:8px 12px;margin-top:10px;font-size:16px}
+.telegram{font-family:var(--type);background:#fbf7ea;border:1px solid #8d866f;padding:16px;font-size:19px;letter-spacing:.04em;word-break:break-word;margin:10px 0}
+input[type=range]{width:100%;accent-color:var(--stamp)}
+select,input[type=text]{font:inherit;padding:8px 10px;border:2px solid #6f6a57;border-radius:4px;background:#fff;color:var(--text)}
+.wires{display:grid;gap:10px;margin:12px 0}
+.wire{display:grid;grid-template-columns:14px 1fr auto;gap:12px;align-items:center;background:var(--paper2);border-radius:6px;padding:8px 12px}
+.wire i{display:block;width:14px;height:44px;border-radius:7px}
+.wire.cut{opacity:.55} .wire.cut i{background:repeating-linear-gradient(0deg,#777 0 6px,transparent 6px 12px)!important}
+.wire.safe{outline:2px solid var(--ok)}
+.order{list-style:none;padding:0;margin:12px 0;display:grid;gap:8px}
+.order li{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;background:var(--paper2);border-radius:6px;padding:8px 12px}
+.order li.good{outline:2px solid var(--ok)}
+.arrows button{background:#fff;border:2px solid #6f6a57;border-radius:4px;width:38px;height:34px;font-size:16px;color:var(--text)}
+.slots{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0}
+.slot{min-width:110px;min-height:44px;border:2px dashed #8d866f;border-radius:6px;display:grid;place-items:center;font-family:var(--type);font-size:20px;padding:0 10px;background:#fff}
+.match{display:grid;grid-template-columns:1fr 1.6fr;gap:10px 16px;margin:12px 0}
+.match button{text-align:left;background:#fff;border:2px solid #6f6a57;border-radius:6px;padding:8px 12px;color:var(--text)}
+.match button.sel{background:var(--text);color:var(--paper)}
+.match button.done{border-color:var(--ok);background:#e3f0e6;color:#1d5234;cursor:default}
+.match button.bad{border-color:var(--stamp)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+.stat{background:var(--paper2);border-radius:6px;padding:12px;text-align:center}
+.stat b{display:block;font-family:var(--type);font-size:30px;font-variant-numeric:tabular-nums}
+textarea{width:100%;min-height:110px;font:inherit;padding:10px;border:2px solid #6f6a57;border-radius:4px}
+:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+.note{color:var(--mut);font-size:15px;text-align:center;margin-top:18px}
+@media (max-width:560px){.zones,.match,.stats{grid-template-columns:1fr} h2{padding-right:0;margin-top:34px;font-size:27px}}
+@media (prefers-reduced-motion:no-preference){.sheet{animation:in .35s ease-out} @keyframes in{from{transform:translateY(8px)}to{transform:none}}}
+.back{color:var(--mut);font-size:15px;text-decoration:none;border:1px solid var(--line);border-radius:4px;padding:4px 10px}
+.back:hover{color:var(--paper)}
+</style>
+</head>
+<body>
+<header>
+  <h1>Krigsarkivet <span>1914</span></h1>
+  <div class="hud">
+    <a class="back" href="index.html">← Til kartet</a>
+    <div class="locks" id="locks" aria-label="Rom"></div>
+    <div class="code" id="code" aria-label="Sifre du har samlet"></div>
+    <div id="timer" aria-label="Tid brukt">00:00</div>
+  </div>
+</header>
+<main><div class="sheet" id="sheet" data-stamp="HEMMELIG"></div>
+<p class="note">Et hint koster 30 sekunder. Feil klipp i rom 3 koster også 30 sekunder.</p></main>
+<script>
+"use strict";
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const el=(t,a={},...k)=>{const e=document.createElement(t);for(const[x,v]of Object.entries(a)){if(x==="class")e.className=v;else if(x.startsWith("on"))e.addEventListener(x.slice(2),v);else if(x==="html")e.innerHTML=v;else e.setAttribute(x,v)}k.flat().forEach(c=>e.append(c));return e};
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const S={room:-1,start:0,penalty:0,hints:0,digits:[],done:false,end:0};
+const DIG=["1","9","1","8"];
+const sheet=$("#sheet");
+function hud(){
+  $("#locks").replaceChildren(...[0,1,2,3,4].map(i=>el("div",{class:"lock"+(i<S.room?" done":i===S.room?" now":"")},String(i+1))));
+  $("#code").replaceChildren(...[0,1,2,3].map(i=>el("div",{class:"digit"},S.digits[i]||"·")));
+}
+function elapsed(){return S.start?Math.floor(((S.done?S.end:Date.now())-S.start)/1000)+S.penalty:0}
+const fmt=s=>String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
+setInterval(()=>{$("#timer").textContent=fmt(elapsed())},500);
+function msg(t,good){const m=$("#msg");if(m){m.textContent=t;m.className="msg "+(good?"good":"bad")}}
+function frame(stamp,title,where,body,hints){
+  sheet.dataset.stamp=stamp;let used=0;
+  const hintBox=el("div",{id:"hints"});
+  const hb=el("button",{class:"btn ghost",type:"button",onclick:()=>{if(used<hints.length){hintBox.append(el("div",{class:"hint"},hints[used++]));S.penalty+=30;S.hints++;if(used===hints.length)hb.disabled=true,hb.textContent="Ingen flere hint"}}},"Hint (+30 s)");
+  sheet.replaceChildren(el("h2",{},title),el("p",{class:"where"},where),...body,el("p",{class:"msg",id:"msg","aria-live":"polite"}),hintBox,el("div",{class:"row"},hb));
+  hud();window.scrollTo(0,0);
+}
+function solved(text,next){
+  if(S.room<4){S.digits[S.room]=DIG[S.room]}hud();
+  msg(text,true);
+  $$("#sheet button").forEach(b=>b.disabled=true);
+  sheet.append(el("div",{class:"row"},el("button",{class:"btn brass",type:"button",onclick:next},S.room<4?"Gå til neste rom":"Åpne ytterdøra")));
+}
+function go(i){S.room=i;[room1,room2,room3,room4,room5][i]()}
+
+/* ---------- Intro ---------- */
+function intro(){
+  sheet.dataset.stamp="HEMMELIG";
+  sheet.replaceChildren(el("h2",{},"Du er låst inne i Krigsarkivet"),el("p",{class:"where"},"Kjelleren, en sen kveld"),
+   el("p",{},"Døra smalt igjen bak deg. Rundt deg står hyller med kart, telegrammer og gulnede aviser fra årene 1914 til 1922. På veggen henger en lapp:"),
+   el("div",{class:"telegram"},"«Bare den som forstår hvorfor krigen kom, og hva den førte til, slipper ut.»"),
+   el("p",{},"Arkivet har fem rom. De fire første gir deg ett siffer hver. Til sammen blir sifrene koden til ytterdøra i det femte rommet. Klokka går fra du starter."),
+   el("div",{class:"row"},el("button",{class:"btn",type:"button",onclick:()=>{S.start=Date.now();go(0)}},"Start klokka")));
+  hud();
+}
+
+/* ---------- Rom 1: Kartrommet ---------- */
+function room1(){
+  const C={"Tyskland":"A","Østerrike-Ungarn":"A","Italia":"A","Storbritannia":"E","Frankrike":"E","Russland":"E"};
+  let sel=null;const place={};
+  const pool=el("div",{class:"chips"}),zA=el("div",{class:"chips"}),zE=el("div",{class:"chips"});
+  const chips=shuffle(Object.keys(C)).map(n=>el("button",{class:"chip",type:"button",onclick:e=>{e.stopPropagation();$$(".chip",sheet).forEach(c=>c.classList.remove("sel"));sel=n;e.currentTarget.classList.add("sel")}},n));
+  pool.append(...chips);
+  const drop=(k,box)=>()=>{if(!sel)return;const c=chips.find(c=>c.textContent===sel);c.classList.remove("sel","bad","good");box.append(c);place[sel]=k;sel=null};
+  const ZA=el("div",{class:"zone",onclick:drop("A",zA)},el("h3",{},"Trippelalliansen"),zA),ZE=el("div",{class:"zone",onclick:drop("E",zE)},el("h3",{},"Trippelententen"),zE);
+  const causes=[["Nasjonalisme",1],["Børskrakket i USA",0],["Imperialisme",1],["Militær opprustning",1],["Spanskesyken",0],["Alliansesystemene",1],["Marsjen mot Roma",0]];
+  const stepB=el("div",{hidden:""},el("p",{class:"task"},"Del 2: På bordet ligger sju lapper. Fire av dem er grunnleggende årsaker til krigen. Velg de fire."),
+    el("div",{class:"chips"},shuffle(causes).map(([t,ok])=>el("button",{class:"chip",type:"button","data-ok":ok,"aria-pressed":"false",onclick:e=>{const b=e.currentTarget;b.classList.toggle("sel");b.setAttribute("aria-pressed",b.classList.contains("sel"))}},t))),
+    el("div",{class:"row"},el("button",{class:"btn",type:"button",onclick:()=>{const bs=$$("[data-ok]",stepB);const ok=bs.every(b=>(b.dataset.ok==="1")===b.classList.contains("sel"));
+      if(ok)solved("Riktig. Låsen klikker, og sifferet 1 står risset inn i dørkarmen.",()=>go(1));else msg("Ikke helt. Tre av lappene handler om ting som skjedde etter at krigen var over eller i gang.")}},"Prøv låsen")));
+  frame("ROM 1","Kartrommet","Et kart over Europa i 1914 dekker hele veggen",[
+    el("p",{},"Før krigen hadde stormaktene delt seg i to allianser. Kartet mangler merkelappene sine."),
+    el("p",{class:"task"},"Del 1: Trykk på et land, og trykk deretter på alliansen det hørte til før krigen."),
+    el("div",{class:"pool"},pool),el("div",{class:"zones"},ZA,ZE),
+    el("div",{class:"row"},el("button",{class:"btn",type:"button",id:"chk1",onclick:()=>{let ok=Object.keys(C).length===Object.keys(place).length;chips.forEach(c=>{const n=c.textContent;c.classList.remove("bad","good");if(place[n]){const g=place[n]===C[n];c.classList.add(g?"good":"bad");if(!g)ok=false}});
+      if(ok){msg("Riktig. Italia skiftet riktignok side under krigen og gikk med trippelententen.",true);$("#chk1").disabled=true;stepB.hidden=false}else msg("Noe er feil plassert eller mangler. Land med rød kant står i feil allianse.")}},"Sjekk kartet")),
+    stepB],
+   ["Tyskland og Østerrike-Ungarn sto sammen. Storbritannia og Frankrike sto sammen.","Grunnleggende årsaker bygde seg opp over lang tid før 1914. Børskrakket kom i 1929, og marsjen mot Roma i 1922."]);
+}
+
+/* ---------- Rom 2: Telegrafrommet ---------- */
+function room2(){
+  const AL="ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ",K=7;
+  const plain="TYSKLAND LOVER Å STØTTE ØSTERRIKE-UNGARN UANSETT HVA SOM SKJER. BERLIN, JULI 1914";
+  const rot=(t,k)=>[...t].map(ch=>{const i=AL.indexOf(ch);return i<0?ch:AL[(i+k+29*2)%29]}).join("");
+  const cipher=rot(plain,K);
+  const out=el("div",{class:"telegram",id:"tg","aria-live":"off"},cipher);
+  const sl=el("input",{type:"range",min:"0",max:"28",value:"0",id:"dial","aria-label":"Kodehjul",oninput:e=>{out.textContent=rot(cipher,-Number(e.target.value));$("#dv").textContent=e.target.value}});
+  const q=el("div",{hidden:""},el("p",{class:"task"},"Hva kalles dette løftet fra Tyskland?"),
+    el("div",{class:"chips"},shuffle(["Blankofullmakten","Versaillestraktaten","Trippelententen","Nøytralitetserklæringen"]).map(t=>el("button",{class:"chip",type:"button",onclick:e=>{if(t==="Blankofullmakten"){e.currentTarget.classList.add("good");msg("Riktig. Løftet bidro til at Tyskland senere fikk skylden for krigsutbruddet.",true);$$(".chip",q).forEach(b=>b.disabled=true);stepB.hidden=false}else{e.currentTarget.classList.add("bad");msg("Nei. Tenk på et løfte uten betingelser, som en sjekk uten beløp.")}}},t))));
+  const day=el("select",{id:"d","aria-label":"Dag"},Array.from({length:31},(_,i)=>el("option",{},String(i+1))));
+  const mon=el("select",{id:"m","aria-label":"Måned"},["januar","februar","mars","april","mai","juni","juli","august","september","oktober","november","desember"].map(x=>el("option",{},x)));
+  const yr=el("select",{id:"y","aria-label":"År"},[1912,1913,1914,1915,1916,1917,1918,1919].map(x=>el("option",{},String(x))));
+  const stepB=el("div",{hidden:""},el("p",{class:"task"},"Del 2: Døra har en datolås. På låsen står det: «Dagen tronarvingen Franz Ferdinand og kona Sophie ble skutt i Sarajevo.»"),
+    el("div",{class:"row"},day,mon,yr,el("button",{class:"btn",type:"button",onclick:()=>{if(day.value==="28"&&mon.value==="juni"&&yr.value==="1914")solved("Låsen åpner seg. Skuddene i Sarajevo var den utløsende årsaken til krigen. Sifferet 9 er stemplet på telegrammet.",()=>go(2));else msg("Låsen rikker seg ikke. Attentatet skjedde en sommerdag, en måned før krigen brøt ut.")}},"Prøv låsen")));
+  frame("ROM 2","Telegrafrommet","En telegraf tikker fortsatt i hjørnet",[
+    el("p",{},"På pulten ligger et kodet telegram. Hver bokstav er flyttet et fast antall plasser i alfabetet."),
+    el("p",{class:"task"},"Del 1: Drei på kodehjulet til du kan lese meldingen."),out,
+    el("label",{for:"dial"},"Kodehjul: ",el("b",{id:"dv"},"0")),sl,
+    el("div",{class:"row"},el("button",{class:"btn",type:"button",id:"chk2",onclick:()=>{if(Number(sl.value)===K){msg("Meldingen er tydet.",true);sl.disabled=true;$("#chk2").disabled=true;q.hidden=false}else msg("Teksten er fortsatt uleselig. Drei videre.")}},"Jeg kan lese meldingen")),q,stepB],
+   ["Det første ordet i telegrammet er navnet på et land.","Kodehjulet skal stå på 7.","Datoen er 28. juni 1914."]);
+}
+
+/* ---------- Rom 3: Skyttergraven ---------- */
+function room3(){
+  const W=[["På vestfronten gravde soldatene seg ned i skyttergraver.",1,"#8a5a2b"],["Norge deltok i krigen med soldater på Storbritannias side.",0,"#2c5d8a"],["Giftgass ble brukt som våpen under krigen.",1,"#5a7d2b"],["USA gikk med i krigen allerede i 1914.",0,"#8a2b4f"],["Italia skiftet side og gikk med trippelententen.",1,"#6b6b6b"],["På østfronten kjempet Tyskland mot Frankrike.",0,"#b8862b"]];
+  let left=3;
+  const list=el("div",{class:"wires"},shuffle(W).map(([t,ok,c])=>{const row=el("div",{class:"wire"});const b=el("button",{class:"btn ghost",type:"button",onclick:()=>{if(ok){S.penalty+=30;row.classList.add("safe");b.disabled=true;msg("Alarmen uler! Den påstanden var sann. 30 sekunder lagt til.")}else{row.classList.add("cut");b.disabled=true;left--;if(left===0)solved("Alle de tre falske ledningene er kuttet. Norge var nøytralt, USA kom med i 1917, og på østfronten kjempet Tyskland mot Russland. Sifferet 1 lyser på bryteren.",()=>go(3));else msg("Riktig klipp. "+left+" falske igjen.",true)}}},"Klipp");const i=el("i");i.style.background=c;row.append(i,el("span",{},t),b);return row}));
+  frame("ROM 3","Skyttergraven","En gjenskapt skyttergrav med sandsekker og piggtråd",[
+    el("p",{},"Seks ledninger går inn i dørlåsen. På hver ledning henger en påstand om krigen. Tre påstander er sanne, og tre er falske."),
+    el("p",{class:"task"},"Klipp de tre ledningene med falske påstander. Klipper du en sann, går alarmen."),list],
+   ["Tenk på hvem som sloss mot hvem i øst, og hvilket år USA erklærte krig.","Norge erklærte seg nøytralt, selv om mange norske sjøfolk mistet livet."]);
+}
+
+/* ---------- Rom 4: Trykkeriet ---------- */
+function room4(){
+  const EV=["Krigen fører til matmangel og misnøye i Russland","Tsaren blir tvunget til å gå av","Lenin og bolsjevikene tar makten i et statskupp","Borgerkrig, der bolsjevikene vinner","Russland tar navnet Sovjetunionen"];
+  let ord=shuffle(EV);while(ord.every((x,i)=>x===EV[i]))ord=shuffle(EV);
+  const ol=el("ol",{class:"order"});
+  const draw=()=>ol.replaceChildren(...ord.map((t,i)=>el("li",{},el("span",{},t),el("span",{class:"arrows"},el("button",{type:"button","aria-label":"Flytt opp",onclick:()=>{if(i>0){[ord[i-1],ord[i]]=[ord[i],ord[i-1]];draw()}}},"▲")," ",el("button",{type:"button","aria-label":"Flytt ned",onclick:()=>{if(i<ord.length-1){[ord[i+1],ord[i]]=[ord[i],ord[i+1]];draw()}}},"▼")))));
+  draw();
+  const words=shuffle(["Fred","Jord","Brød","Krig","Gull","Tsar","Frihet","Makt"]);let pick=[];
+  const slots=el("div",{class:"slots"});const drawS=()=>slots.replaceChildren(...[0,1,2].map(i=>el("div",{class:"slot"},pick[i]||"?")));drawS();
+  const stepB=el("div",{hidden:""},el("p",{class:"task"},"Del 2: Trykkpressa mangler de tre ordene i bolsjevikenes slagord. Velg tre ord."),slots,
+    el("div",{class:"chips"},words.map(w=>el("button",{class:"chip",type:"button",onclick:e=>{const b=e.currentTarget;if(pick.includes(w)){pick=pick.filter(x=>x!==w);b.classList.remove("sel")}else if(pick.length<3){pick.push(w);b.classList.add("sel")}drawS()}},w))),
+    el("div",{class:"row"},el("button",{class:"btn",type:"button",onclick:()=>{if(pick.length===3&&["Fred","Jord","Brød"].every(w=>pick.includes(w)))solved("«Fred, jord, brød» ruller ut av pressa. Sifferet 8 er trykt nederst på plakaten.",()=>go(4));else msg("Det er ikke slagordet. Folk ønsket slutt på krigen, egen jord å dyrke og nok mat.")}},"Start pressa")));
+  frame("ROM 4","Trykkeriet i Petrograd","Løpesedler ligger strødd på gulvet",[
+    el("p",{},"Fem løpesedler forteller om revolusjonen i Russland, men noen har blandet dem."),
+    el("p",{class:"task"},"Del 1: Legg hendelsene i riktig rekkefølge, med den eldste øverst."),ol,
+    el("div",{class:"row"},el("button",{class:"btn",type:"button",id:"chk4",onclick:()=>{const lis=$$("li",ol);let ok=true;ord.forEach((t,i)=>{const g=t===EV[i];lis[i].classList.toggle("good",g);if(!g)ok=false});
+      if(ok){msg("Riktig rekkefølge: tsaren gikk av i mars 1917, bolsjevikene tok makten høsten 1917, og Sovjetunionen ble opprettet i 1922.",true);$$("button",ol).forEach(b=>b.disabled=true);$("#chk4").disabled=true;stepB.hidden=false}else msg("Ikke helt. Hendelsene med grønn kant står riktig.")}},"Sjekk rekkefølgen")),stepB],
+   ["Det begynte med nød og misnøye, og sluttet med et nytt navn på landet i 1922.","Tsaren gikk av før Lenin tok makten. Borgerkrigen kom etter kuppet."]);
+}
+
+/* ---------- Rom 5: Speilsalen ---------- */
+function room5(){
+  const P=[["Versaillestraktaten","Fredsavtalen der Tyskland måtte ta på seg skylden for krigen"],["Folkeforbundet","Organisasjon som skulle forebygge nye kriger"],["Fascisme","Ideologi som ville ha én sterk leder i stedet for demokrati"],["Benito Mussolini","Ble statsminister i Italia i 1922"],["Dyrtid","Perioden da prisene steg mer enn lønningene i Norge"],["Jugoslavia","Ny stat på Balkan etter krigen"]];
+  let a=null,left=P.length;
+  const L=shuffle(P).map(([t])=>el("button",{type:"button","data-k":t,onclick:e=>{if(e.currentTarget.classList.contains("done"))return;$$(".match .l").forEach(b=>b.classList.remove("sel"));a=t;e.currentTarget.classList.add("sel")},class:"l"},t));
+  const R=shuffle(P).map(([t,d])=>el("button",{type:"button",class:"r",onclick:e=>{const b=e.currentTarget;if(b.classList.contains("done")||!a)return;if(a===t){b.classList.add("done");const l=L.find(x=>x.dataset.k===t);l.classList.remove("sel");l.classList.add("done");a=null;left--;if(left===0){msg("Alle parene er koblet. Nå gjenstår bare ytterdøra.",true);fin.hidden=false}else msg("Riktig.",true)}else{b.classList.add("bad");setTimeout(()=>b.classList.remove("bad"),600);msg("De to hører ikke sammen. Prøv igjen.")}}},d));
+  const grid=el("div",{class:"match"});L.forEach((l,i)=>grid.append(l,R[i]));
+  const inp=el("input",{type:"text",id:"final",inputmode:"numeric",maxlength:"4",size:"6","aria-label":"Kode til ytterdøra",autocomplete:"off"});
+  const fin=el("div",{hidden:""},el("p",{class:"task"},"Ytterdøra har en kodelås med fire sifre. Over låsen står det: «Året våpnene stilnet.» Sifrene du har samlet, gir svaret."),
+    el("form",{class:"row",onsubmit:e=>{e.preventDefault();if(inp.value.trim()==="1918"){S.done=true;S.end=Date.now();S.room=5;end()}else msg("Feil kode. Se på sifrene øverst på siden, i den rekkefølgen du fant dem.")}},inp,el("button",{class:"btn",type:"submit"},"Lås opp")));
+  frame("ROM 5","Speilsalen","En kopi av salen i Versailles, der fredsavtalen ble undertegnet",[
+    el("p",{},"Krigen er over, men den har forandret Europa. På det lange bordet ligger seks navnelapper og seks forklaringer."),
+    el("p",{class:"task"},"Trykk på et begrep til venstre, og trykk deretter på forklaringen som passer."),grid,fin],
+   ["Mussolini grunnla det fascistiske partiet i Italia. Jugoslavia var en ny stat.","Våpenhvilen begynte å gjelde klokka 11 den 11. november. Året er sifrene 1, 9, 1 og 8."]);
+}
+
+/* ---------- Slutt ---------- */
+function end(){
+  const t=elapsed();const rank=t<=480?"Arkivmester":t<=780?"Kildegransker":"Lærling i arkivet";
+  sheet.dataset.stamp="FRI";
+  sheet.replaceChildren(el("h2",{},"Døra går opp. Du er ute!"),el("p",{class:"where"},"Frisk luft, og en hel krig klokere"),
+    el("div",{class:"stats"},el("div",{class:"stat"},el("b",{},fmt(t)),"tid med straffetid"),el("div",{class:"stat"},el("b",{},String(S.hints)),"hint brukt"),el("div",{class:"stat"},el("b",{},rank),"din tittel")),
+    el("p",{},"Du har vært innom de grunnleggende årsakene, skuddene i Sarajevo, krigen i skyttergravene, revolusjonen i Russland og fredsoppgjøret."),
+    el("p",{class:"task"},"Siste oppgave, uten fasit: Kunne krigen vært unngått? Skriv to setninger og bruk minst ett begrep fra arkivet."),
+    el("label",{for:"refl",style:"position:absolute;left:-9999px"},"Refleksjon"),el("textarea",{id:"refl",placeholder:"Jeg mener at …"}),
+    el("p",{style:"font-size:15px;color:#5d5a4c"},"Teksten lagres ikke. Les den opp for sidemannen eller skriv den av i boka di."),
+    el("div",{class:"row"},el("button",{class:"btn",type:"button",onclick:()=>{Object.assign(S,{room:-1,start:0,penalty:0,hints:0,digits:[],done:false,end:0});intro()}},"Spill igjen")));
+  hud();window.scrollTo(0,0);
+}
+intro();
+</script>
+</body>
+</html>
