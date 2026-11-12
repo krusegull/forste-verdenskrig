@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Begrepsjakten</title>
+<style>
+:root{
+  /* Layout: ett spørsmålskort midt på siden, framdrift som 20 prikker, resultat med øveliste til slutt */
+  --bg:#eef1ec; --card:#ffffff; --ink:#1c2423; --mut:#5c6b68; --line:#c5cec8;
+  --ok:#2f7d4f; --okbg:#eaf5ee; --bad:#b3261e; --badbg:#fbeeed; --gold:#c9a24a;
+  --display:"Arial Narrow","Helvetica Neue",Arial,sans-serif; --body:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.45}
+header{background:var(--ink);color:#fff;padding:16px 20px}
+.top{max-width:820px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;justify-content:space-between}
+h1{font-family:var(--display);font-weight:700;font-size:28px;letter-spacing:.05em;text-transform:uppercase;margin:0}
+h1 small{display:block;font-family:var(--body);font-size:15px;font-weight:400;letter-spacing:0;text-transform:none;color:#c8d2ce}
+.back{color:#c8d2ce;font-size:15px;text-decoration:none;border:1px solid #47595a;border-radius:4px;padding:4px 10px}
+.score{font-family:var(--display);font-weight:700;font-size:22px;font-variant-numeric:tabular-nums}
+main{max-width:820px;margin:0 auto;padding:22px 16px 60px}
+.card{background:var(--card);border:2px solid var(--line);border-radius:10px;padding:24px clamp(16px,4vw,32px)}
+h2{font-family:var(--display);font-weight:700;font-size:30px;margin:0 0 8px;text-wrap:balance}
+p{margin:0 0 12px;max-width:64ch}
+.eyebrow{font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin:0 0 6px}
+.q{font-size:24px;line-height:1.3;margin:4px 0 18px;text-wrap:balance}
+button{font:inherit;cursor:pointer}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{background:#fff;border:2px solid var(--line);border-radius:8px;padding:14px 12px;font-weight:600;color:var(--ink);text-align:left}
+.opt:hover:not(:disabled){border-color:var(--ink)}
+.opt.right{border-color:var(--ok);background:var(--okbg);color:#1d5234}
+.opt.wrong{border-color:var(--bad);background:var(--badbg);color:var(--bad)}
+.tf{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.tf .opt{text-align:center;font-family:var(--display);font-size:22px;letter-spacing:.05em;text-transform:uppercase}
+.fb{min-height:3.2em;margin:16px 0 0;font-weight:600}
+.fb.good{color:var(--ok)} .fb.bad{color:var(--bad)}
+.btn{background:var(--ink);color:#fff;border:0;border-radius:6px;padding:11px 22px;font-family:var(--display);font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:18px}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.row{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.dots{display:flex;flex-wrap:wrap;gap:5px;margin:16px 0 0}
+.dots i{width:16px;height:16px;border-radius:50%;background:var(--line)}
+.dots i.y{background:var(--ok)} .dots i.x{background:var(--bad)} .dots i.now{outline:2px solid var(--ink);outline-offset:2px}
+.big{font-family:var(--display);font-weight:700;font-size:56px;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+.stars{color:var(--gold);font-size:34px;letter-spacing:.1em}
+.list{list-style:none;padding:0;margin:10px 0 0;display:grid;gap:8px}
+.list li{background:var(--bg);border-left:5px solid var(--gold);border-radius:4px;padding:8px 12px}
+.list b{display:block}
+.terms{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0}
+.terms span{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:3px 10px;font-size:15px}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+@media (max-width:520px){.opts{grid-template-columns:1fr} .q{font-size:21px}}
+</style>
+</head>
+<body>
+<header><div class="top"><h1>Begrepsjakten<small>20 begreper om første verdenskrig</small></h1><a class="back" href="index.html">← Til kartet</a><div class="score"><span id="score" aria-live="polite">0 poeng</span> · <span id="clock" aria-label="Tid brukt">00:00</span></div></div></header>
+<main id="main"></main>
+<script>
+"use strict";
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const el=(t,a={},...k)=>{const e=document.createElement(t);for(const[x,v]of Object.entries(a)){if(x==="class")e.className=v;else if(x.startsWith("on"))e.addEventListener(x.slice(2),v);else e.setAttribute(x,v)}k.flat().forEach(c=>e.append(c));return e};
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+/* [begrep, forklaring, gruppe, påstand, er påstanden sann, forklaring til påstanden] */
+const T=[
+["Nasjonalisme","Sterk tro på og stolthet over egen nasjon, og tanken om at et folk bør ha sin egen stat.",0,"Nasjonalisme var en av de grunnleggende årsakene til første verdenskrig.",true,"Nasjonalismen skapte spenninger mellom statene i Europa."],
+["Imperialisme","At stormakter skaffer seg kolonier og makt over andre områder.",0,"Imperialisme betyr at et land holder seg utenfor en krig.",false,"Det er nøytralitet. Imperialisme handler om å skaffe seg kolonier og makt over andre områder."],
+["Militær opprustning","At stater bygger opp hæren, flåten og våpnene sine.",1,"Militær opprustning betyr at et land bygger ned hæren sin.",false,"Opprustning betyr å bygge opp hær og våpen."],
+["Allianse","En avtale mellom land om å støtte hverandre.",1,"I en allianse lover land å støtte hverandre.",true,"Før krigen sto to allianser mot hverandre i Europa."],
+["Trippelalliansen","Alliansen mellom Tyskland, Østerrike-Ungarn og Italia.",1,"Storbritannia var med i trippelalliansen.",false,"Trippelalliansen besto av Tyskland, Østerrike-Ungarn og Italia."],
+["Trippelententen","Alliansen mellom Storbritannia, Frankrike og Russland.",1,"Russland var med i trippelententen.",true,"Trippelententen besto av Storbritannia, Frankrike og Russland."],
+["Grunnleggende årsak","Noe som bygger seg opp over lang tid og gjør en konflikt mulig.",2,"Skuddene i Sarajevo var en grunnleggende årsak til krigen.",false,"Skuddene var en utløsende årsak. De grunnleggende årsakene hadde bygd seg opp over lang tid."],
+["Utløsende årsak","Hendelsen som setter en konflikt i gang.",2,"En utløsende årsak er hendelsen som setter en konflikt i gang.",true,"Skuddene i Sarajevo er eksempelet fra første verdenskrig."],
+["Blankofullmakten","Tysklands løfte om å støtte Østerrike-Ungarn før angrepet på Serbia.",1,"Blankofullmakten var Tysklands løfte om støtte til Østerrike-Ungarn.",true,"Løftet bidro til at Tyskland fikk skylden for krigsutbruddet."],
+["Vestfronten","Frontlinjen i vest, der hærene sto mot hverandre i fire år uten framgang.",3,"På vestfronten sto hærene nesten stille i skyttergraver.",true,"Ingen av partene hadde framgang i de fire årene krigen varte."],
+["Østfronten","Fronten i øst, der Tyskland sloss mot Russland og det var mer bevegelse.",3,"På østfronten kjempet Tyskland mot Frankrike.",false,"På østfronten kjempet Tyskland mot Russland. Frankrike lå ved vestfronten."],
+["Skyttergrav","Grøft som soldatene gravde seg ned i for å beskytte seg ved fronten.",3,"Skyttergravene på vestfronten strakte seg helt til Sveits.",true,"De gikk fra kysten i nord og helt til Sveits."],
+["Nøytralitet","At et land ikke tar side i en krig.",4,"Norge var nøytralt under første verdenskrig.",true,"Norge erklærte seg nøytralt, men knyttet seg etter hvert sterkere til Storbritannia."],
+["Dyrtid","Periode da prisene på varer stiger mer enn lønningene.",4,"Dyrtid betyr at lønningene steg mer enn prisene.",false,"Det er omvendt. Prisene steg mer enn lønningene, og mange familier fikk det vanskelig."],
+["Rasjonering","At det bestemmes hvor mye hver person får kjøpe av varer det er mangel på.",4,"Rasjonering ble innført fordi det var mangel på varer.",true,"Varer som mat og drivstoff måtte rasjoneres under krigen."],
+["Versaillestraktaten","Fredsavtalen der Tyskland måtte ta på seg skylden for krigen og betale erstatninger.",5,"I Versaillestraktaten måtte Tyskland ta på seg skylden for krigen.",true,"Tyskland måtte også betale erstatninger og gi fra seg land og kolonier."],
+["Folkeforbundet","Verdensomspennende organisasjon som skulle forebygge nye kriger.",5,"Folkeforbundet ble opprettet for å forebygge nye kriger.",true,"Organisasjonen ble foreslått av den amerikanske presidenten Woodrow Wilson."],
+["Kommunisme","Ideologi der målet er et klasseløst samfunn uten forskjell på fattige og rike.",0,"Målet med kommunismen var et samfunn med store forskjeller mellom fattige og rike.",false,"Målet var et klasseløst samfunn uten forskjell på fattige og rike."],
+["Planøkonomi","Økonomisk system der staten eier fabrikkene og bestemmer hva som skal produseres.",0,"I en planøkonomi bestemmer staten hva som skal produseres.",true,"Staten skulle også eie fabrikkene og bestemme prisene."],
+["Fascisme","Ideologi som vil ha én sterk leder i stedet for demokrati, og som er sterkt nasjonalistisk.",0,"Fascistene ønsket å styrke demokratiet.",false,"Fascistene mente demokratiet ikke fungerte og ville ha én sterk leder, en diktator."],
+];
+const main=$("#main");
+let S;
+function reset(){S={round:1,order:shuffle(T.map((_,i)=>i)),i:0,res1:[],res2:[],score:0,acc:0,t0:null}}
+const secs=()=>Math.floor((S.acc+(S.t0?Date.now()-S.t0:0))/1000);
+const fmt=s=>String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
+const clockOn=()=>{S.t0=Date.now()},clockOff=()=>{if(S.t0){S.acc+=Date.now()-S.t0;S.t0=null}};
+setInterval(()=>{if(S)$("#clock").textContent=fmt(secs())},500);
+const setScore=()=>{$("#score").textContent=S.score+" poeng"};
+function dots(res){return el("div",{class:"dots","aria-hidden":"true"},S.order.map((_,j)=>el("i",{class:(res[j]===true?"y":res[j]===false?"x":"")+(j===S.i?" now":"")})))}
+function start(){
+  reset();setScore();
+  main.replaceChildren(el("div",{class:"card"},el("h2",{},"Kan du alle de 20 begrepene?"),
+    el("p",{},"Spillet har to runder, og hvert begrep kommer én gang i hver runde."),
+    el("ul",{class:"list"},el("li",{},el("b",{},"Runde 1: Hvilket begrep?"),"Du får en forklaring og velger begrepet som passer."),el("li",{},el("b",{},"Runde 2: Sant eller usant?"),"Du får en påstand om hvert begrep og avgjør om den stemmer.")),
+    el("p",{style:"margin-top:14px"},"Du får ett poeng for hvert riktig svar, altså opptil 40 poeng. Klokka går mens du svarer og står stille mellom rundene. Til slutt får du se tiden din og en liste over begrepene du bør øve mer på."),
+    el("div",{class:"terms"},T.map(t=>el("span",{},t[0]))),
+    el("div",{class:"row"},el("button",{class:"btn",type:"button",onclick:()=>{clockOn();q1()}},"Start runde 1"))));
+}
+function options(id){
+  const same=shuffle(T.map((_,i)=>i).filter(i=>i!==id&&T[i][2]===T[id][2]));
+  const other=shuffle(T.map((_,i)=>i).filter(i=>i!==id&&T[i][2]!==T[id][2]));
+  return shuffle([id,...same.slice(0,2),...other].slice(0,4));
+}
+function after(ok,text,next,last){
+  const fb=$("#fb");fb.textContent=(ok?"Riktig. ":"Feil. ")+text;fb.className="fb "+(ok?"good":"bad");
+  $$(".opt").forEach(b=>b.disabled=true);
+  const b=el("button",{class:"btn",type:"button",onclick:next},last);$("#next").replaceChildren(b);b.focus();
+}
+function q1(){
+  const id=S.order[S.i],t=T[id];
+  main.replaceChildren(el("div",{class:"card"},el("p",{class:"eyebrow"},"Runde 1 · spørsmål "+(S.i+1)+" av 20"),el("p",{},"Hvilket begrep passer til forklaringen?"),el("p",{class:"q"},t[1]),
+    el("div",{class:"opts"},options(id).map(o=>el("button",{class:"opt",type:"button","data-id":o,onclick:e=>{const ok=o===id;S.res1[S.i]=ok;if(ok)S.score++;setScore();
+      e.currentTarget.classList.add(ok?"right":"wrong");if(!ok)$$(".opt").find(b=>Number(b.dataset.id)===id).classList.add("right");
+      const lastQ=S.i===19;after(ok,"Forklaringen hører til "+t[0].toLowerCase().replace("versaillestraktaten","Versaillestraktaten").replace("folkeforbundet","Folkeforbundet")+".",()=>{if(lastQ){S.round=2;S.round1order=S.order;S.order=shuffle(S.order);S.i=0;mid()}else{S.i++;q1()}},lastQ?"Til runde 2":"Neste")}},T[o][0]))),
+    el("p",{class:"fb",id:"fb","aria-live":"polite"}),el("div",{class:"row",id:"next"}),dots(S.res1)));
+}
+function mid(){
+  clockOff();const r=S.res1.filter(Boolean).length;
+  main.replaceChildren(el("div",{class:"card"},el("p",{class:"eyebrow"},"Runde 1 er ferdig"),el("div",{class:"big"},r+" av 20"),el("p",{style:"margin-top:12px"},"I runde 2 får du en påstand om hvert begrep. Les nøye, for noen av påstandene er nesten riktige."),
+    el("div",{class:"row"},el("button",{class:"btn",type:"button",onclick:()=>{clockOn();q2()}},"Start runde 2"))));
+}
+function q2(){
+  const id=S.order[S.i],t=T[id];
+  const ans=v=>e=>{const ok=v===t[4];S.res2[S.i]=ok;if(ok)S.score++;setScore();e.currentTarget.classList.add(ok?"right":"wrong");if(!ok)$$(".opt").find(b=>b!==e.currentTarget).classList.add("right");
+    const lastQ=S.i===19;after(ok,t[5],()=>{if(lastQ)end();else{S.i++;q2()}},lastQ?"Se resultatet":"Neste")};
+  main.replaceChildren(el("div",{class:"card"},el("p",{class:"eyebrow"},"Runde 2 · påstand "+(S.i+1)+" av 20 · "+t[0]),el("p",{},"Er påstanden sann eller usann?"),el("p",{class:"q"},t[3]),
+    el("div",{class:"tf"},el("button",{class:"opt",type:"button",onclick:ans(true)},"Sant"),el("button",{class:"opt",type:"button",onclick:ans(false)},"Usant")),
+    el("p",{class:"fb",id:"fb","aria-live":"polite"}),el("div",{class:"row",id:"next"}),dots(S.res2)));
+}
+function end(){
+  clockOff();const ord2=S.order;const miss=new Set();
+  S.res2.forEach((ok,j)=>{if(!ok)miss.add(ord2[j])});
+  if(S.round1order)S.res1.forEach((ok,j)=>{if(!ok)miss.add(S.round1order[j])});
+  const n=S.score,stars=n>=36?3:n>=28?2:n>=20?1:0;
+  const list=[...miss].sort((a,b)=>a-b);
+  main.replaceChildren(el("div",{class:"card"},el("p",{class:"eyebrow"},"Resultat"),el("div",{class:"big"},n+" av 40"),el("div",{class:"stars","aria-label":stars+" av 3 stjerner"},"★".repeat(stars)+"☆".repeat(3-stars)),
+    el("p",{style:"margin-top:8px;font-weight:600"},"Tid: "+fmt(secs())),
+    el("p",{style:"margin-top:10px"},n===40?"Full pott. Du kan alle de 20 begrepene.":list.length?"Disse begrepene bør du øve mer på:":"Bra jobbet."),
+    list.length?el("ul",{class:"list"},list.map(i=>el("li",{},el("b",{},T[i][0]),T[i][1]))):"",
+    el("div",{class:"row"},el("button",{class:"btn",type:"button",onclick:start},"Spill igjen"))));
+  window.scrollTo(0,0);
+}
+start();
+</script>
+</body>
+</html>
