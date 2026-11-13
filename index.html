@@ -80,12 +80,13 @@ header p{margin:6px 0 0;color:var(--muted);max-width:60ch}
 .cat-btn[aria-current="true"] .ct{color:var(--paper)}
 .cat-btn[aria-current="true"] small{color:var(--halo)}
 @media (max-width:640px){.cats{grid-template-columns:1fr}}
-.games{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px}
+.games{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:10px}
 .games .glabel{grid-column:1/-1}
 .game-link{background:var(--card);border:1.5px solid var(--line);border-radius:8px;padding:11px 10px;text-align:left;display:flex;flex-direction:column;gap:2px;text-decoration:none;color:var(--ink);transition:border-color .15s}
 .game-link:hover{border-color:var(--ink)}
 .game-link .ct{font-family:var(--f-display);font-weight:800;font-size:16px;letter-spacing:.01em}
 .game-link small{color:var(--muted);font-size:12px}
+@media (max-width:1100px){.games{grid-template-columns:repeat(3,1fr)}}
 @media (max-width:900px){.games{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:640px){.games{grid-template-columns:1fr}}
 .panel{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px;min-width:0}
@@ -273,6 +274,7 @@ footer ul{margin:6px 0 0;padding-left:18px;columns:2;column-gap:28px}
     <a class="game-link" href="arsakskjeden.html"><span class="ct">Årsakskjeden</span><small>Bygg, sorter og koble årsaker og konsekvenser</small></a>
     <a class="game-link" href="begrepsjakten.html"><span class="ct">Begrepsjakten</span><small>Test deg selv i 20 begreper, på tid</small></a>
     <a class="game-link" href="krigsdagbokene.html"><span class="ct">Krigens gang</span><small>22 hendelser i rekkefølge, med skrivearbeid</small></a>
+    <a class="game-link" href="togreisen.html"><span class="ct">Togreisen</span><small>Legg sporet i riktig rekkefølge og kjør gjennom krigen</small></a>
   </nav>
 
   <nav class="years" id="years" aria-label="Velg år"></nav>
