@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Krigsdagbøkene</title>
+<style>
+:root{
+  /* Layout: fem dagbøker som kort, en felles tidslinje med én rad per person, ett dagbokark om gangen */
+  --bg:#e7ebe6; --page:#fffdf8; --ink:#1c2423; --mut:#5c6b68; --line:#c9d0ca;
+  --ok:#2f7d4f; --okbg:#eaf5ee; --bad:#b3261e; --badbg:#fbeeed; --gold:#b8892a;
+  --display:"Arial Narrow","Helvetica Neue",Arial,sans-serif; --body:system-ui,-apple-system,"Segoe UI",Arial,sans-serif; --hand:Georgia,"Times New Roman",serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.5}
+header{background:var(--ink);color:#fff;padding:16px 20px}
+.top{max-width:940px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;justify-content:space-between}
+h1{font-family:var(--display);font-weight:700;font-size:28px;letter-spacing:.05em;text-transform:uppercase;margin:0}
+h1 small{display:block;font-family:var(--body);font-size:15px;font-weight:400;letter-spacing:0;text-transform:none;color:#c8d2ce}
+.back{color:#c8d2ce;font-size:15px;text-decoration:none;border:1px solid #47595a;border-radius:4px;padding:4px 10px}
+.back:hover{color:#fff}
+.score{font-family:var(--display);font-weight:700;font-size:21px;font-variant-numeric:tabular-nums}
+main{max-width:940px;margin:0 auto;padding:20px 16px 60px}
+h2{font-family:var(--display);font-weight:700;font-size:30px;margin:0 0 6px;text-wrap:balance}
+h3{font-family:var(--display);font-weight:700;font-size:22px;margin:0}
+p{margin:0 0 12px;max-width:66ch}
+.lead{color:var(--mut)}
+.note{font-size:15px;color:var(--mut);border-left:4px solid var(--gold);padding:2px 0 2px 10px;margin:8px 0 18px}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--ink);color:#fff;border:0;border-radius:6px;padding:10px 20px;font-family:var(--display);font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:17px}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px}
+.lane{background:#fff;border:2px solid var(--line);border-radius:10px;padding:12px 12px 6px;margin:0 0 18px}
+.lane svg{display:block;width:100%;height:auto}
+.lane .cap{font-size:14px;color:var(--mut);margin:4px 4px 6px}
+.people{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.person{background:var(--page);border:2px solid var(--line);border-top-width:8px;border-radius:10px;padding:14px 16px;text-align:left;color:var(--ink);display:flex;flex-direction:column;gap:2px}
+.person:hover{border-color:var(--ink)}
+.person .meta{color:var(--mut);font-size:15px}
+.person .prog{margin-top:8px;font-size:15px;font-weight:600}
+.person .bar{height:6px;border-radius:3px;background:var(--line);margin-top:6px;overflow:hidden}
+.person .bar i{display:block;height:100%}
+.final{margin-top:18px;background:#fff;border:2px dashed var(--ink);border-radius:10px;padding:16px 18px}
+.diary{display:grid;gap:14px}
+.dhead{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;justify-content:space-between;margin-bottom:4px}
+.sheet{background:var(--page);border:1px solid var(--line);border-left-width:8px;border-radius:6px;padding:18px clamp(14px,3vw,26px);box-shadow:0 2px 0 rgba(0,0,0,.04)}
+.when{font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 6px}
+.entry{font-family:var(--hand);font-size:20px;line-height:1.55;font-style:italic;margin:0 0 12px;max-width:62ch}
+.past .entry{font-size:17px}
+.qq{font-weight:700;margin:14px 0 10px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.opt{background:#fff;border:2px solid var(--line);border-radius:8px;padding:11px 12px;text-align:left;color:var(--ink);font-weight:600}
+.opt:hover:not(:disabled){border-color:var(--ink)}
+.opt.right{border-color:var(--ok);background:var(--okbg);color:#1d5234}
+.opt.wrong{border-color:var(--bad);background:var(--badbg);color:var(--bad)}
+.fb{margin:12px 0 0;font-weight:600}
+.fb.good{color:var(--ok)} .fb.bad{color:var(--bad)}
+.ex{font-size:16px;margin:6px 0 0;max-width:66ch}
+.res{display:inline-block;font-size:14px;font-weight:700;border-radius:12px;padding:1px 10px;margin-bottom:6px}
+.res.y{background:var(--okbg);color:#1d5234} .res.n{background:var(--badbg);color:var(--bad)}
+.chain{list-style:none;margin:14px 0;padding:0;display:grid;gap:8px}
+.chain li{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;background:#fff;border:2px solid var(--line);border-radius:8px;padding:8px 12px}
+.chain li.ok{border-color:var(--ok);background:var(--okbg)}
+.chain .d{display:block;font-size:14px;color:var(--ok);font-weight:700}
+.arrows button{background:#fff;border:2px solid var(--line);border-radius:4px;width:38px;height:32px;color:var(--ink)}
+.msg{min-height:1.5em;font-weight:600;margin:10px 0 0}
+.msg.good{color:var(--ok)} .msg.bad{color:var(--bad)}
+.done{background:var(--ink);color:#fff;border-radius:10px;padding:18px 20px;margin-bottom:18px}
+.done b{font-family:var(--display);font-size:26px;color:#e8c46a}
+.done p{margin:6px 0 0}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+@media (max-width:560px){.opts{grid-template-columns:1fr} .entry{font-size:18px} h2{font-size:26px}}
+</style>
+</head>
+<body>
+<header><div class="top"><h1>Krigsdagbøkene<small>Fem liv gjennom første verdenskrig</small></h1><a class="back" href="index.html">← Til kartet</a><div class="score" id="score" aria-live="polite">0 av 19 riktige</div></div></header>
+<main id="main"></main>
+<script>
+"use strict";
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const el=(t,a={},...k)=>{const e=document.createElement(t);for(const[x,v]of Object.entries(a)){if(x==="class")e.className=v;else if(x.startsWith("on"))e.addEventListener(x.slice(2),v);else e.setAttribute(x,v)}k.flat().forEach(c=>e.append(c));return e};
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+/* m = måneder etter juni 1914, brukes til plassering på tidslinjen. Første svaralternativ i opts er riktig. */
+const P=[
+{id:"karl",name:"Karl",role:"Tysk soldat",place:"Vestfronten",col:"#a33b2c",bg:"#fbeeed",E:[
+ {when:"August 1914",m:2,text:"Vi marsjerer vestover. Planen er å slå Frankrike raskt, og veien går gjennom Belgia. Belgia er nøytralt, men offiserene sier vi ikke har tid til å gå rundt. Nå har Storbritannia også erklært oss krig.",
+  q:"Hvorfor gikk Storbritannia med i krigen da Tyskland gikk inn i Belgia?",opts:["Storbritannia hadde lovet å beskytte Belgia","Belgia var med i trippelalliansen","Storbritannia ville ta over Belgias kolonier","Tyskland hadde angrepet Storbritannia først"],
+  ex:"Tyskland angrep Frankrike gjennom Belgia. Storbritannia hadde lovet å beskytte Belgia, og dermed ble også Storbritannia trukket med i krigen."},
+ {when:"Desember 1914",m:6,text:"Vi har gravd oss ned. Skyttergraven er full av gjørme, og fienden ligger i sin egen grav på den andre siden av ingenmannsland. Ingen av sidene kommer seg framover.",
+  q:"Hvor langt strakte skyttergravene på vestfronten seg?",opts:["Fra Den engelske kanal og helt til Sveits","Fra Nordsjøen til Middelhavet","Fra Paris til Berlin","Langs kysten av Belgia"],
+  ex:"Hærene på begge sider gravde seg ned i skyttergraver fra Den engelske kanal og helt til Sveits. Her kjempet de i de fire årene krigen varte, uten at noen av partene hadde framgang."},
+ {when:"22. april 1915",m:10,text:"Ved Ypres i Belgia slapp vi giftgass mot fiendens skyttergraver. En gulgrønn sky drev over ingenmannsland. Nå har alle fått beskjed om å ha gassmasken klar.",
+  q:"Hvorfor kalles første verdenskrig gjerne «den første moderne krigen»?",opts:["Ny teknologi ga nye, dødelige våpen som ble brukt i krig for første gang","Det var den første krigen der det deltok soldater","Det var den første krigen som ble utkjempet i Europa","Krigen ble avgjort i løpet av noen få dager"],
+  ex:"Den teknologiske utviklingen hadde skapt nye våpen, som maskingevær, giftgass og stridsvogner. Ved Ypres 22. april 1915 brukte tyskerne giftgass i stor skala for første gang."}
+]},
+{id:"ivan",name:"Ivan",role:"Russisk soldat",place:"Østfronten",col:"#2c5d8a",bg:"#e8f0f8",E:[
+ {when:"August 1914",m:2,text:"Tsaren har kalt oss inn. Russland har lovet å støtte Serbia, og nå har Tyskland erklært oss krig. Hele landsbyen fulgte oss til toget.",
+  q:"Hvorfor kom Russland med i krigen?",opts:["Russland hadde lovet å støtte Serbia","Russland ble angrepet av Storbritannia","Russland ville ta over Belgia","Russland var med i trippelalliansen"],
+  ex:"Russland hadde lovet å støtte Serbia. Da Østerrike-Ungarn angrep Serbia, ble Russland trukket inn, og Tyskland erklærte Russland krig 1. august 1914."},
+ {when:"1915",m:13,text:"Her i øst ligger vi ikke stille i skyttergraver måned etter måned. Fronten flytter seg, og vi marsjerer langt. Tyskerne må kjempe mot oss her og mot franskmenn og briter i vest på samme tid.",
+  q:"Sant eller usant: Det var mer bevegelse på østfronten enn på vestfronten.",tf:true,
+  ex:"Sant. På vestfronten sto fronten nesten stille, mens det var mer bevegelse på østfronten. For Tyskland var det krevende å kjempe både i vest og øst samtidig."},
+ {when:"Mars 1917",m:33,text:"Det er ikke nok mat, verken her ved fronten eller hjemme. I Petrograd har tusenvis gått ut i protest, og soldatene nektet å skyte på dem. Nå sier de at tsaren har gått av.",
+  q:"Hva var en viktig grunn til at det ble revolusjon i Russland i 1917?",opts:["Krigen gjorde nøden verre, og folk manglet mat","Tsaren hadde nettopp innført demokrati","Russland hadde vunnet krigen","Tyskland krevde at tsaren skulle gå av"],
+  ex:"Tsaren var allerede upopulær, og arbeiderne hadde lav lønn og dårlige levekår. Krigen gjorde det enda verre. I mars 1917 protesterte folk, soldatene nektet å skyte, og tsaren ble tvunget til å gå av."},
+ {when:"Mars 1918",m:45,text:"I høst tok Lenin og bolsjevikene makten. Nå har Russland sluttet fred med Tyskland, og vi får reise hjem. Men folk sier at det blir borgerkrig.",
+  q:"Hva betydde det for Tyskland at Russland gikk ut av krigen?",opts:["Tyskland slapp å kjempe i øst og kunne samle styrkene i vest","Tyskland hadde dermed vunnet hele krigen","USA gikk ut av krigen samtidig","Tyskland måtte gi koloniene sine til Russland"],
+  ex:"Russland sluttet fred med Tyskland 3. mars 1918. Da slapp Tyskland å kjempe på to fronter og kunne samle styrkene på vestfronten. Likevel tapte Tyskland krigen samme høst."}
+]},
+{id:"mary",name:"Mary",role:"Fabrikkarbeider",place:"Skottland",col:"#6b4c9a",bg:"#f1ecf8",E:[
+ {when:"1915",m:15,text:"Bror min er ved fronten, og jeg har fått jobb på en ammunisjonsfabrikk. Før var dette mannsarbeid. Nå er det fullt av kvinner her, og for første gang tjener jeg mine egne penger.",
+  q:"Hvorfor fikk mange kvinner jobb i industrien under krigen?",opts:["Mange menn var i krigen, og industrien trengte arbeidere","Det ble forbudt for menn å jobbe i fabrikker","Kvinnene ble sendt dit som straff","Fabrikkene ble flyttet til nøytrale land"],
+  ex:"Mange menn reiste i krigen, og særlig industrien som laget våpen og utstyr trengte arbeidere. Mange kvinner fikk dermed jobb utenfor hjemmet og tjente penger for første gang."},
+ {when:"Juli 1916",m:25,text:"Avisene skriver om et stort britisk angrep ved elva Somme i Frankrike. Det sies at tapene er enorme. Jeg venter og venter på brev fra bror min.",
+  q:"Hvorfor ble tapene så store når soldatene angrep på vestfronten?",opts:["De måtte løpe over ingenmannsland mot maskingevær og piggtråd","De angrep uten våpen","De kjempet til sjøs i stedet for på land","Angrepene skjedde bare om natta"],
+  ex:"Slaget ved Somme begynte 1. juli 1916. Bare den første dagen ble rundt 57 000 britiske soldater drept, såret eller meldt savnet. Angripere som løp over ingenmannsland, var et lett mål for maskingevær."},
+ {when:"September 1916",m:27,text:"Ved Somme har britene tatt i bruk et nytt våpen: stridsvogner. Det er store pansrede kjøretøy som skal kunne kjøre over skyttergraver og piggtråd.",
+  q:"Sant eller usant: Stridsvognen var et av de nye våpnene som ble tatt i bruk under første verdenskrig.",tf:true,
+  ex:"Sant. Britene brukte stridsvogner for første gang 15. september 1916, under slaget ved Somme."},
+ {when:"November 1918",m:53,text:"Krigen er over. Mennene kommer hjem, og mange av oss må gi fra oss jobbene igjen. Men vi har vist hva vi kan, og det glemmer vi ikke.",
+  q:"Hvilken konsekvens kan kvinnenes innsats under krigen ha fått?",opts:["Flere land innførte stemmerett for kvinner i årene etter krigen","Kvinner fikk forbud mot å jobbe utenfor hjemmet","Alle våpenfabrikkene ble gjort om til skoler","Kvinner ble soldater ved fronten i alle land"],
+  ex:"Erfaringene og innsatsen kan ha påvirket kvinnenes stilling i familien og samfunnet og dermed kvinnefrigjøringen. Flere land innførte stemmerett for kvinner i årene etter krigen."}
+]},
+{id:"arjun",name:"Arjun",role:"Indisk soldat i britisk tjeneste",place:"Vestfronten",col:"#9a6a12",bg:"#faf1de",E:[
+ {when:"Høsten 1914",m:4,text:"Jeg er soldat fra India, som er en britisk koloni. Vi har seilt over havet for å kjempe for Storbritannia på vestfronten i Frankrike. Det er kaldt og vått her, og alt er fremmed.",
+  q:"Hvorfor kjempet soldater fra blant annet India og Afrika i skyttergravene i Europa?",opts:["Storbritannia og Frankrike hentet soldater fra koloniene sine","India og landene i Afrika var med i trippelalliansen","De var frivillige fra nøytrale land","De var tyske kolonisoldater"],
+  ex:"Både Storbritannia og Frankrike hentet soldater fra koloniene sine til skyttergravene i Europa. India var en britisk koloni."},
+ {when:"Slutten av 1914",m:6,text:"Offiserene forteller at Det osmanske riket har sluttet seg til fienden. Nå er også Midtøsten trukket inn i krigen.",
+  q:"Hvilken side gikk Det osmanske riket inn på?",opts:["Tysklands og Østerrike-Ungarns side","Storbritannias og Frankrikes side","Det holdt seg nøytralt","Russlands side"],
+  ex:"Det osmanske riket inngikk en allianse med Tyskland og Østerrike-Ungarn, og dermed ble også Midtøsten involvert i krigen."},
+ {when:"1915",m:17,text:"En offiser forteller at krigen ikke bare er her. I Øst-Afrika kjemper tyske kolonisoldater mot britene, og i Asia er flere tyske kolonier erobret.",
+  q:"Krigen ble mest utkjempet i Europa. Hvorfor kalles den likevel en verdenskrig?",opts:["Det ble kjempet i flere verdensdeler, og soldater kom fra hele verden","Alle land i verden var med i krigen","Den varte lenger enn alle andre kriger","Den begynte i Amerika"],
+  ex:"Krigen spredte seg til andre verdensdeler: Øst-Afrika, Asia, Midtøsten og havene. Soldater fra koloniene kjempet i Europa, og USA gikk med i 1917."}
+]},
+{id:"ole",name:"Ole",role:"Norsk sjømann",place:"Handelsflåten",col:"#1f6f63",bg:"#e3f2ef",E:[
+ {when:"August 1914",m:2,text:"Norge har erklært seg nøytralt. Vi tar ikke side i krigen, men skipet vårt seiler videre med last for land på begge sider.",
+  q:"Hva betyr det at Norge var nøytralt?",opts:["Norge tok ikke side i krigen","Norge kjempet på Storbritannias side","Norge stengte alle havnene sine","Norge var alliert med Tyskland"],
+  ex:"Da krigen brøt ut, erklærte Norge seg nøytralt. De første krigsårene handlet Norge med begge parter, men senere knyttet landet seg sterkere til Storbritannia."},
+ {when:"Februar 1917",m:32,text:"Tyskland har varslet at ubåtene skal senke skip som frakter varer til og fra Storbritannia og Frankrike, også skip fra nøytrale land som Norge. Mange av gutta tør nesten ikke mønstre på.",
+  q:"Hvorfor ble Norge hardt rammet av krigen, selv om landet var nøytralt?",opts:["Tyske ubåter senket også skip fra nøytrale land","Norge sendte soldater til vestfronten","Norge ble okkupert av Tyskland","Norge erklærte krig mot Tyskland"],
+  ex:"1917 ble det verste året for den norske handelsflåten. Under hele krigen gikk over åtte hundre norske skip tapt, og rundt to tusen norske sjøfolk mistet livet."},
+ {when:"April 1917",m:34,text:"Nyheten har nådd oss i havn: USA har erklært krig mot Tyskland. Tyske ubåter har senket amerikanske skip også.",
+  q:"Hva bidro til at USA gikk med i krigen i 1917?",opts:["Tyske ubåter senket amerikanske skip","Japan angrep USA","Skuddene i Sarajevo","Norge ba USA om hjelp"],
+  ex:"Tyske ubåter senket også amerikanske skip, og det bidro til at USA erklærte krig mot Tyskland 6. april 1917."},
+ {when:"Januar 1918",m:43,text:"Mor skriver at alt har blitt så dyrt hjemme. Prisene stiger mer enn lønningene. Nå har de fått brødkort, og hun får bare kjøpe en bestemt mengde brød hver uke.",
+  q:"Hva kalles det når prisene stiger mer enn lønningene?",opts:["Dyrtid","Rasjonering","Nøytralitet","Planøkonomi"],
+  ex:"Perioden kalles dyrtid. Brødkortet er et eksempel på rasjonering: Varer det var mangel på, som mat og drivstoff, ble fordelt slik at hver person fikk en bestemt mengde."},
+ {when:"11. november 1918",m:53,text:"Klokka 11 i dag begynte våpenhvilen. Krigen er over. Men mange av kameratene mine kom aldri hjem.",
+  q:"Sant eller usant: Våpenhvilen begynte å gjelde klokka 11 den 11. november 1918.",tf:true,
+  ex:"Sant. Våpenhvilen begynte å gjelde klokka 11 den 11. november 1918. Datoen markeres fortsatt i mange land."}
+]}
+];
+const TOTAL=P.reduce((a,p)=>a+p.E.length,0);
+const EV=[["Skuddene i Sarajevo","28. juni 1914"],["Tyskland går inn i Belgia, og Storbritannia går med i krigen","4. august 1914"],["Tyskerne bruker giftgass ved Ypres","22. april 1915"],["Slaget ved Somme begynner","1. juli 1916"],["Britene bruker stridsvogner for første gang","15. september 1916"],["Tsaren i Russland går av","mars 1917"],["USA erklærer Tyskland krig","6. april 1917"],["Russland slutter fred med Tyskland","3. mars 1918"],["Våpenhvilen begynner å gjelde","11. november 1918"]];
+const S={res:{},opts:{},fin:null};
+P.forEach(p=>{S.res[p.id]=[];S.opts[p.id]=p.E.map(e=>e.opts?shuffle(e.opts):null)});
+const main=$("#main");
+const right=()=>P.reduce((a,p)=>a+S.res[p.id].filter(Boolean).length,0);
+const answered=()=>P.reduce((a,p)=>a+S.res[p.id].length,0);
+function setScore(){$("#score").textContent=right()+" av "+TOTAL+" riktige"}
+const toTop=()=>{try{main.scrollIntoView({block:"start"})}catch(e){}window.scrollTo(0,0)};
+
+/* ---------- felles tidslinje ---------- */
+function lane(){
+  const NS="http://www.w3.org/2000/svg",W=760,L=96,R=744,RH=34,H=P.length*RH+34;
+  const X=m=>L+m*(R-L)/53;
+  const svg=document.createElementNS(NS,"svg");svg.setAttribute("viewBox","0 0 "+W+" "+H);svg.setAttribute("role","img");
+  svg.setAttribute("aria-label","Tidslinje fra juni 1914 til november 1918 med én rad per person");
+  const mk=(t,a,txt)=>{const n=document.createElementNS(NS,t);for(const[k,v]of Object.entries(a))n.setAttribute(k,v);if(txt!=null)n.textContent=txt;return n};
+  [["1914",0],["1915",7],["1916",19],["1917",31],["1918",43]].forEach(([y,m])=>{svg.append(mk("line",{x1:X(m),x2:X(m),y1:4,y2:H-26,stroke:"#d6dcd7","stroke-width":1}));svg.append(mk("text",{x:X(m)+4,y:H-8,"font-size":13,fill:"#5c6b68","font-family":"Arial,sans-serif"},y))});
+  P.forEach((p,r)=>{const y=14+r*RH;
+    svg.append(mk("text",{x:4,y:y+5,"font-size":14,"font-weight":700,fill:p.col,"font-family":"Arial,sans-serif"},p.name));
+    svg.append(mk("line",{x1:X(0),x2:X(53),y1:y,y2:y,stroke:"#e3e7e3","stroke-width":2}));
+    p.E.forEach((e,i)=>{const n=S.res[p.id].length,done=i<n,cur=i===n;
+      const c=mk("circle",{cx:X(e.m),cy:y,r:done||cur?8:5,fill:done?p.col:cur?"#fff":"#c9d0ca",stroke:done||cur?p.col:"#c9d0ca","stroke-width":3});
+      if(done||cur){c.style.cursor="pointer";c.setAttribute("tabindex","0");c.setAttribute("role","button");c.setAttribute("aria-label",p.name+", "+e.when);
+        const go=()=>diary(p.id,i);c.addEventListener("click",go);c.addEventListener("keydown",ev=>{if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();go()}})}
+      const t=mk("title",{},p.name+", "+e.when+(done?"":cur?" (neste side)":" (låst)"));c.append(t);svg.append(c)})});
+  return el("div",{class:"lane"},el("p",{class:"cap"},"Fylte prikker er sider du har lest. Trykk på en prikk for å åpne siden."),svg);
+}
+
+/* ---------- oversikt ---------- */
+function hub(){
+  const all=answered()===TOTAL;
+  main.replaceChildren(
+    all?el("div",{class:"done"},el("b",{},right()+" av "+TOTAL+" riktige"),el("p",{},"Du har lest alle fem dagbøkene. Velg én av personene og skriv noen setninger: Hvordan ville livet til denne personen ha vært annerledes hvis krigen ikke hadde skjedd?")):"",
+    el("h2",{},"Fem dagbøker fra krigen"),
+    el("p",{class:"lead"},"Les dagbøkene til fem personer som opplevde første verdenskrig på hver sin måte. Etter hver side får du et spørsmål. Du kan lese dagbøkene i den rekkefølgen du vil."),
+    el("p",{class:"note"},"Personene er oppdiktet, men hendelsene de forteller om, er virkelige."),
+    lane(),
+    el("div",{class:"people"},P.map(p=>{const n=S.res[p.id].length,k=S.res[p.id].filter(Boolean).length,b=el("i");b.style.width=(100*n/p.E.length)+"%";b.style.background=p.col;
+      const card=el("button",{class:"person",type:"button",onclick:()=>diary(p.id)},el("h3",{},p.name),el("span",{class:"meta"},p.role+" · "+p.place),
+        el("span",{class:"prog"},n===0?"Ikke begynt":n===p.E.length?"Ferdig: "+k+" av "+p.E.length+" riktige":n+" av "+p.E.length+" sider lest"),el("span",{class:"bar"},b));
+      card.style.borderTopColor=p.col;return card})),
+    el("div",{class:"final"},el("h3",{},"Siste oppdrag: Krigens gang"),el("p",{style:"margin:6px 0 0"},"Legg ni av hendelsene fra dagbøkene i riktig rekkefølge."+(S.fin?" Du klarte det på "+S.fin+" forsøk.":"")),
+      el("div",{class:"row"},el("button",{class:"btn",type:"button",onclick:finale},S.fin?"Prøv igjen":"Start"))));
+  setScore();toTop();
+}
+
+/* ---------- dagbok ---------- */
+function diary(pid,focus){
+  const p=P.find(x=>x.id===pid),res=S.res[pid],n=res.length;
+  const wrap=el("div",{class:"diary"});
+  const sheetFor=(e,i)=>{const s=el("div",{class:"sheet"+(i<n?" past":""),"data-i":i});s.style.borderLeftColor=p.col;
+    s.append(el("p",{class:"when",style:"color:"+p.col},e.when),el("p",{class:"entry"},e.text));
+    if(i<n){s.append(el("span",{class:"res "+(res[i]?"y":"n")},res[i]?"Riktig svar":"Feil svar"),el("p",{class:"qq",style:"margin-top:2px"},e.q),el("p",{class:"ex"},e.ex))}
+    else question(s,p,e,i);
+    return s};
+  p.E.slice(0,Math.min(n+1,p.E.length)).forEach((e,i)=>wrap.append(sheetFor(e,i)));
+  if(n===p.E.length)wrap.append(el("div",{class:"row"},el("button",{class:"btn",type:"button",onclick:hub},"Tilbake til dagbøkene")));
+  main.replaceChildren(el("div",{class:"dhead"},el("h2",{style:"color:"+p.col},p.name+"s dagbok"),el("button",{class:"btn ghost",type:"button",onclick:hub},"Alle dagbøkene")),
+    el("p",{class:"lead"},p.role+" · "+p.place+" · side "+Math.min(n+1,p.E.length)+" av "+p.E.length),wrap);
+  setScore();
+  const tgt=focus!=null?$('.sheet[data-i="'+focus+'"]',main):$$(".sheet",main).pop();
+  if(tgt&&(focus!=null||n>0)){try{tgt.scrollIntoView({block:"start"})}catch(e){}}else toTop();
+}
+function question(s,p,e,i){
+  const fb=el("p",{class:"fb","aria-live":"polite"}),next=el("div",{class:"row"});
+  const answer=(ok,btn,box)=>{S.res[p.id][i]=ok;setScore();$$(".opt",box).forEach(b=>b.disabled=true);btn.classList.add(ok?"right":"wrong");
+    if(!ok){const r=$$(".opt",box).find(b=>b.dataset.r==="1");if(r)r.classList.add("right")}
+    fb.textContent=ok?"Riktig.":"Feil.";fb.className="fb "+(ok?"good":"bad");s.insertBefore(el("p",{class:"ex"},e.ex),next);
+    const last=i===p.E.length-1;const b=el("button",{class:"btn",type:"button",onclick:()=>last?hub():diary(p.id)},last?"Tilbake til dagbøkene":"Neste side");next.append(b);b.focus()};
+  let box;
+  if(e.tf!==undefined){box=el("div",{class:"opts"});[["Sant",true],["Usant",false]].forEach(([t,v])=>box.append(el("button",{class:"opt",type:"button","data-r":v===e.tf?"1":"0",onclick:ev=>answer(v===e.tf,ev.currentTarget,box)},t)))}
+  else{box=el("div",{class:"opts"});S.opts[p.id][i].forEach(t=>box.append(el("button",{class:"opt",type:"button","data-r":t===e.opts[0]?"1":"0",onclick:ev=>answer(t===e.opts[0],ev.currentTarget,box)},t)))}
+  s.append(el("p",{class:"qq"},e.q),box,fb,next);
+}
+
+/* ---------- siste oppdrag ---------- */
+function finale(){
+  let ord=shuffle(EV.map((_,i)=>i)),tries=0,locked=false;
+  while(ord.every((x,i)=>x===i))ord=shuffle(ord);
+  const ol=el("ol",{class:"chain"}),msg=el("p",{class:"msg","aria-live":"polite"});
+  const draw=chk=>ol.replaceChildren(...ord.map((id,pos)=>{const ok=chk&&id===pos;
+    return el("li",{class:ok?"ok":""},el("span",{},EV[id][0],ok?el("span",{class:"d"},EV[id][1]):""),
+      el("span",{class:"arrows"},el("button",{type:"button","aria-label":"Flytt opp",onclick:()=>mv(pos,-1)},"▲")," ",el("button",{type:"button","aria-label":"Flytt ned",onclick:()=>mv(pos,1)},"▼")))}));
+  const mv=(p,d)=>{if(locked)return;const q=p+d;if(q<0||q>=ord.length)return;[ord[p],ord[q]]=[ord[q],ord[p]];draw(false)};
+  draw(false);
+  const chk=el("button",{class:"btn",type:"button",onclick:()=>{tries++;const r=ord.filter((id,p)=>id===p).length;draw(true);
+    if(r===EV.length){locked=true;draw(true);$$("button",ol).forEach(b=>b.disabled=true);chk.disabled=true;S.fin=S.fin?Math.min(S.fin,tries):tries;
+      msg.textContent="Hele rekkefølgen er riktig, etter "+tries+" forsøk. Datoene står nå på kortene.";msg.className="msg good"}
+    else{msg.textContent=r+" av "+EV.length+" står på riktig plass. De med grønn kant er riktige.";msg.className="msg bad"}}},"Sjekk rekkefølgen");
+  main.replaceChildren(el("div",{class:"dhead"},el("h2",{},"Krigens gang"),el("button",{class:"btn ghost",type:"button",onclick:hub},"Alle dagbøkene")),
+    el("p",{class:"lead"},"Legg hendelsene i riktig rekkefølge, med den eldste øverst. Bruk pilene."),ol,el("div",{class:"row"},chk),msg);
+  toTop();
+}
+hub();
+</script>
+</body>
+</html>
