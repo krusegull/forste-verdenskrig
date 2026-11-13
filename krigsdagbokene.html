@@ -342,6 +342,8 @@ function docx(body){
 async function saveFile(name,blob,status){
   let d=null;try{d=DL?await DL:null}catch(e){d=null}
   if(d){try{await d.save({filename:name,data:blob});status("Filen er lastet ned.",true)}catch(e){const c=e&&e.code;status(c==="declined"?"Nedlastingen ble avbrutt.":"Nedlastingen virket ikke her. Trykk «Kopier svarene» og lim teksten inn i Word i stedet.",false)}return}
+  const own=location.protocol==="file:"||/github\.io$/.test(location.hostname)||location.hostname==="localhost";
+  if(!own){status("Nedlasting til Word virker ikke på denne siden. Trykk «Kopier svarene» og lim teksten inn i et Word-dokument.",false);return}
   try{const u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download=name;a.style.display="none";document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),5000);status("Filen er lastet ned. Se etter den i nedlastingsmappen.",true)}
   catch(e){status("Nedlastingen virket ikke her. Trykk «Kopier svarene» og lim teksten inn i Word i stedet.",false)}
 }
