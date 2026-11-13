@@ -77,6 +77,8 @@ textarea{min-height:110px;resize:vertical;line-height:1.5}
 .sum dl{margin:6px 0 0}
 .sum dt{font-weight:700}
 .sum dd{margin:0 0 8px 0}
+.steps{margin:6px 0 0;padding-left:22px}
+.steps li{margin:0 0 6px;max-width:66ch}
 .done{background:var(--ink);color:#fff;border-radius:10px;padding:16px 20px;margin:0 0 16px}
 .done b{font-family:var(--display);font-size:26px;color:#e8c46a}
 .done p{margin:4px 0 0}
@@ -201,7 +203,6 @@ const answered=()=>S.res.filter(Boolean).length;
 const setScore=()=>{$("#score").textContent=right()+" av "+N+" riktige"};
 const main=$("#main");
 const toTop=()=>{try{main.scrollIntoView({block:"start"})}catch(e){}window.scrollTo(0,0)};
-let DL=null;try{if(window.claude&&typeof window.claude.use==="function")DL=Promise.resolve(window.claude.use("downloads")).catch(()=>null)}catch(e){DL=null}
 
 /* ---------- startside ---------- */
 function intro(){
@@ -211,7 +212,7 @@ function intro(){
     el("p",{},"Du skal gå gjennom 22 viktige hendelser, fra spenningene før 1914 til fascismen i Italia i 1922. Hver gang du trykker deg videre, kommer du til neste hendelse. Etter hver hendelse svarer du på et kort spørsmål."),
     el("p",{},"Underveis hører du stemmene til fem personer som opplevde krigen. Personene er oppdiktet, men hendelsene de forteller om, er virkelige."),
     el("div",{class:"people"},Object.values(V).map(([n,r])=>el("div",{},el("b",{},n),r))),
-    el("p",{},"Til slutt svarer du på oppfølgingsspørsmål i tekstbokser. Du kan laste ned svarene dine og et sammendrag som Word-filer."),
+    el("p",{},"Til slutt svarer du på oppfølgingsspørsmål i tekstbokser og kopierer svarene dine over i et Word-dokument. Du får også et sammendrag av det viktigste."),
     el("div",{class:"row"},el("button",{class:"btn",type:"button",onclick:()=>ev(started?Math.min(answered(),N-1):0)},started?"Fortsett der du slapp":"Start"),
       started?el("button",{class:"btn ghost",type:"button",onclick:()=>{S.res=[];S.i=-1;save();setScore();ev(0)}},"Start forløpet på nytt"):"",
       answered()>=N?el("button",{class:"btn ghost",type:"button",onclick:qs},"Til oppfølgingsspørsmålene"):"")));
@@ -250,106 +251,58 @@ function qs(){
   const ta=(id,label,help)=>{const t=el("textarea",{id:id,rows:"5"});t.value=S.ans[id]||"";t.addEventListener("input",()=>{S.ans[id]=t.value;save()});
     return el("div",{class:"task"},el("label",{for:id},label),help?el("p",{class:"help"},help):"",t)};
   const inp=(id,label,key)=>{const t=el("input",{type:"text",id:id,autocomplete:"off"});t.value=S[key]||"";t.addEventListener("input",()=>{S[key]=t.value;save()});return el("div",{},el("label",{for:id},label),t)};
-  const[st,status]=statusLine();
+  const[st,status]=statusLine();const out=el("div");
   const left=N-answered();
   main.replaceChildren(
     left>0?el("div",{class:"done"},el("b",{},left+" hendelser gjenstår"),el("p",{},"Du kan svare på spørsmålene nå, men det er lurt å gå gjennom hele forløpet først.")):el("div",{class:"done"},el("b",{},right()+" av "+N+" riktige"),el("p",{},"Du har gått gjennom hele forløpet. Nå skal du vise hva du har lært.")),
     el("div",{class:"card"},
       el("h2",{},"Oppfølgingsspørsmål"),
-      el("p",{class:"lead"},"Skriv svarene dine i boksene. Teksten blir husket i denne nettleseren, men last ned svarene før du lukker siden."),
+      el("p",{class:"lead"},"Skriv svarene dine i boksene. Når du er ferdig, kopierer du svarene over i et Word-dokument. Teksten blir husket i denne nettleseren en stund, men kopier svarene før du lukker siden."),
       el("div",{class:"fields"},inp("navn","Navn","name"),inp("klasse","Klasse","cls")),
       el("h3",{class:"part"},"Del 1: Forklar begrepene"),
       ...QA.map((b,k)=>ta("a"+k,String.fromCharCode(97+k)+") "+b,"Forklar med dine egne ord hva begrepet betyr.")),
       el("h3",{class:"part"},"Del 2: Bruk begrepene"),
       ...QB.map((q,k)=>ta("b"+k,(k+1)+". "+q)),
-      el("div",{class:"row"},el("button",{class:"btn",type:"button",onclick:()=>saveFile(fileName(),answersDoc(),status)},"Last ned svarene mine (Word)"),
-        el("button",{class:"btn ghost",type:"button",onclick:()=>copy(answersText(),status)},"Kopier svarene"),
-        el("button",{class:"btn ghost",type:"button",onclick:summary},"Se sammendraget")),st,
+      el("h3",{class:"part"},"Kopier svarene til Word"),
+      el("ol",{class:"steps"},el("li",{},"Åpne et nytt Word-dokument."),el("li",{},"Skriv denne overskriften øverst: ",el("b",{},"Første verdenskrig: Mine svar"),"."),el("li",{},"Trykk på knappen under, og lim inn svarene i dokumentet med Ctrl+V (Cmd+V på Mac)."),el("li",{},"Gjør overskriftene «Del 1» og «Del 2» til underoverskrifter, og lagre dokumentet.")),
+      el("div",{class:"row"},el("button",{class:"btn",type:"button",onclick:()=>copy(answersText(),status,out)},"Kopier svarene mine"),
+        el("button",{class:"btn ghost",type:"button",onclick:summary},"Se sammendraget")),st,out,
       el("div",{class:"row"},el("button",{class:"btn ghost",type:"button",onclick:()=>ev(Math.min(answered(),N-1))},"← Tilbake til hendelsene"))));
   setScore();toTop();
 }
 
 /* ---------- sammendrag ---------- */
 function summary(){
-  const[st,status]=statusLine();
+  const[st,status]=statusLine();const out=el("div");
   main.replaceChildren(el("div",{class:"card sum"},
     el("h2",{},"Det viktigste om første verdenskrig"),
     ...SUM.map(([h,l])=>[el("h3",{},h),el("ul",{},l.map(x=>el("li",{},x)))]).flat(),
     el("h3",{},"Begrepene"),el("dl",{},DEF.map(([b,d])=>[el("dt",{},b),el("dd",{},d)]).flat()),
     el("h3",{},"Hendelsene i rekkefølge"),el("ul",{},E.map(e=>el("li",{},e.d+": "+e.t))),
-    el("div",{class:"row"},el("button",{class:"btn",type:"button",onclick:()=>saveFile("Sammendrag_forste_verdenskrig.docx",summaryDoc(),status)},"Last ned sammendraget (Word)"),
-      el("button",{class:"btn ghost",type:"button",onclick:qs},"← Tilbake til spørsmålene")),st));
+    el("p",{class:"part",style:"border-top-width:1px"},"Vil du ta vare på sammendraget? Kopier det og lim det inn i Word. Bruk overskriften ",el("b",{},"Første verdenskrig: Sammendrag"),"."),
+    el("div",{class:"row"},el("button",{class:"btn",type:"button",onclick:()=>copy(summaryText(),status,out)},"Kopier sammendraget"),
+      el("button",{class:"btn ghost",type:"button",onclick:qs},"← Tilbake til spørsmålene")),st,out));
   toTop();
 }
 
 /* ---------- tekst og Word ---------- */
 const today=()=>{const d=new Date();return String(d.getDate()).padStart(2,"0")+"."+String(d.getMonth()+1).padStart(2,"0")+"."+d.getFullYear()};
-const fileName=()=>{const n=(S.name||"").trim().replace(/[^\p{L}\p{N} _-]/gu,"").replace(/\s+/g,"_").slice(0,40);return "Mine_svar_forste_verdenskrig"+(n?"_"+n:"")+".docx"};
 function answersText(){
-  const L=["Mine svar: Første verdenskrig","Navn: "+(S.name||"")+"   Klasse: "+(S.cls||"")+"   Dato: "+today(),"Riktige svar i hendelsesforløpet: "+right()+" av "+N,"","Del 1: Forklar begrepene"];
+  const L=[(S.name||S.cls?"Navn: "+(S.name||"")+"   Klasse: "+(S.cls||"")+"   Dato: "+today():"Dato: "+today()),"Riktige svar i hendelsesforløpet: "+right()+" av "+N,"","Del 1: Forklar begrepene"];
   QA.forEach((b,k)=>{L.push("",String.fromCharCode(97+k)+") "+b,(S.ans["a"+k]||"").trim()||"(ikke besvart)")});
   L.push("","Del 2: Bruk begrepene");QB.forEach((q,k)=>{L.push("",(k+1)+". "+q,(S.ans["b"+k]||"").trim()||"(ikke besvart)")});
   return L.join("\n");
 }
-const X=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g,"");
-function P(text,o={}){
-  const pp=[];
-  if(o.box)pp.push('<w:pBdr><w:left w:val="single" w:sz="18" w:space="8" w:color="B8892A"/></w:pBdr>');
-  pp.push('<w:spacing w:before="'+(o.before||0)+'" w:after="'+(o.after===undefined?120:o.after)+'"/>');
-  if(o.box)pp.push('<w:ind w:left="240"/>');
-  if(o.bullet)pp.push('<w:ind w:left="360" w:hanging="240"/>');
-  const rp='<w:rFonts w:ascii="Calibri" w:hAnsi="Calibri" w:cs="Calibri"/>'+(o.b?"<w:b/>":"")+(o.i?"<w:i/>":"")+(o.color?'<w:color w:val="'+o.color+'"/>':"")+'<w:sz w:val="'+(o.sz||24)+'"/>';
-  return "<w:p><w:pPr>"+pp.join("")+"</w:pPr><w:r><w:rPr>"+rp+'</w:rPr><w:t xml:space="preserve">'+X((o.bullet?"– ":"")+text)+"</w:t></w:r></w:p>";
+function summaryText(){
+  const L=[];SUM.forEach(([h,l])=>{L.push(h);l.forEach(x=>L.push("– "+x));L.push("")});
+  L.push("Begrepene");DEF.forEach(([t,d])=>L.push(t+": "+d));L.push("","Hendelsene i rekkefølge");E.forEach(e=>L.push("– "+e.d+": "+e.t));
+  return L.join("\n");
 }
-const ansPs=t=>{const s=(t||"").trim();if(!s)return P("(ikke besvart)",{i:true,color:"777777",box:true});return s.split(/\r?\n/).map(l=>P(l,{box:true,after:60})).join("")};
-function answersDoc(){
-  let b=P("Mine svar: Første verdenskrig",{b:true,sz:36,after:80})+P("Navn: "+(S.name||"")+"     Klasse: "+(S.cls||"")+"     Dato: "+today(),{color:"555555"})+P("Riktige svar i hendelsesforløpet: "+right()+" av "+N,{color:"555555",after:240});
-  b+=P("Del 1: Forklar begrepene",{b:true,sz:28,before:120});
-  QA.forEach((q,k)=>{b+=P(String.fromCharCode(97+k)+") "+q,{b:true,before:160,after:60})+ansPs(S.ans["a"+k])});
-  b+=P("Del 2: Bruk begrepene",{b:true,sz:28,before:280});
-  QB.forEach((q,k)=>{b+=P((k+1)+". "+q,{b:true,before:160,after:60})+ansPs(S.ans["b"+k])});
-  return docx(b);
-}
-function summaryDoc(){
-  let b=P("Det viktigste om første verdenskrig",{b:true,sz:36,after:200});
-  SUM.forEach(([h,l])=>{b+=P(h,{b:true,sz:28,before:200});l.forEach(x=>b+=P(x,{bullet:true,after:60}))});
-  b+=P("Begrepene",{b:true,sz:28,before:200});DEF.forEach(([t,d])=>{b+=P(t,{b:true,after:0,before:80})+P(d,{after:80})});
-  b+=P("Hendelsene i rekkefølge",{b:true,sz:28,before:200});E.forEach(e=>b+=P(e.d+": "+e.t,{bullet:true,after:40}));
-  return docx(b);
-}
-const CRC=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
-const crc32=b=>{let c=0xFFFFFFFF;for(let i=0;i<b.length;i++)c=CRC[(c^b[i])&255]^(c>>>8);return(c^0xFFFFFFFF)>>>0};
-function zip(files){
-  const enc=new TextEncoder(),parts=[],cen=[];let off=0;
-  const put=(dv,list)=>list.forEach(([o,v,s])=>s===4?dv.setUint32(o,v,true):dv.setUint16(o,v,true));
-  files.forEach(([name,txt])=>{const nm=enc.encode(name),d=enc.encode(txt),c=crc32(d);
-    const h=new DataView(new ArrayBuffer(30));put(h,[[0,0x04034b50,4],[4,20,2],[6,0x0800,2],[8,0,2],[10,0,2],[12,0x21,2],[14,c,4],[18,d.length,4],[22,d.length,4],[26,nm.length,2],[28,0,2]]);
-    parts.push(new Uint8Array(h.buffer),nm,d);
-    const C=new DataView(new ArrayBuffer(46));put(C,[[0,0x02014b50,4],[4,20,2],[6,20,2],[8,0x0800,2],[10,0,2],[12,0,2],[14,0x21,2],[16,c,4],[20,d.length,4],[24,d.length,4],[28,nm.length,2],[30,0,2],[32,0,2],[34,0,2],[36,0,2],[38,0,4],[42,off,4]]);
-    cen.push(new Uint8Array(C.buffer),nm);off+=30+nm.length+d.length});
-  const cs=cen.reduce((a,x)=>a+x.length,0),Z=new DataView(new ArrayBuffer(22));
-  put(Z,[[0,0x06054b50,4],[8,files.length,2],[10,files.length,2],[12,cs,4],[16,off,4]]);
-  return new Blob([...parts,...cen,new Uint8Array(Z.buffer)],{type:"application/vnd.openxmlformats-officedocument.wordprocessingml.document"});
-}
-function docx(body){
-  const H='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
-  return zip([
-    ["[Content_Types].xml",H+'<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>'],
-    ["_rels/.rels",H+'<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>'],
-    ["word/document.xml",H+'<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>'+body+'<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1134" w:header="708" w:footer="708" w:gutter="0"/></w:sectPr></w:body></w:document>']
-  ]);
-}
-async function saveFile(name,blob,status){
-  let d=null;try{d=DL?await DL:null}catch(e){d=null}
-  if(d){try{await d.save({filename:name,data:blob});status("Filen er lastet ned.",true)}catch(e){const c=e&&e.code;status(c==="declined"?"Nedlastingen ble avbrutt.":"Nedlastingen virket ikke her. Trykk «Kopier svarene» og lim teksten inn i Word i stedet.",false)}return}
-  const own=location.protocol==="file:"||/github\.io$/.test(location.hostname)||location.hostname==="localhost";
-  if(!own){status("Nedlasting til Word virker ikke på denne siden. Trykk «Kopier svarene» og lim teksten inn i et Word-dokument.",false);return}
-  try{const u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download=name;a.style.display="none";document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),5000);status("Filen er lastet ned. Se etter den i nedlastingsmappen.",true)}
-  catch(e){status("Nedlastingen virket ikke her. Trykk «Kopier svarene» og lim teksten inn i Word i stedet.",false)}
-}
-async function copy(text,status){
-  try{await navigator.clipboard.writeText(text);status("Svarene er kopiert. Lim dem inn i et Word-dokument.",true)}
-  catch(e){status("Kopieringen virket ikke. Merk teksten i boksene og kopier den selv.",false)}
+async function copy(text,status,out){
+  out.replaceChildren();
+  try{await navigator.clipboard.writeText(text);status("Kopiert. Gå til Word-dokumentet og lim inn med Ctrl+V (Cmd+V på Mac).",true);return}catch(e){}
+  const t=el("textarea",{readonly:"",rows:"10","aria-label":"Teksten som skal kopieres"});t.value=text;out.append(t);t.focus();t.select();
+  status("Teksten under er merket. Kopier den med Ctrl+C (Cmd+C på Mac) og lim den inn i Word.",true);
 }
 intro();
 </script>
