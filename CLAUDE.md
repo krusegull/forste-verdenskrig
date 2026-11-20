@@ -45,12 +45,12 @@ krigsdagbokene.html, togreisen.html   (i rot) = videresendinger til ny plasserin
 
 ### Tekniske prinsipper
 - Hver side er **én selvstendig HTML-fil** (CSS og JS inne i filen). Eneste eksterne avhengigheter: Google Fonts (og d3 i WWI-kartet). Sidene må fungere selv om fontene ikke lastes.
-- Fremdrift lagres i elevens nettleser med `localStorage` (alltid i `try/catch`). Brukte nøkler: `fvk-progress` (WWI), `hindu_*` (Reisen), `bgr_*` (Begrepsreisen). Ikke endre nøklene – da mister elevene fremdriften.
+- Fremdrift lagres i elevens nettleser med `localStorage` (alltid i `try/catch`). Brukte nøkler: `fvk-progress` (WWI, index.html), `fvkbgr_*` (WWI Begrepsreisen), `hindu_*` (Reisen), `bgr_*` (KRLE Begrepsreisen). Ikke endre nøklene – da mister elevene fremdriften. Siden alle sider deler samme nettsted-opprinnelse, deler de også localStorage – pass på at nye nøkler ikke kolliderer med disse.
 - Må fungere på Chromebook/PC (storskjerm) og mobil.
 
 ## 4. Samfunnsfag – Første verdenskrig (`samfunnsfag/forste-verdenskrig/`)
 
-For 9. trinn, elevene jobber helt selvstendig. Filer: `index.html` (interaktivt kart år for år 1914–1919 med oppdrag, Norges nøytralitet, lærerboka/quiz), `krigsarkivet.html` (escape room «Krigsarkivet 1914»), `arsakskjeden.html` («Årsakskjeden»), `begrepsjakten.html`, `krigsdagbokene.html` («Krigens gang»), `togreisen.html`. Eirik ønsker at nye WWI-spill integreres i denne siden, ikke som løsrevne sider. Lenkene mellom filene er relative (`index.html`) – behold dem.
+For 9. trinn, elevene jobber helt selvstendig. Filer: `index.html` (interaktivt kart år for år 1914–1919 med oppdrag, Norges nøytralitet, lærerboka/quiz – lærerboka-delen har også en læringssti om den russiske revolusjonen), `krigsarkivet.html` (escape room «Krigsarkivet 1914»), `arsakskjeden.html` («Årsakskjeden»), `begrepsjakten.html` (20 begreper, tidsbasert quiz), `begrepsreisen.html` («Begrepsreisen»: samme 20 begreper i 6 «verdener», tre moduser Utforsk/Øv/Test deg – prezi-mønster hentet fra krle/hinduismen/begrepsreisen.html), `krigsdagbokene.html` («Krigens gang»), `togreisen.html`. Eirik ønsker at nye WWI-spill integreres i denne siden, ikke som løsrevne sider. Lenkene mellom filene er relative (`index.html`) – behold dem.
 
 ### 4.1 Læreplan: samfunnsfag (LK20, SAF01-05)
 
