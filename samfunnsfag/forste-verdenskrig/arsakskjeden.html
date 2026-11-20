@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Årsakskjeden</title>
+<meta name="robots" content="noindex">
+<style>
+:root{
+  /* Layout: lyst arbeidsbord, fire nivåer som faner øverst, ett spillbrett om gangen */
+  --bg:#eef1ec; --card:#ffffff; --ink:#1c2423; --mut:#5c6b68; --line:#c5cec8;
+  --cause:#2c5d8a; --trigger:#b3261e; --effect:#2f7d4f; --gold:#c9a24a;
+  --display:"Oswald","Arial Narrow",sans-serif; --body:"Source Sans 3","Segoe UI",sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.45}
+header{background:var(--ink);color:#fff;padding:16px 20px}
+.top{max-width:980px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;justify-content:space-between}
+h1{font-family:var(--display);font-size:28px;letter-spacing:.05em;text-transform:uppercase;margin:0}
+h1 small{display:block;font-family:var(--body);font-size:15px;letter-spacing:0;text-transform:none;color:#c8d2ce;font-weight:400}
+.score{font-family:var(--display);font-size:20px;font-variant-numeric:tabular-nums}
+nav{max-width:980px;margin:14px auto 0;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+nav button{font:inherit;font-family:var(--display);letter-spacing:.04em;text-transform:uppercase;font-size:15px;background:transparent;color:#c8d2ce;border:2px solid #47595a;border-radius:6px;padding:8px 6px;cursor:pointer}
+nav button[aria-current=true]{background:#fff;color:var(--ink);border-color:#fff}
+nav button .st{display:block;color:var(--gold);font-size:16px;min-height:1.2em;letter-spacing:.1em}
+main{max-width:980px;margin:0 auto;padding:22px 16px 60px}
+h2{font-family:var(--display);font-size:30px;margin:0 0 6px;text-wrap:balance}
+p{margin:0 0 12px;max-width:68ch}
+.lead{color:var(--mut)}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--ink);color:#fff;border:0;border-radius:6px;padding:10px 20px;font-family:var(--display);letter-spacing:.05em;text-transform:uppercase;font-size:17px}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px}
+.msg{font-weight:600;min-height:1.5em;margin:12px 0 0}
+.good{color:var(--effect)} .bad{color:var(--trigger)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+/* nivå 1 */
+.chain{list-style:none;margin:14px 0;padding:0 0 0 26px;display:grid;gap:8px;position:relative}
+.chain::before{content:"";position:absolute;left:9px;top:10px;bottom:10px;width:4px;background:var(--line);border-radius:2px}
+.link{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;background:var(--card);border:2px solid var(--line);border-radius:8px;padding:8px 10px;touch-action:none;user-select:none;position:relative}
+.link::before{content:"";position:absolute;left:-23px;top:50%;width:14px;height:14px;margin-top:-7px;border-radius:50%;background:var(--card);border:3px solid var(--mut)}
+.link .grip{cursor:grab;color:var(--mut);font-size:22px;padding:0 4px;line-height:1}
+.link.drag{box-shadow:0 10px 24px rgba(0,0,0,.25);border-color:var(--ink);z-index:2}
+.link.ok{border-color:var(--effect);background:#eaf5ee}.link.ok::before{background:var(--effect);border-color:var(--effect)}
+.link .when{display:block;font-size:15px;color:var(--effect);font-weight:700}
+.arrows button{background:#fff;border:2px solid var(--line);border-radius:4px;width:38px;height:32px;color:var(--ink)}
+/* nivå 2 */
+.deck{background:var(--card);border-radius:10px;border:2px solid var(--line);padding:26px 20px;text-align:center;margin:14px 0}
+.deck .n{color:var(--mut);font-size:15px}
+.deck .t{font-family:var(--display);font-size:28px;margin:6px 0 0;text-wrap:balance}
+.bins{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.bin{border:0;border-radius:8px;color:#fff;padding:14px 8px;font-family:var(--display);font-size:18px;letter-spacing:.04em;text-transform:uppercase}
+.bin small{display:block;font-family:var(--body);text-transform:none;letter-spacing:0;font-size:14px;opacity:.9}
+.bin.g{background:var(--cause)}.bin.u{background:var(--trigger)}.bin.k{background:var(--effect)}
+.tally{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.tally i{width:18px;height:18px;border-radius:50%;background:var(--line)}
+.tally i.y{background:var(--effect)}.tally i.x{background:var(--trigger)}
+/* nivå 3 */
+.wrap{position:relative;margin:14px 0}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px clamp(40px,12vw,150px)}
+.node{background:var(--card);border:2px solid var(--line);border-radius:8px;padding:10px 12px;text-align:left;color:var(--ink);min-height:72px}
+.node.sel{border-color:var(--ink);background:#f6f2e3}
+.node.done{border-color:var(--effect);background:#eaf5ee;cursor:default}
+.node.no{border-color:var(--trigger)}
+.wrap svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.colh{font-family:var(--display);text-transform:uppercase;letter-spacing:.06em;font-size:16px;color:var(--mut);margin:0}
+/* nivå 4 */
+.hva{display:flex;flex-wrap:wrap;gap:6px;align-items:stretch;margin:14px 0}
+.hva button{flex:1 1 150px;background:var(--card);border:2px solid var(--line);border-radius:8px;padding:12px 10px;color:var(--ink);font-weight:600;position:relative}
+.hva button[aria-pressed=true]{border-style:dashed;border-color:var(--trigger);color:var(--trigger);text-decoration:line-through;background:#fbeeed}
+.what{background:var(--card);border-left:6px solid var(--gold);border-radius:6px;padding:14px 16px;min-height:110px}
+.final{background:var(--ink);color:#fff;border-radius:10px;padding:18px 20px;margin-top:22px}
+.final b{font-family:var(--display);font-size:26px;color:var(--gold)}
+@media (max-width:620px){nav{grid-template-columns:repeat(2,1fr)} .bins{grid-template-columns:1fr} .cols{gap:10px 34px} .node{font-size:16px;padding:8px}}
+.back{color:#c8d2ce;font-size:15px;text-decoration:none;border:1px solid #47595a;border-radius:4px;padding:4px 10px}
+.back:hover{color:#fff}
+</style>
+</head>
+<body>
+<header>
+  <div class="top"><h1>Årsakskjeden<small>Første verdenskrig: fra årsaker til konsekvenser</small></h1><a class="back" href="index.html">← Til kartet</a><div class="score" id="score" aria-live="polite">0 av 9 stjerner</div></div>
+  <nav id="nav" aria-label="Nivåer"></nav>
+</header>
+<main id="main"></main>
+<script>
+"use strict";
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const el=(t,a={},...k)=>{const e=document.createElement(t);for(const[x,v]of Object.entries(a)){if(x==="class")e.className=v;else if(x.startsWith("on"))e.addEventListener(x.slice(2),v);else e.setAttribute(x,v)}k.flat().forEach(c=>e.append(c));return e};
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const main=$("#main");
+const LV=["1 Bygg kjeden","2 Sorter","3 Koble","4 Hva om?"];
+const S={lv:0,stars:[0,0,0]};
+const star=n=>"★".repeat(n)+"☆".repeat(3-n);
+function nav(){
+  $("#nav").replaceChildren(...LV.map((t,i)=>el("button",{type:"button","aria-current":String(i===S.lv),onclick:()=>go(i)},t,el("span",{class:"st"},i<3&&S.stars[i]?star(S.stars[i]):""))));
+  $("#score").textContent=S.stars.reduce((a,b)=>a+b,0)+" av 9 stjerner";
+}
+function go(i){S.lv=i;nav();[l1,l2,l3,l4][i]();window.scrollTo(0,0)}
+const msg=(t,g)=>{const m=$("#msg");m.textContent=t;m.className="msg "+(g?"good":"bad")};
+const nextBtn=i=>el("div",{class:"row"},el("button",{class:"btn",type:"button",onclick:()=>go(i)},"Neste nivå"));
+
+/* ---------- Nivå 1: Bygg kjeden ---------- */
+const EV=[["Skuddene i Sarajevo","28. juni 1914"],["Tyskland lover Østerrike-Ungarn full støtte (blankofullmakten)","5. juli 1914"],["Østerrike-Ungarn går til krig mot Serbia","28. juli 1914"],["Tyskland går inn i Belgia, og Storbritannia går med i krigen","4. august 1914"],["Tsaren i Russland må gå av","mars 1917"],["USA erklærer Tyskland krig","6. april 1917"],["Lenin og bolsjevikene tar makten i Russland","november 1917"],["Våpenhvilen begynner å gjelde","11. november 1918"],["Versaillestraktaten blir undertegnet","28. juni 1919"],["Mussolini blir statsminister i Italia","oktober 1922"]];
+function l1(){
+  let ord=shuffle(EV.map((_,i)=>i)),tries=0,locked=false;
+  const ol=el("ol",{class:"chain"});
+  function draw(check){
+    ol.replaceChildren(...ord.map((id,pos)=>{
+      const ok=check&&id===pos;
+      const li=el("li",{class:"link"+(ok?" ok":""),"data-id":id},
+        el("span",{class:"grip","aria-hidden":"true"},"⠿"),
+        el("span",{},EV[id][0],ok?el("span",{class:"when"},EV[id][1]):""),
+        el("span",{class:"arrows"},el("button",{type:"button","aria-label":"Flytt opp",onclick:()=>move(pos,-1)},"▲")," ",el("button",{type:"button","aria-label":"Flytt ned",onclick:()=>move(pos,1)},"▼")));
+      li.addEventListener("pointerdown",e=>startDrag(e,li));return li}));
+    if(locked)$$("button",ol).forEach(b=>b.disabled=true);
+  }
+  function move(p,d){if(locked)return;const q=p+d;if(q<0||q>=ord.length)return;[ord[p],ord[q]]=[ord[q],ord[p]];draw(false)}
+  function startDrag(e,li){
+    if(locked||e.target.closest("button"))return;e.preventDefault();li.classList.add("drag");
+    const mv=ev=>{const sib=$$(".link",ol).filter(x=>x!==li);let before=null;for(const s of sib){const r=s.getBoundingClientRect();if(ev.clientY<r.top+r.height/2){before=s;break}}if(li.nextElementSibling!==before)ol.insertBefore(li,before)};
+    const up=()=>{document.removeEventListener("pointermove",mv);document.removeEventListener("pointerup",up);document.removeEventListener("pointercancel",up);ord=$$(".link",ol).map(x=>Number(x.dataset.id));draw(false)};
+    document.addEventListener("pointermove",mv);document.addEventListener("pointerup",up);document.addEventListener("pointercancel",up);
+  }
+  draw(false);
+  main.replaceChildren(el("h2",{},"Bygg kjeden"),el("p",{class:"lead"},"Ti hendelser har havnet i feil rekkefølge. Dra kortene, eller bruk pilene, til den eldste hendelsen står øverst og den nyeste nederst."),ol,
+    el("div",{class:"row"},el("button",{class:"btn",type:"button",id:"c1",onclick:()=>{tries++;const right=ord.filter((id,p)=>id===p).length;draw(true);
+      if(right===EV.length){locked=true;draw(true);S.stars[0]=tries<=2?3:tries<=4?2:1;nav();$("#c1").disabled=true;msg("Hele kjeden er riktig etter "+tries+" forsøk. Datoene står nå på kortene.",true);main.append(nextBtn(1))}
+      else msg(right+" av 10 står på riktig plass. Kort med grønn kant er riktige, og datoen vises.")}},"Sjekk kjeden")),
+    el("p",{class:"msg",id:"msg","aria-live":"polite"}));
+}
+
+/* ---------- Nivå 2: Sorter ---------- */
+const CARDS=[["Nasjonalisme","g","Nasjonalismen skapte spenninger mellom statene i Europa lenge før 1914."],["Imperialisme","g","Kampen om kolonier og makt skapte konflikter mellom stormaktene over lang tid."],["Militær opprustning","g","Spenningene førte til at statene rustet opp i årene før krigen."],["Alliansesystemene","g","Trippelalliansen og trippelententen var dannet før krigen, og de trakk flere land inn i den."],["Spenningen mellom Serbia og Østerrike-Ungarn","g","Konflikten på Balkan hadde vart i lang tid før skuddene falt."],["Skuddene i Sarajevo","u","Attentatet 28. juni 1914 var fyrstikken som tente bålet. Det utløste krigen, men lå ikke bak den."],["Østerrike-Ungarn blir oppløst","k","Keiserriket gikk i oppløsning da krigen sluttet, og ble til flere mindre stater."],["Polen og Tsjekkoslovakia blir egne stater","k","Europa fikk et nytt kart etter krigen."],["Folkeforbundet blir opprettet","k","Organisasjonen ble opprettet etter krigen for å forebygge nye kriger."],["Tyskland må betale store krigserstatninger","k","Det var ett av de harde kravene i fredsavtalen i Versailles."],["Flere land innfører stemmerett for kvinner","k","Det skjedde i årene etter krigen. Kvinnenes innsats under krigen kan ha bidratt."],["Tsaren i Russland blir styrtet","k","Krigen gjorde nøden i Russland verre og bidro til revolusjonen i 1917."],["Fascismen får fotfeste i Italia","k","Misnøye, økonomiske problemer og politisk uro etter krigen ga grobunn for fascismen."]];
+const NAME={g:"grunnleggende årsak",u:"utløsende årsak",k:"konsekvens"};
+function l2(){
+  const deck=shuffle(CARDS);let i=0,right=0;const res=[];
+  const box=el("div",{class:"deck"}),tally=el("div",{class:"tally"}),fb=el("p",{class:"msg",id:"msg","aria-live":"polite"});
+  const bins=el("div",{class:"bins"},[["g","Grunnleggende årsak","bygde seg opp over lang tid"],["u","Utløsende årsak","satte krigen i gang"],["k","Konsekvens","kom som følge av krigen"]].map(([k,t,s])=>el("button",{class:"bin "+k,type:"button",onclick:()=>answer(k)},t,el("small",{},s))));
+  function show(){box.replaceChildren(el("div",{class:"n"},"Kort "+(i+1)+" av "+deck.length),el("div",{class:"t"},deck[i][0]));tally.replaceChildren(...deck.map((_,j)=>el("i",{class:res[j]===true?"y":res[j]===false?"x":""})))}
+  function answer(k){const c=deck[i],ok=c[1]===k;res[i]=ok;if(ok)right++;msg((ok?"Riktig: ":"Feil. Dette er en "+NAME[c[1]]+": ")+c[2],ok);i++;
+    if(i<deck.length)show();else{tally.replaceChildren(...deck.map((_,j)=>el("i",{class:res[j]?"y":"x"})));box.replaceChildren(el("div",{class:"t"},right+" av "+deck.length+" riktige"));$$(".bin").forEach(b=>b.disabled=true);S.stars[1]=right>=12?3:right>=10?2:1;nav();
+      main.append(el("div",{class:"row"},el("button",{class:"btn ghost",type:"button",onclick:l2},"Prøv igjen"),el("button",{class:"btn",type:"button",onclick:()=>go(2)},"Neste nivå")))}}
+  show();
+  main.replaceChildren(el("h2",{},"Sorter kortene"),el("p",{class:"lead"},"Hva slags brikke er dette i historien? Les kortet og velg riktig boks. Du får forklaringen med en gang."),box,bins,fb,tally);
+}
+
+/* ---------- Nivå 3: Koble ---------- */
+const PAIRS=[["Tyskland angriper Frankrike gjennom nøytrale Belgia","Storbritannia går med i krigen"],["Tyske ubåter senker amerikanske skip","USA erklærer Tyskland krig i 1917"],["Matmangel og misnøye i Russland","Tsaren må gå av i 1917"],["Mange menn reiser ut i krigen","Kvinner overtar jobber i industrien"],["Harde krav til Tyskland i Versaillestraktaten","Bitterhet i Tyskland og grunnlag for nye konflikter"],["Frykt for revolusjon og misnøye med freden i Italia","Fascistene får støtte"]];
+function l3(){
+  let sel=null,errs=0,left=PAIRS.length;const done=[];
+  const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");
+  const Ls=shuffle(PAIRS.map((p,i)=>i)).map(i=>el("button",{class:"node l",type:"button","data-i":i,onclick:e=>{const b=e.currentTarget;if(b.classList.contains("done"))return;$$(".node.l").forEach(x=>x.classList.remove("sel"));sel=i;b.classList.add("sel")}},PAIRS[i][0]));
+  const Rs=shuffle(PAIRS.map((p,i)=>i)).map(i=>el("button",{class:"node r",type:"button","data-i":i,onclick:e=>{const b=e.currentTarget;if(b.classList.contains("done"))return;if(sel===null){msg("Velg en årsak til venstre først.");return}
+    if(sel===i){const a=Ls.find(x=>Number(x.dataset.i)===i);a.classList.remove("sel");a.classList.add("done");b.classList.add("done");done.push([a,b]);sel=null;left--;lines();
+      if(left===0){S.stars[2]=errs===0?3:errs<=2?2:1;nav();msg("Alle seks koblingene er riktige, med "+errs+" feil underveis.",true);main.append(nextBtn(3))}else msg("Riktig kobling.",true)}
+    else{errs++;b.classList.add("no");setTimeout(()=>b.classList.remove("no"),600);msg("Den årsaken førte ikke til den virkningen. Prøv en annen.")}}},PAIRS[i][1]));
+  const cols=el("div",{class:"cols"});Ls.forEach((l,k)=>cols.append(l,Rs[k]));
+  const wrap=el("div",{class:"wrap"},cols,svg);
+  function lines(){const w=wrap.getBoundingClientRect();svg.replaceChildren(...done.map(([a,b])=>{const ra=a.getBoundingClientRect(),rb=b.getBoundingClientRect();const ln=document.createElementNS("http://www.w3.org/2000/svg","line");ln.setAttribute("x1",ra.right-w.left);ln.setAttribute("y1",ra.top+ra.height/2-w.top);ln.setAttribute("x2",rb.left-w.left);ln.setAttribute("y2",rb.top+rb.height/2-w.top);ln.setAttribute("stroke","#2f7d4f");ln.setAttribute("stroke-width","4");ln.setAttribute("stroke-linecap","round");return ln}))}
+  window.onresize=lines;
+  main.replaceChildren(el("h2",{},"Koble årsak og virkning"),el("p",{class:"lead"},"Trykk på en årsak til venstre og deretter på virkningen den førte til. Riktige par får en strek mellom seg."),
+    el("div",{class:"cols"},el("p",{class:"colh"},"Årsak"),el("p",{class:"colh"},"Virkning")),wrap,el("p",{class:"msg",id:"msg","aria-live":"polite"}));
+}
+
+/* ---------- Nivå 4: Hva om? ---------- */
+const WHATIF=[["Alliansene","Uten alliansene kunne en krig mellom Østerrike-Ungarn og Serbia kanskje ha blitt en lokal krig på Balkan. Det var alliansene som trakk Russland, Frankrike, Tyskland og Storbritannia inn. Men Russland hadde lovet å støtte Serbia, så sikkert er det ikke."],["Skuddene i Sarajevo","De grunnleggende årsakene ville fortsatt ha vært der. Makthaverne i Østerrike-Ungarn følte seg truet av Serbia og ønsket nærmest en unnskyldning for å gå til krig. En annen hendelse kunne derfor ha blitt påskuddet."],["Blankofullmakten","Uten løftet om tysk støtte ville det ha vært langt mer risikabelt for Østerrike-Ungarn å angripe Serbia, siden Russland sto på serbernes side. Løftet regnes som et avgjørende øyeblikk på veien mot krig."],["Angrepet på Serbia","Hadde Østerrike-Ungarn valgt forhandlinger i stedet for krig, kunne krisen kanskje ha blitt løst denne gangen. Men spenningen mellom de to landene hadde vart lenge og ville ikke ha forsvunnet."],["Angrepet gjennom Belgia","Storbritannia hadde lovet å beskytte Belgia og gikk med i krigen da Tyskland gikk inn der. Uten dette angrepet kunne Storbritannia kanskje ha holdt seg utenfor lenger, men krigen på kontinentet var allerede i gang."]];
+function l4(){
+  const out=el("div",{class:"what","aria-live":"polite"},el("p",{class:"lead"},"Velg en brikke i kjeden for å fjerne den."));
+  const bs=WHATIF.map(([t,d])=>el("button",{type:"button","aria-pressed":"false",onclick:e=>{bs.forEach(b=>b.setAttribute("aria-pressed","false"));e.currentTarget.setAttribute("aria-pressed","true");out.replaceChildren(el("p",{},el("b",{},"Uten "+t.toLowerCase()+": "),d))}},t));
+  const tot=S.stars.reduce((a,b)=>a+b,0);
+  main.replaceChildren(el("h2",{},"Hva om én brikke manglet?"),
+    el("p",{class:"lead"},"Dette er et tankeeksperiment. Ingen vet sikkert hva som ville ha skjedd, og historikere er uenige om krigen kunne vært unngått. Fjern én brikke om gangen og les hva som kunne ha endret seg."),
+    el("div",{class:"hva"},bs),out,
+    el("p",{style:"margin-top:16px;font-weight:700"},"Diskuter med sidemannen: Hvilken brikke tror dere var viktigst for at det ble verdenskrig? Begrunn svaret med ordene grunnleggende og utløsende årsak."),
+    el("div",{class:"final"},el("b",{},tot+" av 9 stjerner"),el("p",{style:"margin:6px 0 0"},tot===9?"Full pott. Du har kontroll på både rekkefølgen, begrepene og sammenhengene.":"Gå tilbake til et nivå i menyen øverst for å prøve igjen og samle flere stjerner.")));
+}
+go(0);
+</script>
+</body>
+</html>

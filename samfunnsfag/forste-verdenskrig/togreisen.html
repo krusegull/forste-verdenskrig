@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Togreisen gjennom krigen</title>
+<style>
+:root{
+  /* Layout: steg 1 er en rutetabell der stasjonsskilt settes i rekkefølge; steg 2 er en jernbane som ruller sidelengs med en infotavle under */
+  --bg:#e9e6dc; --card:#fffdf7; --ink:#1d2321; --mut:#5f6863; --line:#cfc9b8;
+  --rail:#4a4038; --sign:#1f3a5f; --ok:#2f7d4f; --okbg:#e7f4ea; --bad:#b3261e; --badbg:#fbeeed; --gold:#c9a24a; --steam:#8b2f22;
+  --display:"Arial Narrow","Helvetica Neue",Arial,sans-serif; --body:system-ui,-apple-system,"Segoe UI",Arial,sans-serif; --mono:"Courier New",monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.5}
+header{background:var(--steam);color:#fff;padding:16px 20px}
+.top{max-width:1000px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;justify-content:space-between}
+h1{font-family:var(--display);font-weight:700;font-size:28px;letter-spacing:.05em;text-transform:uppercase;margin:0}
+h1 small{display:block;font-family:var(--body);font-size:15px;font-weight:400;letter-spacing:0;text-transform:none;color:#f1d9d3}
+.back{color:#f1d9d3;font-size:15px;text-decoration:none;border:1px solid #c47a6c;border-radius:4px;padding:4px 10px}
+.back:hover{color:#fff}
+.ticket{font-family:var(--mono);font-size:15px;background:#f7efd9;color:var(--ink);border-radius:4px;padding:4px 10px;border:1px dashed #7a6a4a}
+main{max-width:1000px;margin:0 auto;padding:20px 16px 60px}
+h2{font-family:var(--display);font-weight:700;font-size:30px;line-height:1.15;margin:0 0 8px;text-wrap:balance}
+p{margin:0 0 12px;max-width:68ch}
+.lead{color:var(--mut)}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--ink);color:#fff;border:0;border-radius:6px;padding:11px 20px;font-family:var(--display);font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-size:17px}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--ink)}
+.btn.red{background:var(--steam)}
+.btn:disabled{opacity:.4;cursor:default}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px}
+.row.split{justify-content:space-between}
+.msg{min-height:1.5em;font-weight:700;margin:10px 0 0}
+.msg.good{color:var(--ok)} .msg.bad{color:var(--bad)}
+/* steg 1 */
+.board{background:var(--sign);color:#fff;border-radius:10px;padding:14px;margin:14px 0}
+.board .bh{display:flex;justify-content:space-between;font-family:var(--display);letter-spacing:.08em;text-transform:uppercase;font-size:14px;color:#c8d6ea;margin:0 2px 10px}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px}
+.slot{position:relative;min-height:74px;border:2px dashed #6f8bb0;border-radius:8px;background:#264a77;color:#fff;text-align:left;padding:8px 10px 8px 46px;display:flex;flex-direction:column;justify-content:center}
+.slot .no{position:absolute;left:8px;top:50%;margin-top:-15px;width:30px;height:30px;border-radius:50%;background:#fff;color:var(--sign);font-family:var(--display);font-weight:700;display:grid;place-items:center;font-size:16px}
+.slot .empty{color:#9fb4d1;font-size:15px}
+.slot.filled{border-style:solid;border-color:#fff;background:#2d5588}
+.slot.lock{border-color:#8fd3a6;background:#1f5a3a;cursor:default}
+.slot.lock .d{display:block;font-size:13px;color:#bfe8cc;font-weight:700}
+.slot.wrong{animation:shake .4s}
+.slot:focus-visible,.cardb:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.slot .t{font-weight:700;font-size:16px;line-height:1.3}
+.pilewrap{position:sticky;bottom:0;background:var(--bg);border-top:2px solid var(--line);padding:4px 0 10px;max-height:46vh;overflow:auto}
+.pilewrap .row{margin-top:10px}
+.pileh{font-family:var(--display);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:15px;color:var(--mut);margin:8px 0 8px}
+.pile{display:flex;flex-wrap:wrap;gap:8px}
+.cardb{background:var(--card);border:2px solid var(--line);border-left:8px solid var(--sign);border-radius:6px;padding:9px 12px;font-weight:700;font-size:16px;color:var(--ink);text-align:left;max-width:300px}
+.cardb:hover{border-color:var(--ink);border-left-color:var(--sign)}
+.cardb.sel{background:var(--sign);color:#fff;border-color:var(--sign)}
+@keyframes shake{0%,100%{transform:none}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+/* steg 2 */
+.view{position:relative;height:250px;overflow:hidden;border-radius:10px;border:2px solid var(--line);background:#dfe8d6}
+.view svg{position:absolute;left:0;top:0;height:250px;will-change:transform}
+.panel{display:grid;grid-template-columns:120px 1fr;gap:18px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin-top:14px}
+.panel .ic{width:120px;height:120px;border-radius:10px;background:#f1ece0;display:grid;place-items:center}
+.panel .ic svg{width:96px;height:96px}
+.panel .st{font-family:var(--mono);font-size:14px;color:var(--mut);margin:0 0 2px}
+.panel .dt{display:inline-block;font-family:var(--display);font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:var(--steam);color:#fff;border-radius:4px;padding:2px 10px;font-size:15px;margin:2px 0 8px}
+.panel h3{font-family:var(--display);font-weight:700;font-size:26px;margin:0 0 6px}
+.panel p{font-size:18px}
+.stars{color:var(--gold);font-size:26px;letter-spacing:.1em}
+@media (prefers-reduced-motion:no-preference){.puff{animation:puff 1.6s ease-out infinite}.puff.p2{animation-delay:.5s}.puff.p3{animation-delay:1s}
+ @keyframes puff{0%{opacity:.8;transform:translate(0,0) scale(.6)}100%{opacity:0;transform:translate(-26px,-38px) scale(1.6)}}}
+@media (max-width:600px){.slots{grid-template-columns:1fr 1fr}.slot{min-height:64px;padding-left:40px}.slot .t{font-size:14px}.cardb{font-size:14px;padding:7px 10px}.panel{grid-template-columns:1fr}.panel .ic{width:90px;height:90px}.panel .ic svg{width:70px;height:70px} h2{font-size:26px}}
+</style>
+</head>
+<body>
+<header><div class="top"><h1>Togreisen gjennom krigen<small>Første verdenskrig, stasjon for stasjon</small></h1><a class="back" href="index.html">← Til kartet</a><span class="ticket" id="ticket">BILLETT · 1914–1919</span></div></header>
+<main id="main"></main>
+<script>
+"use strict";
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const el=(t,a={},...k)=>{const e=document.createElement(t);for(const[x,v]of Object.entries(a)){if(x==="class")e.className=v;else if(x.startsWith("on"))e.addEventListener(x.slice(2),v);else e.setAttribute(x,v)}k.flat().forEach(c=>e.append(c));return e};
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const NS="http://www.w3.org/2000/svg";
+const svg=(t,a={},...k)=>{const e=document.createElementNS(NS,t);for(const[x,v]of Object.entries(a))e.setAttribute(x,v);k.flat().forEach(c=>e.append(typeof c==="string"?document.createTextNode(c):c));return e};
+
+/* Ikoner, tegnet med enkle former */
+const IC={
+ car:'<rect x="14" y="44" width="68" height="20" rx="6" fill="#2b2b2b"/><path d="M28 44 L36 30 H60 L68 44Z" fill="#444"/><circle cx="30" cy="66" r="8" fill="#111"/><circle cx="66" cy="66" r="8" fill="#111"/><circle cx="48" cy="22" r="7" fill="#8b2f22"/><path d="M41 22 h14" stroke="#2b2b2b" stroke-width="3"/>',
+ scroll:'<rect x="24" y="16" width="48" height="62" rx="4" fill="#f4ead2" stroke="#7a6a4a" stroke-width="3"/><path d="M32 30h32M32 40h32M32 50h24" stroke="#7a6a4a" stroke-width="3"/><circle cx="58" cy="64" r="8" fill="#b3261e"/>',
+ flagBE:'<rect x="20" y="20" width="56" height="40" fill="#fff" stroke="#333"/><rect x="20" y="20" width="19" height="40" fill="#111"/><rect x="39" y="20" width="18" height="40" fill="#f2c500"/><rect x="57" y="20" width="19" height="40" fill="#d6262b"/><path d="M20 20v60" stroke="#5a4a3a" stroke-width="4"/>',
+ trench:'<rect x="8" y="50" width="80" height="30" fill="#7a5a3a"/><path d="M8 50 l10 -8 l10 8 l10 -8 l10 8 l10 -8 l10 8 l10 -8 l10 8" fill="none" stroke="#4a3a2a" stroke-width="3"/><path d="M14 36 l8 -8 m0 8 l-8 -8 M40 36 l8 -8 m0 8 l-8 -8 M66 36 l8 -8 m0 8 l-8 -8" stroke="#555" stroke-width="2"/>',
+ gas:'<ellipse cx="34" cy="50" rx="20" ry="14" fill="#c8cf6a" opacity=".85"/><ellipse cx="56" cy="44" rx="22" ry="16" fill="#b5c050" opacity=".85"/><ellipse cx="48" cy="58" rx="26" ry="12" fill="#d6db86" opacity=".9"/><path d="M8 78h80" stroke="#7a5a3a" stroke-width="4"/>',
+ flagIT:'<rect x="20" y="20" width="56" height="40" fill="#fff" stroke="#333"/><rect x="20" y="20" width="19" height="40" fill="#1e8f4e"/><rect x="57" y="20" width="19" height="40" fill="#d6262b"/><path d="M20 20v60" stroke="#5a4a3a" stroke-width="4"/>',
+ tank:'<rect x="14" y="48" width="68" height="22" rx="11" fill="#5b5a3c"/><rect x="30" y="34" width="34" height="16" rx="3" fill="#6d6c48"/><path d="M64 40h18" stroke="#3f3e2a" stroke-width="4"/><circle cx="24" cy="59" r="5" fill="#2f2e20"/><circle cx="40" cy="59" r="5" fill="#2f2e20"/><circle cx="56" cy="59" r="5" fill="#2f2e20"/><circle cx="72" cy="59" r="5" fill="#2f2e20"/>',
+ sub:'<path d="M6 60h84" stroke="#4d7ea8" stroke-width="3"/><ellipse cx="48" cy="56" rx="34" ry="9" fill="#3a3f45"/><rect x="40" y="38" width="14" height="12" rx="2" fill="#3a3f45"/><path d="M47 38v-10h6" stroke="#3a3f45" stroke-width="3" fill="none"/><path d="M6 70q10 -6 20 0t20 0t20 0t20 0" fill="none" stroke="#4d7ea8" stroke-width="3"/>',
+ crown:'<path d="M18 62 L22 30 L36 46 L48 24 L60 46 L74 30 L78 62Z" fill="#d6a531" stroke="#8a6a1a" stroke-width="3"/><rect x="18" y="62" width="60" height="10" fill="#b8892a"/><path d="M14 20 L82 80" stroke="#b3261e" stroke-width="6" stroke-linecap="round"/>',
+ ship:'<path d="M12 56h72l-10 16H22Z" fill="#3a3f45"/><rect x="34" y="40" width="26" height="16" fill="#9aa4ad"/><rect x="40" y="28" width="6" height="12" fill="#8b2f22"/><rect x="50" y="28" width="6" height="12" fill="#8b2f22"/><rect x="62" y="22" width="22" height="14" fill="#fff" stroke="#333"/><rect x="62" y="22" width="9" height="7" fill="#2c4a8a"/><path d="M71 25h13M62 32h22" stroke="#c62828" stroke-width="2"/><path d="M6 76q10 -6 20 0t20 0t20 0t20 0" fill="none" stroke="#4d7ea8" stroke-width="3"/>',
+ redflag:'<path d="M24 14v70" stroke="#5a4a3a" stroke-width="4"/><path d="M26 16 q20 -6 26 2 t26 0 v30 q-12 8 -26 0 t-26 2Z" fill="#c62828"/>',
+ peace:'<rect x="22" y="16" width="52" height="62" rx="4" fill="#f4ead2" stroke="#7a6a4a" stroke-width="3"/><path d="M30 30h36M30 40h36M30 50h20" stroke="#7a6a4a" stroke-width="3"/><path d="M54 70 l18 -26" stroke="#2b2b2b" stroke-width="4" stroke-linecap="round"/>',
+ clock:'<circle cx="48" cy="48" r="32" fill="#fffdf7" stroke="#2b2b2b" stroke-width="4"/><path d="M48 48V24M48 48l-10 -6" stroke="#2b2b2b" stroke-width="4" stroke-linecap="round"/><circle cx="48" cy="48" r="3" fill="#2b2b2b"/>',
+ palace:'<path d="M14 36 L48 18 L82 36Z" fill="#c9b37a"/><rect x="16" y="36" width="64" height="6" fill="#b39a5a"/><g fill="#e8dcbc"><rect x="20" y="42" width="7" height="30"/><rect x="34" y="42" width="7" height="30"/><rect x="55" y="42" width="7" height="30"/><rect x="69" y="42" width="7" height="30"/></g><rect x="14" y="72" width="68" height="8" fill="#b39a5a"/>'
+};
+/* Stasjonene i riktig rekkefølge */
+const ST=[
+ {d:"28. juni 1914",y:1914,t:"Skuddene i Sarajevo",ic:"car",x:"Tronarvingen i Østerrike-Ungarn, Franz Ferdinand, og kona Sophie blir skutt og drept i Sarajevo av en 19 år gammel mann med tilknytning til Serbia. Skuddene blir den utløsende årsaken til krigen."},
+ {d:"28. juli 1914",y:1914,t:"Østerrike-Ungarn erklærer Serbia krig",s:"Krig mot Serbia",ic:"scroll",x:"Østerrike-Ungarn gir Serbia ansvaret for drapet. Med løfte om støtte fra Tyskland, blankofullmakten, erklærer keiserriket krig mot Serbia en måned etter skuddene."},
+ {d:"4. august 1914",y:1914,t:"Tyskland går gjennom Belgia",s:"Gjennom Belgia",ic:"flagBE",x:"Alliansene trekker stormaktene inn i krigen. Tyskland angriper Frankrike gjennom det nøytrale Belgia. Storbritannia hadde lovet å beskytte Belgia og erklærer krig mot Tyskland."},
+ {d:"Høsten 1914",y:1914,t:"Vestfronten låser seg",ic:"trench",x:"Tyskernes plan om å slå Frankrike raskt slår feil. Hærene graver seg ned i skyttergraver fra Den engelske kanal til Sveits, og fronten står nesten stille i fire år."},
+ {d:"22. april 1915",y:1915,t:"Giftgass ved Ypres",ic:"gas",x:"Ved Ypres i Belgia slipper tyskerne giftgass mot fiendens skyttergraver. Det er første gang giftgass brukes i stor skala. Ny teknologi gjør krigen mer dødelig enn noen krig før."},
+ {d:"Mai 1915",y:1915,t:"Italia skifter side",ic:"flagIT",x:"Italia hadde vært med i trippelalliansen, men holdt seg utenfor krigen i 1914. Landet blir lovet landområder fra Østerrike-Ungarn og går inn i krigen på trippelententens side."},
+ {d:"1. juli 1916",y:1916,t:"Slaget ved Somme",ic:"tank",x:"Britiske og franske styrker angriper ved Somme. Den første dagen blir rundt 57 000 britiske soldater drept, såret eller meldt savnet. I september tar britene i bruk stridsvogner for første gang."},
+ {d:"Februar 1917",y:1917,t:"Uinnskrenket ubåtkrig",s:"Ubåtkrigen",ic:"sub",x:"Tyske ubåter senker skip til og fra Storbritannia og Frankrike, også fra nøytrale land. 1917 blir det verste året for den norske handelsflåten."},
+ {d:"Mars 1917",y:1917,t:"Tsaren går av",ic:"crown",x:"I Russland fører krigen til sult og nød. Kvinner og arbeidere protesterer, soldatene nekter å skyte, og tsaren blir tvunget til å gå av."},
+ {d:"6. april 1917",y:1917,t:"USA går med i krigen",ic:"ship",x:"Tyske ubåter har senket amerikanske skip, og USA erklærer krig mot Tyskland. Storbritannia og Frankrike får en mektig ny støttespiller."},
+ {d:"November 1917",y:1917,t:"Bolsjevikene tar makten",s:"Bolsjevikene",ic:"redflag",x:"Med slagordet «Fred, jord, brød» gjennomfører Lenin og bolsjevikene et statskupp i Russland. De kaller seg kommunister og vil ha et klasseløst samfunn."},
+ {d:"3. mars 1918",y:1918,t:"Russland slutter fred",s:"Russland ut av krigen",ic:"peace",x:"Russland går ut av krigen og slutter fred med Tyskland. Nå kan Tyskland samle styrkene i vest. I Russland bryter det ut borgerkrig."},
+ {d:"11. november 1918",y:1918,t:"Våpenhvilen",ic:"clock",x:"Tyskland forstår at krigen er tapt, og keiseren går av. Klokka 11 den 11. november 1918 begynner våpenhvilen å gjelde, og kanonene stilner."},
+ {d:"28. juni 1919",y:1919,t:"Versaillestraktaten",ic:"palace",x:"I Versailles utenfor Paris må Tyskland godta en hard fredsavtale: skylden for krigen, store erstatninger, tap av landområder og kolonier og en liten hær. Endestasjon."}
+];
+const N=ST.length;
+const icon=k=>{const s=svg("svg",{viewBox:"0 0 96 96","aria-hidden":"true"});s.innerHTML=IC[k];return s};
+const main=$("#main");
+const toTop=()=>{try{main.scrollIntoView({block:"start"})}catch(e){}window.scrollTo(0,0)};
+let built=false,tries=0;
+
+/* ---------- steg 1: legg sporet ---------- */
+function build(){
+  const place=Array(N).fill(null),lock=Array(N).fill(false);let pile=shuffle(ST.map((_,i)=>i)),sel=null;tries=0;
+  const slots=el("div",{class:"slots"}),pileEl=el("div",{class:"pile"}),msg=el("p",{class:"msg","aria-live":"polite"});
+  const check=el("button",{class:"btn red",type:"button",onclick:()=>{
+    tries++;let right=0;const wrong=[];
+    place.forEach((id,pos)=>{if(id===pos){lock[pos]=true;right++}else if(id!==null){wrong.push(pos)}});
+    wrong.forEach(pos=>{pile.push(place[pos]);place[pos]=null});
+    draw(wrong);
+    if(right===N){built=true;const s=tries<=1?3:tries<=3?2:1;msg.className="msg good";msg.textContent="Sporet er ferdig! Du brukte "+tries+" forsøk.";
+      main.append(el("div",{class:"row"},el("span",{class:"stars","aria-label":s+" av 3 stjerner"},"★".repeat(s)+"☆".repeat(3-s)),el("button",{class:"btn red",type:"button",onclick:()=>travel(0)},"Start togreisen →")))}
+    else{msg.className="msg bad";msg.textContent=right+" av "+N+" stasjoner står riktig. De grønne er låst fast. Prøv å plassere resten på nytt."}}},"Sjekk sporet");
+  function draw(shake){
+    slots.replaceChildren(...place.map((id,pos)=>{
+      const b=el("button",{type:"button",class:"slot"+(id!==null?" filled":"")+(lock[pos]?" lock":"")+(shake&&shake.includes(pos)?" wrong":""),"aria-label":"Stasjon "+(pos+1)+(id!==null?": "+ST[id].t:", tom")},
+        el("span",{class:"no"},String(pos+1)),
+        id!==null?el("span",{class:"t"},ST[id].t,lock[pos]?el("span",{class:"d"},ST[id].d):""):el("span",{class:"empty"},sel!==null?"Trykk for å sette skiltet her":"Tom stasjon"));
+      b.addEventListener("click",()=>{if(lock[pos])return;
+        if(sel!==null){if(place[pos]!==null)pile.push(place[pos]);place[pos]=sel;pile=pile.filter(x=>x!==sel);sel=null}
+        else if(place[pos]!==null){pile.push(place[pos]);place[pos]=null}
+        draw()});
+      return b}));
+    pileEl.replaceChildren(...(pile.length?pile.map(id=>el("button",{type:"button",class:"cardb"+(sel===id?" sel":""),"aria-pressed":String(sel===id),onclick:()=>{sel=sel===id?null:id;draw()}},ST[id].t)):[el("p",{class:"lead",style:"margin:0"},built?"":"Alle skiltene er satt opp. Trykk «Sjekk sporet».")]));
+    check.disabled=place.some(x=>x===null)||built;
+  }
+  draw();
+  main.replaceChildren(el("h2",{},"Steg 1: Legg sporet gjennom krigen"),
+    el("p",{class:"lead"},"Toget kan ikke kjøre før stasjonene står i riktig rekkefølge. Trykk på et stasjonsskilt, og trykk deretter på stasjonen der det skal stå. Stasjon 1 er den første hendelsen. Trykk på et skilt som står på en stasjon, for å flytte det tilbake."),
+    el("div",{class:"board"},el("div",{class:"bh"},el("span",{},"Rutetabell"),el("span",{},"1914 → 1919")),slots),
+    el("div",{class:"pilewrap"},el("p",{class:"pileh"},"Stasjonsskilt"),pileEl,el("div",{class:"row"},check),msg));
+  $("#ticket").textContent="BILLETT · 1914–1919";
+  toTop();
+}
+
+/* ---------- steg 2: togreisen ---------- */
+const GAP=260,X0=200,TY=190;
+const YC={1914:"#dfe8d6",1915:"#e5e3cf",1916:"#e2dbcf",1917:"#d9e0e6",1918:"#e6e1d6",1919:"#e8ecef"};
+let world,trainG,viewEl,curX=X0,anim=null;
+function drawWorld(){
+  const W=X0*2+GAP*(N-1);
+  const s=svg("svg",{viewBox:"0 0 "+W+" 250",width:W,height:250,role:"img","aria-label":"Jernbane med "+N+" stasjoner fra 1914 til 1919"});
+  /* bakgrunn per år */
+  let prev=null,start=0;const xs=ST.map((_,i)=>X0+i*GAP);
+  ST.forEach((st,i)=>{if(st.y!==prev){if(prev!==null){const end=(xs[i-1]+xs[i])/2;s.append(svg("rect",{x:start,y:0,width:end-start,height:250,fill:YC[prev]}));start=end}prev=st.y}});
+  s.append(svg("rect",{x:start,y:0,width:W-start,height:250,fill:YC[prev]}));
+  /* åsrygger */
+  for(let x=-100;x<W;x+=340)s.append(svg("ellipse",{cx:x+170,cy:200,rx:230,ry:90,fill:"#000",opacity:".05"}));
+  /* årsskilt */
+  prev=null;ST.forEach((st,i)=>{if(st.y!==prev){const x=i===0?40:(xs[i-1]+xs[i])/2;s.append(svg("rect",{x:x-30,y:14,width:60,height:26,rx:4,fill:"#1d2321"}),svg("text",{x:x,y:32,"text-anchor":"middle","font-family":"Arial,sans-serif","font-size":15,"font-weight":"700",fill:"#fff"},String(st.y)));prev=st.y}});
+  /* skinner */
+  for(let x=0;x<W;x+=18)s.append(svg("rect",{x:x,y:TY+2,width:8,height:14,fill:"#7a6650"}));
+  s.append(svg("rect",{x:0,y:TY+3,width:W,height:3,fill:"#4a4038"}),svg("rect",{x:0,y:TY+12,width:W,height:3,fill:"#4a4038"}));
+  /* stasjoner */
+  ST.forEach((st,i)=>{const x=xs[i];const g=svg("g",{style:"cursor:pointer",tabindex:"0",role:"button","aria-label":"Stasjon "+(i+1)+": "+st.t});
+    g.append(svg("rect",{x:x-60,y:TY-14,width:120,height:12,fill:"#9a8f80"}),svg("rect",{x:x-3,y:96,width:6,height:80,fill:"#4a4038"}),
+      svg("rect",{x:x-84,y:48,width:168,height:50,rx:6,fill:"#1f3a5f",stroke:"#fff","stroke-width":2}),
+      svg("text",{x:x,y:66,"text-anchor":"middle","font-family":"Arial,sans-serif","font-size":12,fill:"#c8d6ea"},"STASJON "+(i+1)),
+      svg("text",{x:x,y:86,"text-anchor":"middle","font-family":"Arial,sans-serif","font-size":13,"font-weight":"700",fill:"#fff"},st.s||st.t));
+    const go=()=>moveTo(i);g.addEventListener("click",go);g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}});s.append(g)});
+  /* toget */
+  trainG=svg("g",{});
+  const tr=svg("g",{transform:"translate(-175,0)"});
+  [[0,"#8b2f22"],[72,"#8b2f22"]].forEach(([dx,c])=>{tr.append(svg("rect",{x:dx,y:TY-44,width:64,height:36,rx:4,fill:c}),svg("rect",{x:dx+8,y:TY-38,width:16,height:12,fill:"#f7efd9"}),svg("rect",{x:dx+40,y:TY-38,width:16,height:12,fill:"#f7efd9"}),svg("circle",{cx:dx+14,cy:TY-6,r:7,fill:"#222"}),svg("circle",{cx:dx+50,cy:TY-6,r:7,fill:"#222"}))});
+  tr.append(svg("rect",{x:146,y:TY-40,width:58,height:32,rx:4,fill:"#1d2321"}),svg("rect",{x:150,y:TY-62,width:26,height:24,fill:"#1d2321"}),svg("rect",{x:154,y:TY-58,width:18,height:12,fill:"#f2c94c"}),
+    svg("rect",{x:188,y:TY-58,width:10,height:20,fill:"#1d2321"}),svg("path",{d:"M204 "+(TY-12)+" l14 6 v6 h-14z",fill:"#8b2f22"}),
+    svg("circle",{cx:160,cy:TY-6,r:8,fill:"#222"}),svg("circle",{cx:190,cy:TY-6,r:8,fill:"#222"}));
+  ["","p2","p3"].forEach(k=>tr.append(svg("circle",{class:"puff "+k,cx:193,cy:TY-66,r:7,fill:"#fff",opacity:".7"})));
+  trainG.append(tr);s.append(trainG);
+  return s;
+}
+function placeTrain(x){curX=x;trainG.setAttribute("transform","translate("+x+",0)");const vw=viewEl.clientWidth||800;const W=X0*2+GAP*(N-1);const off=Math.max(0,Math.min(W-vw,x-vw*0.5));world.style.transform="translateX("+(-off)+"px)"}
+let at=0,panelEl,ctrlEl;
+function moveTo(i){
+  const target=X0+i*GAP;at=i;info();
+  const reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(anim)cancelAnimationFrame(anim);
+  if(reduce){placeTrain(target);return}
+  const from=curX,dur=Math.min(1600,350+Math.abs(target-from)*1.6),t0=performance.now();
+  const step=t=>{const k=Math.min(1,(t-t0)/dur),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;placeTrain(from+(target-from)*e);if(k<1)anim=requestAnimationFrame(step)};
+  anim=requestAnimationFrame(step);
+}
+function info(){
+  const st=ST[at];
+  panelEl.replaceChildren(el("div",{class:"ic"},icon(st.ic)),el("div",{},el("p",{class:"st"},"STASJON "+(at+1)+" AV "+N),el("span",{class:"dt"},st.d),el("h3",{},st.t),el("p",{},st.x)));
+  const last=at===N-1;
+  ctrlEl.replaceChildren(el("button",{class:"btn ghost",type:"button",onclick:()=>moveTo(at-1)},"← Forrige stasjon"),
+    last?el("span",{class:"row",style:"margin:0"},el("button",{class:"btn ghost",type:"button",onclick:()=>moveTo(0)},"Kjør reisen på nytt"),el("button",{class:"btn",type:"button",onclick:build},"Legg sporet på nytt")):el("button",{class:"btn red",type:"button",id:"go",onclick:()=>moveTo(at+1)},"Kjør videre →"));
+  ctrlEl.firstChild.disabled=at===0;
+  $("#ticket").textContent="STASJON "+(at+1)+"/"+N+" · "+st.y;
+}
+function travel(i){
+  if(!built){build();return}
+  world=drawWorld();viewEl=el("div",{class:"view"});viewEl.append(world);
+  panelEl=el("div",{class:"panel","aria-live":"polite"});ctrlEl=el("div",{class:"row split"});
+  main.replaceChildren(el("h2",{},"Steg 2: Togreisen"),el("p",{class:"lead"},"Toget kjører gjennom krigen. Les om hendelsen på hver stasjon, og trykk «Kjør videre» når du er klar. Du kan også trykke på en stasjon for å kjøre dit."),viewEl,panelEl,ctrlEl);
+  curX=X0-260;placeTrain(curX);moveTo(i);toTop();
+}
+build();
+</script>
+</body>
+</html>

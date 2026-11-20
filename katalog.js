@@ -1,0 +1,47 @@
+/* =====================================================================
+   KATALOG OVER FAG OG TEMAER
+   ---------------------------------------------------------------------
+   Slik legger du til et nytt FAG:
+     Kopier en hel fag-blokk { ... } nedenfor, lim den inn etter den siste,
+     og endre id, navn, ikon, farge og beskrivelse.
+     id brukes i adressen (bare små bokstaver, tall og bindestrek).
+
+   Slik legger du til et nytt TEMA i et fag:
+     1. Lag en mappe for temaet, f.eks. krle/islam/, med en index.html.
+     2. Legg til en linje i fagets "temaer"-liste:
+        { navn: "Islam", ikon: "🕌", beskrivelse: "Kort tekst", lenke: "krle/islam/index.html" },
+     Sett  skjult: true  på et tema for å skjule det for elevene.
+   ===================================================================== */
+
+const KATALOG = [
+  {
+    id: "samfunnsfag",
+    navn: "Samfunnsfag",
+    ikon: "🌍",
+    farge: "#1d4ed8",
+    beskrivelse: "Historie, geografi og samfunnskunnskap",
+    temaer: [
+      {
+        navn: "Første verdenskrig",
+        ikon: "🪖",
+        beskrivelse: "Kart, krigsarkivet, årsakskjeden, krigsdagbøkene, togreisen og begrepsjakten",
+        lenke: "samfunnsfag/forste-verdenskrig/index.html"
+      }
+    ]
+  },
+  {
+    id: "krle",
+    navn: "KRLE",
+    ikon: "🕉️",
+    farge: "#8c2f39",
+    beskrivelse: "Kristendom, religion, livssyn og etikk",
+    temaer: [
+      {
+        navn: "Hinduismen",
+        ikon: "🪷",
+        beskrivelse: "Utforsk hinduismen i 13 stasjoner og øv på de viktigste begrepene",
+        lenke: "krle/hinduismen/index.html"
+      }
+    ]
+  }
+];

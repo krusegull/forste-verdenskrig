@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Læringsportalen – velg tema</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,800;9..144,900&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="portal.css">
+<script src="katalog.js"></script>
+</head>
+<body>
+<main class="wrap">
+  <a class="back" href="index.html">← Alle fag</a>
+  <header class="hero">
+    <div class="logo" id="ic"></div>
+    <h1 id="navn"></h1>
+    <p>Velg tema</p>
+  </header>
+  <section class="grid" id="temaer"></section>
+</main>
+<script>
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const id = new URLSearchParams(location.search).get("fag") || location.hash.slice(1);
+const fag = KATALOG.find(f => f.id === id);
+if (!fag) {
+  location.replace("index.html");
+} else {
+  document.title = "Læringsportalen – " + fag.navn;
+  document.documentElement.style.setProperty("--c", fag.farge);
+  document.getElementById("ic").textContent = fag.ikon;
+  document.getElementById("navn").textContent = fag.navn;
+  const temaer = fag.temaer.filter(t => !t.skjult);
+  document.getElementById("temaer").innerHTML = temaer.length
+    ? temaer.map(t => `<a class="card" href="${esc(t.lenke)}" style="--c:${fag.farge}">
+        <span class="ic">${t.ikon || "📘"}</span>
+        <h2>${esc(t.navn)}</h2>
+        <span class="desc">${esc(t.beskrivelse || "")}</span>
+        <span class="meta">Start →</span></a>`).join("")
+    : `<p class="empty">Ingen temaer her ennå.</p>`;
+}
+</script>
+</body>
+</html>

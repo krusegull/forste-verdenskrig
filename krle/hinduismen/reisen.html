@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hinduismen – en reise i 13 stasjoner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Nunito:wght@400;600;800&family=Noto+Sans+Devanagari:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7efe1; --ink:#2b1d17; --muted:#6d5a4e; --saffron:#e07a1f; --marigold:#f2b33d;
+  --maroon:#8c2f39; --teal:#1d6f6a; --indigo:#3b3a78; --card:#fffaf2; --line:#e6d6bd;
+  --ok:#2f7d4a; --bad:#b33a3a; --panelW:min(600px,46vw);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif}
+button{font-family:inherit;cursor:pointer}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;margin:0}
+.om{font-family:"Noto Sans Devanagari",serif}
+
+/* top bar */
+#topbar{position:fixed;top:0;left:0;right:0;height:58px;display:flex;align-items:center;gap:10px;padding:0 14px;
+  background:rgba(255,250,242,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);z-index:30}
+#topbar h1{font-size:20px;white-space:nowrap}
+#topbar .om{color:var(--saffron);font-size:24px;margin-right:2px}
+#topbar .spacer{flex:1}
+.tbtn{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font-weight:700;font-size:14px;color:var(--ink)}
+.tbtn:hover{border-color:var(--saffron)}
+#progress{font-size:13px;color:var(--muted);font-weight:700;white-space:nowrap}
+#progress .bar{display:inline-block;width:90px;height:8px;border-radius:9px;background:var(--line);vertical-align:middle;margin-left:6px;overflow:hidden}
+#progress .bar i{display:block;height:100%;background:var(--saffron);width:0;transition:width .4s}
+
+/* world */
+#viewport{position:fixed;inset:58px 0 0 0;overflow:hidden;
+  background:radial-gradient(circle at 50% 50%,#fff8ec 0,#f7efe1 55%,#efe2cb 100%)}
+#world{position:absolute;left:0;top:0;width:2400px;height:1500px;transform-origin:0 0;
+  transition:transform 1s cubic-bezier(.6,.05,.25,1)}
+#paths{position:absolute;inset:0;pointer-events:none}
+.mandala{position:absolute;left:1200px;top:750px;transform:translate(-50%,-50%);pointer-events:none;opacity:.5}
+#center{position:absolute;left:1200px;top:750px;transform:translate(-50%,-50%);text-align:center;width:640px}
+#center .om{font-size:150px;line-height:1;color:var(--saffron)}
+#center h2{font-size:78px;color:var(--maroon);letter-spacing:-1px}
+#center p{font-size:26px;color:var(--muted);margin:10px 0 0}
+#center button{margin-top:22px;font-size:24px;padding:14px 30px;border-radius:999px;border:0;background:var(--maroon);color:#fff;font-weight:800}
+
+.station{position:absolute;width:250px;height:250px;margin:-125px 0 0 -125px;border-radius:50%;border:0;
+  background:var(--c);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  box-shadow:0 10px 30px rgba(60,30,10,.18),inset 0 0 0 8px rgba(255,255,255,.25);transition:transform .25s,box-shadow .25s;padding:20px}
+.station:hover{transform:scale(1.06);box-shadow:0 16px 40px rgba(60,30,10,.28),inset 0 0 0 8px rgba(255,255,255,.4)}
+.station .emo{font-size:64px;line-height:1}
+.station .t{font-family:Fraunces,serif;font-size:25px;font-weight:800;line-height:1.1;margin-top:8px}
+.station .num{position:absolute;top:-8px;left:-8px;width:56px;height:56px;border-radius:50%;background:#fff;color:var(--c);
+  font-weight:800;font-size:24px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.station .done{position:absolute;top:-8px;right:-8px;width:52px;height:52px;border-radius:50%;background:var(--ok);color:#fff;
+  font-size:28px;display:none;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.station.visited .done{display:flex}
+.station .words{position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:14px;width:330px;
+  font-size:15px;color:var(--muted);font-weight:700;letter-spacing:.3px}
+
+/* panel */
+#panel{position:fixed;top:58px;right:0;bottom:0;width:var(--panelW);background:var(--card);z-index:20;
+  box-shadow:-10px 0 40px rgba(60,30,10,.18);transform:translateX(105%);transition:transform .55s cubic-bezier(.6,.05,.25,1);
+  display:flex;flex-direction:column}
+#panel.open{transform:none}
+#panelHead{padding:18px 22px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;background:var(--c,#8c2f39);color:#fff}
+#panelHead .emo{font-size:40px}
+#panelHead small{display:block;opacity:.85;font-weight:700;font-size:13px;letter-spacing:.5px;text-transform:uppercase}
+#panelHead h2{font-size:26px;line-height:1.1}
+#closeBtn{margin-left:auto;background:rgba(255,255,255,.2);border:0;color:#fff;width:40px;height:40px;border-radius:50%;font-size:22px;flex:none}
+#panelBody{flex:1;overflow-y:auto;padding:20px 24px 30px;font-size:17px;line-height:1.55}
+#panelBody h3{font-size:20px;margin:22px 0 6px;color:var(--maroon)}
+#panelBody h3:first-child{margin-top:0}
+#panelBody p{margin:0 0 10px}
+#panelBody ul{margin:0 0 10px;padding-left:20px}
+#panelBody li{margin-bottom:6px}
+.term{background:#fdebd0;border-bottom:2px dotted var(--saffron);padding:0 3px;border-radius:3px;cursor:help;font-weight:700}
+.box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:12px 0}
+.think{background:#eef4f3;border-left:5px solid var(--teal);border-radius:10px;padding:12px 14px;margin:14px 0}
+.think b{color:var(--teal)}
+.timeline{list-style:none;padding:0!important;border-left:3px solid var(--marigold);margin-left:8px!important}
+.timeline li{position:relative;padding:0 0 10px 18px}
+.timeline li:before{content:"";position:absolute;left:-9px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--saffron);border:3px solid var(--card)}
+.timeline b{display:block;color:var(--maroon)}
+.task{margin-top:26px;border:2px solid var(--c,#8c2f39);border-radius:16px;padding:16px;background:#fff}
+.task h3{margin-top:0!important;color:var(--ink)!important}
+.task .q{color:var(--muted);margin-bottom:12px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 0;border-bottom:1px solid var(--line)}
+.row:last-of-type{border-bottom:0}
+.row .txt{flex:1 1 220px}
+.pill{border:2px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;font-weight:800;font-size:14px}
+.pill.sel{border-color:var(--indigo);background:var(--indigo);color:#fff}
+.fb{flex-basis:100%;font-size:15px;display:none;padding:6px 10px;border-radius:8px}
+.fb.show{display:block}
+.fb.ok{background:#e4f3e8;color:var(--ok)}
+.fb.bad{background:#f8e3e3;color:var(--bad)}
+select{font-family:inherit;font-size:15px;padding:7px 8px;border-radius:10px;border:2px solid var(--line);background:#fff;max-width:100%}
+select.ok{border-color:var(--ok);background:#e4f3e8}
+select.bad{border-color:var(--bad);background:#f8e3e3}
+.go{margin-top:12px;border:0;border-radius:999px;padding:10px 20px;background:var(--c,#8c2f39);color:#fff;font-weight:800;font-size:15px}
+.ghost{margin-top:12px;border:2px solid var(--line);border-radius:999px;padding:8px 16px;background:#fff;font-weight:800;font-size:14px}
+.result{margin-top:10px;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.chip{border:2px solid var(--line);background:#fff;border-radius:12px;padding:8px 12px;font-weight:700;font-size:15px}
+.chip.used{opacity:.3;pointer-events:none}
+.answer{min-height:48px;border:2px dashed var(--line);border-radius:12px;padding:8px;display:flex;flex-direction:column;gap:6px}
+.answer div{background:#fdebd0;border-radius:8px;padding:6px 10px;font-weight:700}
+.answer div.ok{background:#e4f3e8;color:var(--ok)}
+.answer div.bad{background:#f8e3e3;color:var(--bad)}
+.flips{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.flip{perspective:800px;height:130px;border:0;background:none;padding:0}
+.flip .in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flip.on .in{transform:rotateY(180deg)}
+.flip .f,.flip .b{position:absolute;inset:0;border-radius:14px;display:flex;align-items:center;justify-content:center;padding:10px;
+  backface-visibility:hidden;text-align:center}
+.flip .f{background:var(--c,#8c2f39);color:#fff;font-family:Fraunces,serif;font-size:22px;font-weight:800}
+.flip .b{background:#fff;border:2px solid var(--c,#8c2f39);transform:rotateY(180deg);font-size:14px;line-height:1.35;color:var(--ink)}
+textarea{width:100%;min-height:80px;font-family:inherit;font-size:15px;padding:10px;border-radius:12px;border:2px solid var(--line);resize:vertical}
+.prompt{font-weight:700;margin:14px 0 6px}
+.saved{font-size:13px;color:var(--muted)}
+#panelFoot{display:flex;gap:10px;padding:12px 18px;border-top:1px solid var(--line);background:#fff}
+#panelFoot button{flex:1;border:2px solid var(--line);background:#fff;border-radius:999px;padding:10px;font-weight:800;font-size:15px}
+#panelFoot #nextBtn{background:var(--c,#8c2f39);border-color:transparent;color:#fff}
+.qopt{display:block;width:100%;text-align:left;border:2px solid var(--line);background:#fff;border-radius:12px;padding:10px 12px;margin:6px 0;font-size:15px;font-weight:700}
+.qopt.ok{border-color:var(--ok);background:#e4f3e8}
+.qopt.bad{border-color:var(--bad);background:#f8e3e3}
+.qopt:disabled{cursor:default;color:var(--ink)}
+.qnum{color:var(--muted);font-weight:800;font-size:14px}
+
+/* modal */
+#modal{position:fixed;inset:0;background:rgba(43,29,23,.55);z-index:50;display:none;align-items:center;justify-content:center;padding:16px}
+#modal.show{display:flex}
+#modalBox{background:var(--card);border-radius:20px;max-width:620px;width:100%;max-height:86vh;overflow:auto;padding:26px 28px;box-shadow:0 20px 60px rgba(0,0,0,.3);font-size:17px;line-height:1.55}
+#modalBox h2{color:var(--maroon);font-size:30px;margin-bottom:8px}
+#modalBox ul{padding-left:20px}
+#modalBox .go{background:var(--maroon)}
+.gloss dt{font-weight:800;color:var(--maroon);margin-top:10px}
+.gloss dd{margin:2px 0 0 0}
+#search{width:100%;font-size:16px;padding:10px 12px;border-radius:12px;border:2px solid var(--line);margin:6px 0 4px}
+#tip{position:fixed;z-index:60;max-width:280px;background:var(--ink);color:#fff;font-size:14px;line-height:1.4;padding:10px 12px;border-radius:10px;display:none;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+
+@media (max-width:820px){
+  :root{--panelW:100vw}
+  #topbar h1 .long{display:none}
+  #progress .bar{display:none}
+  .tbtn{padding:7px 10px;font-size:13px}
+}
+@media (max-width:520px){ #topbar h1{font-size:17px} #goalsBtn{display:none} #progress{display:none} #topbar h1 .om{display:none} }
+@media (prefers-reduced-motion:reduce){ #world,#panel,.flip .in{transition:none} }
+</style>
+</head>
+<body>
+
+<header id="topbar">
+  <a href="index.html" title="Til forsiden" style="text-decoration:none;font-size:22px;margin-right:4px">🏠</a><h1><span class="om">ॐ</span> Hinduismen<span class="long"> – en reise</span></h1>
+  <div class="spacer"></div>
+  <span id="progress"><span id="progTxt">0/12</span><span class="bar"><i id="progBar"></i></span></span>
+  <button class="tbtn" id="overviewBtn">🗺️ Oversikt</button>
+  <button class="tbtn" id="glossBtn">📖 Begreper</button>
+  <button class="tbtn" id="goalsBtn">🎯 Mål</button>
+</header>
+
+<div id="viewport">
+  <div id="world">
+    <svg id="paths" width="2400" height="1500"></svg>
+    <svg class="mandala" width="900" height="900" viewBox="-450 -450 900 900" aria-hidden="true" id="mandala"></svg>
+    <div id="center">
+      <div class="om">ॐ</div>
+      <h2>Hinduismen</h2>
+      <p>En reise gjennom en av verdens eldste religioner – i <span id="nSt"></span> stasjoner</p>
+      <button id="startBtn">Start reisen →</button>
+    </div>
+  </div>
+</div>
+
+<aside id="panel" aria-live="polite">
+  <div id="panelHead">
+    <span class="emo" id="pEmo"></span>
+    <div><small id="pNum"></small><h2 id="pTitle"></h2></div>
+    <button id="closeBtn" aria-label="Lukk og gå til oversikten">✕</button>
+  </div>
+  <div id="panelBody"></div>
+  <div id="panelFoot">
+    <button id="prevBtn">← Forrige</button>
+    <button id="nextBtn">Neste →</button>
+  </div>
+</aside>
+
+<div id="modal"><div id="modalBox"></div></div>
+<div id="tip"></div>
+
+<script>
+/* ---------- Begrepsbank ---------- */
+const GLOSS = {
+  "atman":"Sjelen eller det innerste selvet i hvert levende vesen. Atman er evig og dør ikke med kroppen.",
+  "Brahman":"Den ene, guddommelige virkeligheten som alt er en del av. Uten form, overalt og i alt.",
+  "samsara":"Gjenfødelsens kretsløp: atman fødes på nytt og på nytt i nye kropper.",
+  "karma":"«Handling». Loven om at alle handlinger får følger – i dette livet og i neste.",
+  "moksha":"Frigjøring fra samsara. Atman blir ett med Brahman og slipper å fødes på nytt. Det høyeste målet.",
+  "dharma":"Plikt, rett handling og orden. Hva som er riktig, avhenger av rollen og livssituasjonen din.",
+  "ahimsa":"Ikkevold – å ikke skade noe levende. Grunnen til at mange hinduer er vegetarianere.",
+  "bhakti":"Kjærlig hengivenhet til en gud. Den mest utbredte veien til moksha i dag.",
+  "puja":"Tilbedelse, hjemme eller i templet, med blomster, mat, røkelse, lys og bønner.",
+  "prasad":"Mat som er ofret til guden, velsignet og så delt ut til de troende.",
+  "murti":"Gudebilde eller statue. Mange hinduer mener guden er til stede i murtien.",
+  "darshan":"Å se – og bli sett av – guden, for eksempel i templet.",
+  "mandir":"Hindutempel.",
+  "avatar":"En gud (særlig Vishnu) som kommer ned til jorda i en skikkelse, som Rama eller Krishna.",
+  "trimurti":"De tre gudene Brahma (skaper), Vishnu (opprettholder) og Shiva (ødelegger og fornyer).",
+  "varna":"De fire samfunnsklassene i gamle hindutekster: brahminer, kshatriyaer, vaishyaer og shudraer.",
+  "jati":"Tusenvis av mindre grupper man fødes inn i, ofte knyttet til et yrke. Det vi i dagligtale kaller «kaste».",
+  "dalit":"Mennesker som ble regnet som utenfor kastesystemet («urørlige») og ble grovt diskriminert.",
+  "Om":"ॐ – hellig lyd og symbol som sies eller synges i bønner og mantraer.",
+  "Vedaene":"De eldste hellige tekstene i hinduismen, med hymner og ritualer. Overlevert muntlig i århundrer.",
+  "Upanishadene":"Filosofiske tekster om Brahman, atman, karma og gjenfødelse.",
+  "Bhagavadgita":"«Herrens sang». Samtalen mellom Krishna og prins Arjuna, en del av Mahabharata.",
+  "sadhu":"En hellig mann (eller kvinne) som har gitt avkall på eiendeler og familie for å søke moksha.",
+  "guru":"En åndelig lærer.",
+  "mantra":"Et hellig ord eller vers som gjentas i bønn eller meditasjon.",
+  "satyagraha":"«Sannhetskraft». Gandhis metode for ikkevoldelig motstand.",
+  "hijra":"Et tredje kjønn med lang historie i Sør-Asia.",
+  "Shakti":"Guddommelig, kvinnelig kraft. Også et navn på gudinnen.",
+  "samskara":"Livsrite, en seremoni ved viktige overganger i livet, som navngiving, bryllup og død.",
+  "sanatana dharma":"«Den evige orden/veien». Navnet mange hinduer selv bruker på religionen sin."
+};
+const T = (w,label)=>`<span class="term" data-t="${w}">${label||w}</span>`;
+
+/* ---------- Stasjoner ---------- */
+const S = [
+{ id:"hva-er", title:"Hva er hinduismen?", emo:"🕉️", c:"#8c2f39", words:"sanatana dharma · Om · 1,2 milliarder",
+  html:`
+<h3>En religion uten grunnlegger</h3>
+<p>Hinduismen har ingen grunnlegger og ingen bestemt startdato. Den har vokst fram i India over mer enn 3000 år. Mange hinduer kaller selv religionen sin ${T("sanatana dharma")}, som betyr «den evige orden» eller «den evige veien».</p>
+<h3>Hvor kommer navnet fra?</h3>
+<p>Ordet «hindu» kommer fra persisk og betydde opprinnelig folket som bodde ved elva <b>Indus</b> (på sanskrit: Sindhu). Senere brukte britiske koloniherrer ordet «hinduisme» som en samlebetegnelse på svært mange ulike tradisjoner i India.</p>
+<div class="think"><b>Tenk over:</b> Mange forskere sier at hinduismen er mer som en <i>familie</i> av tradisjoner enn én religion med felles regler. Hva tror du de mener med det?</div>
+<h3>Hvor mange, og hvor?</h3>
+<ul>
+<li>Rundt <b>1,2 milliarder</b> mennesker er hinduer. Det gjør hinduismen til verdens <b>tredje største</b> religion, etter kristendom og islam.</li>
+<li>Omtrent 8 av 10 i <b>India</b> er hinduer. Hinduismen er også flertallsreligion i <b>Nepal</b>.</li>
+<li>Det bor mange hinduer i blant annet Sri Lanka, Bangladesh, Mauritius, Indonesia (Bali), Storbritannia og USA.</li>
+<li>I <b>Norge</b> har mange hinduer tamilsk bakgrunn fra Sri Lanka eller bakgrunn fra India.</li>
+</ul>
+<h3>${T("Om")} – det hellige symbolet</h3>
+<div class="box" style="display:flex;gap:16px;align-items:center"><span class="om" style="font-size:64px;color:var(--saffron);line-height:1">ॐ</span><span>Om (eller Aum) er en hellig lyd og et symbol. Den sies eller synges i starten og slutten av bønner og ${T("mantra","mantraer")}. Mange mener den rommer hele universet.</span></div>`,
+  task:{type:"tf", title:"Sant eller usant?", items:[
+    ["Hinduismen ble grunnlagt av én profet.",false,"Hinduismen har ingen grunnlegger. Den har vokst fram gradvis over tusenvis av år."],
+    ["Ordet «hindu» har opprinnelig med en elv å gjøre.",true,"Riktig! Det kommer fra elva Indus (Sindhu)."],
+    ["Hinduismen er verdens nest største religion.",false,"Den er den tredje største, etter kristendom og islam."],
+    ["Alle hinduer tror og praktiserer på samme måte.",false,"Hinduismen er svært mangfoldig. Troen og skikkene varierer mye mellom regioner, retninger og familier."],
+    ["Mange hinduer kaller selv religionen sin sanatana dharma.",true,"Riktig! Det betyr «den evige orden/veien»."]
+  ]}
+},
+{ id:"historie", title:"Historien", emo:"⏳", c:"#b4561c", words:"Indusdalen · Vedaene · 1947",
+  html:`
+<p>Hinduismen har forandret seg mye gjennom historien. Her er de viktigste periodene:</p>
+<ul class="timeline">
+<li><b>ca. 2500 f.Kr. – Induskulturen</b>Store byer som Harappa og Mohenjo-daro. Arkeologer har funnet figurer og store bad som kan ha hatt religiøs betydning, men skriften deres er ikke tydet. Derfor vet vi lite sikkert.</li>
+<li><b>ca. 1500–500 f.Kr. – Vedisk tid</b>${T("Vedaene")} blir til og blir overlevert muntlig. Prester (brahminer) utførte offerritualer til guder som Agni (ilden) og Indra.</li>
+<li><b>ca. 800–200 f.Kr. – Upanishadene</b>Filosofiske tekster om ${T("Brahman")}, ${T("atman")}, karma og gjenfødelse. I samme periode oppstår buddhismen og jainismen.</li>
+<li><b>ca. 400 f.Kr.–400 e.Kr. – De store eposene</b>Mahabharata (med ${T("Bhagavadgita")}) og Ramayana tar form. Gudene Vishnu og Shiva blir viktigere.</li>
+<li><b>ca. 600–1700 – Bhakti-bevegelsen</b>${T("bhakti","Kjærlig hengivenhet")} til en personlig gud blir sentralt, med sanger og dikt på folkets eget språk.</li>
+<li><b>ca. 1200–1857 – Muslimske riker</b>Delhi-sultanatet og Mogulriket styrer store deler av India. Hinduer og muslimer lever side om side, med både samarbeid og konflikter.</li>
+<li><b>1858–1947 – Britisk kolonistyre</b>Britene beskriver og kritiserer hinduismen. Hinduiske reformbevegelser oppstår, og ideen om «hinduismen» som én religion vokser fram.</li>
+<li><b>1947 – Uavhengighet</b>India blir selvstendig og deles i India og Pakistan. Gandhi ledet den ikkevoldelige kampen, men ble drept i 1948 av en hindunasjonalist.</li>
+<li><b>I dag</b>Hinduismen er global, med templer over hele verden. Yoga og meditasjon er populært i Vesten, og forholdet mellom religion og politikk er omstridt i India.</li>
+</ul>
+<div class="think"><b>Tenk over:</b> Hvordan kan møtet med andre religioner og med kolonimakten ha påvirket hvordan hinduer forstår sin egen religion?</div>`,
+  task:{type:"order", title:"Sett i riktig rekkefølge", q:"Trykk på hendelsene i den rekkefølgen de skjedde (eldst først).", items:[
+    "Induskulturen blomstrer","Vedaene blir til","Upanishadene skrives","Mogulriket styrer India","Britisk kolonistyre","India blir selvstendig"
+  ]}
+},
+{ id:"guder", title:"Gud og gudene", emo:"🪷", c:"#c2410c", words:"Brahman · trimurti · Ganesha",
+  html:`
+<h3>${T("Brahman")} – den ene virkeligheten</h3>
+<p>Mange hinduer tror at alt som finnes, er en del av én guddommelig virkelighet: Brahman. Brahman har ingen form og er overalt og i alt, også i deg.</p>
+<h3>Mange guder – eller én?</h3>
+<p>Hinduismen har tusenvis av guder og gudinner. Mange hinduer ser på dem som ulike <b>ansikter eller sider ved Brahman</b>. Derfor passer verken «polyteisme» (tro på mange guder) eller «monoteisme» (tro på én gud) helt. Noen dyrker særlig én gud som den høyeste, for eksempel Vishnu eller Shiva.</p>
+<div class="think"><b>Tenk over:</b> Er det riktig å kalle hinduismen polyteistisk? Hvorfor, eller hvorfor ikke?</div>
+<h3>${T("trimurti")} – tre store guder</h3>
+<ul>
+<li><b>Brahma</b> – skaperen</li>
+<li><b>Vishnu</b> – opprettholderen, som bevarer verden</li>
+<li><b>Shiva</b> – ødeleggeren, som bryter ned det gamle slik at noe nytt kan skapes</li>
+</ul>
+<h3>Avatarer</h3>
+<p>Når verden trenger det, kommer Vishnu ned til jorda i en ny skikkelse, en ${T("avatar")}. De mest kjente er <b>Rama</b> (helten i Ramayana) og <b>Krishna</b> (i Bhagavadgita).</p>
+<h3>Gudinnene</h3>
+<ul>
+<li><b>Lakshmi</b> – rikdom og lykke</li>
+<li><b>Sarasvati</b> – kunnskap, kunst og musikk</li>
+<li><b>Durga</b> – krigergudinne som beseirer demoner</li>
+<li><b>Kali</b> – tid og forandring, ødelegger det onde</li>
+</ul>
+<p>Mange tilber den guddommelige moren, Devi, og hennes kraft, ${T("Shakti")}.</p>
+<h3>Gudenes familie</h3>
+<div class="box" style="font-size:15px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+<div><div style="text-align:center;font-weight:800">Shiva <span style="color:var(--saffron)">♥</span> Parvati</div>
+<div style="text-align:center;color:var(--muted)">│ barn</div>
+<div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap"><span class="chip" style="pointer-events:none">🐘 Ganesha</span><span class="chip" style="pointer-events:none">🦚 Murugan</span></div></div>
+<div><div style="text-align:center;font-weight:800">Vishnu <span style="color:var(--saffron)">♥</span> Lakshmi</div>
+<div style="text-align:center;color:var(--muted)">│ avatarer</div>
+<div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap"><span class="chip" style="pointer-events:none">🏹 Rama</span><span class="chip" style="pointer-events:none">🪈 Krishna</span></div></div>
+</div>
+<p style="margin:12px 0 0"><b>Parvati</b> er Shivas kone og mor til Ganesha og <b>Murugan</b>. Murugan er en krigergud som rir på en påfugl, og han er svært populær blant tamiler i Sør-India, på Sri Lanka og i Norge. <b>Lakshmi</b> er Vishnus kone. Når Vishnu kommer til jorda som Rama, er Lakshmi med ham som Sita.</p>
+</div>
+<h3>Ganesha 🐘</h3>
+<p>Gud med elefanthode, sønn av Shiva og Parvati. Han <b>fjerner hindringer</b>, og mange ber til ham før de starter på noe nytt, for eksempel en reise eller en eksamen.</p>`,
+  task:{type:"match", title:"Koble guden med rollen", pairs:[
+    ["Brahma","Skaperen"],["Vishnu","Opprettholderen"],["Shiva","Ødelegger og fornyer"],["Ganesha","Fjerner hindringer"],
+    ["Lakshmi","Vishnus kone, rikdom og lykke"],["Sarasvati","Kunnskap og musikk"],["Krishna","En avatar av Vishnu"],
+    ["Parvati","Shivas kone"],["Murugan","Krigergud, populær blant tamiler"]
+  ]}
+},
+{ id:"symboler", title:"Gudenes symboler", emo:"🔱", c:"#1e40af", words:"trefork · lotus · tredje øye",
+  html:`
+<p>Hindugudene blir avbildet med mange symboler. Hvert symbol forteller noe om hvem guden er og hva den gjør. Når du kan lese symbolene, kan du kjenne igjen gudene på bilder, statuer og i templer.</p>
+<h3>Vishnu – opprettholderen</h3>
+<ul>
+<li><b>Blå hud</b> – samme farge som himmelen og havet: noe uendelig som omfatter alt</li>
+<li><b>Fire armer</b> – makt over alle fire himmelretninger</li>
+<li><b>Konkylie</b> (sneglehus) 🐚 – lyden kaller til det gode og varsler seier over det onde</li>
+<li><b>Diskos</b> (kasteskive) – et våpen mot ondskap. Den kommer tilbake, som tidens kretsløp</li>
+<li><b>Klubbe</b> – kraft og makt</li>
+<li><b>Lotus</b> 🪷 – renhet. Lotusen vokser opp fra gjørme og blomstrer rent over vannet, slik sjelen kan reise seg fra samsara</li>
+</ul>
+<h3>Shiva – ødeleggeren og fornyeren</h3>
+<ul>
+<li><b>Det tredje øyet</b> i panna – innsikt og kunnskap. Det ødelegger ondskap og uvitenhet</li>
+<li><b>Halvmånen</b> i håret 🌙 – Shiva er herre over tiden</li>
+<li><b>Ganges</b> som renner fra håret 🌊 – Shiva tok imot den hellige elva fra himmelen, så den ikke skulle knuse jorda</li>
+<li><b>Slangen</b> rundt halsen 🐍 – Shiva har makt over farer og frykt</li>
+<li><b>Treforken</b> 🔱 – tre krefter: å skape, å opprettholde og å ødelegge</li>
+<li><b>Tigerskinnet</b> 🐅 – fryktløshet og kontroll over begjær</li>
+<li><b>Perlekjedet</b> 📿 – meditasjon og renhet</li>
+<li><b>Tromma</b> – rytmen som skaper verden</li>
+<li><b>Oksen Nandi</b> 🐂 – Shivas ridedyr. Statuer av Nandi står ofte foran Shiva-templer</li>
+</ul>
+<div class="think"><b>Tenk over:</b> Velg et symbol vi bruker i Norge (for eksempel et flagg, en logo eller et kors). Hva forteller symbolet, uten ord?</div>`,
+  task:{type:"flip", title:"Snukort: hva betyr symbolet?", q:"Gjett betydningen før du snur kortet.", cards:[
+    ["🔱 Treforken","Shiva: tre krefter – å skape, å opprettholde og å ødelegge."],
+    ["👁️ Det tredje øyet","Shiva: innsikt og kunnskap som ødelegger ondskap og uvitenhet."],
+    ["🌙 Halvmånen","Shiva er herre over tiden."],
+    ["🐍 Slangen","Shiva har makt over farer og frykt."],
+    ["🪷 Lotusen","Vishnu: renhet – vokser fra gjørme og blomstrer rent."],
+    ["🐚 Konkylien","Vishnu: kaller til det gode og varsler seier over det onde."],
+    ["🔵 Blå hud","Vishnu: som himmel og hav – noe uendelig."],
+    ["🐂 Nandi","Oksen som er Shivas ridedyr."]
+  ]}
+},
+{ id:"samsara", title:"Livets kretsløp", emo:"🔄", c:"#1d6f6a", words:"atman · karma · moksha",
+  html:`
+<div class="box" style="text-align:center">
+<svg viewBox="0 0 300 180" width="100%" style="max-width:340px" aria-label="Samsara-kretsløpet">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#1d6f6a"/></marker></defs>
+<ellipse cx="150" cy="90" rx="105" ry="62" fill="none" stroke="#1d6f6a" stroke-width="3" stroke-dasharray="8 6"/>
+<path d="M245 68 A105 62 0 0 1 250 100" fill="none" stroke="#1d6f6a" stroke-width="3" marker-end="url(#ar)"/>
+<path d="M55 112 A105 62 0 0 1 50 80" fill="none" stroke="#1d6f6a" stroke-width="3" marker-end="url(#ar)"/>
+<text x="150" y="22" text-anchor="middle" font-size="15" font-weight="800" fill="#2b1d17">fødsel</text>
+<text x="272" y="94" text-anchor="middle" font-size="15" font-weight="800" fill="#2b1d17">liv</text>
+<text x="150" y="172" text-anchor="middle" font-size="15" font-weight="800" fill="#2b1d17">død</text>
+<text x="22" y="94" text-anchor="middle" font-size="14" font-weight="800" fill="#2b1d17">ny</text>
+<text x="150" y="86" text-anchor="middle" font-size="18" font-weight="800" fill="#1d6f6a">SAMSARA</text>
+<text x="150" y="106" text-anchor="middle" font-size="12" fill="#6d5a4e">karma styrer neste liv</text>
+</svg>
+<div style="font-size:15px;color:var(--muted)">Målet er å komme <b>ut</b> av kretsløpet: moksha</div>
+</div>
+<h3>${T("atman")} – sjelen</h3>
+<p>I hvert levende vesen finnes et evig selv, atman. Kroppen dør, men atman lever videre.</p>
+<h3>${T("samsara")} – gjenfødelse</h3>
+<p>Atman fødes på nytt igjen og igjen, som menneske, dyr eller andre vesener. Dette kretsløpet kalles samsara.</p>
+<h3>${T("karma")} – handling og følger</h3>
+<p>Alle handlinger får følger. Gode handlinger gir gode følger, og dårlige handlinger gir dårlige. Karma er ikke straff fra en gud. Det er en lov om <b>årsak og virkning</b>, og den påvirker også hvordan du blir født i neste liv.</p>
+<h3>${T("moksha")} – frigjøring</h3>
+<p>Det høyeste målet er å bli fri fra samsara. Da forstår atman at den er ett med Brahman, og trenger ikke å fødes på nytt.</p>
+<h3>${T("dharma")} – plikt og rett handling</h3>
+<p>Å leve etter dharma betyr å gjøre det som er riktig ut fra rollen din: som barn, forelder, elev eller arbeider.</p>
+<h3>Tre veier til frelse (moksha)</h3>
+<ul>
+<li><b>Handlingens vei</b> (karma) – å gjøre det som er rett: følge ritualer og leveregler i hverdagen. Tradisjonelt viktig for prester og de høyere samfunnsklassene.</li>
+<li><b>Erkjennelsens vei</b> (jnana) – å erkjenne det guddommelige gjennom meditasjon og yoga. Viktig for asketer.</li>
+<li><b>Kjærlighetens vei</b> (${T("bhakti")}) – å tilbe en gud med kjærlighet, med bønn, lovsanger og puja, og få et personlig forhold til guden. Åpen for alle, og den mest utbredte veien i dag.</li>
+</ul>
+<p>Man trenger ikke velge bare én vei. Mange hinduer blander og tar litt fra hver av dem.</p>
+<h3>Fire livsmål</h3>
+<p><b>Dharma</b> (plikt), <b>artha</b> (velstand), <b>kama</b> (glede og kjærlighet) og <b>moksha</b> (frigjøring). Et godt liv har plass til alle fire.</p>
+<div class="think"><b>Tenk over:</b> Hvordan kan troen på karma påvirke hvordan en person behandler andre mennesker og dyr?</div>
+<h3>Verden er evig – et syklisk syn på tiden</h3>
+<p>Ikke bare livet, men også <b>hele verden</b> går i sirkel. Verden blir skapt, opprettholdt og ødelagt, og så skapt på nytt, om og om igjen i all evighet. Det passer med de tre store gudene: Brahma skaper, Vishnu opprettholder og Shiva ødelegger.</p>
+<p>Hver runde deles i <b>fire tidsaldre</b> (yugaer). Den første er perfekt, og så blir verden svakere og verre for hver tidsalder. Mange hinduer mener at vi lever i den siste og verste, <b>kali yuga</b>. De fire tidsaldrene varer til sammen 4,32 millioner år.</p>
+<p>Døden og verdens undergang er derfor ikke en slutt, men begynnelsen på noe nytt. <b>Syklisk</b> betyr at noe går i sirkel og gjentar seg.</p>
+<div class="think"><b>Sammenlign:</b> I jødedom, kristendom og islam er tiden <b>lineær</b>: den har en begynnelse (skapelsen) og en slutt (dommedag). Tegn de to tidssynene som en sirkel og en pil. Hva betyr forskjellen for hvordan man ser på døden?</div>`,
+  task:{type:"flip", title:"Snukort: test deg selv", q:"Forklar ordet for deg selv før du snur kortet.", cards:[
+    ["Atman",GLOSS.atman],["Samsara",GLOSS.samsara],["Karma",GLOSS.karma],["Moksha",GLOSS.moksha],["Dharma",GLOSS.dharma],["Bhakti",GLOSS.bhakti]
+  ]},
+  extra:{type:"tf", title:"Sant eller usant? Verden er evig", items:[
+    ["Hinduer tror at verden har én begynnelse og én slutt.",false,"I hinduismen går verden i sirkel: den skapes, ødelegges og skapes på nytt i all evighet."],
+    ["Mange hinduer mener vi lever i kali yuga, den verste tidsalderen.",true,"Riktig! Etter kali yuga ødelegges verden og skapes på nytt."],
+    ["«Syklisk» betyr at noe går i sirkel og gjentar seg.",true,"Riktig!"],
+    ["I kristendommen er tiden også syklisk.",false,"I kristendom, jødedom og islam er tiden lineær – med en begynnelse og en slutt."]
+  ]}
+},
+{ id:"skrifter", title:"Hellige skrifter", emo:"📜", c:"#7a4b1f", words:"Vedaene · Ramayana · Bhagavadgita",
+  html:`
+<p>Hinduismen har ikke én hellig bok, slik kristendommen har Bibelen og islam har Koranen. Den har mange tekster, de fleste på det gamle språket <b>sanskrit</b>. De ble overlevert muntlig i hundrevis av år før noen skrev dem ned.</p>
+<h3>Shruti – «det som er hørt»</h3>
+<p>De aller helligste tekstene, som mange mener ble åpenbart for vise menn (rishier):</p>
+<ul><li>${T("Vedaene")} – de eldste tekstene, med hymner og ritualer. Den eldste er Rigveda.</li>
+<li>${T("Upanishadene")} – filosofi om Brahman, atman og moksha.</li></ul>
+<h3>Smriti – «det som er husket»</h3>
+<p>Fortellinger og tekster som er laget av mennesker, men som er svært viktige i hverdagen:</p>
+<ul><li><b>Mahabharata</b> – et enormt epos om en krig mellom to grener av samme familie</li>
+<li><b>Ramayana</b> – fortellingen om Rama og Sita</li>
+<li><b>Puranaene</b> – fortellinger om gudene</li></ul>
+<h3>${T("Bhagavadgita")}</h3>
+<p>Bhagavadgita er en del av Mahabharata. Prins <b>Arjuna</b> står på slagmarken og vil ikke kjempe mot sin egen familie. Vognføreren hans, <b>Krishna</b>, viser seg å være Gud. Han lærer Arjuna om plikt (dharma), om at atman ikke kan dø, og om veiene til moksha. Det er kanskje den mest leste hinduteksten i dag.</p>
+<div class="box"><b>📖 Ramayana kort fortalt</b><br>Prins Rama blir sendt i eksil i skogen sammen med kona Sita og broren Lakshmana. Demonkongen Ravana kidnapper Sita og tar henne med til øya Lanka. Med hjelp fra apeguden <b>Hanuman</b> og en hær av aper redder Rama henne. Da Rama kommer hjem, tenner folket lys for å ønske ham velkommen. Dette minnes på <b>Diwali</b>.</div>
+<div class="think"><b>Tenk over:</b> Krishna sier til Arjuna at han må gjøre plikten sin, selv om det er vanskelig. Har du vært i en situasjon der plikt og følelser trakk i hver sin retning?</div>`,
+  task:{type:"match", title:"Koble teksten med beskrivelsen", pairs:[
+    ["Vedaene","De eldste tekstene, med hymner og ritualer"],["Upanishadene","Filosofi om Brahman og atman"],
+    ["Bhagavadgita","Samtalen mellom Krishna og Arjuna"],["Ramayana","Fortellingen om Rama og Sita"],
+    ["Mahabharata","Stort epos om en krig i en familie"]
+  ]}
+},
+{ id:"praksis", title:"Tro i praksis", emo:"🛕", c:"#a2361f", words:"puja · mandir · Ganges",
+  html:`
+<h3>${T("puja")} (pudsja) – tilbedelse</h3>
+<p>Mange hinduer har et lite <b>husalter</b> hjemme, der de ber hver dag. De ofrer blomster, frukt, røkelse og vann. I <b>arati</b> sirkler man en liten flamme foran gudebildet. Maten som er ofret, blir velsignet og delt ut som ${T("prasad")}.</p>
+<h3>${T("murti")} og ${T("darshan")}</h3>
+<p>En murti er et gudebilde eller en statue. Mange mener at guden er til stede i murtien. Å se guden og bli sett av guden kalles darshan.</p>
+<h3>${T("mandir")} – templet er gudenes palass</h3>
+<p>Templet er et hjem for gudene. Man tar av seg skoene før man går inn, og mange ringer i en <b>bjelle</b> for å hilse på guden.</p>
+<div class="box"><b>🛕 Templets arkitektur</b>
+<ul style="margin-top:6px">
+<li><b>Plassering:</b> gjerne nær vann, fordi vann er et symbol på liv</li>
+<li><b>Firkantet form:</b> symbol på de fire himmelretningene</li>
+<li><b>Tårnet:</b> forestiller en fjelltopp, der gudene bor</li>
+<li><b>Det innerste rommet:</b> mørkt og lite, som en hule. Det symboliserer verdens midtpunkt. Her bor hovedguden, og bare prestene får gå inn</li>
+</ul></div>
+<p><b>Hva kan du se og høre i templet?</b> Gudefigurer, blomster, røkelse, altere, ofringer, sterke farger og veggmalerier. Du hører mantraer, musikk og bjeller.</p>
+<p><b>Prestene</b> er gudenes trofaste tjenere. De vasker, kler på og «mater» gudefigurene og leder puja. Det finnes ingen fast «gudstjeneste» som alle må gå på. Folk kommer når de vil, særlig på høytider.</p>
+<h3>Pilegrimsreiser</h3>
+<p><b>Ganges</b> er en hellig elv. Mange reiser til byen <b>Varanasi</b> for å bade i elva, fordi de mener vannet renser bort dårlig karma. Pilegrimsfesten <b>Kumbh Mela</b> regnes som en av de største samlingene av mennesker i verden.</p>
+<h3>Livsriter – ${T("samskara","samskaraer")}</h3>
+<ul>
+<li><b>Navngiving</b> av den nyfødte</li>
+<li><b>Den hellige snoren</b> – i noen grupper får gutter en snor som tegn på at de begynner å lære de hellige tekstene</li>
+<li><b>Bryllup</b> – brudeparet går <b>sju skritt</b> rundt den hellige ilden og lover hverandre troskap</li>
+<li><b>Død</b> – den døde blir <b>kremert</b> (brent), og asken blir ofte strødd i en hellig elv</li>
+</ul>
+<h3>Mat og ${T("ahimsa")}</h3>
+<p>Mange hinduer er vegetarianere fordi de ikke vil skade levende vesener. <b>Kua</b> regnes som hellig, og de fleste hinduer spiser ikke storfekjøtt.</p>`,
+  task:{type:"tf", title:"Sant eller usant?", items:[
+    ["Man beholder skoene på inne i et hindutempel.",false,"Man tar av seg skoene før man går inn i templet."],
+    ["Prasad er mat som er ofret til guden og så delt ut.",true,"Riktig! Maten regnes som velsignet."],
+    ["Hinduer begraver vanligvis sine døde.",false,"De fleste hinduer kremerer sine døde, og asken strøs ofte i en hellig elv."],
+    ["Ganges regnes som en hellig elv.",true,"Riktig! Mange drar til Varanasi for å bade i elva."],
+    ["Puja kan bare gjøres i et tempel.",false,"Puja gjøres like gjerne hjemme ved husalteret."],
+    ["I et hindubryllup går brudeparet sju skritt rundt ilden.",true,"Riktig! De sju skrittene er et viktig løfte."]
+  ]}
+},
+{ id:"hoytider", title:"Høytider", emo:"🪔", c:"#d97706", words:"Diwali · Holi · Navaratri",
+  html:`
+<h3>🪔 Diwali (divali) – lysfesten</h3>
+<p>Den mest kjente høytiden, om høsten (oktober/november). Folk tenner små oljelamper (diyaer), pynter hjemmet, gir hverandre søtsaker og kler seg i nye klær. Diwali minner om at <b>Rama kom hjem</b> etter å ha beseiret Ravana. Mange ber også til <b>Lakshmi</b>. Budskapet er at lyset seirer over mørket og det gode over det onde. Diwali feires også i Norge.</p>
+<h3>🎨 Holi – fargefesten</h3>
+<p>Feires om våren (mars). Folk kaster farget pulver og vann på hverandre, og for en dag blir skillene mellom rik og fattig, ung og gammel visket ut. Kvelden før tenner man bål til minne om at den gode gutten Prahlad overlevde, mens den onde Holika brant.</p>
+<h3>💃 Navaratri</h3>
+<p>«Ni netter» for gudinnen <b>Durga</b>, som beseirer demonen Mahishasura. Mange steder danser man tradisjonelle danser hele natta.</p>
+<h3>🐘 Ganesh Chaturthi</h3>
+<p>Ganeshas fødselsdag. Store Ganesha-statuer bæres i prosesjon og senkes til slutt i vann.</p>
+<h3>🌾 Thai Pongal</h3>
+<p>En tamilsk høstfest i januar, der man takker sola for avlingen. Feires av mange tamiler, også i Norge. Man koker søt ris til den koker over, som et tegn på overflod.</p>
+<div class="think"><b>Tenk over:</b> Diwali og jula har begge mye lys. Hva er likt og hva er ulikt med de to høytidene?</div>`,
+  task:{type:"match", title:"Koble høytiden med beskrivelsen", pairs:[
+    ["Diwali","Lysfest som minner om Ramas hjemkomst"],["Holi","Fargefest om våren"],["Navaratri","Ni netter for gudinnen Durga"],
+    ["Ganesh Chaturthi","Fødselsdagen til guden med elefanthode"],["Thai Pongal","Tamilsk høstfest i januar"]
+  ]}
+},
+{ id:"etikk", title:"Leveregler og kaste", emo:"⚖️", c:"#3b3a78", words:"dharma · varna · Gandhi",
+  html:`
+<h3>Leveregler</h3>
+<p>Hinduismen har ingen felles liste med bud, slik som de ti bud. Det viktigste er å leve etter ${T("dharma")}: å gjøre plikten sin ut fra hvem man er, hvor gammel man er og hvilken rolle man har. Noen leveregler gjelder likevel for nesten alle:</p>
+<ul>
+<li><b>Ikke skade levende vesener</b> (${T("ahimsa")}) – derfor er mange vegetarianere, og kua er hellig</li>
+<li><b>Være sannferdig</b> og ikke stjele</li>
+<li><b>Respektere foreldre, eldre og lærere</b></li>
+<li><b>Renhet</b> – vaske seg før puja, ta av sko i templet og holde huset rent</li>
+<li><b>Gavmildhet</b> – gi til fattige og til templet</li>
+<li><b>Selvkontroll</b> – for eksempel å faste på bestemte dager</li>
+</ul>
+<h3>Fire livsfaser</h3>
+<p>Gamle tekster deler livet inn i fire faser, med ulike plikter. Tradisjonelt gjaldt dette særlig menn i de høyere samfunnsklassene.</p>
+<ul>
+<li><b>Elev</b> – lære av en guru</li>
+<li><b>Husholder</b> – gifte seg, arbeide og ta vare på familien</li>
+<li><b>Skogboer</b> – trekke seg tilbake og ha mer tid til det åndelige</li>
+<li><b>Asket</b> (sannyasin) – gi avkall på alt og søke moksha</li>
+</ul>
+<h3>${T("varna")} – fire samfunnsklasser</h3>
+<p>Gamle hindutekster deler samfunnet inn i fire grupper:</p>
+<ul><li><b>Brahminer</b> – prester og lærde</li><li><b>Kshatriyaer</b> – krigere og herskere</li><li><b>Vaishyaer</b> – handelsfolk og bønder</li><li><b>Shudraer</b> – tjenere og arbeidere</li></ul>
+<h3>${T("jati")} – kaster i praksis</h3>
+<p>I praksis har det vært tusenvis av mindre grupper, ofte knyttet til et yrke. Man ble født inn i gruppen sin og giftet seg som regel innenfor den. Det er dette vi i dagligtale kaller kastesystemet.</p>
+<h3>${T("dalit","Dalitene")}</h3>
+<p>Noen grupper ble regnet som «urørlige» og ble grovt diskriminert. Indias grunnlov fra 1950 <b>forbyr urørlighet og kastediskriminering</b>, og dalitter har reserverte plasser i utdanning og offentlige jobber. Arbeidet med grunnloven ble ledet av <b>B.R. Ambedkar</b>, som selv var dalit. Likevel finnes det fortsatt diskriminering i dag.</p>
+<div class="think"><b>To syn:</b> Mange hinduer mener kastesystemet er en sosial skikk som ikke hører til religionen. Andre mener det har en religiøs begrunnelse i gamle tekster. Hva mener du?</div>
+<h3>${T("ahimsa")} – ikkevold</h3>
+<p>Ahimsa betyr å ikke skade noe levende. Det er en av de viktigste etiske ideene i hinduismen.</p>
+<h3>Mahatma Gandhi (1869–1948)</h3>
+<p>Gandhi brukte ahimsa i kampen for Indias frihet fra Storbritannia. Metoden hans kalte han ${T("satyagraha")}, eller «sannhetskraft»: ikkevoldelig motstand, streiker og fredelige marsjer, som den berømte <b>Saltmarsjen</b> i 1930. Gandhi inspirerte senere blant andre Martin Luther King.</p>
+<p>Gandhi kjempet mot diskrimineringen av «urørlige», men Ambedkar mente at Gandhi ikke gikk langt nok, fordi han ikke ville avskaffe hele kastesystemet.</p>`,
+  task:{type:"reflect", title:"Refleksjon", prompts:[
+    "Gandhi mente at ikkevold er sterkere enn vold. Er du enig? Gi gjerne et eksempel fra i dag.",
+    "Hvorfor tror du kastediskriminering fortsatt finnes, selv om den er forbudt ved lov?",
+    "Hvordan kan troen på karma brukes både til å forklare og til å utfordre urettferdighet?"
+  ]}
+},
+{ id:"kjonn", title:"Kjønn og samliv", emo:"💞", c:"#9d174d", words:"Shakti · ekteskap · tredje kjønn",
+  html:`
+<h3>Gudinner og kvinner</h3>
+<p>Hinduismen har mange mektige gudinner, og ${T("Shakti")}, den guddommelige kvinnelige kraften, er sentral. Samtidig har samfunnet tradisjonelt vært <b>patriarkalsk</b>: mannen var familiens overhode, og det var ofte sønnene som arvet og utførte ritualene når foreldrene døde.</p>
+<p>I dag tar mange kvinner høyere utdanning og har lederroller, og mange hinduer arbeider for likestilling. India fikk en kvinnelig statsminister, Indira Gandhi, allerede i 1966.</p>
+<h3>Ekteskap</h3>
+<p>Å gifte seg og stifte familie har tradisjonelt vært en viktig plikt. <b>Arrangerte ekteskap</b> er vanlige: familien foreslår en partner, men begge skal si ja. Det er noe annet enn <b>tvangsekteskap</b>, som er ulovlig. Ekteskap der folk finner hverandre selv, blir stadig vanligere.</p>
+<h3>Mer enn to kjønn</h3>
+<p>Guden Shiva blir noen ganger fremstilt som <b>Ardhanarishvara</b>: halvt mann og halvt kvinne (Shiva og Parvati i én kropp). I Sør-Asia finnes også ${T("hijra","hijraer")}, et tredje kjønn med lang historie. Indias høyesterett anerkjente et juridisk «tredje kjønn» i 2014.</p>
+<h3>Ulike syn i dag</h3>
+<p>Kama, glede og kjærlighet, er ett av de fire livsmålene. Homofili var forbudt i India etter en britisk kolonilov fra 1861, helt til høyesterett opphevet forbudet i 2018. I dag har hinduer svært ulike syn på kjønnsroller og seksualitet, fra tradisjonelle til liberale.</p>
+<div class="think"><b>Tenk over:</b> Hvorfor kan en religion ha sterke gudinner og samtidig et samfunn der kvinner har hatt mindre makt enn menn?</div>`,
+  task:{type:"tf", title:"Sant eller usant?", items:[
+    ["I hinduismen finnes det bare mannlige guder.",false,"Det finnes mange mektige gudinner, som Durga, Lakshmi, Sarasvati og Kali."],
+    ["Arrangert ekteskap betyr det samme som tvangsekteskap.",false,"I et arrangert ekteskap foreslår familien en partner, men begge skal si ja. Tvangsekteskap er ulovlig."],
+    ["Indias høyesterett anerkjente et tredje kjønn i 2014.",true,"Riktig!"],
+    ["Kama (glede og kjærlighet) er ett av de fire livsmålene.",true,"Riktig! De fire er dharma, artha, kama og moksha."]
+  ]}
+},
+{ id:"mangfold", title:"Mangfold og retninger", emo:"🌈", c:"#0f766e", words:"Vishnu · Shiva · Hare Krishna",
+  html:`
+<h3>Tre store retninger</h3>
+<ul>
+<li><b>Vaishnavisme</b> – tilber Vishnu og avatarene hans, særlig Krishna og Rama. Den største retningen, sterkest i Nord- og Midt-India.</li>
+<li><b>Shaivisme</b> – tilber Shiva som familiefar og asket, sammen med Parvati, Ganesha og Murugan. Nest størst, og sterkest i Sør-India og blant tamiler på Sri Lanka – og derfor også blant mange hinduer i Norge.</li>
+<li><b>Shaktisme</b> – tilber gudinnen (Devi/Shakti) gjennom gudinner som Durga og Parvati. Mange mener de mannlige gudene bare blir aktive gjennom Shakti. Sterkest i nordøst, blant annet i Bengal.</li>
+</ul>
+<p>I tillegg er det store forskjeller mellom nord og sør, mellom by og landsby og mellom familier, med ulike guder, språk og høytider.</p>
+<h3>Hellige personer</h3>
+<p>En ${T("guru")} er en åndelig lærer. En ${T("sadhu")} er en hellig person som har gitt avkall på eiendeler og familie for å søke moksha.</p>
+<h3>Hinduisme utenfor India</h3>
+<ul>
+<li><b>Hare Krishna</b> (ISKCON) ble grunnlagt i New York i 1966. Tilhengerne synger mantraet «Hare Krishna» og tilber Krishna.</li>
+<li><b>Yoga</b> var opprinnelig en åndelig vei mot moksha. I Vesten er yoga ofte bare trening og avslapning, uten religion.</li>
+</ul>
+<div class="think"><b>Diskuter:</b> Er yoga på treningssenteret religion? Hva hvis timen starter med «Om»?</div>
+<h3>Religion og politikk</h3>
+<p><b>Hindunasjonalisme</b> (hindutva) er en politisk retning som mener at India først og fremst er en hindunasjon. Tilhengerne mener den styrker indisk kultur og identitet. Kritikerne mener den skaper konflikt med muslimer, kristne og andre minoriteter. Dette er et omstridt tema i India i dag.</p>`,
+  task:{type:"match", title:"Koble begrepene", pairs:[
+    ["Vaishnavisme","Tilber Vishnu og avatarene hans"],["Shaivisme","Tilber Shiva"],["Shaktisme","Tilber gudinnen som den høyeste"],
+    ["Hare Krishna","Bevegelse grunnlagt i New York i 1966"],["Sadhu","Hellig person som har gitt avkall på alt"]
+  ]}
+},
+{ id:"norge", title:"Norge, medier og kilder", emo:"📱", c:"#4d7c0f", words:"tamiler · Bollywood · kildekritikk",
+  html:`
+<h3>Hinduer i Norge</h3>
+<p>Mange hinduer i Norge har <b>tamilsk</b> bakgrunn. De kom som flyktninger fra borgerkrigen på Sri Lanka (1983–2009). Andre har bakgrunn fra India. Det finnes hindutempler i Oslo og flere andre byer, og høytider som Diwali og Thai Pongal feires også her.</p>
+<h3>Hinduismen i språk og populærkultur</h3>
+<ul>
+<li>Ord fra sanskrit vi bruker på norsk: <b>karma</b>, <b>guru</b>, <b>mantra</b>, <b>yoga</b> og <b>avatar</b> (figuren som representerer deg i et spill!).</li>
+<li><b>Bollywood</b>, filmindustrien i Mumbai, bruker ofte hinduiske fortellinger, høytider og bryllup.</li>
+<li><b>Holi-inspirerte fargefester</b> og yoga-retreater er populære i Vesten, ofte uten den religiøse betydningen.</li>
+</ul>
+<div class="think"><b>Tenk over:</b> Når vi sier «det er karma» på norsk, mener vi det samme som en hindu gjør? Hva blir borte?</div>
+<h3>Kildekritikk: innenfra og utenfra</h3>
+<p>Et <b>innenfraperspektiv</b> er hvordan en troende selv beskriver religionen sin. Et <b>utenfraperspektiv</b> er hvordan forskere, journalister eller andre beskriver den. Vi trenger begge. Husk også at hinduismen er så mangfoldig at én hindu aldri kan snakke for alle hinduer.</p>`,
+  task:{type:"match", title:"Hva slags kilde er dette?", q:"Velg hvilket perspektiv eller hvilken type kilde som passer best.", pairs:[
+    ["En hindu-ungdom i Oslo forteller om Diwali på TikTok","Innenfra, personlig"],
+    ["Store norske leksikon","Utenfra, faglig"],
+    ["En Bollywood-film","Underholdning – kan forenkle"],
+    ["En reiseblogg fra Varanasi","Utenfra, personlig"],
+    ["Et nettsted drevet av et hindutempel","Innenfra, fra et trossamfunn"]
+  ]},
+  extra:{type:"reflect", title:"Skriv", prompts:["Du skal forklare hva Diwali betyr for hinduer. Hvilke to kilder ville du brukt, og hvorfor?"]}
+},
+{ id:"quiz", title:"Sluttquiz", emo:"🏆", c:"#8c2f39", words:"Hvor mye har du lært?",
+  html:`<p>Nå er det tid for å teste hva du har lært! Quizen har 15 spørsmål. Du ser forklaringen etter hvert svar.</p>`,
+  task:{type:"quiz", qs:[
+    {q:"Hva kaller mange hinduer selv religionen sin?",o:["Sanatana dharma","Bhagavadgita","Samsara","Trimurti"],a:0,w:"Sanatana dharma betyr «den evige orden/veien»."},
+    {q:"Hva er atman?",o:["Et tempel","Sjelen eller det evige selvet","En høytid","En kaste"],a:1,w:"Atman er det evige selvet i hvert levende vesen."},
+    {q:"Hva betyr moksha?",o:["Gjenfødelse","Tilbedelse","Frigjøring fra gjenfødelsens kretsløp","Plikt"],a:2,w:"Moksha er det høyeste målet: frihet fra samsara."},
+    {q:"Hvilken gud kalles opprettholderen?",o:["Brahma","Shiva","Ganesha","Vishnu"],a:3,w:"Vishnu opprettholder verden og kommer til jorda som avatarer."},
+    {q:"Hvem er Krishna?",o:["En avatar av Vishnu","Grunnleggeren av hinduismen","En demonkonge","En tempelprest"],a:0,w:"Krishna er en av Vishnus avatarer, og han er læreren i Bhagavadgita."},
+    {q:"Hva handler Ramayana om?",o:["Krishna og Arjuna på slagmarken","Rama som redder Sita fra Ravana","Gandhis liv","Skapelsen av verden"],a:1,w:"Ramayana forteller om Rama, Sita, Ravana og Hanuman."},
+    {q:"Hvilken høytid er lysfesten?",o:["Holi","Navaratri","Diwali","Thai Pongal"],a:2,w:"Diwali er lysfesten om høsten."},
+    {q:"Hva er karma?",o:["Straff fra gudene","En hellig elv","Et gudebilde","Loven om at handlinger får følger"],a:3,w:"Karma er en lov om årsak og virkning, ikke en straff fra en gud."},
+    {q:"Hva gjør de fleste hinduer med sine døde?",o:["Kremerer dem","Begraver dem i jord","Legger dem i et tempel","Senker dem i havet"],a:0,w:"De fleste kremerer, og asken strøs ofte i en hellig elv."},
+    {q:"Hva betyr ahimsa?",o:["Hengivenhet","Ikkevold","Kunnskap","Velstand"],a:1,w:"Ahimsa betyr å ikke skade noe levende. Gandhi bygde kampen sin på det."},
+    {q:"Hvem ledet arbeidet med Indias grunnlov og var selv dalit?",o:["Mahatma Gandhi","Indira Gandhi","B.R. Ambedkar","Krishna"],a:2,w:"B.R. Ambedkar kjempet mot kastediskriminering."},
+    {q:"Hva mener hinduer med at «verden er evig»?",o:["At verden aldri forandrer seg","At verden skapes, ødelegges og skapes på nytt i en evig sirkel","At verden ble skapt for 6000 år siden","At verden skal ende på dommedag"],a:1,w:"Hinduismen har et syklisk syn på tiden: alt går i sirkel."},
+    {q:"Hva symboliserer tårnet på et hindutempel?",o:["En fjelltopp der gudene bor","Et skip","Et tre","Himmelretningene"],a:0,w:"Tårnet forestiller et fjell. Den firkantede formen er de fire himmelretningene."},
+    {q:"Hvilken gud har det tredje øyet, halvmånen og treforken som symboler?",o:["Vishnu","Brahma","Shiva","Ganesha"],a:2,w:"Det er Shiva. Det tredje øyet står for innsikt som ødelegger ondskap."},
+    {q:"Hvorfor passer ordet «polyteisme» dårlig på hinduismen?",o:["Fordi hinduer bare har én gud","Fordi hinduer ikke tror på guder","Fordi gudene er fra Persia","Fordi mange ser gudene som sider ved én guddom, Brahman"],a:3,w:"Mange hinduer forstår de mange gudene som ansikter av den ene virkeligheten, Brahman."}
+  ]}
+}
+];
+
+/* ---------- Lagring ---------- */
+const store = {
+  get(k,d){ try{ const v=localStorage.getItem("hindu_"+k); return v==null?d:JSON.parse(v);}catch(e){return d;} },
+  set(k,v){ try{ localStorage.setItem("hindu_"+k,JSON.stringify(v)); }catch(e){} }
+};
+let visited = new Set(store.get("visited",[]));
+
+/* ---------- Verden ---------- */
+const W=2400,H=1500, world=document.getElementById("world"), vp=document.getElementById("viewport");
+const N=S.length;
+S.forEach((s,i)=>{
+  const ang = (-90 + i*(360/N)) * Math.PI/180;
+  s.x = 1200 + 960*Math.cos(ang);
+  s.y = 750 + 570*Math.sin(ang);
+});
+// sti
+(function(){
+  const svg=document.getElementById("paths");
+  let d="M"+S.map(s=>s.x.toFixed(0)+" "+s.y.toFixed(0)).join(" L");
+  svg.innerHTML=`<path d="${d}" fill="none" stroke="#d9b98a" stroke-width="6" stroke-dasharray="4 18" stroke-linecap="round"/>`;
+  // mandala
+  const m=document.getElementById("mandala"); let g="";
+  for(let r=0;r<3;r++){ const n=[12,18,24][r], R=[230,320,410][r];
+    for(let k=0;k<n;k++){ const a=k*360/n; g+=`<ellipse cx="0" cy="${-R}" rx="${18+r*6}" ry="${48+r*10}" transform="rotate(${a})" fill="none" stroke="${["#e07a1f","#8c2f39","#f2b33d"][r]}" stroke-width="2" opacity=".55"/>`; } }
+  g+=`<circle r="200" fill="none" stroke="#e07a1f" stroke-width="2" opacity=".5"/><circle r="440" fill="none" stroke="#8c2f39" stroke-width="1.5" opacity=".4"/>`;
+  m.innerHTML=g;
+})();
+S.forEach((s,i)=>{
+  const b=document.createElement("button");
+  b.className="station"; b.id="st-"+s.id; b.style.left=s.x+"px"; b.style.top=s.y+"px"; b.style.setProperty("--c",s.c);
+  b.innerHTML=`<span class="num">${i+1}</span><span class="done">✓</span><span class="emo">${s.emo}</span><span class="t">${s.title}</span><span class="words">${s.words}</span>`;
+  b.setAttribute("aria-label",`Stasjon ${i+1}: ${s.title}`);
+  b.onclick=()=>openStation(i);
+  world.appendChild(b);
+});
+
+let cur=-1;
+function panelOpen(){return document.getElementById("panel").classList.contains("open");}
+function setView(x,y,s,leftShift){
+  const vw=vp.clientWidth, vh=vp.clientHeight;
+  const cx=(leftShift?leftShift:vw)/2, cy=vh/2;
+  world.style.transform=`translate(${cx-x*s}px,${cy-y*s}px) scale(${s})`;
+}
+function overview(){
+  const vw=vp.clientWidth, vh=vp.clientHeight;
+  const s=Math.min(vw/(W-60),vh/(H-40));
+  setView(W/2,H/2,s);
+}
+function zoomTo(i){
+  const vw=vp.clientWidth, vh=vp.clientHeight;
+  const panelW=document.getElementById("panel").offsetWidth;
+  const wide = vw>820;
+  const areaW = wide ? vw-panelW : vw;
+  const s = Math.max(0.5, Math.min(areaW,vh)*0.6/330);
+  setView(S[i].x, S[i].y+20, s, areaW);
+}
+
+/* ---------- Panel ---------- */
+const panel=document.getElementById("panel"), body=document.getElementById("panelBody");
+function openStation(i){
+  cur=i; const s=S[i];
+  zoomTo(i);
+  panel.style.setProperty("--c",s.c);
+  document.getElementById("panelHead").style.background=s.c;
+  document.getElementById("pEmo").textContent=s.emo;
+  document.getElementById("pNum").textContent=`Stasjon ${i+1} av ${N}`;
+  document.getElementById("pTitle").textContent=s.title;
+  body.innerHTML=s.html; body.scrollTop=0;
+  if(s.task) body.appendChild(renderTask(s.task,s.id));
+  if(s.extra) body.appendChild(renderTask(s.extra,s.id+"x"));
+  document.getElementById("prevBtn").style.visibility = i===0?"hidden":"visible";
+  document.getElementById("nextBtn").textContent = i===N-1?"Til oversikten 🗺️":"Neste →";
+  setTimeout(()=>panel.classList.add("open"), 350);
+  visited.add(s.id); store.set("visited",[...visited]); updateProgress();
+  try{ history.replaceState(null,"","#"+s.id);}catch(e){}
+}
+function closePanel(){
+  panel.classList.remove("open"); cur=-1; overview();
+  try{ history.replaceState(null,"",location.pathname+location.search);}catch(e){}
+}
+function updateProgress(){
+  document.querySelectorAll(".station").forEach((el,i)=>el.classList.toggle("visited",visited.has(S[i].id)));
+  const n=S.filter(s=>visited.has(s.id)).length;
+  document.getElementById("progTxt").textContent=`${n}/${N} besøkt`;
+  document.getElementById("progBar").style.width=(n/N*100)+"%";
+}
+document.getElementById("closeBtn").onclick=closePanel;
+document.getElementById("overviewBtn").onclick=closePanel;
+document.getElementById("startBtn").onclick=()=>openStation(0);
+document.getElementById("prevBtn").onclick=()=>{ if(cur>0) openStation(cur-1); };
+document.getElementById("nextBtn").onclick=()=>{ if(cur<N-1) openStation(cur+1); else closePanel(); };
+document.addEventListener("keydown",e=>{
+  if(document.getElementById("modal").classList.contains("show")){ if(e.key==="Escape") closeModal(); return; }
+  if(/TEXTAREA|SELECT|INPUT/.test(document.activeElement.tagName)) return;
+  if(e.key==="Escape" && cur>=0) closePanel();
+  if(e.key==="ArrowRight"){ if(cur<0) openStation(0); else if(cur<N-1) openStation(cur+1); }
+  if(e.key==="ArrowLeft" && cur>0) openStation(cur-1);
+});
+window.addEventListener("resize",()=>{ cur>=0?zoomTo(cur):overview(); });
+
+/* ---------- Oppgaver ---------- */
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function el(h){ const d=document.createElement("div"); d.innerHTML=h.trim(); return d.firstChild; }
+
+function renderTask(t,sid){
+  const box=el(`<div class="task"><h3>✏️ ${t.title||"Oppgave"}</h3>${t.q?`<div class="q">${t.q}</div>`:""}</div>`);
+  if(t.type==="tf"){
+    t.items.forEach(([txt,ans,why])=>{
+      const r=el(`<div class="row"><span class="txt">${txt}</span><button class="pill">Sant</button><button class="pill">Usant</button><div class="fb"></div></div>`);
+      const [bS,bU]=r.querySelectorAll(".pill"), fb=r.querySelector(".fb");
+      const pick=(v)=>{ bS.classList.toggle("sel",v); bU.classList.toggle("sel",!v);
+        fb.className="fb show "+(v===ans?"ok":"bad"); fb.textContent=(v===ans?"✓ Riktig. ":"✗ Ikke helt. ")+why; };
+      bS.onclick=()=>pick(true); bU.onclick=()=>pick(false);
+      box.appendChild(r);
+    });
+  }
+  if(t.type==="match"){
+    const rights=[...new Set(t.pairs.map(p=>p[1]))], opts=shuffle(rights);
+    const sels=[];
+    t.pairs.forEach(([l,r])=>{
+      const row=el(`<div class="row"><span class="txt"><b>${l}</b></span><select><option value="">Velg …</option>${opts.map(o=>`<option>${o}</option>`).join("")}</select></div>`);
+      const s=row.querySelector("select"); s.dataset.a=r; s.onchange=()=>s.className=""; sels.push(s); box.appendChild(row);
+    });
+    const res=el(`<div class="result"></div>`), go=el(`<button class="go">Sjekk svarene</button>`);
+    go.onclick=()=>{ let ok=0; sels.forEach(s=>{ const g=s.value===s.dataset.a; if(g)ok++; s.className=s.value?(g?"ok":"bad"):"bad"; });
+      res.textContent = ok===sels.length?`🎉 Alle ${ok} riktige!`:`${ok} av ${sels.length} riktige. Rett opp de røde og prøv igjen.`; };
+    box.append(go,res);
+  }
+  if(t.type==="order"){
+    const chips=el(`<div class="chips"></div>`), ans=el(`<div class="answer"></div>`), res=el(`<div class="result"></div>`);
+    let picked=[];
+    const draw=()=>{ ans.innerHTML = picked.length? picked.map((p,i)=>`<div>${i+1}. ${p}</div>`).join("") : `<span style="color:var(--muted);padding:6px">Svaret ditt kommer her …</span>`; };
+    shuffle(t.items).forEach(it=>{ const c=el(`<button class="chip">${it}</button>`); c.onclick=()=>{ picked.push(it); c.classList.add("used"); draw(); res.textContent=""; }; chips.appendChild(c); });
+    draw();
+    const go=el(`<button class="go">Sjekk rekkefølgen</button>`), rs=el(`<button class="ghost">Start på nytt</button>`);
+    go.onclick=()=>{ if(picked.length<t.items.length){ res.textContent="Plasser alle hendelsene først."; return; }
+      let ok=0; [...ans.children].forEach((d,i)=>{ const g=picked[i]===t.items[i]; if(g)ok++; d.className=g?"ok":"bad"; });
+      res.textContent= ok===t.items.length?"🎉 Perfekt rekkefølge!":`${ok} av ${t.items.length} på riktig plass. Les tidslinjen igjen og prøv på nytt.`; };
+    rs.onclick=()=>{ picked=[]; chips.querySelectorAll(".chip").forEach(c=>c.classList.remove("used")); draw(); res.textContent=""; };
+    box.append(chips,ans,go,document.createTextNode(" "),rs,res);
+  }
+  if(t.type==="flip"){
+    const g=el(`<div class="flips"></div>`);
+    t.cards.forEach(([f,b])=>{ const c=el(`<button class="flip"><div class="in"><div class="f">${f}</div><div class="b">${b}</div></div></button>`); c.onclick=()=>c.classList.toggle("on"); g.appendChild(c); });
+    box.appendChild(g);
+  }
+  if(t.type==="reflect"){
+    box.appendChild(el(`<div class="q">Skriv svarene dine her. De lagres bare i nettleseren din, så kopier dem gjerne til et eget dokument.</div>`));
+    t.prompts.forEach((p,i)=>{
+      const k="r_"+sid+"_"+i;
+      box.appendChild(el(`<div class="prompt">${i+1}. ${p}</div>`));
+      const ta=document.createElement("textarea"); ta.value=store.get(k,""); ta.placeholder="Skriv her …";
+      const sv=el(`<div class="saved"></div>`);
+      ta.oninput=()=>{ store.set(k,ta.value); sv.textContent="Lagret i nettleseren ✓"; };
+      box.append(ta,sv);
+    });
+    const cp=el(`<button class="ghost">📋 Kopier svarene mine</button>`);
+    cp.onclick=()=>{ const txt=t.prompts.map((p,i)=>`${i+1}. ${p}\n${store.get("r_"+sid+"_"+i,"")}`).join("\n\n");
+      navigator.clipboard && navigator.clipboard.writeText(txt).then(()=>cp.textContent="✓ Kopiert!",()=>cp.textContent="Kunne ikke kopiere – merk teksten og kopier selv"); };
+    box.appendChild(cp);
+  }
+  if(t.type==="quiz"){
+    let i=0, score=0; const qs=t.qs;
+    const area=el(`<div></div>`); box.appendChild(area);
+    const show=()=>{
+      if(i>=qs.length){
+        const best=store.get("best",0); if(score>best) store.set("best",score);
+        const msg = score>=14?"Fantastisk – du er en ekspert! 🏆":score>=11?"Veldig bra! 🌟":score>=7?"Godt jobbet! Gå tilbake til stasjonene du var usikker på.":"Ta en ny runde gjennom stasjonene og prøv igjen!";
+        area.innerHTML=`<h3 style="font-size:28px">${score} av ${qs.length} riktige</h3><p>${msg}</p><p class="saved">Din beste poengsum: ${Math.max(score,best)} av ${qs.length}</p>`;
+        const again=el(`<button class="go">Ta quizen på nytt</button>`); again.onclick=()=>{i=0;score=0;show();}; area.appendChild(again); return;
+      }
+      const q=qs[i];
+      area.innerHTML=`<div class="qnum">Spørsmål ${i+1} av ${qs.length} · Poeng: ${score}</div><p style="font-weight:800;font-size:19px;margin:6px 0 10px">${q.q}</p>`;
+      const fb=el(`<div class="fb"></div>`);
+      const btns=q.o.map((o,k)=>{ const b=el(`<button class="qopt">${o}</button>`);
+        b.onclick=()=>{ btns.forEach(x=>x.disabled=true); btns[q.a].classList.add("ok");
+          if(k===q.a){score++; fb.className="fb show ok"; fb.textContent="✓ Riktig! "+q.w;} else {b.classList.add("bad"); fb.className="fb show bad"; fb.textContent="✗ "+q.w;}
+          const nx=el(`<button class="go">${i<qs.length-1?"Neste spørsmål →":"Se resultatet"}</button>`); nx.onclick=()=>{i++;show();}; area.appendChild(nx); };
+        area.appendChild(b); return b; });
+      area.appendChild(fb);
+    };
+    show();
+  }
+  return box;
+}
+
+/* ---------- Begrepsforklaring (tooltip) ---------- */
+const tip=document.getElementById("tip");
+function findGloss(w){ const k=Object.keys(GLOSS).find(k=>k.toLowerCase()===w.toLowerCase()); return k?[k,GLOSS[k]]:null; }
+document.addEventListener("click",e=>{
+  const t=e.target.closest(".term");
+  if(!t){ tip.style.display="none"; return; }
+  const g=findGloss(t.dataset.t); if(!g) return;
+  tip.innerHTML=`<b>${g[0]}</b><br>${g[1]}`; tip.style.display="block";
+  const r=t.getBoundingClientRect(), tw=Math.min(280,window.innerWidth-20);
+  let left=Math.min(Math.max(10,r.left), window.innerWidth-tw-10);
+  let top=r.bottom+8; if(top+120>window.innerHeight) top=r.top-tip.offsetHeight-8;
+  tip.style.left=left+"px"; tip.style.top=top+"px";
+});
+document.getElementById("panelBody").addEventListener("scroll",()=>tip.style.display="none");
+
+/* ---------- Modaler ---------- */
+const modal=document.getElementById("modal"), mbox=document.getElementById("modalBox");
+function openModal(h){ mbox.innerHTML=h; modal.classList.add("show"); const c=mbox.querySelector(".go"); if(c) c.onclick=closeModal; }
+function closeModal(){ modal.classList.remove("show"); }
+modal.addEventListener("click",e=>{ if(e.target===modal) closeModal(); });
+
+function goalsHTML(first){
+  return `<h2>${first?"Velkommen til reisen! 🙏":"🎯 Mål for reisen"}</h2>
+  ${first?`<p>Du skal utforske hinduismen gjennom <b>${N} stasjoner</b>. Klikk på en stasjon for å zoome inn. Hver stasjon har fagtekst og en oppgave. Ord med <span class="term">oransje bakgrunn</span> kan du klikke på for å få en forklaring.</p>`:""}
+  <p><b>Etter denne reisen skal du kunne</b></p>
+  <ul>
+  <li>forklare sentrale trekk ved hinduismen og hvor den er utbredt i dag</li>
+  <li>bruke og forklare fagbegreper som atman, samsara, karma, moksha og dharma</li>
+  <li>fortelle hvordan hinduismen har utviklet seg og forandret seg gjennom historien</li>
+  <li>beskrive hvordan hinduer praktiserer troen sin: puja, tempel, livsriter og høytider</li>
+  <li>gjøre rede for ulike syn på kaste, kjønn og samliv i hinduismen</li>
+  <li>utforske etiske ideer fra Gandhi og ideen om ahimsa</li>
+  <li>se hvordan hinduismen kommer til uttrykk i Norge, i medier og i populærkultur</li>
+  <li>vurdere kritisk ulike kilder til kunnskap om hinduismen</li>
+  </ul>
+  <p class="saved">Bygget på kompetansemålene etter 10. trinn i KRLE (LK20).</p>
+  <button class="go">${first?"Ok, la oss starte!":"Lukk"}</button>`;
+}
+document.getElementById("goalsBtn").onclick=()=>openModal(goalsHTML(false));
+document.getElementById("glossBtn").onclick=()=>{
+  const keys=Object.keys(GLOSS).sort((a,b)=>a.localeCompare(b,"nb"));
+  openModal(`<h2>📖 Begrepsbank</h2><input id="search" placeholder="Søk etter et begrep …"><dl class="gloss" id="glist">${keys.map(k=>`<div data-k="${k.toLowerCase()}"><dt>${k}</dt><dd>${GLOSS[k]}</dd></div>`).join("")}</dl><button class="go">Lukk</button>`);
+  const s=document.getElementById("search");
+  s.oninput=()=>{ const v=s.value.toLowerCase(); document.querySelectorAll("#glist > div").forEach(d=>d.style.display=d.textContent.toLowerCase().includes(v)?"":"none"); };
+};
+
+/* ---------- Start ---------- */
+document.getElementById("nSt").textContent=N;
+updateProgress();
+overview();
+const h=location.hash.replace("#","");
+const hi=S.findIndex(s=>s.id===h);
+if(hi>=0){ setTimeout(()=>openStation(hi),200); }
+else if(!store.get("seenIntro",false)){ openModal(goalsHTML(true)); store.set("seenIntro",true); }
+</script>
+</body>
+</html>
