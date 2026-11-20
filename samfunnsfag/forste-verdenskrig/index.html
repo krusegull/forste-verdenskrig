@@ -415,6 +415,24 @@ footer ul{margin:6px 0 0;padding-left:18px;columns:2;column-gap:28px}
       <ol class="mlist" id="lbQuiz"></ol>
     </section>
 
+    <section class="panel laererbok" aria-labelledby="russTitle">
+      <h2 id="russTitle">Den russiske revolusjonen</h2>
+      <p class="sub">Mens krigen fortsatt raste i vest, falt et av Europas eldste riker sammen i øst. Klikk deg gjennom hendelsene i rekkefølge.</p>
+      <ul class="events" id="russSteps"></ul>
+    </section>
+
+    <section class="panel laererbok" aria-labelledby="russLifeTitle">
+      <h2 id="russLifeTitle">Hva betydde det for en vanlig russer?</h2>
+      <p class="sub">Bolsjevikene lovet et rettferdig samfunn for alle. Klikk på hvert område for å se hva som faktisk endret seg.</p>
+      <ul class="events" id="russLife"></ul>
+    </section>
+
+    <section class="panel missions" aria-labelledby="russQuizTitle">
+      <h2 id="russQuizTitle">Quiz: den russiske revolusjonen</h2>
+      <p class="sub">Test det du har lært.</p>
+      <ol class="mlist" id="russQuiz"></ol>
+    </section>
+
     <div class="reflect-pair">
       <section class="panel"><div class="reflect reflect-standalone">
         <h3>Reflekter</h3>
@@ -786,11 +804,40 @@ const LAERE_QUIZ=[
  {q:'Hva var Folkeforbundet?',o:['En ny organisasjon som skulle løse konflikter mellom land uten krig','Et nytt parlament i Tyskland','Mussolinis fascistparti','Bolsjevikenes hemmelige politi'],a:0,ok:'Riktig! Folkeforbundet regnes som forløperen til FN.'}
 ];
 
+const RUSS_STEPS=[
+ {t:'Russland i 1917',
+  x:'Russland ble styrt av tsar Nikolaj II, en eneveldig keiser som ikke delte makten med noe folkevalgt storting. Store deler av befolkningen levde i fattigdom, og det var enorme klasseskiller mellom en liten overklasse og et stort flertall av fattige bønder og arbeidere. Første verdenskrig gjorde alt verre: dyrtid, matmangel og enorme tap av soldater skapte en stor misnøye med tsaren.'},
+ {t:'Marsrevolusjonen 1917',
+  x:'Store protester brøt ut i hovedstaden. Tsaren sendte soldater for å slå ned opprøret, men mange av soldatene nektet å skyte på sitt eget folk og sluttet seg i stedet til demonstrantene. Til slutt skjønte Nikolaj II at han hadde mistet all støtte, og han abdiserte (trakk seg). Russland fikk en midlertidig regjering – men den fortsatte å føre krigen, noe folket var sterkt imot.'},
+ {t:'Bolsjevikene tar makten',
+  x:'Bolsjevikene, et kommunistisk parti ledet av Vladimir Lenin, lovet folket det de ønsket seg mest: «Fred, jord, brød!» I november 1917 tok de makten i et statskupp. Kort tid etter trakk Russland seg ut av første verdenskrig.'},
+ {t:'Borgerkrig og diktatur',
+  x:'Bolsjevikene hadde ikke full kontroll over landet, og Russland gikk inn i en blodig borgerkrig som varte helt til 1922. Da den var over, hadde rundt 12 millioner mennesker mistet livet – halvparten av dem fordi de sultet i hjel. Bolsjevikene vant til slutt, og Lenin satt igjen som eneveldig diktator. Landet byttet navn og flagg: fra nå av het det Sovjetunionen.'},
+ {t:'Et rettferdig samfunn?',
+  x:'Bolsjevikene ville ha et klasseløst samfunn uten forskjell på rike og fattige. Fabrikker, gårder og annen eiendom som folk kunne tjene penger på, ble overtatt av staten – dette kalles planøkonomi. Det var bare lov med ett politisk parti, og staten bestemte hva avisene fikk skrive. Målet var et rettferdig samfunn, men i praksis ble det et samfunn uten ytringsfrihet og med én svært mektig leder.'}
+];
+const RUSS_LIFE=[
+ {t:'Arbeid',x:'Folk ønsket bedre arbeidsforhold, kortere arbeidsdager og mer makt til arbeiderne selv.'},
+ {t:'Mat',x:'Folk ønsket at mat og ressurser skulle fordeles mer rettferdig. Under borgerkrigen tok imidlertid staten mat fra bøndene for å forsyne byene og hæren – noe som bidro til hungersnød.'},
+ {t:'Bolig',x:'Målet var å redusere forskjellene mellom rike og fattige. Store boliger ble delt opp slik at flere familier fikk plass til å bo.'},
+ {t:'Utdanning',x:'Alle, også fattige barn, skulle få gå på skole. Myndighetene satset tungt på å redusere analfabetisme i befolkningen.'},
+ {t:'Kvinner',x:'Kvinner fikk flere juridiske rettigheter, blant annet større likestilling i ekteskapet og rett til skilsmisse.'},
+ {t:'Religion',x:'Målet var et samfunn der religionen hadde mindre makt. Kirken mistet mye av sin eiendom og innflytelse.'},
+ {t:'Penger og eiendom',x:'Banker og store bedrifter ble overtatt av staten. Privat eierskap av store fabrikker ble avskaffet.'}
+];
+const RUSS_QUIZ=[
+ {q:'Hva het tsaren som styrte Russland fram til revolusjonen i 1917?',o:['Nikolaj II','Lenin','Alexander III','Nikolaj I'],a:0,ok:'Riktig! Nikolaj II abdiserte etter marsrevolusjonen i 1917.'},
+ {q:'Hvorfor sluttet mange soldater å støtte tsaren i mars 1917?',o:['De nektet å skyte på sitt eget folk under protestene','De ble beordret av Lenin til å gjøre opprør','Tyskland betalte dem for å gjøre opprør','Tsaren ga dem fri fra krigstjeneste'],a:0,ok:'Riktig! Da soldatene sluttet seg til demonstrantene i stedet for å slå dem ned, mistet tsaren kontrollen.'},
+ {q:'Hva lovet bolsjevikene det russiske folket?',o:['Fred, jord, brød','Frihet, likhet, brorskap','Ett folk, én stat','Arbeid, orden, framtid'],a:0,ok:'Riktig! Parolen lovet slutt på krigen, jord til bøndene og mat til alle.'},
+ {q:'Hva skjedde i Russland etter at bolsjevikene tok makten i november 1917?',o:['En blodig borgerkrig som varte til 1922','Umiddelbar fred og ro i hele landet','Tsaren tok makten tilbake','Russland ble med i Folkeforbundet'],a:0,ok:'Riktig! Rundt 12 millioner mennesker døde i borgerkrigen, mange av sult.'},
+ {q:'Hva betyr «planøkonomi»?',o:['Staten eier fabrikkene og bestemmer hva som skal produseres','Hver bedrift planlegger sin egen produksjon fritt','Prisene bestemmes av tilbud og etterspørsel','Alle varer deles likt uansett produksjon'],a:0,ok:'Riktig! I Sovjetunionen var det staten, ikke private eiere, som bestemte over produksjonen.'}
+];
+
 /* ---------- state ---------- */
 const store={get(){try{return JSON.parse(localStorage.getItem('fvk-progress')||'{}')}catch(e){return{}}},set(v){try{localStorage.setItem('fvk-progress',JSON.stringify(v))}catch(e){}}};
 let progress=store.get();
-let yi=0, activeMission=null, selEvent=null, selCountry=null, selDyrtid=null, melSekker=100, cat='hendelser';
-const veiHints={}, veiLocked={}, veiCorrect={}, veiWrong={}, veiGaveUp={}, lbAnswered={}, lbTries={};
+let yi=0, activeMission=null, selEvent=null, selCountry=null, selDyrtid=null, melSekker=100, cat='hendelser', selRuss=null, selRussLife=null;
+const veiHints={}, veiLocked={}, veiCorrect={}, veiWrong={}, veiGaveUp={}, lbAnswered={}, lbTries={}, russAnswered={}, russTries={};
 const decisionPicks={};
 const HINT_COST=20, WRONG_PENALTY=30;
 const tries={};
@@ -1033,6 +1080,47 @@ function updateLbScore(){
   LAERE_QUIZ.forEach((q,j)=>{ if(lbAnswered[j]) total+=(lbTries[j]&&lbTries[j].length)?5:20; });
   document.getElementById('lbScoreVal').textContent=total;
 }
+/* ---------- lærerboka: den russiske revolusjonen ---------- */
+function renderRussSteps(){
+  const ul=document.getElementById('russSteps'); ul.innerHTML='';
+  RUSS_STEPS.forEach((s,i)=>{
+    const li=document.createElement('li');
+    const open=selRuss===i;
+    li.innerHTML=`<button type="button" class="ev-btn" aria-expanded="${open}" id="rsb-${i}"><span class="n">${i+1}</span><span><span class="t">${s.t}</span></span></button>${open?`<p class="ev-body">${s.x}</p>`:''}`;
+    li.querySelector('button').onclick=()=>{selRuss=open?null:i;renderRussSteps()};
+    ul.appendChild(li);
+  });
+}
+function renderRussLife(){
+  const ul=document.getElementById('russLife'); ul.innerHTML='';
+  RUSS_LIFE.forEach((s,i)=>{
+    const li=document.createElement('li');
+    const open=selRussLife===i;
+    li.innerHTML=`<button type="button" class="ev-btn" aria-expanded="${open}" id="rlb-${i}"><span class="n">${i+1}</span><span><span class="t">${s.t}</span></span></button>${open?`<p class="ev-body">${s.x}</p>`:''}`;
+    li.querySelector('button').onclick=()=>{selRussLife=open?null:i;renderRussLife()};
+    ul.appendChild(li);
+  });
+}
+function renderRussQuiz(){
+  const ol=document.getElementById('russQuiz'); ol.innerHTML='';
+  RUSS_QUIZ.forEach((q,j)=>{
+    const done=!!russAnswered[j];
+    const li=document.createElement('li'); li.className='mission'+(done?' done':'');
+    let h=`<div class="mhead"><span class="mn">${done?'✓':(j+1)+'.'}</span><div><p class="mq">${q.q}</p></div></div>`;
+    h+='<div class="opts">'+q.o.map((o,oi)=>{
+      let cls='opt'; if(done&&oi===q.a) cls+=' right'; if(!done&&russTries[j]&&russTries[j].includes(oi)) cls+=' wrong';
+      return `<button type="button" class="${cls}" data-oi="${oi}" ${done?'disabled':''}>${o}</button>`;
+    }).join('')+'</div>';
+    if(done) h+=`<div class="fb ok" role="status"><strong>Riktig!</strong>${q.ok.replace(/^Riktig! ?/,'')}</div>`;
+    li.innerHTML=h;
+    li.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+      const oi=+b.dataset.oi;
+      if(oi===q.a) russAnswered[j]=true; else (russTries[j]=russTries[j]||[]).push(oi);
+      renderRussQuiz();
+    });
+    ol.appendChild(li);
+  });
+}
 function kindLabel(k){return k==='country'?'Svar i kartet · klikk på et land':k==='event'?'Svar i kartet · klikk på en markør':'Velg ett svar'}
 function renderMissions(){
   const y=YEARS[yi];
@@ -1180,6 +1268,9 @@ renderMel();
 /* ---------- lærerboka init (kategori- og årstalluavhengig) ---------- */
 renderVeivalg();
 renderLbQuiz();
+renderRussSteps();
+renderRussLife();
+renderRussQuiz();
 updateLbScore();
 document.getElementById('goTo1919').onclick=()=>{
   setCat('hendelser');
