@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Begrepsreisen – første verdenskrig</title>
+<style>
+:root{
+  /* Layout: samme Prezi-aktige zoomkart/øv/test-mønster som KRLE sin begrepsreisen.html, men i samfunnsfag/WWI-sidenes egen lyse papirstil. */
+  --bg:#eef1ec; --ink:#1c2423; --muted:#5c6b68; --line:#c5cec8; --card:#fffffe; --ok:#2f7d4f; --bad:#b3261e; --gold:#c9a24a;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+button{font-family:inherit;cursor:pointer}
+h1,h2,h3{font-family:"Arial Narrow","Helvetica Neue",Arial,sans-serif;margin:0}
+#top{position:fixed;inset:0 0 auto 0;height:62px;z-index:30;display:flex;align-items:center;gap:10px;padding:0 14px;background:rgba(238,241,236,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+#top h1{font-size:21px;white-space:nowrap;font-weight:700;letter-spacing:.02em}
+#top a.back{color:var(--muted);font-size:14px;text-decoration:none;border:1px solid var(--line);border-radius:4px;padding:5px 10px;white-space:nowrap}
+.tabs{display:flex;gap:6px;margin-left:auto;background:#e2e7df;border-radius:999px;padding:4px}
+.tabs button{border:0;background:transparent;border-radius:999px;padding:8px 14px;font-weight:800;font-size:14px;color:var(--muted);white-space:nowrap}
+.tabs button.on{background:#fff;color:var(--ink);box-shadow:0 2px 8px rgba(0,0,0,.08)}
+#mastery{font-weight:800;font-size:13px;color:var(--muted);white-space:nowrap}
+#mastery b{color:var(--ok);font-size:16px}
+.view{position:fixed;inset:62px 0 0 0;display:none}
+.view.on{display:block}
+
+/* ---------- UTFORSK ---------- */
+#vp{position:absolute;inset:0;overflow:hidden;background:radial-gradient(circle at 50% 50%,#f5f6f2 0,#eef1ec 50%,#e2e6de 100%)}
+#world{position:absolute;left:0;top:0;width:3200px;height:2400px;transform-origin:0 0;transition:transform 1s cubic-bezier(.6,.05,.25,1)}
+#center{position:absolute;left:1600px;top:1200px;transform:translate(-50%,-50%);text-align:center;width:620px}
+#center .e{font-size:100px;line-height:1}
+#center h2{font-size:72px;color:var(--ink)}
+#center p{font-size:24px;color:var(--muted);margin:8px 0 0}
+.cluster{position:absolute;width:760px;height:760px;margin:-380px 0 0 -380px;border-radius:50%;border:4px dashed color-mix(in srgb,var(--c) 45%,transparent);
+  background:radial-gradient(circle,color-mix(in srgb,var(--c) 10%,transparent) 0,transparent 70%)}
+.chub{position:absolute;left:50%;top:50%;width:250px;height:250px;margin:-125px 0 0 -125px;border-radius:50%;border:0;background:var(--c);color:#fff;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 14px 40px rgba(0,0,0,.2),inset 0 0 0 8px rgba(255,255,255,.2);transition:transform .2s;padding:16px}
+.chub:hover{transform:scale(1.05)}
+.chub .e{font-size:64px;line-height:1}
+.chub .t{font-family:"Arial Narrow","Helvetica Neue",Arial,sans-serif;font-weight:800;font-size:25px;line-height:1.05;margin-top:8px;text-align:center}
+.chub .p{font-size:16px;font-weight:700;opacity:.9;margin-top:6px}
+.cpt{position:absolute;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:22px;border:3px solid var(--c);background:#fff;color:var(--ink);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;box-shadow:0 8px 20px rgba(0,0,0,.08);transition:transform .2s}
+.cpt:hover{transform:scale(1.08) rotate(-2deg)}
+.cpt .e{font-size:40px;line-height:1}
+.cpt .t{font-weight:800;font-size:16px;margin-top:6px;text-align:center;line-height:1.1}
+.cpt.known{background:color-mix(in srgb,var(--c) 14%,#fff)}
+.cpt.known:after{content:"✓";position:absolute;top:-12px;right:-12px;width:34px;height:34px;border-radius:50%;background:var(--ok);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px}
+#zoomOut{position:absolute;left:14px;bottom:14px;z-index:5;border:0;border-radius:999px;padding:12px 18px;font-weight:800;background:#fff;box-shadow:0 6px 20px rgba(0,0,0,.15);font-size:15px;display:none}
+#hint{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);background:rgba(28,36,35,.85);color:#fff;border-radius:999px;padding:10px 18px;font-weight:700;font-size:14px;pointer-events:none}
+
+/* detail modal */
+#modal{position:fixed;inset:0;z-index:50;background:rgba(28,36,35,.5);display:none;align-items:center;justify-content:center;padding:16px}
+#modal.on{display:flex}
+#mbox{width:min(560px,100%);background:var(--card);border-radius:22px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.35);animation:pop .4s cubic-bezier(.3,1.5,.5,1)}
+@keyframes pop{from{transform:scale(.7);opacity:0}}
+#mhead{background:var(--c);color:#fff;padding:22px 24px;display:flex;align-items:center;gap:16px}
+#mhead .e{font-size:58px;line-height:1}
+#mhead small{font-weight:700;opacity:.9;letter-spacing:.5px;text-transform:uppercase;font-size:12px}
+#mhead h2{font-size:32px}
+#mbody{padding:20px 24px 22px;font-size:18px;line-height:1.5}
+.huske{margin-top:14px;background:#fdf3d9;border-radius:12px;padding:12px 14px;font-size:15px}
+.huske b{color:#8a6a1f}
+.mact{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.btn{border:0;border-radius:8px;padding:12px 20px;font-weight:800;font-size:16px;background:var(--c,#1c2423);color:#fff}
+.btn.ghost{background:#fff;color:var(--ink);border:2px solid var(--line)}
+.btn.ok{background:var(--ok)}
+.spacer{flex:1}
+
+/* ---------- ØV ---------- */
+.wrap{max-width:760px;margin:0 auto;padding:22px 16px 40px;height:100%;overflow:auto}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 16px}
+.chip{border:2px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font-weight:700;font-size:14px}
+.chip.on{border-color:var(--ink);background:var(--ink);color:#fff}
+.fc{perspective:1200px;width:100%;height:330px;border:0;background:none;padding:0;display:block}
+.fc .in{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.fc.flip .in{transform:rotateY(180deg)}
+.fc .f,.fc .b{position:absolute;inset:0;border-radius:24px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:26px;text-align:center;box-shadow:0 14px 40px rgba(0,0,0,.12)}
+.fc .f{background:var(--c);color:#fff}
+.fc .f .e{font-size:76px;line-height:1}
+.fc .f .t{font-family:"Arial Narrow","Helvetica Neue",Arial,sans-serif;font-weight:800;font-size:40px;margin-top:10px}
+.fc .f small{margin-top:10px;opacity:.85;font-weight:700}
+.fc .b{background:#fff;border:4px solid var(--c);transform:rotateY(180deg);font-size:19px;line-height:1.45;color:var(--ink)}
+.fc .b .t{font-family:"Arial Narrow","Helvetica Neue",Arial,sans-serif;font-weight:800;font-size:24px;color:var(--c);margin-bottom:8px}
+.fc .b .h{font-size:15px;color:#8a6a1f;margin-top:10px}
+.prog{height:12px;border-radius:9px;background:#e2e7df;overflow:hidden;margin:6px 0 14px}
+.prog i{display:block;height:100%;background:var(--ok);transition:width .4s}
+.row{display:flex;gap:10px;margin-top:16px}
+.row .btn{flex:1;font-size:17px;padding:16px}
+.info{color:var(--muted);font-weight:700;font-size:15px}
+.done{text-align:center;padding:40px 10px}
+.done .e{font-size:76px}
+
+/* ---------- TEST ---------- */
+.mgrid{display:grid;grid-template-columns:1fr 1.6fr;gap:12px}
+.mcol{display:flex;flex-direction:column;gap:10px}
+.mi{border:3px solid var(--line);background:#fff;border-radius:14px;padding:12px 14px;font-weight:700;font-size:16px;text-align:left;color:var(--ink);transition:all .15s;min-height:56px}
+.mi.term{font-family:"Arial Narrow","Helvetica Neue",Arial,sans-serif;font-size:19px;font-weight:800;text-align:center}
+.mi.sel{border-color:var(--ink);transform:scale(1.03);box-shadow:0 6px 16px rgba(0,0,0,.12)}
+.mi.gone{opacity:0;pointer-events:none;transform:scale(.8)}
+.mi.wrong{animation:shake .4s;border-color:var(--bad)}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.stat{display:flex;gap:16px;font-weight:800;font-size:18px;margin:6px 0 14px}
+.stat span{background:#fff;border-radius:12px;padding:8px 14px;border:2px solid var(--line)}
+.petal{position:fixed;top:-40px;z-index:60;font-size:26px;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+
+@media (max-width:760px){
+  #top{height:auto;flex-wrap:wrap;padding:8px 10px;gap:6px}
+  #top h1{font-size:17px}
+  .tabs{margin-left:0;order:3;width:100%;justify-content:center}
+  #mastery{margin-left:auto}
+  .view{top:104px}
+  .mgrid{grid-template-columns:1fr}
+  .fc{height:300px}
+  .fc .f .t{font-size:32px}
+}
+</style>
+</head>
+<body>
+<header id="top">
+  <a class="back" href="index.html">← Til kartet</a><h1>🪖 Begrepsreisen</h1>
+  <div id="mastery"><b id="mN">0</b>/<span id="mT">0</span> kan jeg</div>
+  <nav class="tabs">
+    <button data-v="explore" class="on">🗺️ Utforsk</button>
+    <button data-v="practice">🃏 Øv</button>
+    <button data-v="test">⚡ Test deg</button>
+  </nav>
+</header>
+
+<section class="view on" id="explore">
+  <div id="vp"><div id="world"><div id="center"><div class="e">🪖</div><h2>Begrepsreisen</h2><p>20 viktige begreper om første verdenskrig – i seks verdener.<br>Klikk på en verden for å zoome inn.</p></div></div></div>
+  <button id="zoomOut">🗺️ Tilbake til oversikten</button>
+  <div id="hint">Klikk på en verden 🌍 → klikk på et begrep</div>
+</section>
+
+<section class="view" id="practice"><div class="wrap" id="pw"></div></section>
+<section class="view" id="test"><div class="wrap" id="tw"></div></section>
+
+<div id="modal"><div id="mbox"><div id="mhead"></div><div id="mbody"></div></div></div>
+
+<script>
+/* ================= BEGREPENE =================
+   Samme 20 begreper og forklaringer som i begrepsjakten.html, gruppert i seks
+   "verdener" (samme gruppe-nummer 0-5 som der) med en kort huskeregel lagt til. */
+const CL=[
+ {id:"ideologier",name:"Ideologier",e:"🏛️",c:"#8c2f39",items:[
+  ["Nasjonalisme","🏳️","Sterk tro på og stolthet over egen nasjon, og tanken om at et folk bør ha sin egen stat.","Nasjonalisme var en av de grunnleggende årsakene til krigen."],
+  ["Imperialisme","🌍","At stormakter skaffer seg kolonier og makt over andre områder.","Ikke forveksle med nøytralitet – det er det motsatte."],
+  ["Kommunisme","☭","Ideologi der målet er et klasseløst samfunn uten forskjell på fattige og rike.","Målet: ingen forskjell på fattig og rik."],
+  ["Planøkonomi","🏭","Økonomisk system der staten eier fabrikkene og bestemmer hva som skal produseres.","Staten bestemmer – ikke markedet."],
+  ["Fascisme","🖤","Ideologi som vil ha én sterk leder i stedet for demokrati, og som er sterkt nasjonalistisk.","Én leder i stedet for demokrati."]
+ ]},
+ {id:"militaer",name:"Militærmakt og allianser",e:"⚔️",c:"#2c4870",items:[
+  ["Militær opprustning","🛡️","At stater bygger opp hæren, flåten og våpnene sine.","Opprustning = å bygge OPP, ikke ned."],
+  ["Allianse","🤝","En avtale mellom land om å støtte hverandre.","Venner i krig – og i fred."],
+  ["Trippelalliansen","🇩🇪","Alliansen mellom Tyskland, Østerrike-Ungarn og Italia.","De tre fra starten – Italia byttet side i 1915!"],
+  ["Trippelententen","🇬🇧","Alliansen mellom Storbritannia, Frankrike og Russland.","De tre som sto mot trippelalliansen."],
+  ["Blankofullmakten","✍️","Tysklands løfte om å støtte Østerrike-Ungarn før angrepet på Serbia.","Et blankt løfte – uten grenser."]
+ ]},
+ {id:"arsaker",name:"Årsaker",e:"🔗",c:"#6b4423",items:[
+  ["Grunnleggende årsak","🧱","Noe som bygger seg opp over lang tid og gjør en konflikt mulig.","Bygges opp over tid, murstein for murstein."],
+  ["Utløsende årsak","💥","Hendelsen som setter en konflikt i gang.","Gnisten – skuddene i Sarajevo."]
+ ]},
+ {id:"fronten",name:"Vestfronten og krigføring",e:"🪖",c:"#3a3a3a",items:[
+  ["Vestfronten","🇫🇷","Frontlinjen i vest, der hærene sto mot hverandre i fire år uten framgang.","Fire år – nesten ingen bevegelse."],
+  ["Østfronten","🇷🇺","Fronten i øst, der Tyskland sloss mot Russland og det var mer bevegelse.","Øst = Russland, ikke Frankrike."],
+  ["Skyttergrav","🕳️","Grøft som soldatene gravde seg ned i for å beskytte seg ved fronten.","Fra kysten i nord til Sveits."]
+ ]},
+ {id:"norge",name:"Norge og hjemmefronten",e:"🇳🇴",c:"#1f6b52",items:[
+  ["Nøytralitet","⚖️","At et land ikke tar side i en krig.","Norge var nøytralt – men nær Storbritannia."],
+  ["Dyrtid","📈","Periode da prisene på varer stiger mer enn lønningene.","Prisene opp, lommeboka ned."],
+  ["Rasjonering","🎫","At det bestemmes hvor mye hver person får kjøpe av varer det er mangel på.","Mangel på varer → rasjoneringskort."]
+ ]},
+ {id:"fred",name:"Fredsoppgjøret",e:"🕊️",c:"#7a6a1f",items:[
+  ["Versaillestraktaten","📜","Fredsavtalen der Tyskland måtte ta på seg skylden for krigen og betale erstatninger.","Skyld + erstatning + tapt land."],
+  ["Folkeforbundet","🕊️","Verdensomspennende organisasjon som skulle forebygge nye kriger.","Forløperen til FN."]
+ ]}
+];
+const ALL=[]; CL.forEach(c=>c.items.forEach((it,i)=>ALL.push({id:c.id+"-"+i,cl:c,t:it[0],e:it[1],d:it[2],h:it[3]})));
+
+/* ================= LAGRING =================
+   Eget nøkkelprefiks (fvkbgr_) – ikke samme som hindu-Begrepsreisens bgr_,
+   siden sidene deler samme nettsted-opprinnelse og localStorage. */
+const ST={get(k,d){try{const v=localStorage.getItem("fvkbgr_"+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem("fvkbgr_"+k,JSON.stringify(v))}catch(e){}}};
+let known=new Set(ST.get("known",[]));
+function setKnown(id,v){ v?known.add(id):known.delete(id); ST.set("known",[...known]); updMastery(); }
+function updMastery(){ $("mN").textContent=known.size; $("mT").textContent=ALL.length;
+  document.querySelectorAll(".cpt").forEach(el=>el.classList.toggle("known",known.has(el.dataset.id)));
+  CL.forEach(c=>{ const el=document.getElementById("cp-"+c.id); if(el) el.textContent=`${c.items.filter((_,i)=>known.has(c.id+"-"+i)).length}/${c.items.length} kan jeg`; }); }
+const $=id=>document.getElementById(id);
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a}
+
+/* ================= FANER ================= */
+document.querySelectorAll(".tabs button").forEach(b=>b.onclick=()=>{ document.querySelectorAll(".tabs button").forEach(x=>x.classList.toggle("on",x===b));
+  document.querySelectorAll(".view").forEach(v=>v.classList.toggle("on",v.id===b.dataset.v));
+  if(b.dataset.v==="practice") practiceStart(); if(b.dataset.v==="test") testIntro(); if(b.dataset.v==="explore") overview(); });
+
+/* ================= UTFORSK (zoom) ================= */
+const W=3200,H=2400, world=$("world"), vp=$("vp");
+const CPOS=CL.map((c,i)=>{ const a=(-90+i*60)*Math.PI/180; return [1600+1150*Math.cos(a),1200+830*Math.sin(a)]; });
+CL.forEach((c,ci)=>{
+  const [x,y]=CPOS[ci]; const d=document.createElement("div"); d.className="cluster"; d.style.left=x+"px"; d.style.top=y+"px"; d.style.setProperty("--c",c.c);
+  d.innerHTML=`<button class="chub"><span class="e">${c.e}</span><span class="t">${c.name}</span><span class="p" id="cp-${c.id}"></span></button>`;
+  d.querySelector(".chub").onclick=()=>zoomCluster(ci);
+  c.items.forEach((it,i)=>{ const a=(-90+i*360/c.items.length)*Math.PI/180, r=265;
+    const b=document.createElement("button"); b.className="cpt"; b.dataset.id=c.id+"-"+i; b.style.left=(380+r*Math.cos(a))+"px"; b.style.top=(380+r*Math.sin(a))+"px";
+    b.innerHTML=`<span class="e">${it[1]}</span><span class="t">${it[0]}</span>`; b.onclick=()=>{ zoomCluster(ci); openConcept(c.id+"-"+i); };
+    d.appendChild(b); });
+  world.appendChild(d);
+});
+let curCl=-1;
+function setView(x,y,s){ const vw=vp.clientWidth, vh=vp.clientHeight; world.style.transform=`translate(${vw/2-x*s}px,${vh/2-y*s}px) scale(${s})`; }
+function overview(){ curCl=-1; const s=Math.min(vp.clientWidth/(W+100),vp.clientHeight/(H+60)); setView(W/2,H/2,s); $("zoomOut").style.display="none"; $("hint").style.display="block"; }
+function zoomCluster(i){ curCl=i; const s=Math.min(vp.clientWidth,vp.clientHeight)/840; setView(CPOS[i][0],CPOS[i][1],s); $("zoomOut").style.display="block"; $("hint").style.display="none"; }
+$("zoomOut").onclick=overview;
+window.addEventListener("resize",()=>curCl<0?overview():zoomCluster(curCl));
+
+function openConcept(id){
+  const k=ALL.findIndex(a=>a.id===id), it=ALL[k], c=it.cl;
+  const sib=ALL.filter(a=>a.cl===c), si=sib.indexOf(it);
+  $("mbox").style.setProperty("--c",c.c);
+  $("mhead").innerHTML=`<span class="e">${it.e}</span><div><small>${c.name}</small><h2>${it.t}</h2></div>`;
+  $("mbody").innerHTML=`<div>${it.d}</div><div class="huske"><b>💡 Huskeregel:</b> ${it.h}</div>
+    <div class="mact"><button class="btn ghost" id="mPrev">←</button><button class="btn ghost" id="mNext">→</button><span class="spacer"></span>
+    <button class="btn ${known.has(id)?'ok':''}" id="mKnow">${known.has(id)?"✓ Jeg kan dette":"Jeg kan dette"}</button><button class="btn ghost" id="mClose">Lukk</button></div>`;
+  $("modal").classList.add("on");
+  $("mKnow").onclick=()=>{ setKnown(id,!known.has(id)); openConcept(id); };
+  $("mPrev").onclick=()=>openConcept(sib[(si-1+sib.length)%sib.length].id);
+  $("mNext").onclick=()=>openConcept(sib[(si+1)%sib.length].id);
+  $("mClose").onclick=()=>$("modal").classList.remove("on");
+}
+$("modal").onclick=e=>{ if(e.target.id==="modal") $("modal").classList.remove("on"); };
+document.addEventListener("keydown",e=>{ if(!$("modal").classList.contains("on")) return;
+  if(e.key==="Escape") $("modal").classList.remove("on"); if(e.key==="ArrowRight") $("mNext").click(); if(e.key==="ArrowLeft") $("mPrev").click(); });
+
+/* ================= ØV (snukort) ================= */
+let P={filter:"all",dir:"term",queue:[],total:0,doneN:0};
+function practiceStart(){
+  const pool=ALL.filter(a=>P.filter==="all"||a.cl.id===P.filter);
+  P.queue=shuffle(pool); P.total=pool.length; P.doneN=0; drawPractice();
+}
+function drawPractice(){
+  const w=$("pw");
+  const head=`<h2 style="font-size:28px">🃏 Øv på begrepene</h2><p class="info">Se på kortet og forklar begrepet for deg selv – høyt eller i hodet. Snu kortet og vær ærlig: kunne du det?</p>
+   <div class="chips">${[["all","Alle"],...CL.map(c=>[c.id,c.e+" "+c.name])].map(([v,l])=>`<button class="chip ${P.filter===v?'on':''}" data-f="${v}">${l}</button>`).join("")}</div>
+   <div class="chips"><button class="chip ${P.dir==="term"?'on':''}" data-d="term">Vis begrepet først</button><button class="chip ${P.dir==="def"?'on':''}" data-d="def">Vis forklaringen først (vanskeligere)</button></div>`;
+  if(!P.queue.length){
+    w.innerHTML=head+`<div class="done"><div class="e">🪖</div><h2>Bunken er tom!</h2><p class="info">Du har gått gjennom alle ${P.total} kortene. Begreper du kunne, er merket med ✓ i Utforsk.</p><button class="btn" style="background:#1c2423" id="again">Øv på nytt</button></div>`;
+    bindPractice(); $("again").onclick=practiceStart; petals(); return; }
+  const it=P.queue[0];
+  const front = P.dir==="term" ? `<span class="e">${it.e}</span><span class="t">${it.t}</span><small>Hva betyr dette? Trykk for å snu</small>`
+                               : `<span style="font-size:21px;line-height:1.45;font-weight:700">${it.d.replace(new RegExp(it.t.split(" ")[0],"gi"),"___")}</span><small>Hvilket begrep er dette? Trykk for å snu</small>`;
+  w.innerHTML=head+`<div class="info">${P.doneN} av ${P.total} kan du · ${P.queue.length} igjen i bunken</div><div class="prog"><i style="width:${P.doneN/P.total*100}%"></i></div>
+   <button class="fc" id="fc" style="--c:${it.cl.c}"><div class="in"><div class="f">${front}</div>
+   <div class="b"><div class="t">${it.e} ${it.t}</div><div>${it.d}</div><div class="h">💡 ${it.h}</div></div></div></button>
+   <div class="row"><button class="btn" style="background:#b3261e" id="no">↺ Øv mer</button><button class="btn ok" id="yes">✓ Kunne det</button></div>
+   <p class="info" style="text-align:center;margin-top:10px">Tastatur: mellomrom = snu · ← = øv mer · → = kunne det</p>`;
+  bindPractice();
+  $("fc").onclick=()=>$("fc").classList.toggle("flip");
+  $("yes").onclick=()=>{ setKnown(it.id,true); P.queue.shift(); P.doneN++; drawPractice(); };
+  $("no").onclick=()=>{ setKnown(it.id,false); const x=P.queue.shift(); P.queue.splice(Math.min(3,P.queue.length),0,x); drawPractice(); };
+}
+function bindPractice(){
+  $("pw").querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{P.filter=b.dataset.f;practiceStart();});
+  $("pw").querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{P.dir=b.dataset.d;drawPractice();});
+}
+document.addEventListener("keydown",e=>{ if(!$("practice").classList.contains("on")||!$("fc")) return;
+  if(e.key===" "){e.preventDefault();$("fc").click();} if(e.key==="ArrowRight") $("yes").click(); if(e.key==="ArrowLeft") $("no").click(); });
+
+/* ================= TEST (begrepsmatch, på tid) ================= */
+let T=null;
+function testIntro(){
+  const best=ST.get("best",null);
+  $("tw").innerHTML=`<h2 style="font-size:28px">⚡ Begrepsmatch</h2>
+   <p class="info">Koble begrepet med riktig forklaring så fort du kan. Seks par per runde, fire runder. Feil koster 3 sekunder!</p>
+   <div class="chips">${[["all","Alle"],...CL.map(c=>[c.id,c.e+" "+c.name])].map(([v,l])=>`<button class="chip ${(T&&T.filter||"all")===v?'on':''}" data-f="${v}">${l}</button>`).join("")}</div>
+   ${best?`<p class="info">🏆 Din beste tid: <b>${best.toFixed(1)} sek</b></p>`:""}
+   <button class="btn" style="background:#1c2423;font-size:19px;padding:16px 34px" id="go">Start ⚡</button>`;
+  $("tw").querySelectorAll("[data-f]").forEach(b=>b.onclick=()=>{ T={filter:b.dataset.f}; testIntro(); });
+  $("go").onclick=()=>testStart((T&&T.filter)||"all");
+}
+function testStart(filter){
+  const pool=shuffle(ALL.filter(a=>filter==="all"||a.cl.id===filter));
+  const rounds=[]; const per=Math.min(6,pool.length); const nR=filter==="all"?4:Math.max(1,Math.floor(pool.length/per));
+  for(let r=0;r<nR;r++){ let set=pool.slice(r*per,r*per+per); if(set.length<per) set=shuffle(pool).slice(0,per); rounds.push(set); }
+  T={filter,rounds,r:0,start:performance.now(),pen:0,miss:0,sel:null,left:0}; testRound();
+  clearInterval(T.iv); T.iv=setInterval(()=>{ const el=$("tTime"); if(el) el.textContent=((performance.now()-T.start)/1000+T.pen).toFixed(1); },100);
+}
+function testRound(){
+  const set=T.rounds[T.r]; T.left=set.length; T.sel=null;
+  $("tw").innerHTML=`<div class="stat"><span>⏱️ <b id="tTime">0.0</b> s</span><span>Runde ${T.r+1}/${T.rounds.length}</span><span>❌ ${T.miss}</span></div>
+   <div class="mgrid"><div class="mcol">${shuffle(set).map(a=>`<button class="mi term" data-id="${a.id}" style="border-color:${a.cl.c}">${a.e} ${a.t}</button>`).join("")}</div>
+   <div class="mcol">${shuffle(set).map(a=>`<button class="mi def" data-id="${a.id}">${a.d.split(". ")[0].replace(/\.$/,"")}.</button>`).join("")}</div></div>`;
+  const all=[...$("tw").querySelectorAll(".mi")];
+  all.forEach(b=>b.onclick=()=>{
+    if(!T.sel || T.sel.classList.contains(b.classList.contains("term")?"term":"def")){ all.forEach(x=>x.classList.remove("sel")); T.sel=b; b.classList.add("sel"); return; }
+    if(T.sel.dataset.id===b.dataset.id){ T.sel.classList.add("gone"); b.classList.add("gone"); T.sel=null; T.left--;
+      if(!T.left){ T.r++; if(T.r<T.rounds.length) setTimeout(testRound,400); else setTimeout(testEnd,400); } }
+    else { T.pen+=3; T.miss++; b.classList.add("wrong"); T.sel.classList.add("wrong"); const a=T.sel; setTimeout(()=>{a.classList.remove("wrong","sel");b.classList.remove("wrong");},400); T.sel=null;
+      $("tw").querySelector(".stat span:last-child").textContent="❌ "+T.miss; }
+  });
+}
+function testEnd(){
+  clearInterval(T.iv); const time=(performance.now()-T.start)/1000+T.pen; const best=ST.get("best",null); const rec=T.filter==="all"&&(!best||time<best); if(rec) ST.set("best",time);
+  $("tw").innerHTML=`<div class="done"><div class="e">${T.miss===0?"🏆":"⚡"}</div><h2>${time.toFixed(1)} sekunder</h2><p class="info">${T.miss} feil (hver feil ga +3 sek).${rec?" <b>Ny personlig rekord!</b>":""}</p>
+   <p class="info">${T.miss>3?"Tips: øv litt mer med snukortene, og prøv igjen.":"Sterkt! Klarer du å slå tiden din?"}</p><button class="btn" style="background:#1c2423" id="re">Prøv igjen</button></div>`;
+  $("re").onclick=()=>testStart(T.filter); if(T.miss<=2) petals();
+}
+function petals(){ for(let i=0;i<40;i++){ const p=document.createElement("div"); p.className="petal"; p.textContent=["🎖️","⭐","✨","🪖"][i%4]; p.style.left=Math.random()*100+"vw"; p.style.animationDuration=(3+Math.random()*3)+"s"; p.style.animationDelay=Math.random()*1.5+"s"; document.body.appendChild(p); setTimeout(()=>p.remove(),7000);} }
+
+updMastery(); overview();
+</script>
+</body>
+</html>
