@@ -52,6 +52,29 @@ krigsdagbokene.html, togreisen.html   (i rot) = videresendinger til ny plasserin
 
 For 9. trinn, elevene jobber helt selvstendig. Filer: `index.html` (interaktivt kart år for år 1914–1919 med oppdrag, Norges nøytralitet, lærerboka/quiz), `krigsarkivet.html` (escape room «Krigsarkivet 1914»), `arsakskjeden.html` («Årsakskjeden»), `begrepsjakten.html`, `krigsdagbokene.html` («Krigens gang»), `togreisen.html`. Eirik ønsker at nye WWI-spill integreres i denne siden, ikke som løsrevne sider. Lenkene mellom filene er relative (`index.html`) – behold dem.
 
+### 4.1 Læreplan: samfunnsfag (LK20, SAF01-05)
+
+Kilde: udir.no, hentet 20.11.2026. Kompetansemål etter 10. trinn (KM-koder) som er relevante for dette temaet – resten av de 19 målene (personlig økonomi, digitale spor, fornorskning av samene, bærekraft osv.) hører til andre temaer i faget og er ikke forventet dekket her:
+
+- **(KM14699)** «gjøre rede for årsaker til og konsekvenser av sentrale historiske og nåtidige konflikter og reflektere over om endringer av noen forutsetninger kunne ha hindret konfliktene» – kjernemålet for hele temaet. Godt dekket: Hendelser, Årsaker/Årsakskjeden, og særlig «Hva hadde du gjort?» (reflekterer direkte over om andre valg kunne hindret/endret utfallet).
+- **(KM14705)** «gjøre rede for årsaker til og konsekvenser av terrorhandlinger og folkemord, som holocaust, og reflektere over hvordan ekstreme holdninger og ekstreme handlinger kan forebygges» – delvis dekket (det armenske folkemordet er med som hendelse), men ingen oppgave får elevene til å reflektere over *forebygging* av ekstreme holdninger.
+- **(KM14703)** «utforske og beskrive hvordan menneske- og urfolksrettigheter og andre internasjonale avtaler og samarbeid har betydning for nasjonal politikk, menneskers liv og likestilling og likeverd» – Folkeforbundet er nevnt (index.html, begrepsjakten.html), men ikke utdypet som egen oppgave.
+- **(KM14700)** «drøfte hvordan framstillinger av fortiden, hendelser og grupper har påvirket og påvirker folks holdninger og handlinger» – delvis dekket via krigsskyldparagrafen/Versailles («Hevn eller forsoning?»), men ingen egen propaganda-/framstillingsoppgave.
+- **(KM14701)** «vurdere på hvilke måter ulike kilder gir informasjon om et samfunnsfaglig tema, og reflektere over hvordan algoritmer, ensrettede kilder eller mangel på kilder kan prege forståelsen vår» – **ikke dekket**. Kildene står listet i footeren på index.html, men ingen oppgave får elevene til å vurdere eller sammenligne dem kildekritisk.
+- **(KM14702)** «utforske hvordan teknologi har vært og fremdeles er en endringsfaktor, og drøfte innvirkningen teknologien har hatt og har på enkeltmennesker, samfunn og natur» – godt dekket (giftgass, stridsvogner, ubåter, maskingevær er med i flere spill).
+- **(KM14704)** «sammenligne hvordan politiske, geografiske og historiske forhold påvirker levekår, bosettingsmønstre og demografi i forskjellige deler av verden i dag» – delvis dekket via «Et nytt kart over Europa», men kobler ikke eksplisitt til situasjonen i verden *i dag*.
+
+Kjerneelement mest relevant: **Samfunnskritisk tenking og samanhengar** (brot/kontinuitet, historisk empati, makt og maktrelasjoner – appens kjerne) og **Demokratiforståing og deltaking** (hvorfor konflikter oppstår og håndteres – «Hva hadde du gjort?» treffer dette presist).
+
+Tverrfaglig tema **Demokrati og medborgerskap** nevner eksplisitt forebygging av ekstreme holdninger/handlinger og terrorisme. Relevant bakgrunn for fascisme/kommunisme-innholdet (22. juli-pensum selv hører ikke hjemme i en WWI-app og skal ikke tas inn her).
+
+**Avvik å være obs på (varsel til Eirik):**
+1. Ingen kildekritikk-oppgave (KM14701), selv om kilder listes i footeren.
+2. «Militarisme» (våpenkappløp/opprustning) er ikke nevnt som eget begrep noe sted, selv om det tradisjonelt står sammen med nasjonalisme og imperialisme i årsaksforklaringer til krigen. Alliansesystemet dekkes implisitt gjennom hendelsene, men ordet «militarisme» finnes ikke i appen.
+3. Folkeforbundet/internasjonale avtaler (KM14703) er nevnt, men har ingen egen oppgave eller stasjon.
+
+Endrer noe av dette seg (nye kompetansemål-koder, ny versjon av læreplanen), oppdater denne seksjonen – ikke stol på hukommelse, sjekk udir.no på nytt.
+
 ## 5. KRLE – Hinduismen (`krle/hinduismen/`)
 
 ### Bakgrunn
