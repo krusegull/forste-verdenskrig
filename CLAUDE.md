@@ -9,6 +9,7 @@ Dette repoet er **Læringsportalen**: interaktive læringsverktøy for elevene t
 1. **Elevene logger aldri inn.** Alt i portalen må fungere uten konto – ingen claude.ai-lenker, ingen innlogging, ingen API-nøkler.
 2. **Lenker som deles med elevene kan ikke inneholde «github».** En github.io-lenke fungerte ikke for klassen. Bruk adressen i punkt 4.
 3. **Lærermateriell skal ALDRI ligge i dette repoet.** Repoet er offentlig. Ingen fasit til lærerspill, ingen elevnavn, ingen elevpoeng, ingen PIN-koder, ingen lenker til lærerressurser fra elevsidene.
+   - **Unntak bestemt av Eirik 24.11.2026:** standardsett til konkurransemalen (`verktoy/sett/*.json`) kan ligge her med fasit, selv om elevene da kan finne svarene. **Bilder fra opphavsrettsbeskyttede bøker skal likevel aldri ligge her** – de hører hjemme i private lærerspill på claude.ai.
 4. **Fakta må være korrekte.** Sjekk fagstoff og fasit nøye. Hvis noe er usikkert: lat være å påstå det, eller marker det.
 5. **Lenker elevene får må virke med en gang.** Test navigasjon (forside → fag → tema → tilbake) før du pusher.
 6. Eirik liker å **bygge i små steg og sjekke underveis** før man går videre.
@@ -124,12 +125,14 @@ Status 20.11.2026: klassen hadde nesten fullført gallery walk-starteren (trinne
 - **Finnes automatisk i alle fag:** `fag.html` legger til et 🏆 Konkurranse-kort sist i hvert fag (`?sett=<fag>&fag=<fag>&tilbake=../fag.html?fag=<fag>`). Nye fag i `katalog.js` får kortet uten mer arbeid.
 - **Flere sett per fag:** på startskjermen velger læreren spørsmålssett i en meny eller lager et nytt («＋ Nytt sett» → id `<fag>-<navn>`). Menyen viser alle sett i nettleseren som hører til faget (`<fag>` og `<fag>-*`), også sett som åpnes fra en temaside.
 - **Lenke fra en temaside (valgfritt):** `../../verktoy/konkurranse.html?sett=<fag>-<tema>&tilbake=../<fag>/<tema>/index.html` – brukes av Sinna Mann.
+- **Standardsett:** `verktoy/sett/<sett-id>.json` (samme format som «Lagre som fil») lastes automatisk hvis læreren ikke har en egen versjon i nettleseren. `verktoy/sett/liste.json` lister standardsettene (`id`, `tittel`) så de vises i menyen i riktig fag. Har læreren endret et standardsett, brukes den lokale versjonen; «↺ Tilbake til standardsettet» i redigeringen henter standarden igjen.
 - Merk: raw.githack.com er et delt nettsted, så det som ligger i localStorage der, kan i prinsippet leses av andre sider på samme adresse. Når portalen flyttes til egen adresse (Vercel), er dette løst.
 
 ### Norsk – Virkemidler i bildebok – Sinna Mann (`norsk/sinna-mann/`)
 - Bildebok av Gro Dahle (tekst) og Svein Nyhus (bilder), Cappelen 2003. Fokus: kontrast, besjeling, personifikasjon, sammenligning, metafor, motiv og tema.
 - `index.html` har ett kort: **Konkurranse** (`sett=norsk-sinna-mann`).
-- Det ferdige spørsmålssettet (62 spørsmål, med Eiriks egne bilder fra boka) er levert til Eirik som fil (`sinna-mann-konkurranse.json`) og hentes inn med «📥 Hent inn sett». **Fila skal aldri legges i repoet** – den inneholder fasit og bilder fra en opphavsrettsbeskyttet bok.
+- **Standardsettet ligger fast i portalen:** `verktoy/sett/norsk-sinna-mann.json` (62 spørsmål, 7 kategorier, *uten* bilder fra boka – 📖-spørsmål ber læreren vise oppslaget). Lastes automatisk når nettleseren ikke har en egen versjon.
+- Versjonen **med** Eiriks bilder fra boka finnes privat som SI FRA på claude.ai (se 7) og som fila `sinna-mann-konkurranse.json` hos Eirik. **Disse bildene skal aldri legges i repoet** (opphavsrett).
 
 ## 7. Lærerressurser som IKKE ligger her (bare lenker for Eirik – aldri til elevene)
 

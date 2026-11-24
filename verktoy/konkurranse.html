@@ -309,6 +309,8 @@ function normSet(s){ if(!s||typeof s!=="object"||!Array.isArray(s.kat)||!s.kat.l
   for(let t=1;t<=5;t++) out.lyn[t]=(s.lyn&&Array.isArray(s.lyn[t])?s.lyn[t]:[]).slice(0,40).map(normQ);
   return out; }
 let QSET=null; try{ QSET=normSet(JSON.parse(localStorage.getItem(SKEY))); }catch(e){ QSET=emptySet(); }
+let HAS_LOCAL=false; try{ HAS_LOCAL=localStorage.getItem(SKEY)!==null; }catch(e){}
+let STDRAW=null, STDLIST=[];
 /* Spillbar versjon: tomme alternativer fjernes, ufullstendige spørsmål hoppes over */
 function clean(r){ const keep=r.o.map((t,i)=>[String(t).trim(),i]).filter(x=>x[0]); const a=keep.findIndex(x=>x[1]===r.a);
   const bad=!r.q.trim()||keep.length<2||a<0;
@@ -781,14 +783,17 @@ function edImport(){ if(!$("editor").classList.contains("on")) $("editor").class
   $("imFile").onchange=e=>{ const f=e.target.files[0]; if(!f) return; const rd=new FileReader(); rd.onload=()=>use(rd.result); rd.readAsText(f); };
   $("imGo").onclick=()=>use($("imTxt").value); $("imBack").onclick=renderEditor; }
 $("editBtn").onclick=openEditor; $("edClose").onclick=closeEditor; $("edExp").onclick=edExport; $("edImp").onclick=edImport; $("impBtn").onclick=edImport;
-$("edReset").onclick=()=>{ const b=$("edReset"); if(b.dataset.sure){ QSET=emptySet(); edTab="opp"; saveSet(true); renderEditor(); toast("Alt er tømt"); delete b.dataset.sure; b.textContent="🗑 Tøm alt"; }
-  else { b.dataset.sure=1; b.textContent="Klikk igjen for å tømme alt"; setTimeout(()=>{ delete b.dataset.sure; b.textContent="🗑 Tøm alt"; },3500); } };
+$("edReset").onclick=()=>{ const b=$("edReset"), lbl=STDRAW?"↺ Tilbake til standardsettet":"🗑 Tøm alt";
+  if(b.dataset.sure){ if(STDRAW){ QSET=normSet(JSON.parse(STDRAW)); try{ localStorage.removeItem(SKEY); }catch(e){} rebuild(); updSetup(); } else { QSET=emptySet(); saveSet(true); }
+    edTab="opp"; renderEditor(); toast(STDRAW?"Standardsettet er hentet tilbake":"Alt er tømt"); delete b.dataset.sure; b.textContent=lbl; }
+  else { b.dataset.sure=1; b.textContent=STDRAW?"Klikk igjen – endringene dine forsvinner":"Klikk igjen for å tømme alt"; setTimeout(()=>{ delete b.dataset.sure; b.textContent=lbl; },3500); } };
 if(TILBAKE && /^[a-z0-9\-\/\.]+\.html(\?fag=[a-z0-9\-]+)?$/i.test(TILBAKE) && !/^\/\/|:/.test(TILBAKE)){ $("backLink").href=TILBAKE; $("backLink").hidden=false; }
 /* ---------- flere spørsmålssett per fag ---------- */
 function settUrl(id){ const q=new URLSearchParams(); q.set("sett",id); q.set("fag",FAM); if(TILBAKE) q.set("tilbake",TILBAKE); return "konkurranse.html?"+q.toString(); }
 function listSett(){ const out=[]; try{ for(let i=0;i<localStorage.length;i++){ const k=localStorage.key(i); if(!k||!k.startsWith("konk_sett_")) continue; const id=k.slice(10);
     if(id===FAM||id.startsWith(FAM+"-")){ let t=id; try{ t=JSON.parse(localStorage.getItem(k)).tittel||id; }catch(e){} out.push({id,t}); } } }catch(e){}
   if(!out.some(x=>x.id===SETT)) out.push({id:SETT,t:QSET.tittel||SETT});
+  STDLIST.forEach(x=>{ if(!out.some(y=>y.id===x.id)) out.push({id:x.id,t:x.tittel||x.id}); });
   if(!out.some(x=>x.id===FAM)) out.push({id:FAM,t:"Konkurranse (tomt sett)"}); return out.sort((a,b)=>a.t.localeCompare(b.t,"nb")); }
 function renderSett(){ const l=listSett(); $("settSel").innerHTML=l.map(x=>`<option value="${esc(x.id)}" ${x.id===SETT?"selected":""}>${esc(x.t)}${x.id===SETT?"":""}</option>`).join("");
   $("settDel").hidden=!(SETT!==FAM && l.length>1); }
@@ -804,6 +809,11 @@ $("settDel").onclick=()=>{ const b=$("settDel"); if(!b.dataset.sure){ b.dataset.
   try{ localStorage.removeItem(SKEY); localStorage.removeItem(KEY); }catch(e){} location.href=settUrl(FAM); };
 $("impTop").onclick=edImport; $("editTop").onclick=openEditor;
 renderSett();
+/* ---------- standardsett fra portalen (verktoy/sett/) ---------- */
+fetch("sett/liste.json",{cache:"no-cache"}).then(r=>r.ok?r.json():[]).then(l=>{ STDLIST=(Array.isArray(l)?l:[]).filter(x=>x&&typeof x.id==="string"&&/^[a-z0-9-]+$/.test(x.id)&&(x.id===FAM||x.id.startsWith(FAM+"-"))).map(x=>({id:x.id,tittel:strip(x.tittel||x.id)})); renderSett(); }).catch(()=>{});
+fetch("sett/"+SETT+".json",{cache:"no-cache"}).then(r=>r.ok?r.text():null).then(t=>{ if(!t) return; normSet(JSON.parse(t)); STDRAW=t; $("edReset").textContent="↺ Tilbake til standardsettet";
+  if(!HAS_LOCAL){ QSET=normSet(JSON.parse(t)); rebuild(); updSetup(); if($("editor").classList.contains("on")) renderEditor(); } }).catch(()=>{});
+
 updSetup();
 </script>
 </body>

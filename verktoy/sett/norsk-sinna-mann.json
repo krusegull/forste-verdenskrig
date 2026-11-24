@@ -1,0 +1,999 @@
+{
+ "v": 1,
+ "tittel": "SI FRA",
+ "under": "Virkemiddelkampen om «Sinna Mann» av Gro Dahle og Svein Nyhus – ha boka klar: spørsmål merket 📖 viser til et oppslag",
+ "slutt": "Er det noen som har det sånn som Boj? Snakk med en voksen du stoler på – eller ring Alarmtelefonen for barn og unge: 116 111.",
+ "kat": [
+  {
+   "n": "Kontrast",
+   "e": "🌗",
+   "c": "#8c2f39",
+   "q": [
+    {
+     "q": "Hva er en kontrast?",
+     "o": [
+      "To motsetninger som stilles opp mot hverandre, slik at forskjellen blir tydelig",
+      "To ting som er nesten helt like",
+      "Et ord som gjentas mange ganger",
+      "To ord som rimer"
+     ],
+     "a": 0,
+     "w": "En kontrast er en motsetning, for eksempel stor og liten, rødt og blått eller trygt og farlig. Kontraster får leseren til å legge merke til forskjellen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilken kontrast er den viktigste i boka?",
+     "o": [
+      "Pappa og Sinna Mann – den snille og den farlige siden av samme person",
+      "Boj og naboen",
+      "Kongen og Boj",
+      "Mamma og naboen"
+     ],
+     "a": 0,
+     "w": "Boj er glad i Pappa, men han er redd for Sinna Mann. Det vondeste i boka er at begge bor i den samme personen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "📖 Oppslag: Pappa er enorm, mens Mamma og Boj er bitte små. Hva viser denne kontrasten i størrelse?",
+     "o": [
+      "Makt og frykt – slik opplever Boj Pappa når sinnet tar over",
+      "At Pappa er veldig høy i virkeligheten",
+      "At Boj er yngst i familien",
+      "Ingenting, det er bare tegnestilen"
+     ],
+     "a": 0,
+     "w": "Størrelsen viser følelser, ikke virkelige mål. Den som har makten, fyller siden, mens den som er redd, blir liten.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "📖 I de voldsomste oppslagene er det mye rødt og oransje. Senere i boka er det blått som dominerer. Hva slags kontrast er dette?",
+     "o": [
+      "Varme, eksplosive farger mot kalde, stille farger – fra utbruddet til stillheten etterpå",
+      "Dag mot natt",
+      "Sommer mot vinter",
+      "Det er ingen kontrast – fargene er tilfeldige"
+     ],
+     "a": 0,
+     "w": "Rødt og oransje står for sinne, brann og fare. Blått står for stillhet, kulde og tristhet, men også for ro.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "📖 Tidlig i boka forteller teksten om en vanlig familie, mens bildene viser røde hender og farlige gjenstander. Hva oppnår Dahle og Nyhus med denne kontrasten mellom tekst og bilde?",
+     "o": [
+      "Leseren aner at noe er galt før teksten sier det – det farlige ligger under overflaten",
+      "Leseren blir forvirret og slutter å lese",
+      "Det viser at tegneren ikke har lest teksten",
+      "Det gjør boka morsommere"
+     ],
+     "a": 0,
+     "w": "I en bildebok kan tekst og bilde fortelle forskjellige ting. Her viser bildene det familien ikke sier høyt, akkurat som en hemmelighet.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Besjeling og personifikasjon",
+   "e": "👤",
+   "c": "#4a3a6b",
+   "q": [
+    {
+     "q": "Hva er besjeling?",
+     "o": [
+      "At ting, dyr eller naturen får menneskelige egenskaper",
+      "At noe sammenlignes med noe annet ved hjelp av «som»",
+      "At noe blir overdrevet",
+      "At to ord begynner med samme lyd"
+     ],
+     "a": 0,
+     "w": "Et eksempel er «Huset holdt pusten». Et hus kan ikke puste, men her får det en menneskelig egenskap.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilken setning er besjeling?",
+     "o": [
+      "«Vinden hylte sint rundt huset.»",
+      "«Boj er redd.»",
+      "«Pappa er høy.»",
+      "«Klokka er sju.»"
+     ],
+     "a": 0,
+     "w": "Vinden kan ikke være sint, men her får den en menneskelig følelse. Det er besjeling. (Setningene er laget som eksempler og står ikke i boka.)",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er personifikasjon?",
+     "o": [
+      "At noe abstrakt, for eksempel en følelse, blir framstilt som en person",
+      "At en ting får en farge",
+      "At en person sammenlignes med et dyr",
+      "At en person snakker direkte til leseren"
+     ],
+     "a": 0,
+     "w": "Mange lærebøker skiller mellom dem slik: Ved besjeling får ting og natur menneskelige trekk. Ved personifikasjon blir noe abstrakt en hel person. Noen bruker ordene om hverandre.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Sinnet får et eget navn med stor forbokstav: Sinna Mann. Hvilket virkemiddel er det?",
+     "o": [
+      "Personifikasjon – sinnet blir en egen person",
+      "Sammenligning",
+      "Allitterasjon",
+      "Ironi"
+     ],
+     "a": 0,
+     "w": "Sinne er en følelse, men i boka blir det en skikkelse som kommer inn i stua. Da blir det lettere for et barn å sette ord på det som skjer.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Noen lesere mener det er et problem at sinnet blir en egen person. Hvorfor?",
+     "o": [
+      "Det kan se ut som om Pappa ikke har ansvar for det Sinna Mann gjør",
+      "Fordi det gjør boka for morsom",
+      "Fordi personifikasjon er forbudt i barnebøker",
+      "Fordi Boj ikke skjønner hvem Sinna Mann er"
+     ],
+     "a": 0,
+     "w": "Personifikasjonen hjelper Boj med å skille pappaen han er glad i, fra volden. Likevel er det Pappa som slår. Mot slutten sier Pappa selv at det er hans skyld, og Kongen sier at Pappa er sterkere enn Sinna Mann. I en god analyse viser du begge sidene.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Sammenligning og metafor",
+   "e": "🔀",
+   "c": "#2e4a5c",
+   "q": [
+    {
+     "q": "Hva er en sammenligning?",
+     "o": [
+      "At to ting sammenlignes ved hjelp av ord som «som» eller «lik»",
+      "En setning uten verb",
+      "En motsetning",
+      "En gjentakelse"
+     ],
+     "a": 0,
+     "w": "Et eksempel er «Sinnet er som en storm». Det er ordet «som» som viser at det er en sammenligning.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilken av disse er en metafor?",
+     "o": [
+      "«Pappa er en vulkan.»",
+      "«Pappa er som en vulkan.»",
+      "«Pappa er sint.»",
+      "«Pappa likner en vulkan.»"
+     ],
+     "a": 0,
+     "w": "En metafor sier at noe ER noe annet, uten å bruke «som» eller «likner». (Eksemplene er laget og står ikke i boka.)",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Gjør om metaforen «Sinnet er en storm» til en sammenligning.",
+     "o": [
+      "«Sinnet er som en storm.»",
+      "«Stormen er sint.»",
+      "«Sinnet stormer.»",
+      "«Det stormer i dag.»"
+     ],
+     "a": 0,
+     "w": "Du legger til «som». «Stormen er sint» er besjeling, og «sinnet stormer» er fortsatt et metaforisk bilde.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "📖 Mammas stemme beskrives som om den har sakser i seg. Hvilket virkemiddel er det, og hva betyr det?",
+     "o": [
+      "Metafor – stemmen er skarp, anspent og redd",
+      "Sammenligning – Mamma klipper håret til Boj",
+      "Besjeling – saksene snakker",
+      "Overdrivelse – Mamma eier mange sakser"
+     ],
+     "a": 0,
+     "w": "Det står ikke «som» her, og derfor er det en metafor. Saksene får oss til å høre hvor skarp og redd stemmen er.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "📖 Huset blir beskrevet som skjørt, nesten som om det var av glass eller papir, og Sinna Mann som noe som brenner. Hva viser disse bildene til sammen?",
+     "o": [
+      "Hjemmet er utrygt og kan knuses eller brenne opp når som helst, fordi sinnet ødelegger",
+      "Huset er nytt og pent",
+      "Familien bor i et drivhus",
+      "Pappa er brannmann"
+     ],
+     "a": 0,
+     "w": "Glass knuses lett, og papir tar lett fyr. Sammen viser metaforene et hjem uten trygghet.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Bildene forteller",
+   "e": "🖼️",
+   "c": "#a8622e",
+   "q": [
+    {
+     "q": "Hva kaller vi to sider i en bildebok som hører sammen og blir lest som én helhet?",
+     "o": [
+      "Et oppslag",
+      "Et kapittel",
+      "En strofe",
+      "En tegneserierute"
+     ],
+     "a": 0,
+     "w": "Et oppslag består av venstre og høyre side. I bildebøker viser et oppslag ofte én scene.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilken farge er særlig knyttet til sinnet i boka?",
+     "o": [
+      "Rødt",
+      "Grønt",
+      "Lyseblått",
+      "Hvitt"
+     ],
+     "a": 0,
+     "w": "Pappas hender og ansikt blir røde, og etter hvert sprer den røde fargen seg over hele oppslaget. Rødt er et symbol på sinne og fare.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "📖 Pappa blir større og større gjennom boka, til han ikke får plass på én side. Hva viser det?",
+     "o": [
+      "At sinnet vokser og tar over alt",
+      "At han spiser mye",
+      "At tegneren gikk tom for plass",
+      "At han blir eldre"
+     ],
+     "a": 0,
+     "w": "Størrelsen viser hvor mye plass sinnet tar, både i rommet, i familien og i hodet til Boj.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "📖 I det voldsomste oppslaget sitter Boj nede i hjørnet og holder seg for ørene. Hva forteller plasseringen oss?",
+     "o": [
+      "Han er liten og maktesløs og prøver å stenge volden ute",
+      "Han leker gjemsel",
+      "Han hører på musikk",
+      "Han er sint selv"
+     ],
+     "a": 0,
+     "w": "Boj er vitne. Han ser og hører alt, men han kan ikke stoppe det. Plasseringen i hjørnet viser hvor liten han føler seg.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "📖 Senere i boka blir det røde erstattet av mye blått. Hva kan fargeskiftet bety?",
+     "o": [
+      "Utbruddet er over. Det blir stille, kaldt og trist, men det blir også rom for noe nytt",
+      "Familien drar på sommerferie",
+      "Pappa har blitt enda sintere",
+      "Fargene betyr ingenting"
+     ],
+     "a": 0,
+     "w": "Rødt viser eksplosjonen, og blått viser stillheten etterpå. Fargene forteller like mye som teksten.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Motiv",
+   "e": "🔍",
+   "c": "#3a5a3e",
+   "q": [
+    {
+     "q": "Hva er motivet i en tekst?",
+     "o": [
+      "Det konkrete teksten handler om – hva som skjer",
+      "Det overordnede emnet, ofte ett eller to ord",
+      "Det forfatteren vil si til leseren",
+      "Hvilke farger illustratøren bruker"
+     ],
+     "a": 0,
+     "w": "Motivet er det konkrete: Hva skjer? Temaet er det generelle: Hva handler teksten egentlig om? Budskapet er det forfatteren vil si til leseren.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er motivet i «Sinna Mann»?",
+     "o": [
+      "En gutt som opplever at pappaen slår mammaen, og som til slutt forteller det til noen",
+      "En gutt som får en ny hund",
+      "En konge som skal finne en dronning",
+      "En familie som drar på ferie"
+     ],
+     "a": 0,
+     "w": "Boj er redd for Sinna Mann og lurer på om det er hans skyld. Til slutt skriver han et brev til Kongen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilket av disse er et MOTIV – ikke et tema?",
+     "o": [
+      "Boj skriver et brev til Kongen",
+      "Skam",
+      "Håp",
+      "Frykt"
+     ],
+     "a": 0,
+     "w": "Brevet til Kongen er en konkret hendelse og derfor et motiv. Skam, håp og frykt er generelle og derfor temaer.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Familien har ikke noe etternavn, og Boj er et uvanlig navn. Hva oppnår forfatteren med det?",
+     "o": [
+      "Familien kan være hvem som helst, og det som skjer, kan skje i alle slags hjem",
+      "Forfatteren glemte å gi dem navn",
+      "Det viser at historien skjer i et annet land",
+      "Det viser at familien er kongelig"
+     ],
+     "a": 0,
+     "w": "Mamma og Pappa blir bare kalt det de er. Det gjør historien allmenn, slik at mange barn kan kjenne seg igjen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Motivet endrer seg gjennom boka. Hvordan?",
+     "o": [
+      "Fra frykt og hemmelighold til at Boj sier fra og familien får hjelp",
+      "Fra en fin hverdag til en enda finere hverdag",
+      "Fra skolen til hjemmet",
+      "Fra Boj som voksen til Boj som barn"
+     ],
+     "a": 0,
+     "w": "Boka begynner med stillheten og frykten hjemme og slutter med håp etter at Boj har sagt fra.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Tema og budskap",
+   "e": "💡",
+   "c": "#6b4423",
+   "q": [
+    {
+     "q": "Hva er temaet i en tekst?",
+     "o": [
+      "Det overordnede emnet teksten handler om – ofte ett eller to ord",
+      "Det konkrete som skjer",
+      "Navnet på hovedpersonen",
+      "Antall sider"
+     ],
+     "a": 0,
+     "w": "Spør deg selv: Hva handler dette egentlig om? Svaret er gjerne kort, for eksempel vold, frykt, skyld eller håp.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilket forslag passer best som tema?",
+     "o": [
+      "Vold i familien",
+      "Fotball",
+      "Vennskap på skolen",
+      "Reiser"
+     ],
+     "a": 0,
+     "w": "Hovedtemaet er vold i nære relasjoner sett fra et barns perspektiv.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilket av disse er IKKE et tema i boka?",
+     "o": [
+      "Forelskelse",
+      "Frykt",
+      "Skyld",
+      "Hemmeligheter"
+     ],
+     "a": 0,
+     "w": "Boj er redd, han lurer på om det er hans skyld, og han får beskjed om å holde det hemmelig. Forelskelse er derimot ikke et tema.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "📖 Mamma ber Boj om å holde det som skjer, hemmelig. Hvilket tema blir tydelig her?",
+     "o": [
+      "Hemmelighold og skam – volden blir skjult for omverdenen",
+      "Vennskap mellom mor og sønn",
+      "Glede over å ha en hemmelighet",
+      "Kjærlighet til naboen"
+     ],
+     "a": 0,
+     "w": "Hemmeligheten gjør Boj ensom. Først når han bryter den, kan hjelpen komme.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilken formulering av budskapet er best begrunnet?",
+     "o": [
+      "«Barn som opplever vold hjemme har ikke skylden, og de bør si fra til en voksen de stoler på – slik Boj gjør når han skriver til Kongen.»",
+      "«Voksne blir sinte noen ganger.»",
+      "«Man bør skrive brev oftere.»",
+      "«Det går alltid over av seg selv.»"
+     ],
+     "a": 0,
+     "w": "Ifølge forlaget er budskapet at du ikke er alene, at det ikke er din skyld, og at du må si fra til noen du stoler på. Et godt svar begrunner budskapet med et eksempel fra boka.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Bildene i boka",
+   "e": "📖",
+   "c": "#2e6a8a",
+   "q": [
+    {
+     "q": "📖 Vis oppslaget med Kongen. Hva holder Kongen i hånda?",
+     "o": [
+      "Et ark – trolig brevet fra Boj",
+      "Et sverd",
+      "En blomst",
+      "En nøkkel"
+     ],
+     "a": 0,
+     "w": "Kongen holder et ark, som vi kan tolke som brevet Boj skrev. Brevet har nådd fram til den mektigste voksne Boj kan tenke seg.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "📖 Vis oppslaget der Boj står foran en dør. Bak døra er det en ny dør, og bak den enda en. Hva viser bildet?",
+     "o": [
+      "At Boj føler seg fanget – det virker ikke som om det finnes noen vei ut",
+      "At familien bor i et stort slott",
+      "At Boj er på vei til skolen",
+      "At Boj leker gjemsel"
+     ],
+     "a": 0,
+     "w": "Dørene gjentas innover i bildet nesten i det uendelige. Gjentakelsen viser hvor fanget Boj føler seg. Også teksten på dette oppslaget gjentar ordet «dør» mange ganger.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "På et av oppslagene er det tre fisker i en bolle. Hvilken farge har den største fisken, og hvilken farge har de to små?",
+     "o": [
+      "Den store er svart, og de to små er oransje",
+      "Den store er oransje, og de to små er svarte",
+      "Alle tre er oransje",
+      "Den store er rød, og de to små er blå"
+     ],
+     "a": 0,
+     "w": "Den store fisken er svart, og de to små er oransje. Vi kan tolke fiskebollen som et bilde på familien: en stor og truende skikkelse sammen med to små i en trang bolle av glass.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "📖 Tre bilder fra boka: en bolle med en stor, svart fisk og to små, oransje fisker, Boj som holder seg for ørene i senga, og en enorm, oransje Pappa. Hva er det felles motivet i de tre bildene?",
+     "o": [
+      "Sinna Mann tar over hjemmet: Pappa blir stor og farlig, mens Boj gjemmer seg i senga",
+      "En familie som drar på fisketur",
+      "Boj som feirer bursdag og får et akvarium",
+      "Kongen som kommer på besøk"
+     ],
+     "a": 0,
+     "w": "Den store, svarte fisken, Boj som holder seg for ørene i senga, og den enorme, oransje Pappa viser det samme fra tre kanter: et hjem der sinnet har tatt over, og et barn som er redd.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "📖 Sammenlign oppslaget der Sinna Mann fyller hele siden, med oppslaget der Pappa ligger på kne foran Boj. Hva har skjedd med størrelsene, og hva betyr det?",
+     "o": [
+      "Nå er Pappa mindre enn Boj – han ligger på kne og tar ansvar for det han har gjort",
+      "Pappa har blitt enda større og farligere",
+      "Boj har vokst fordi det har gått mange år",
+      "Ingenting – størrelsene er de samme i begge bildene"
+     ],
+     "a": 0,
+     "w": "Størrelseskontrasten er snudd. Sinna Mann fylte hele oppslaget, men nå går Pappa ned på kne, ber om unnskyldning og sier at det er hans skyld. Fargene har også endret seg fra brennende oransje til dempet brunt.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  }
+ ],
+ "lyn": {
+  "1": [
+   {
+    "q": "Hvem skrev teksten i «Sinna Mann»?",
+    "o": [
+     "Gro Dahle",
+     "Svein Nyhus",
+     "Inger Hagerup",
+     "Thorbjørn Egner"
+    ],
+    "a": 0,
+    "w": "Gro Dahle skrev teksten. Svein Nyhus laget bildene.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvem laget illustrasjonene?",
+    "o": [
+     "Svein Nyhus",
+     "Gro Dahle",
+     "Thorbjørn Egner",
+     "Alf Prøysen"
+    ],
+    "a": 0,
+    "w": "Svein Nyhus illustrerte boka, som kom ut i 2003.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva heter gutten i boka?",
+    "o": [
+     "Boj",
+     "Bo",
+     "Bjørn",
+     "Ola"
+    ],
+    "a": 0,
+    "w": "Boj er hovedpersonen, og vi opplever historien gjennom ham.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvem skriver Boj brev til?",
+    "o": [
+     "Kongen",
+     "Læreren",
+     "Bestemor",
+     "Politiet"
+    ],
+    "a": 0,
+    "w": "Boj stoler på Kongen og skriver til ham. Det blir begynnelsen på at familien får hjelp.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva slags bok er «Sinna Mann»?",
+    "o": [
+     "En bildebok – tekst og bilder forteller sammen",
+     "En roman uten bilder",
+     "En diktsamling",
+     "En tegneserie med snakkebobler"
+    ],
+    "a": 0,
+    "w": "I en bildebok er bildene like viktige som teksten. Ofte forteller de noe som teksten ikke sier.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "2": [
+   {
+    "q": "Hva kaller vi en tekst der ord og bilder skaper mening sammen?",
+    "o": [
+     "Sammensatt tekst",
+     "Ren tekst",
+     "Fagtekst",
+     "Dikt"
+    ],
+    "a": 0,
+    "w": "En bildebok er en sammensatt tekst. Vi må lese både ordene og bildene.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "«Klokka gikk sakte som en snegle.» Hvilket virkemiddel er det?",
+    "o": [
+     "Sammenligning",
+     "Metafor",
+     "Besjeling",
+     "Kontrast"
+    ],
+    "a": 0,
+    "w": "Det er ordet «som» som avslører sammenligningen. (Eksempelet er laget.)",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "«Huset sukket i natta.» Hvilket virkemiddel er det?",
+    "o": [
+     "Besjeling",
+     "Sammenligning",
+     "Kontrast",
+     "Rim"
+    ],
+    "a": 0,
+    "w": "Et hus kan ikke sukke, men her gjør det noe bare mennesker kan. (Eksempelet er laget.)",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "«Pappa er en tikkende bombe.» Hvilket virkemiddel er det?",
+    "o": [
+     "Metafor",
+     "Sammenligning",
+     "Besjeling",
+     "Personifikasjon"
+    ],
+    "a": 0,
+    "w": "Her står det ikke «som». I bildet ER Pappa en bombe, og metaforen viser at sinnet kan eksplodere når som helst. (Eksempelet er laget.)",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva kaller vi noe konkret som står for noe annet, for eksempel når rødt står for sinne?",
+    "o": [
+     "Symbol",
+     "Rim",
+     "Refreng",
+     "Oppslag"
+    ],
+    "a": 0,
+    "w": "I boka er rødt et symbol på sinne og fare.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "3": [
+   {
+    "q": "📖 Mamma gjentar et lite trøsteord mange ganger etter hverandre. Hvilket virkemiddel er det, og hva viser det?",
+    "o": [
+     "Gjentakelse – hun prøver desperat å roe situasjonen ned",
+     "Sammenligning – hun synger",
+     "Metafor – hun er en fugl",
+     "Ironi – hun tuller"
+    ],
+    "a": 0,
+    "w": "Gjentakelsen viser panikken under overflaten. Hun prøver å dysse ned det som skjer.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "📖 Boj klarer bare å si de første lydene i et ord, om og om igjen. Hva viser det?",
+    "o": [
+     "At han er så redd at språket bryter sammen",
+     "At han lærer å snakke",
+     "At han synger en sang",
+     "At han tuller med Pappa"
+    ],
+    "a": 0,
+    "w": "Når språket brytes opp, viser teksten hvor sterk frykten er. Boj finner ikke ordene – i alle fall ikke ennå.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "📖 Boj hører klokka slå «hundre slag». Hvilket virkemiddel er det?",
+    "o": [
+     "Overdrivelse – øyeblikket føles uendelig langt",
+     "Besjeling",
+     "Sammenligning",
+     "Rim"
+    ],
+    "a": 0,
+    "w": "Ingen klokke slår hundre slag. Overdrivelsen viser hvordan tiden kjennes for et barn som er redd.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva kaller vi det når teksten sier én ting og bildet viser noe annet?",
+    "o": [
+     "Kontrast mellom tekst og bilde",
+     "Rim",
+     "Allitterasjon",
+     "Refreng"
+    ],
+    "a": 0,
+    "w": "I bildebøker kan tekst og bilde fortelle hver sin historie. Da må leseren tolke hva som egentlig skjer.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "📖 I teksten blir Mamma beskrevet som en stol i hjørnet. Hvilket virkemiddel er det, og hva betyr det?",
+    "o": [
+     "Metafor – Mamma blir stille og passiv og klarer ikke å hjelpe Boj",
+     "Sammenligning – Mamma sitter på en stol",
+     "Besjeling – stolen får menneskelige egenskaper",
+     "Overdrivelse – Mamma er veldig sliten"
+    ],
+    "a": 0,
+    "w": "Det står ikke «som», så det er en metafor. Mamma er der, men hun er like stille og ute av stand til å handle som en stol.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Sinna Mann skrives med stor forbokstav, slik som et navn. Hvorfor?",
+    "o": [
+     "Sinnet blir en egen person – en personifikasjon",
+     "Det er en skrivefeil",
+     "Det er Pappas ekte navn",
+     "Alle ord i boka har stor forbokstav"
+    ],
+    "a": 0,
+    "w": "Navnet gjør sinnet til en skikkelse som kommer og går. Det kalles personifikasjon.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "4": [
+   {
+    "q": "Hva er forskjellen på besjeling og personifikasjon?",
+    "o": [
+     "Besjeling: ting og natur får menneskelige trekk. Personifikasjon: noe abstrakt blir en hel person",
+     "De er motsetninger",
+     "Besjeling bruker «som», personifikasjon gjør det ikke",
+     "Personifikasjon handler bare om dyr"
+    ],
+    "a": 0,
+    "w": "Et hus som sukker, er besjeling. Sinnet som blir til Sinna Mann, er personifikasjon. Noen lærebøker bruker ordene om hverandre.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "📖 Når Sinna Mann tar tak i Mamma, er hun tegnet bitte liten ved siden av den store neven. Hvorfor er hun tegnet slik?",
+    "o": [
+     "For å vise at hun er maktesløs i øyeblikket",
+     "Fordi hun er mye lavere enn Pappa i virkeligheten",
+     "Fordi hun er langt unna",
+     "For å gjøre bildet morsomt"
+    ],
+    "a": 0,
+    "w": "Størrelseskontrasten viser makt, ikke høyde. Også i teksten blir hun mindre.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Historien fortelles fra Bojs perspektiv. Hva betyr det for leseren?",
+    "o": [
+     "Vi opplever volden gjennom et barns frykt og forvirring",
+     "Vi får vite alt Pappa tenker",
+     "Vi ser alt fra Kongens slott",
+     "Vi får en nøytral nyhetsreportasje"
+    ],
+    "a": 0,
+    "w": "Barneperspektivet forklarer de store og rare bildene. Vi ser det slik Boj opplever det, ikke slik en voksen ville sett det.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "📖 Naboen vet hva som skjer, og Boj vet at hun vet. Hva betyr det for budskapet?",
+    "o": [
+     "Andre voksne ser det – Boj er ikke helt alene",
+     "At naboen er skyld i det",
+     "At hemmeligheten er trygg",
+     "At ingen bryr seg"
+    ],
+    "a": 0,
+    "w": "Hemmeligheten er ikke så godt bevart som Mamma tror, og det åpner for at noen kan hjelpe.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "📖 I teksten gjentas det at Pappa følger etter dem fra rom til rom. Hvilken virkning har gjentakelsen?",
+    "o": [
+     "Ingen steder i huset er trygge – spenningen øker",
+     "Den gjør scenen rolig",
+     "Den viser at de leker sisten",
+     "Den har ingen virkning"
+    ],
+    "a": 0,
+    "w": "Gjentakelsen høres ut som skritt bak dem, og leseren kjenner hvordan det er å bli jaget.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "5": [
+   {
+    "q": "Hvorfor skriver Boj til akkurat Kongen?",
+    "o": [
+     "Kongen er den mektigste og tryggeste voksne han kan tenke seg – et symbol på beskyttelse",
+     "Fordi Kongen er i familie med ham",
+     "Fordi læreren ba ham om det",
+     "Fordi Kongen er nabo"
+    ],
+    "a": 0,
+    "w": "Boj stoler på Kongen. Vi kan tolke Kongen som et symbol på en voksen som har makt til å stoppe det vonde.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvorfor kan en bildebok være god til å snakke om vanskelige ting?",
+    "o": [
+     "Bilder, symboler og et barneperspektiv gjør det lettere å sette ord på følelser",
+     "Fordi bildebøker alltid har en lykkelig slutt",
+     "Fordi barn ikke forstår tekst",
+     "Fordi bildebøker er korte"
+    ],
+    "a": 0,
+    "w": "En personifikasjon som Sinna Mann og symbolske farger gir ord og bilder til det som er vanskelig å si.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Sammenlign «Sinnet er en vulkan» med «Sinnet er som en vulkan». Hvorfor blir metaforen ofte regnet som sterkere?",
+    "o": [
+     "Den sier at noe ER noe annet – bildet blir mer direkte",
+     "Fordi den er lengre",
+     "Fordi den rimer",
+     "Fordi den bruker ordet «som»"
+    ],
+    "a": 0,
+    "w": "Sammenligningen holder de to tingene fra hverandre, mens metaforen smelter dem sammen.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Utenfra ser familien helt vanlig ut, men innenfor er det farlig. Hvordan henger dette sammen med temaet hemmelighold?",
+    "o": [
+     "Hjemmet ser normalt ut utenfra, mens volden skjules innenfor – akkurat som en hemmelighet",
+     "Det passer ikke",
+     "Det viser at familien er rik",
+     "Det viser at alt egentlig er bra"
+    ],
+    "a": 0,
+    "w": "Virkemidlene speiler temaet. Det pene skjuler det vonde helt til noen sier fra.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "📖 Kongen sier til Pappa at han er sterkere enn Sinna Mann. Hva betyr det for spørsmålet om ansvar?",
+    "o": [
+     "Pappa kan og må ta ansvar – sinnet er ingen unnskyldning for volden",
+     "At Sinna Mann har skylden, ikke Pappa",
+     "At Boj har skylden",
+     "At Kongen skal slåss mot Sinna Mann"
+    ],
+    "a": 0,
+    "w": "Personifikasjonen kunne fått det til å se ut som om sinnet har skylden. Men Kongen sier at Pappa er sterkere, og Pappa sier selv at det er hans skyld.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilken påstand om virkemidler er best begrunnet?",
+    "o": [
+     "«Nyhus bruker størrelseskontrast: Pappa fyller oppslaget mens Boj er liten i hjørnet. Det viser hvor maktesløs Boj føler seg.»",
+     "«Bildene er fine.»",
+     "«Det er mange virkemidler i boka.»",
+     "«Pappa er stor.»"
+    ],
+    "a": 0,
+    "w": "Slik gjør du det: Navngi virkemiddelet, vis et eksempel og forklar virkningen.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ]
+ }
+}
