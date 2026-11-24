@@ -121,7 +121,9 @@ Status 20.11.2026: klassen hadde nesten fullført gallery walk-starteren (trinne
 - **Ingen spørsmål eller fasit ligger i repoet.** Læreren lager kategorier, spørsmål, 2–6 svaralternativer, riktig svar, forklaring og bilder i «✏️ Rediger spørsmål». Alt lagres i lærerens nettleser (`konk_sett_<id>`); spilltilstand og elevnavn i `konk_spill_<id>`. «📤 Lagre som fil» / «📥 Hent inn sett» flytter et sett mellom PC-er (JSON med bildene innebygd).
 - Bilder kan vises sammen med spørsmålet, i X sekunder før spørsmålet (huskeoppgave) eller etter svaret.
 - **Samarbeid:** laget velger et hjelperlag og et spørsmål; riktig svar = 250 poeng, og 250 til hjelperlaget hvis læreren bekrefter at hjelpen bidro. Feil svar koster ingenting.
-- **Bruk i et nytt tema:** lenk fra temasiden til `../../verktoy/konkurranse.html?sett=<fag>-<tema>&tilbake=../<fag>/<tema>/index.html`. `sett` gir hvert tema sitt eget spørsmålssett; `tilbake` styrer tilbake-knappen.
+- **Finnes automatisk i alle fag:** `fag.html` legger til et 🏆 Konkurranse-kort sist i hvert fag (`?sett=<fag>&fag=<fag>&tilbake=../fag.html?fag=<fag>`). Nye fag i `katalog.js` får kortet uten mer arbeid.
+- **Flere sett per fag:** på startskjermen velger læreren spørsmålssett i en meny eller lager et nytt («＋ Nytt sett» → id `<fag>-<navn>`). Menyen viser alle sett i nettleseren som hører til faget (`<fag>` og `<fag>-*`), også sett som åpnes fra en temaside.
+- **Lenke fra en temaside (valgfritt):** `../../verktoy/konkurranse.html?sett=<fag>-<tema>&tilbake=../<fag>/<tema>/index.html` – brukes av Sinna Mann.
 - Merk: raw.githack.com er et delt nettsted, så det som ligger i localStorage der, kan i prinsippet leses av andre sider på samme adresse. Når portalen flyttes til egen adresse (Vercel), er dette løst.
 
 ### Norsk – Virkemidler i bildebok – Sinna Mann (`norsk/sinna-mann/`)

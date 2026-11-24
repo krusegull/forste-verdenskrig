@@ -230,6 +230,9 @@ select.inp{font-weight:800}
    <div id="sUnder" style="font-family:Fraunces,serif;font-size:24px;color:var(--muted)"></div>
    <div id="sCount" style="color:var(--muted);font-weight:800;margin-top:8px"></div>
   </div>
+  <div class="panel" id="settPanel"><h3>Spørsmålssett</h3><div class="orow" style="flex-wrap:wrap;gap:8px"><select class="inp" id="settSel" style="max-width:460px;flex:1 1 260px"></select><button class="ghost" id="settNew">＋ Nytt sett</button><button class="ghost" id="settDel" hidden>🗑 Slett settet</button></div>
+   <div id="settNewBox" hidden style="margin-top:10px"><div class="orow" style="flex-wrap:wrap;gap:8px"><input class="inp" id="settName" maxlength="60" placeholder="Navn på settet, f.eks. Første verdenskrig – repetisjon" style="flex:1 1 300px"><button class="big" id="settMake" style="font-size:16px;padding:9px 20px">Lag settet</button></div></div>
+   <p class="note" style="margin:8px 0 0">Lag så mange sett du vil – ett for hvert tema eller hver repetisjon. Settene lagres bare i denne nettleseren.</p></div>
   <div id="resume"></div>
   <div class="panel">
    <h3>Lag og deltakere</h3>
@@ -287,6 +290,7 @@ select.inp{font-weight:800}
 const PARAMS=new URLSearchParams(location.search);
 const SETT=((PARAMS.get("sett")||"standard").toLowerCase().replace(/[^a-z0-9-]/g,""))||"standard";
 const SKEY="konk_sett_"+SETT, KEY="konk_spill_"+SETT, TILBAKE=PARAMS.get("tilbake")||"";
+const FAM=((PARAMS.get("fag")||SETT.split("-")[0]).toLowerCase().replace(/[^a-z0-9]/g,""))||"standard";
 const KC=["#8c2f39","#4a3a6b","#2e4a6b","#a8622e","#3a5a3e","#6b4423","#2e6a8a"];
 const KE=["📘","🧩","💡","🔍","🎨","⭐","👁️"];
 const MAXCAT=7, MAXOPT=6, LETTERS="ABCDEF";
@@ -692,7 +696,7 @@ function chooseHelper(gi){ const g=G.groups[gi], others=G.groups.map((x,k)=>k).f
    settet mellom PC-er.
    ===================================================================== */
 let edTab="opp";
-function updSetup(){ const t=QSET.tittel||"Konkurranse"; $("sTitle").textContent=t; $("sUnder").textContent=QSET.under||""; $("hudLogo").textContent=t; document.title=t;
+function updSetup(){ if(typeof renderSett==="function"&&$("settSel")) try{ renderSett(); }catch(e){} const t=QSET.tittel||"Konkurranse"; $("sTitle").textContent=t; $("sUnder").textContent=QSET.under||""; $("hudLogo").textContent=t; document.title=t;
   const n=playable(); $("sCount").innerHTML=n?`✅ ${n} spørsmål er klare til bruk.`:`Det er ingen spørsmål her ennå. Trykk <b>✏️ Rediger spørsmål</b> for å lage dem, eller hent inn et ferdig sett.`; }
 function openEditor(){ $("editor").classList.add("on"); renderEditor(); }
 function closeEditor(){ saveSet(true); $("editor").classList.remove("on"); }
@@ -779,7 +783,26 @@ function edImport(){ if(!$("editor").classList.contains("on")) $("editor").class
 $("editBtn").onclick=openEditor; $("edClose").onclick=closeEditor; $("edExp").onclick=edExport; $("edImp").onclick=edImport; $("impBtn").onclick=edImport;
 $("edReset").onclick=()=>{ const b=$("edReset"); if(b.dataset.sure){ QSET=emptySet(); edTab="opp"; saveSet(true); renderEditor(); toast("Alt er tømt"); delete b.dataset.sure; b.textContent="🗑 Tøm alt"; }
   else { b.dataset.sure=1; b.textContent="Klikk igjen for å tømme alt"; setTimeout(()=>{ delete b.dataset.sure; b.textContent="🗑 Tøm alt"; },3500); } };
-if(TILBAKE && /^[a-z0-9\-\/\.]+\.html$/i.test(TILBAKE) && !/^\/\/|:/.test(TILBAKE)){ $("backLink").href=TILBAKE; $("backLink").hidden=false; }
+if(TILBAKE && /^[a-z0-9\-\/\.]+\.html(\?fag=[a-z0-9\-]+)?$/i.test(TILBAKE) && !/^\/\/|:/.test(TILBAKE)){ $("backLink").href=TILBAKE; $("backLink").hidden=false; }
+/* ---------- flere spørsmålssett per fag ---------- */
+function settUrl(id){ const q=new URLSearchParams(); q.set("sett",id); q.set("fag",FAM); if(TILBAKE) q.set("tilbake",TILBAKE); return "konkurranse.html?"+q.toString(); }
+function listSett(){ const out=[]; try{ for(let i=0;i<localStorage.length;i++){ const k=localStorage.key(i); if(!k||!k.startsWith("konk_sett_")) continue; const id=k.slice(10);
+    if(id===FAM||id.startsWith(FAM+"-")){ let t=id; try{ t=JSON.parse(localStorage.getItem(k)).tittel||id; }catch(e){} out.push({id,t}); } } }catch(e){}
+  if(!out.some(x=>x.id===SETT)) out.push({id:SETT,t:QSET.tittel||SETT});
+  if(!out.some(x=>x.id===FAM)) out.push({id:FAM,t:"Konkurranse (tomt sett)"}); return out.sort((a,b)=>a.t.localeCompare(b.t,"nb")); }
+function renderSett(){ const l=listSett(); $("settSel").innerHTML=l.map(x=>`<option value="${esc(x.id)}" ${x.id===SETT?"selected":""}>${esc(x.t)}${x.id===SETT?"":""}</option>`).join("");
+  $("settDel").hidden=!(SETT!==FAM && l.length>1); }
+$("settSel").onchange=e=>{ location.href=settUrl(e.target.value); };
+$("settNew").onclick=()=>{ $("settNewBox").hidden=!$("settNewBox").hidden; if(!$("settNewBox").hidden) $("settName").focus(); };
+$("settMake").onclick=()=>{ const n=strip($("settName").value).trim(); if(!n) return toast("Skriv et navn på settet først");
+  const slug=n.toLowerCase().replace(/æ/g,"ae").replace(/ø/g,"o").replace(/å/g,"a").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,40)||"sett";
+  let id=FAM+"-"+slug, k=2; while(localStorage.getItem("konk_sett_"+id)!==null) id=FAM+"-"+slug+"-"+(k++);
+  const ny=emptySet(); ny.tittel=n.slice(0,60); try{ localStorage.setItem("konk_sett_"+id,JSON.stringify(ny)); }catch(e){ return toast("Det er ikke plass til flere sett i nettleseren"); }
+  location.href=settUrl(id); };
+$("settName").onkeydown=e=>{ if(e.key==="Enter") $("settMake").click(); };
+$("settDel").onclick=()=>{ const b=$("settDel"); if(!b.dataset.sure){ b.dataset.sure=1; b.textContent="Slette for godt? Klikk igjen"; return; }
+  try{ localStorage.removeItem(SKEY); localStorage.removeItem(KEY); }catch(e){} location.href=settUrl(FAM); };
+renderSett();
 updSetup();
 </script>
 </body>

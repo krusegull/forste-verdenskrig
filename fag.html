@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="portal.css">
 <script>/* Henter alltid nyeste fag-liste, så nye fag og temaer vises med en gang */
 document.write('<script src="katalog.js?t='+Date.now()+'"><\/script>');</script>
+<style>.card.konk{background:linear-gradient(135deg,#1f2a44,#3a2f5c)!important}</style>
 </head>
 <body>
 <main class="wrap">
@@ -38,6 +39,14 @@ if (!fag) {
         <span class="desc">${esc(t.beskrivelse || "")}</span>
         <span class="meta">Start →</span></a>`).join("")
     : `<p class="empty">Ingen temaer her ennå.</p>`;
+  /* Konkurransemalen finnes automatisk i alle fag – læreren lager spørsmålene selv */
+  const tilbake = encodeURIComponent("../fag.html?fag=" + fag.id);
+  document.getElementById("temaer").insertAdjacentHTML("beforeend",
+    `<a class="card konk" href="verktoy/konkurranse.html?sett=${encodeURIComponent(fag.id)}&amp;fag=${encodeURIComponent(fag.id)}&amp;tilbake=${tilbake}">
+      <span class="ic">🏆</span>
+      <h2>Konkurranse</h2>
+      <span class="desc">Lagkonkurranse på storskjerm. Læreren lager spørsmålene selv.</span>
+      <span class="meta">Start →</span></a>`);
 }
 </script>
 </body>
