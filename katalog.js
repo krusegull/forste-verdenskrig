@@ -30,7 +30,7 @@ const KATALOG = [
       {
         navn: "Den kalde krigen",
         ikon: "🧊",
-        beskrivelse: "Supermaktene, ideologier, allianser, brennpunkter og slutten på den kalde krigen",
+        beskrivelse: "Reisen i 13 stasjoner og konkurransen JERNTEPPET – forberedelse til prøven",
         lenke: "samfunnsfag/kalde-krigen/index.html"
       }
     ]

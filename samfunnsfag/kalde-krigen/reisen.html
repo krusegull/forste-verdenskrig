@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Den kalde krigen – en reise i 13 stasjoner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef2f6; --ink:#16202b; --muted:#4d5d6e; --saffron:#c0392b; --marigold:#9fb3c8;
+  --maroon:#1f3a5f; --teal:#2e6a8a; --indigo:#1f3a5f; --card:#fbfcfe; --line:#d5dee8;
+  --ok:#2f7d4a; --bad:#b33a3a; --panelW:min(600px,46vw);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--bg);color:var(--ink);font-family:Nunito,system-ui,sans-serif}
+button{font-family:inherit;cursor:pointer}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;margin:0}
+.om{font-family:"Noto Sans Devanagari",serif}
+
+/* top bar */
+#topbar{position:fixed;top:0;left:0;right:0;height:58px;display:flex;align-items:center;gap:10px;padding:0 14px;
+  background:rgba(251,252,254,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);z-index:30}
+#topbar h1{font-size:20px;white-space:nowrap}
+#topbar .om{color:var(--saffron);font-size:24px;margin-right:2px}
+#topbar .spacer{flex:1}
+.tbtn{white-space:nowrap;border:1px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font-weight:700;font-size:14px;color:var(--ink)}
+.tbtn:hover{border-color:var(--saffron)}
+#progress{font-size:13px;color:var(--muted);font-weight:700;white-space:nowrap}
+#progress .bar{display:inline-block;width:90px;height:8px;border-radius:9px;background:var(--line);vertical-align:middle;margin-left:6px;overflow:hidden}
+#progress .bar i{display:block;height:100%;background:var(--saffron);width:0;transition:width .4s}
+
+/* world */
+#viewport{position:fixed;inset:58px 0 0 0;overflow:hidden;
+  background:linear-gradient(90deg,#e6edf5 0,#f3f6f9 49.6%,#c0392b22 49.6%,#c0392b22 50.4%,#f7eeee 50.4%,#efe3e3 100%)}
+#world{position:absolute;left:0;top:0;width:2400px;height:1500px;transform-origin:0 0;
+  transition:transform 1s cubic-bezier(.6,.05,.25,1)}
+#paths{position:absolute;inset:0;pointer-events:none}
+.mandala{position:absolute;left:1200px;top:750px;transform:translate(-50%,-50%);pointer-events:none;opacity:.5}
+#center{position:absolute;left:1200px;top:750px;transform:translate(-50%,-50%);text-align:center;width:640px}
+#center .om{font-size:150px;line-height:1;color:var(--saffron)}
+#center h2{font-size:78px;color:var(--maroon);letter-spacing:-1px}
+#center p{font-size:26px;color:var(--muted);margin:10px 0 0}
+#center button{margin-top:22px;font-size:24px;padding:14px 30px;border-radius:999px;border:0;background:var(--maroon);color:#fff;font-weight:800}
+
+.station{position:absolute;width:250px;height:250px;margin:-125px 0 0 -125px;border-radius:50%;border:0;
+  background:var(--c);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  box-shadow:0 10px 30px rgba(10,25,45,.2),inset 0 0 0 8px rgba(255,255,255,.25);transition:transform .25s,box-shadow .25s;padding:20px}
+.station:hover{transform:scale(1.06);box-shadow:0 16px 40px rgba(60,30,10,.28),inset 0 0 0 8px rgba(255,255,255,.4)}
+.station .emo{font-size:64px;line-height:1}
+.station .t{font-family:Fraunces,serif;font-size:25px;font-weight:800;line-height:1.1;margin-top:8px}
+.station .num{position:absolute;top:-8px;left:-8px;width:56px;height:56px;border-radius:50%;background:#fff;color:var(--c);
+  font-weight:800;font-size:24px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.station .done{position:absolute;top:-8px;right:-8px;width:52px;height:52px;border-radius:50%;background:var(--ok);color:#fff;
+  font-size:28px;display:none;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.station.visited .done{display:flex}
+.station .words{position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:14px;width:330px;
+  font-size:15px;color:var(--muted);font-weight:700;letter-spacing:.3px}
+
+/* panel */
+#panel{position:fixed;top:58px;right:0;bottom:0;width:var(--panelW);background:var(--card);z-index:20;
+  box-shadow:-10px 0 40px rgba(60,30,10,.18);transform:translateX(105%);transition:transform .55s cubic-bezier(.6,.05,.25,1);
+  display:flex;flex-direction:column}
+#panel.open{transform:none}
+#panelHead{padding:18px 22px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;background:var(--c,#8c2f39);color:#fff}
+#panelHead .emo{font-size:40px}
+#panelHead small{display:block;opacity:.85;font-weight:700;font-size:13px;letter-spacing:.5px;text-transform:uppercase}
+#panelHead h2{font-size:26px;line-height:1.1}
+#closeBtn{margin-left:auto;background:rgba(255,255,255,.2);border:0;color:#fff;width:40px;height:40px;border-radius:50%;font-size:22px;flex:none}
+#panelBody{flex:1;overflow-y:auto;padding:20px 24px 30px;font-size:17px;line-height:1.55}
+#panelBody h3{font-size:20px;margin:22px 0 6px;color:var(--maroon)}
+#panelBody h3:first-child{margin-top:0}
+#panelBody p{margin:0 0 10px}
+#panelBody ul{margin:0 0 10px;padding-left:20px}
+#panelBody li{margin-bottom:6px}
+.term{background:#dce8f4;border-bottom:2px dotted var(--saffron);padding:0 3px;border-radius:3px;cursor:help;font-weight:700}
+.box{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:12px 0}
+.think{background:#eef4f3;border-left:5px solid var(--teal);border-radius:10px;padding:12px 14px;margin:14px 0}
+.think b{color:var(--teal)}
+.timeline{list-style:none;padding:0!important;border-left:3px solid var(--marigold);margin-left:8px!important}
+.timeline li{position:relative;padding:0 0 10px 18px}
+.timeline li:before{content:"";position:absolute;left:-9px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--saffron);border:3px solid var(--card)}
+.timeline b{display:block;color:var(--maroon)}
+.task{margin-top:26px;border:2px solid var(--c,#8c2f39);border-radius:16px;padding:16px;background:#fff}
+.task h3{margin-top:0!important;color:var(--ink)!important}
+.task .q{color:var(--muted);margin-bottom:12px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:10px 0;border-bottom:1px solid var(--line)}
+.row:last-of-type{border-bottom:0}
+.row .txt{flex:1 1 220px}
+.pill{border:2px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;font-weight:800;font-size:14px}
+.pill.sel{border-color:var(--indigo);background:var(--indigo);color:#fff}
+.fb{flex-basis:100%;font-size:15px;display:none;padding:6px 10px;border-radius:8px}
+.fb.show{display:block}
+.fb.ok{background:#e4f3e8;color:var(--ok)}
+.fb.bad{background:#f8e3e3;color:var(--bad)}
+select{font-family:inherit;font-size:15px;padding:7px 8px;border-radius:10px;border:2px solid var(--line);background:#fff;max-width:100%}
+select.ok{border-color:var(--ok);background:#e4f3e8}
+select.bad{border-color:var(--bad);background:#f8e3e3}
+.go{margin-top:12px;border:0;border-radius:999px;padding:10px 20px;background:var(--c,#8c2f39);color:#fff;font-weight:800;font-size:15px}
+.ghost{margin-top:12px;border:2px solid var(--line);border-radius:999px;padding:8px 16px;background:#fff;font-weight:800;font-size:14px}
+.result{margin-top:10px;font-weight:800}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.chip{border:2px solid var(--line);background:#fff;border-radius:12px;padding:8px 12px;font-weight:700;font-size:15px}
+.chip.used{opacity:.3;pointer-events:none}
+.answer{min-height:48px;border:2px dashed var(--line);border-radius:12px;padding:8px;display:flex;flex-direction:column;gap:6px}
+.answer div{background:#dce8f4;border-radius:8px;padding:6px 10px;font-weight:700}
+.answer div.ok{background:#e4f3e8;color:var(--ok)}
+.answer div.bad{background:#f8e3e3;color:var(--bad)}
+.flips{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.flip{perspective:800px;height:130px;border:0;background:none;padding:0}
+.flip .in{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flip.on .in{transform:rotateY(180deg)}
+.flip .f,.flip .b{position:absolute;inset:0;border-radius:14px;display:flex;align-items:center;justify-content:center;padding:10px;
+  backface-visibility:hidden;text-align:center}
+.flip .f{background:var(--c,#8c2f39);color:#fff;font-family:Fraunces,serif;font-size:22px;font-weight:800}
+.flip .b{background:#fff;border:2px solid var(--c,#8c2f39);transform:rotateY(180deg);font-size:14px;line-height:1.35;color:var(--ink)}
+textarea{width:100%;min-height:80px;font-family:inherit;font-size:15px;padding:10px;border-radius:12px;border:2px solid var(--line);resize:vertical}
+.prompt{font-weight:700;margin:14px 0 6px}
+.saved{font-size:13px;color:var(--muted)}
+#panelFoot{display:flex;gap:10px;padding:12px 18px;border-top:1px solid var(--line);background:#fff}
+#panelFoot button{flex:1;border:2px solid var(--line);background:#fff;border-radius:999px;padding:10px;font-weight:800;font-size:15px}
+#panelFoot #nextBtn{background:var(--c,#8c2f39);border-color:transparent;color:#fff}
+.qopt{display:block;width:100%;text-align:left;border:2px solid var(--line);background:#fff;border-radius:12px;padding:10px 12px;margin:6px 0;font-size:15px;font-weight:700}
+.qopt.ok{border-color:var(--ok);background:#e4f3e8}
+.qopt.bad{border-color:var(--bad);background:#f8e3e3}
+.qopt:disabled{cursor:default;color:var(--ink)}
+.qnum{color:var(--muted);font-weight:800;font-size:14px}
+
+/* modal */
+#modal{position:fixed;inset:0;background:rgba(43,29,23,.55);z-index:50;display:none;align-items:center;justify-content:center;padding:16px}
+#modal.show{display:flex}
+#modalBox{background:var(--card);border-radius:20px;max-width:620px;width:100%;max-height:86vh;overflow:auto;padding:26px 28px;box-shadow:0 20px 60px rgba(0,0,0,.3);font-size:17px;line-height:1.55}
+#modalBox h2{color:var(--maroon);font-size:30px;margin-bottom:8px}
+#modalBox ul{padding-left:20px}
+#modalBox .go{background:var(--maroon)}
+.gloss dt{font-weight:800;color:var(--maroon);margin-top:10px}
+.gloss dd{margin:2px 0 0 0}
+#search{width:100%;font-size:16px;padding:10px 12px;border-radius:12px;border:2px solid var(--line);margin:6px 0 4px}
+#tip{position:fixed;z-index:60;max-width:280px;background:var(--ink);color:#fff;font-size:14px;line-height:1.4;padding:10px 12px;border-radius:10px;display:none;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+
+@media (max-width:820px){
+  :root{--panelW:100vw}
+  #topbar h1 .long{display:none}
+  #progress .bar{display:none}
+  .tbtn{padding:7px 10px;font-size:13px}
+}
+@media (max-width:520px){ #topbar h1{font-size:17px} #goalsBtn{display:none} #progress{display:none} #topbar h1 .om{display:none} }
+@media (prefers-reduced-motion:reduce){ #world,#panel,.flip .in{transition:none} }
+</style>
+</head>
+<body>
+
+<header id="topbar">
+  <a href="index.html" title="Til temaets forside" style="text-decoration:none;font-size:22px;margin-right:4px">🏠</a><h1><span class="om">🧊</span> Den kalde krigen<span class="long"> – en reise</span></h1>
+  <div class="spacer"></div>
+  <span id="progress"><span id="progTxt">0/12</span><span class="bar"><i id="progBar"></i></span></span>
+  <button class="tbtn" id="overviewBtn">🗺️ Oversikt</button>
+  <button class="tbtn" id="glossBtn">📖 Begreper</button>
+  <button class="tbtn" id="goalsBtn">🎯 Mål</button>
+</header>
+
+<div id="viewport">
+  <div id="world">
+    <svg id="paths" width="2400" height="1500"></svg>
+    <svg class="mandala" width="900" height="900" viewBox="-450 -450 900 900" aria-hidden="true" id="mandala"></svg>
+    <div id="center">
+      <div class="om" style="font-size:120px">🌍</div>
+      <h2>Den kalde krigen</h2>
+      <p>USA og Sovjetunionen 1947–1991 – en reise i <span id="nSt"></span> stasjoner</p>
+      <p style="font-size:20px;margin-top:6px"><b style="color:#1f3a5f">🇺🇸 Vest</b> &nbsp;·&nbsp; <b style="color:#c0392b">Øst ☭</b></p>
+      <button id="startBtn">Start reisen →</button>
+    </div>
+  </div>
+</div>
+
+<aside id="panel" aria-live="polite">
+  <div id="panelHead">
+    <span class="emo" id="pEmo"></span>
+    <div><small id="pNum"></small><h2 id="pTitle"></h2></div>
+    <button id="closeBtn" aria-label="Lukk og gå til oversikten">✕</button>
+  </div>
+  <div id="panelBody"></div>
+  <div id="panelFoot">
+    <button id="prevBtn">← Forrige</button>
+    <button id="nextBtn">Neste →</button>
+  </div>
+</aside>
+
+<div id="modal"><div id="modalBox"></div></div>
+<div id="tip"></div>
+
+<script>
+/* ---------- Begrepsbank (fra forberedelsesheftet) ---------- */
+const GLOSS = {
+  "den kalde krigen":"Konflikten mellom USA og Sovjetunionen og deres allierte, fra omtrent 1947 til 1991, uten direkte krig mellom supermaktene.",
+  "supermakt":"Et land med stor politisk, økonomisk og militær makt i verden.",
+  "ideologi":"Ideer om hvordan et samfunn bør styres og organiseres.",
+  "jernteppet":"Betegnelse på det politiske og ideologiske skillet mellom Øst-Europa og Vest-Europa.",
+  "maktbalanse":"Fordelingen av makt mellom land, der ingen enkeltmakt nødvendigvis kan dominere de andre.",
+  "kapitalisme":"Økonomisk system med privat eiendomsrett, der bedrifter og konkurranse spiller en viktig rolle.",
+  "kommunisme":"Ideologi med mål om et klasseløst samfunn med felles eierskap til produksjonsmidlene.",
+  "demokrati":"Styreform der folket har politisk innflytelse, blant annet gjennom frie valg.",
+  "diktatur":"Styreform der makten er samlet hos én person eller en liten gruppe, og folket har begrenset politisk frihet.",
+  "ettpartistat":"Et land der bare ett parti har lov til å styre. I Sovjetunionen hadde kommunistpartiet all makt.",
+  "markedsøkonomi":"Økonomisk system der tilbud og etterspørsel i stor grad bestemmer produksjon og priser.",
+  "planøkonomi":"Økonomisk system der staten bestemmer mye av hva som skal produseres, og hvordan ressursene skal fordeles.",
+  "Trumandoktrinen":"USAs politikk fra 1947 for å hindre at kommunismen spredte seg.",
+  "Marshallhjelpen":"Økonomisk støtte fra USA til gjenoppbyggingen av Europa etter andre verdenskrig. Kalles også Marshallplanen.",
+  "allianse":"Samarbeid mellom land, ofte om forsvar og sikkerhet.",
+  "NATO":"Forsvarsallianse opprettet i 1949 av USA, Canada og flere vesteuropeiske land. Norge var med fra starten.",
+  "Warszawapakten":"Militærallianse opprettet i 1955 mellom Sovjetunionen og flere kommunistiske land i Øst-Europa.",
+  "våpenkappløp":"Konkurranse mellom land om å utvikle og skaffe stadig flere og kraftigere våpen.",
+  "atomvåpen":"Våpen med enorm ødeleggelseskraft som frigjør energi fra atomreaksjoner.",
+  "terrorbalanse":"Situasjon der frykten for gjensidig ødeleggelse kan hindre land i å angripe hverandre.",
+  "stedfortrederkrig":"Krig der stormakter støtter ulike parter i stedet for å kjempe direkte mot hverandre.",
+  "propaganda":"Informasjon som brukes for å påvirke menneskers meninger og holdninger.",
+  "spionasje":"Å skaffe hemmelig informasjon om andre land, organisasjoner eller personer.",
+  "etterretning":"Å samle inn og analysere informasjon, ofte om andre lands planer og virksomhet.",
+  "overvåking":"Å følge med på eller kontrollere personer, grupper eller aktiviteter.",
+  "sensur":"Når myndigheter eller andre med makt begrenser eller kontrollerer informasjon og ytringer.",
+  "Red Scare":"Kommunistfrykten i USA, som førte til mistanke, undersøkelser og anklager mot mennesker som ble oppfattet som kommunister.",
+  "ytringsfrihet":"Retten til å uttrykke egne meninger uten urimelig innblanding eller straff fra myndighetene.",
+  "okkupasjonssone":"Et område som et annet land kontrollerer etter en krig. Tyskland ble delt i fire okkupasjonssoner i 1945.",
+  "blokade":"Å stenge veier eller forbindelser inn til et område, slik at varer og mennesker ikke kommer fram.",
+  "dominoteorien":"USAs frykt for at hvis ett land ble kommunistisk, ville nabolandene følge etter – som dominobrikker.",
+  "våpenhvile":"En avtale om å stanse kampene, uten at det nødvendigvis er inngått en fredsavtale.",
+  "sivilbefolkning":"Vanlige mennesker som ikke er soldater.",
+  "avspenning":"En periode med mindre spenning mellom øst og vest, blant annet etter Cubakrisen.",
+  "mujahedin":"Afghanske motstandsgrupper som kjempet mot de sovjetiske styrkene i Afghanistan.",
+  "glasnost":"Betyr åpenhet. Gorbatsjovs reformpolitikk som skulle gi større åpenhet i Sovjetunionen.",
+  "perestrojka":"Betyr omstrukturering. Gorbatsjovs forsøk på å endre Sovjetunionens økonomiske og politiske system.",
+  "reform":"En endring som skal forbedre et eksisterende system.",
+  "oppløsning":"Når en stat eller organisasjon opphører å eksistere i sin tidligere form.",
+  "demokratisering":"En utvikling der et samfunn får mer demokratiske styreformer.",
+  "konsekvens":"En følge av noe. Politiske konsekvenser er følger for makt, styresett, lover og forholdet mellom land. Økonomiske konsekvenser er følger for arbeid, produksjon, handel og økonomi. Menneskelige konsekvenser er følger for menneskers liv, frihet, trygghet og levekår."
+};
+const T = (w,label)=>`<span class="term" data-t="${w}">${label||w}</span>`;
+
+/* ---------- Stasjoner ---------- */
+const S = [
+{ id:"hva-er", title:"Hva var den kalde krigen?", emo:"🧊", c:"#1f3a5f", lm:1, words:"supermakter · mistillit · 1947–1991",
+  html:`
+<h3>To supermakter</h3>
+<p>Etter andre verdenskrig i 1945 vokste <b>USA</b> og <b>Sovjetunionen</b> fram som verdens to ${T("supermakt","supermakter")}. De hadde stor militær og politisk makt og kunne påvirke andre land.</p>
+<h3>Fra allierte til fiender</h3>
+<p>Landene hadde samarbeidet under krigen mot Hitler-Tyskland, men de var uenige om hvordan Europa skulle styres etterpå. Begge ønsket mer makt og innflytelse.</p>
+<div class="box" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+<div><b>🇺🇸 USA fryktet …</b><br>at Sovjetunionen skulle spre ${T("kommunisme","kommunismen")} til flere land.</div>
+<div><b>☭ Sovjetunionen fryktet …</b><br>trusler fra USA og vestlige land.</div>
+</div>
+<p>Ulike ${T("ideologi","ideologier")} skapte <b>mistillit</b> og spenning.</p>
+<h3>Hvorfor «kald»?</h3>
+<p>Konflikten ble kalt ${T("den kalde krigen")} fordi supermaktene <b>aldri gikk til direkte krig mot hverandre</b>. Likevel konkurrerte de om makt, utviklet våpen og støttet ulike parter i kriger andre steder i verden.</p>
+<div class="think"><b>Tenk over:</b> Hvorfor kan to land som har vært allierte i en krig, bli fiender like etterpå?</div>`,
+  task:{type:"tf", title:"Sant eller usant?", items:[
+    ["USA og Sovjetunionen kjempet mot hverandre i en direkte krig.",false,"Usant. Supermaktene gikk aldri til direkte krig mot hverandre – derfor kalles det en kald krig."],
+    ["USA og Sovjetunionen samarbeidet under andre verdenskrig.",true,"Sant. De var allierte mot Hitler-Tyskland, men ble uenige om hvordan Europa skulle styres etterpå."],
+    ["Den kalde krigen varte fra omtrent 1947 til 1991.",true,"Sant. Den tok slutt da Sovjetunionen ble oppløst i 1991."],
+    ["Sovjetunionen fryktet at USA skulle spre kommunismen.",false,"Usant. Det var USA som fryktet at Sovjetunionen skulle spre kommunismen. Sovjetunionen fryktet trusler fra USA og vestlige land."],
+    ["En supermakt er et land med stor politisk, økonomisk og militær makt.",true,"Sant. Etter 1945 var det bare to slike land: USA og Sovjetunionen."]
+  ]}
+},
+{ id:"truman", title:"Truman og Marshall", emo:"🤝", c:"#2e6a8a", lm:1, words:"Trumandoktrinen · Marshallhjelpen",
+  html:`
+<h3>${T("Trumandoktrinen")} (1947)</h3>
+<p>I 1947 innførte USAs president Harry S. Truman en ny politikk: USA skulle hjelpe land som ble truet av kommunismen. Målet var å <b>hindre at kommunismen spredte seg</b>.</p>
+<h3>${T("Marshallhjelpen")}</h3>
+<p>Europa lå i ruiner etter krigen. Gjennom Marshallhjelpen ga USA <b>økonomisk støtte</b> til gjenoppbyggingen av Europa. Norge var blant landene som tok imot hjelpen.</p>
+<p>Målet var ikke bare å hjelpe. USA ønsket også å <b>hindre at flere land ble kommunistiske</b>. Land med fattigdom og nød kunne være lettere å vinne for kommunistene.</p>
+<div class="think"><b>Tenk over:</b> Var Marshallhjelpen et vennlig gaveutdeling eller et politisk våpen? Kan den ha vært begge deler?</div>`,
+  task:{type:"match", title:"Koble sammen", q:"Velg riktig forklaring til hvert begrep.", pairs:[
+    ["Trumandoktrinen","USAs politikk for å hindre kommunismens spredning"],
+    ["Marshallhjelpen","Økonomisk støtte til gjenoppbyggingen av Europa"],
+    ["Supermakt","Land med stor politisk, økonomisk og militær makt"],
+    ["Mistillit","Når man ikke stoler på hverandre"],
+    ["1947","Året den kalde krigen regnes å starte"]
+  ]}
+},
+{ id:"ideologi", title:"To ideologier", emo:"⚖️", c:"#8c2f39", lm:2, words:"demokrati · diktatur · plan- og markedsøkonomi",
+  html:`
+<p>En viktig årsak til den kalde krigen var at USA og Sovjetunionen hadde ulike ${T("ideologi","ideologier")}, styresett og økonomiske systemer.</p>
+<div class="box" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;font-size:16px">
+<div><h3 style="margin:0 0 6px">🇺🇸 USA</h3>
+<ul style="margin:0">
+<li><b>Styresett:</b> ${T("demokrati")} – innbyggerne velger hvem som skal styre, gjennom frie valg</li>
+<li><b>Økonomi:</b> ${T("kapitalisme")} og ${T("markedsøkonomi")} – privatpersoner og bedrifter eier virksomheter og konkurrerer om å selge varer og tjenester</li>
+</ul></div>
+<div><h3 style="margin:0 0 6px">☭ Sovjetunionen</h3>
+<ul style="margin:0">
+<li><b>Styresett:</b> kommunistisk ${T("diktatur")} og ${T("ettpartistat")} – kommunistpartiet har makten, og det finnes ingen frie valg mellom ulike partier</li>
+<li><b>Økonomi:</b> ${T("planøkonomi")} – staten bestemmer mye av hva som skal produseres, hvordan varene skal fordeles og hva de skal koste</li>
+</ul></div>
+</div>
+<h3>Hvorfor ble det konflikt?</h3>
+<p>Begge supermaktene ønsket å <b>spre sitt eget samfunnssystem</b> og hindre at den andre fikk større innflytelse. Dette førte til konflikter både i Europa og i resten av verden.</p>
+<div class="think"><b>Tenk over:</b> ${T("kommunisme","Kommunismen")} har som mål et klasseløst samfunn. Hvorfor kan et slikt mål ende i et diktatur?</div>`,
+  task:{type:"match", title:"USA eller Sovjetunionen?", q:"Hvilken supermakt passer beskrivelsen best?", pairs:[
+    ["Frie valg mellom flere partier","USA"],
+    ["Kommunistpartiet har all makt","Sovjetunionen"],
+    ["Staten bestemmer hva som skal produseres","Sovjetunionen"],
+    ["Bedrifter konkurrerer om å selge varer","USA"],
+    ["Ettpartistat","Sovjetunionen"],
+    ["Kapitalisme","USA"]
+  ]}
+},
+{ id:"blokker", title:"Øst og vest", emo:"🧱", c:"#55452a", lm:3, words:"jernteppet · NATO · Warszawapakten",
+  html:`
+<h3>Et delt Europa</h3>
+<p>Under den kalde krigen ble Europa delt i to maktblokker:</p>
+<ul>
+<li><b>Vestblokken</b> ble ledet av USA.</li>
+<li><b>Østblokken</b> var dominert av Sovjetunionen.</li>
+</ul>
+<p>Skillet mellom øst og vest ble kalt ${T("jernteppet")}.</p>
+<h3>Militære ${T("allianse","allianser")}</h3>
+<div class="box">
+<p><b>1949 – ${T("NATO")}</b><br>En forsvarsallianse med USA i spissen, sammen med Canada og flere vesteuropeiske land. <b>Norge var blant medlemslandene fra starten.</b></p>
+<p style="margin:0"><b>1955 – ${T("Warszawapakten")}</b><br>Sovjetunionen og flere kommunistiske land i Øst-Europa dannet sin egen militærallianse.</p>
+</div>
+<div class="think"><b>Tenk over:</b> Norge grenser til Russland (tidligere Sovjetunionen) i nord. Hvorfor kan det ha vært viktig for Norge å bli med i NATO?</div>`,
+  task:{type:"tf", title:"Sant eller usant?", items:[
+    ["Norge var med i Warszawapakten.",false,"Usant. Norge var med i NATO fra opprettelsen i 1949."],
+    ["NATO ble opprettet før Warszawapakten.",true,"Sant. NATO kom i 1949, Warszawapakten i 1955."],
+    ["Jernteppet var en ekte mur av jern tvers gjennom Europa.",false,"Usant. Jernteppet er et bilde på det politiske og ideologiske skillet mellom øst og vest."],
+    ["Østblokken var dominert av Sovjetunionen.",true,"Sant. Vestblokken ble ledet av USA."],
+    ["En allianse er et samarbeid mellom land, ofte om forsvar og sikkerhet.",true,"Sant. NATO og Warszawapakten var militære allianser."]
+  ]}
+},
+{ id:"vapen", title:"Våpenkappløp og terror­balanse", emo:"☢️", c:"#a8622e", lm:3, words:"atomvåpen · terrorbalanse · stedfortrederkrig",
+  html:`
+<h3>${T("våpenkappløp","Våpenkappløpet")}</h3>
+<p>USA og Sovjetunionen konkurrerte om å utvikle stadig flere og kraftigere våpen. Begge landene fikk ${T("atomvåpen")}.</p>
+<h3>${T("terrorbalanse","Terrorbalansen")}</h3>
+<p>Fordi begge hadde atomvåpen, fryktet begge et <b>ødeleggende motangrep</b> dersom de selv angrep. Frykten for gjensidig ødeleggelse kunne derfor hindre krig – men den gjorde også verden svært farlig.</p>
+<h3>${T("stedfortrederkrig","Stedfortrederkriger")}</h3>
+<p>Den kalde krigen spredte seg til andre verdensdeler. I stedet for å kjempe direkte mot hverandre støttet supermaktene ulike parter i kriger, blant annet i <b>Korea</b> og <b>Vietnam</b>. Slike kriger kalles stedfortrederkriger.</p>
+<div class="think"><b>Tenk over:</b> Hvordan kan militære allianser og atomvåpen gjøre et land tryggere, men samtidig skape større spenning mellom øst og vest?</div>`,
+  task:{type:"flip", title:"Snukort", q:"Prøv å forklare begrepet selv før du snur kortet.", cards:[
+    ["Våpen­kappløp","Konkurranse mellom land om å utvikle og skaffe stadig flere og kraftigere våpen."],
+    ["Atom­våpen","Våpen med enorm ødeleggelseskraft som frigjør energi fra atomreaksjoner."],
+    ["Terror­balanse","Frykten for gjensidig ødeleggelse hindrer land i å angripe hverandre."],
+    ["Stedfor­treder­krig","Stormakter støtter ulike parter i stedet for å kjempe direkte mot hverandre."],
+    ["Makt­balanse","Fordelingen av makt mellom land, der ingen nødvendigvis kan dominere de andre."],
+    ["Allianse","Samarbeid mellom land, ofte om forsvar og sikkerhet."]
+  ]},
+  extra:{type:"reflect", title:"Skriv", prompts:["Hvorfor kunne militære allianser og atomvåpen gjøre landene tryggere, men samtidig skape større spenning mellom øst og vest?"]}
+},
+{ id:"propaganda", title:"Propaganda og spionasje", emo:"🕵️", c:"#4a3a6b", lm:4, words:"CIA · KGB · Red Scare",
+  html:`
+<h3>Kampen om hva folk tenkte</h3>
+<p>USA og Sovjetunionen kjempet ikke bare om militær og politisk makt, men også om hva folk tenkte og mente. Begge brukte ${T("propaganda")} for å framstille sitt eget samfunn som det beste og motstanderen som en trussel. Propaganda ble spredt gjennom plakater, aviser, radio, filmer og TV.</p>
+<ul><li><b>USA</b> framhevet demokrati og frihet.</li><li><b>Sovjetunionen</b> framhevet kommunismen og økonomisk likhet.</li></ul>
+<h3>${T("spionasje","Spionasje")}</h3>
+<p>Begge supermaktene drev med spionasje for å skaffe hemmelig informasjon om hverandres våpen, teknologi og militære planer. USA hadde ${T("etterretning","etterretningsorganisasjonen")} <b>CIA</b>, mens Sovjetunionen hadde <b>KGB</b>. Spionasjen bidro til mer mistillit og frykt.</p>
+<h3>${T("overvåking","Overvåking")} av egne innbyggere</h3>
+<p>I USA oppsto en periode kjent som ${T("Red Scare")} (kommunistfrykten), særlig på 1950-tallet. Mange ble mistenkt for å være kommunister, ofte uten bevis, og enkelte mistet jobbene sine.</p>
+<p>I Sovjetunionen kontrollerte myndighetene informasjonen befolkningen fikk (${T("sensur")}), og de overvåket mennesker som var kritiske til staten. ${T("ytringsfrihet","Ytringsfriheten")} var sterkt begrenset.</p>
+<h3>Og i dag?</h3>
+<p>Overvåking brukes fortsatt, blant annet for å forebygge kriminalitet og beskytte nasjonal sikkerhet. Samtidig reiser dette spørsmål om <b>personvern</b>, ytringsfrihet og hvor mye kontroll myndighetene bør ha over innbyggerne.</p>`,
+  task:{type:"tf", title:"Sant eller usant?", items:[
+    ["Bare Sovjetunionen brukte propaganda.",false,"Usant. Begge supermaktene brukte propaganda for å framstille sitt eget samfunn som det beste."],
+    ["CIA var Sovjetunionens etterretningsorganisasjon.",false,"Usant. CIA var amerikansk. Sovjetunionens organisasjon het KGB."],
+    ["Under Red Scare ble mange mistenkt for å være kommunister, ofte uten bevis.",true,"Sant. Enkelte mistet jobbene sine."],
+    ["Sensur betyr at myndighetene begrenser eller kontrollerer informasjon og ytringer.",true,"Sant. I Sovjetunionen kontrollerte myndighetene informasjonen befolkningen fikk."],
+    ["Overvåking er ikke i bruk lenger i dag.",false,"Usant. Overvåking brukes fortsatt, og det reiser spørsmål om personvern og ytringsfrihet."]
+  ]},
+  extra:{type:"reflect", title:"Utforsk og se sammenhenger", prompts:["Hvordan brukes propaganda og overvåking i dag? Nevn ett eksempel.","Hvilke likheter og forskjeller finner du sammenlignet med den kalde krigen?"]}
+},
+{ id:"tyskland", title:"Tyskland og Berlin", emo:"🏙️", c:"#3a5a3e", lm:5, words:"Berlinblokaden · Berlinmuren",
+  html:`
+<h3>Et land i fire deler</h3>
+<p>Etter andre verdenskrig i 1945 ble Tyskland og hovedstaden Berlin delt i fire ${T("okkupasjonssone","okkupasjonssoner")}. <b>USA, Storbritannia, Frankrike og Sovjetunionen</b> kontrollerte hver sin del. Berlin lå inne i den sovjetiske sonen.</p>
+<h3>${T("blokade","Berlinblokaden")} 1948–1949</h3>
+<p>Vestmaktene ønsket å bygge opp den tyske økonomien, mens Sovjetunionen ønsket at Tyskland skulle betale erstatning etter krigen. I 1948 innførte vestmaktene nye penger i sine områder. Da stengte Sovjetunionen landveiene inn til Vest-Berlin.</p>
+<p>Vestmaktene svarte med å frakte mat og varer inn <b>med fly</b>. Blokaden tok slutt i 1949. Samme år ble Tyskland delt i to stater:</p>
+<ul><li><b>Vest-Tyskland</b> – demokrati</li><li><b>Øst-Tyskland</b> – kommunistisk styresett</li></ul>
+<h3>Berlinmuren 1961</h3>
+<p>Mange mennesker flyktet fra Øst-Tyskland til Vest-Tyskland. I 1961 bygde myndighetene i øst <b>Berlinmuren</b> for å hindre flukten gjennom Berlin. Muren delte byen og skilte familier fra hverandre. Den ble et viktig symbol på den kalde krigen.</p>
+<div class="think"><b>Tenk over:</b> Velg Berlinblokaden eller Berlinmuren. Hvilke politiske, økonomiske eller menneskelige konsekvenser fikk hendelsen?</div>`,
+  task:{type:"order", title:"Sett i riktig rekkefølge", q:"Trykk på hendelsene i den rekkefølgen de skjedde (eldst først).", items:[
+    "Tyskland deles i fire okkupasjonssoner","Vestmaktene innfører nye penger","Sovjetunionen stenger veiene til Vest-Berlin","Vestmaktene frakter mat inn med fly","Tyskland deles i Vest- og Øst-Tyskland","Berlinmuren bygges"
+  ]}
+},
+{ id:"korea", title:"Korea", emo:"⚔️", c:"#2e4a6b", lm:5, words:"Koreakrigen · dominoteorien · våpenhvile",
+  html:`
+<h3>Et delt land</h3>
+<p>Etter andre verdenskrig ble Korea delt i to. Sovjetunionen hadde kontrollert den nordlige delen, mens USA hadde kontrollert den sørlige. Landene fikk etter hvert ulike styresett: <b>Nord-Korea</b> ble kommunistisk, mens <b>Sør-Korea</b> ble knyttet til USA og vestlige land.</p>
+<h3>Koreakrigen 1950–1953</h3>
+<p>I 1950 angrep Nord-Korea Sør-Korea. USA fryktet at kommunismen skulle spre seg til flere land i Asia. Denne tankegangen kalles ${T("dominoteorien")}. USA ønsket derfor å hindre at Sør-Korea ble kommunistisk.</p>
+<ul>
+<li>Etter et vedtak i <b>FN</b> kjempet amerikanske styrker på Sør-Koreas side, sammen med styrker fra flere andre land.</li>
+<li>Nord-Korea fikk hjelp fra <b>Kina</b> og <b>Sovjetunionen</b>.</li>
+<li><b>Norge</b> bidro med et feltsykehus.</li>
+</ul>
+<h3>Hvordan endte det?</h3>
+<p>I 1953 ble det inngått en ${T("våpenhvile")}. Krigshandlingene stoppet, men Korea forble delt i to stater – slik det fortsatt er i dag. Krigen førte til store ødeleggelser og mange menneskelige tap.</p>
+<div class="think"><b>Tenk over:</b> Koreakrigen viser hvordan den kalde krigen kunne føre til krig i andre land, selv om USA og Sovjetunionen ikke kjempet direkte mot hverandre. Hvorfor er det et eksempel på en ${T("stedfortrederkrig")}?</div>`,
+  task:{type:"tf", title:"Sant eller usant?", items:[
+    ["Koreakrigen startet ved at Nord-Korea angrep Sør-Korea.",true,"Sant. Det skjedde i 1950."],
+    ["Koreakrigen endte med at landet ble samlet.",false,"Usant. Det ble inngått en våpenhvile i 1953, men Korea forble delt."],
+    ["Norge bidro med et feltsykehus i Korea.",true,"Sant."],
+    ["Nord-Korea fikk hjelp fra USA.",false,"Usant. Nord-Korea fikk hjelp fra Kina og Sovjetunionen. Sør-Korea fikk hjelp fra USA og flere land etter et vedtak i FN."],
+    ["Dominoteorien handlet om frykten for at kommunismen skulle spre seg fra land til land.",true,"Sant. Derfor ville USA hindre at Sør-Korea ble kommunistisk."]
+  ]}
+},
+{ id:"vietnam", title:"Vietnam", emo:"🚁", c:"#5a6b2e", lm:5, words:"Vietnamkrigen · sivilbefolkning · båtflyktninger",
+  html:`
+<h3>Fra koloni til delt land</h3>
+<p>Vietnam hadde tidligere vært en fransk koloni. På 1950-tallet ble landet delt i to. <b>Nord-Vietnam</b> var kommunistisk og fikk støtte fra Sovjetunionen og Kina. <b>Sør-Vietnam</b> fikk etter hvert stadig større støtte fra USA.</p>
+<h3>Hvorfor ble USA med?</h3>
+<p>USA fryktet at kommunismen skulle spre seg til flere land i Asia. Det bygde på ${T("dominoteorien")}. USA ønsket derfor å hindre at kommunistene tok kontroll over hele Vietnam.</p>
+<h3>Vietnamkrigen 1955–1975</h3>
+<p>USA deltok med store mengder våpen og soldater. Sovjetunionen og Kina støttet Nord-Vietnam med blant annet våpen. Krigen førte til enorme ødeleggelser og rammet ${T("sivilbefolkning","sivilbefolkningen")} hardt.</p>
+<p>Gjennom TV og andre medier fikk mennesker over hele verden se bilder fra krigen. Det førte til økende motstand og store protester, også i USA.</p>
+<h3>Slutten</h3>
+<p>I 1975 endte krigen med <b>kommunistisk seier</b>. Vietnam ble samlet under kommunistisk styre. Mange mennesker flyktet fra landet, blant annet i båter, og noen av disse flyktningene kom til <b>Norge</b>.</p>`,
+  task:{type:"match", title:"Årsak eller konsekvens?", q:"Var dette en årsak til Vietnamkrigen eller en konsekvens av den?", pairs:[
+    ["USA fryktet at kommunismen skulle spre seg i Asia","Årsak"],
+    ["Landet ble delt i et kommunistisk nord og et sør støttet av USA","Årsak"],
+    ["Store protester mot krigen i USA","Konsekvens"],
+    ["Vietnam ble samlet under kommunistisk styre","Konsekvens"],
+    ["Båtflyktninger kom blant annet til Norge","Konsekvens"]
+  ]},
+  extra:{type:"reflect", title:"Se ulike perspektiver", prompts:["Hvordan kunne krigen oppleves annerledes for vanlige mennesker i Vietnam enn for lederne i USA? Bruk eksempler fra teksten."]}
+},
+{ id:"cuba", title:"Cubakrisen", emo:"🚀", c:"#9b2c2c", lm:5, words:"atomraketter · Kennedy · Khrusjtsjov",
+  html:`
+<h3>En øy like ved USA</h3>
+<p>Cuba er en øy som ligger nær USA. Etter en revolusjon kom <b>Fidel Castro</b> til makten i 1959. Han kom i konflikt med USA, og Cuba fikk et tett samarbeid med Sovjetunionen.</p>
+<h3>Krisen i 1962</h3>
+<p>I 1962 begynte Sovjetunionen å plassere <b>atomraketter</b> på Cuba. Rakettene kunne nå store deler av USA. Da amerikanerne oppdaget dem, oppsto Cubakrisen.</p>
+<p>USAs president <b>John F. Kennedy</b> krevde at Sovjetunionen skulle fjerne rakettene. Konflikten førte til stor spenning, og verden var nær en atomkrig.</p>
+<h3>Løsningen</h3>
+<p>Etter intense forhandlinger gikk Sovjetunionens leder <b>Nikita Khrusjtsjov</b> med på å fjerne rakettene fra Cuba. Samtidig godtok USA å fjerne noen av sine raketter fra <b>Tyrkia</b>.</p>
+<p>Cubakrisen viste hvor farlig ${T("våpenkappløp","våpenkappløpet")} hadde blitt – et eksempel på ${T("terrorbalanse")}. Etterpå fulgte en periode med mindre spenning, kalt ${T("avspenning")}.</p>
+<div class="think"><b>Se ulike perspektiver:</b> Hvorfor opplevde USA rakettene på Cuba som en trussel? Og hvorfor kan Sovjetunionen ha ment at det var viktig å støtte Cuba?</div>`,
+  task:{type:"order", title:"Sett i riktig rekkefølge", q:"Trykk på hendelsene i den rekkefølgen de skjedde.", items:[
+    "Fidel Castro kommer til makten etter en revolusjon","Cuba samarbeider tett med Sovjetunionen","Sovjetunionen plasserer atomraketter på Cuba","USA oppdager rakettene, og Kennedy krever dem fjernet","Khrusjtsjov fjerner rakettene, og USA fjerner noen raketter fra Tyrkia","En periode med avspenning"
+  ]}
+},
+{ id:"afghanistan", title:"Afghanistan", emo:"⛰️", c:"#7a5c2e", lm:5, words:"1979–1989 · mujahedin",
+  html:`
+<h3>Invasjonen i 1979</h3>
+<p>I 1979 invaderte Sovjetunionen Afghanistan for å støtte landets kommunistiske regjering, som møtte sterk motstand fra deler av befolkningen.</p>
+<h3>En del av den kalde krigen</h3>
+<p>Afghanske motstandsgrupper, kalt ${T("mujahedin")}, kjempet mot de sovjetiske styrkene. <b>USA støttet motstandsgruppene med penger og våpen</b> for å svekke Sovjetunionen. Krigen ble dermed en del av den kalde krigen og maktkampen mellom supermaktene.</p>
+<h3>Konsekvenser</h3>
+<ul>
+<li>Store ødeleggelser, mange dødsfall og millioner av mennesker på flukt.</li>
+<li>Sovjetunionen trakk styrkene sine ut i <b>1989</b>, etter nesten ti år med krig.</li>
+<li>Krigen hadde svekket Sovjetunionen både økonomisk og militært.</li>
+</ul>
+<div class="think"><b>Se sammenhenger:</b> Hvorfor støttet USA de afghanske motstandsgruppene? Hvordan henger dette sammen med begrepet ${T("stedfortrederkrig")}?</div>`,
+  task:{type:"tf", title:"Sant eller usant?", items:[
+    ["Sovjetunionen invaderte Afghanistan for å støtte en kommunistisk regjering.",true,"Sant. Regjeringen møtte sterk motstand fra deler av befolkningen."],
+    ["USA sendte egne soldater for å kjempe mot Sovjetunionen i Afghanistan.",false,"Usant. Ifølge heftet støttet USA de afghanske motstandsgruppene med penger og våpen."],
+    ["Mujahedin var afghanske motstandsgrupper.",true,"Sant. De kjempet mot de sovjetiske styrkene."],
+    ["Krigen gjorde Sovjetunionen sterkere.",false,"Usant. Krigen svekket Sovjetunionen både økonomisk og militært."],
+    ["Sovjetunionen trakk seg ut av Afghanistan i 1989.",true,"Sant, etter nesten ti år med krig."]
+  ]}
+},
+{ id:"slutten", title:"Slutten på den kalde krigen", emo:"🕊️", c:"#2f7d4a", lm:6, words:"Gorbatsjov · 1989 · 1991",
+  html:`
+<h3>Et svekket Sovjetunionen</h3>
+<p>På 1980-tallet fikk Sovjetunionen store økonomiske problemer. Landet hadde brukt mye penger på våpenkappløpet og krigen i Afghanistan. I tillegg fungerte det økonomiske systemet dårlig.</p>
+<p>Mange mennesker i Øst-Europa var misfornøyde med de kommunistiske styresmaktene og ønsket større frihet og demokrati. Tidligere hadde Sovjetunionen brukt militær makt for å stanse opprør i flere østeuropeiske land.</p>
+<h3>Gorbatsjovs ${T("reform","reformer")}</h3>
+<p>I 1985 ble <b>Mikhail Gorbatsjov</b> leder i Sovjetunionen. Han innførte reformer som skulle gi mer åpenhet, ytringsfrihet og økonomisk frihet: ${T("glasnost")} (åpenhet) og ${T("perestrojka")} (omstrukturering). Han gjorde det også klart at Sovjetunionen ikke lenger ville støtte upopulære kommunistregimer i Øst-Europa på samme måte som før.</p>
+<ul class="timeline">
+<li><b>1989</b>Flere kommunistregimer mister makten, og Berlinmuren blir åpnet – et viktig symbol på slutten av den kalde krigen. Sovjetunionen trekker seg ut av Afghanistan.</li>
+<li><b>1990</b>Tyskland blir samlet.</li>
+<li><b>1991</b>Warszawapakten blir oppløst. Samme år blir Sovjetunionen ${T("oppløsning","oppløst")} i 15 selvstendige stater.</li>
+</ul>
+<h3>${T("konsekvens","Konsekvenser")} av den kalde krigen</h3>
+<div class="box">
+<p><b>Politisk:</b> Europa hadde vært delt mellom øst og vest.</p>
+<p><b>Økonomisk:</b> Landene hadde brukt store summer på våpen.</p>
+<p style="margin:0"><b>Menneskelig:</b> Mange hadde opplevd krig, overvåking, flukt og begrenset frihet.</p>
+</div>`,
+  task:{type:"match", title:"Hvilken type konsekvens?", q:"Er dette en politisk, økonomisk eller menneskelig konsekvens?", pairs:[
+    ["Europa var delt mellom øst og vest","Politisk"],
+    ["Landene brukte store summer på våpen","Økonomisk"],
+    ["Familier ble skilt av Berlinmuren","Menneskelig"],
+    ["Sovjetunionen ble oppløst i 15 stater","Politisk"],
+    ["Millioner flyktet fra krigene i Vietnam og Afghanistan","Menneskelig"],
+    ["Sovjetunionen fikk store økonomiske problemer","Økonomisk"]
+  ]},
+  extra:{type:"reflect", title:"Se sammenhenger og reflekter", prompts:["Hva mener du var den viktigste årsaken til at den kalde krigen tok slutt: økonomiske problemer, Gorbatsjovs reformer eller folkets krav om større frihet? Begrunn svaret med eksempler, og forklar hvordan årsakene hang sammen."]}
+},
+{ id:"quiz", title:"Sluttquiz", emo:"🏆", c:"#1f3a5f", lm:0, words:"Er du klar til prøven?",
+  html:`<p>Nå er det tid for å teste hva du har lært! Quizen har 15 spørsmål. Du ser forklaringen etter hvert svar.</p>`,
+  task:{type:"quiz", qs:[
+    {q:"Hvorfor kalles konflikten mellom USA og Sovjetunionen «den kalde krigen»?",o:["Supermaktene gikk aldri til direkte krig mot hverandre","Kampene foregikk i Arktis","Den foregikk bare om vinteren","Landene sluttet å handle med hverandre"],a:0,w:"De konkurrerte om makt og støttet ulike parter i andre kriger, men kjempet aldri direkte mot hverandre."},
+    {q:"Hva var målet med Trumandoktrinen?",o:["Å gjenoppbygge Tyskland","Å hindre at kommunismen spredte seg","Å skape fred med Sovjetunionen","Å dele Korea i to"],a:1,w:"Trumandoktrinen fra 1947 skulle hindre kommunismens spredning."},
+    {q:"Hva slags økonomi hadde Sovjetunionen?",o:["Markedsøkonomi","Kapitalisme","Planøkonomi","Fri handel"],a:2,w:"I planøkonomi bestemmer staten mye av hva som skal produseres og hva det skal koste."},
+    {q:"Hva betyr ettpartistat?",o:["Et land med frie valg","Et land med to store partier","Et land uten regjering","Et land der bare ett parti har makten"],a:3,w:"I Sovjetunionen hadde kommunistpartiet all makt."},
+    {q:"Hvilken allianse var Norge med i?",o:["NATO","Warszawapakten","Begge","Ingen"],a:0,w:"Norge var med i NATO fra starten i 1949."},
+    {q:"Hva er terrorbalanse?",o:["Like mange soldater på hver side","Frykten for gjensidig ødeleggelse hindrer land i å angripe hverandre","Et samarbeid mot terrorister","En avtale om å kvitte seg med atomvåpen"],a:1,w:"Begge hadde atomvåpen og fryktet et ødeleggende motangrep."},
+    {q:"Hvilken krig er et eksempel på en stedfortrederkrig?",o:["Andre verdenskrig","Første verdenskrig","Koreakrigen","Den kalde krigen selv"],a:2,w:"I Koreakrigen støttet supermaktene hver sin side."},
+    {q:"Hva het etterretningsorganisasjonene til USA og Sovjetunionen?",o:["NATO og KGB","FBI og Stasi","CIA og NATO","CIA og KGB"],a:3,w:"USA hadde CIA, Sovjetunionen hadde KGB."},
+    {q:"Hva var Red Scare?",o:["Kommunistfrykten i USA","En sovjetisk propagandafilm","Et atomvåpen","En militærøvelse i NATO"],a:0,w:"Mange ble mistenkt for å være kommunister, ofte uten bevis."},
+    {q:"Hvorfor ble Berlinmuren bygd i 1961?",o:["For å beskytte Vest-Berlin mot angrep","For å hindre at folk flyktet fra øst til vest","For å markere slutten på krigen","Fordi vestmaktene ville stenge Øst-Berlin ute"],a:1,w:"Mange flyktet fra Øst-Tyskland. Muren skilte familier fra hverandre."},
+    {q:"Hvordan svarte vestmaktene på Berlinblokaden?",o:["De angrep Sovjetunionen","De bygde Berlinmuren","De fraktet mat og varer inn med fly","De ga opp Vest-Berlin"],a:2,w:"Blokaden tok slutt i 1949."},
+    {q:"Hva utløste Cubakrisen?",o:["USA invaderte Cuba","Castro ble styrtet","Cuba ble med i NATO","Sovjetunionen plasserte atomraketter på Cuba"],a:3,w:"Rakettene kunne nå store deler av USA, og verden var nær en atomkrig."},
+    {q:"Hvordan endte Vietnamkrigen i 1975?",o:["Med kommunistisk seier","Med en våpenhvile og et delt land","Med amerikansk seier","Med at Frankrike tok tilbake kolonien"],a:0,w:"Vietnam ble samlet under kommunistisk styre, og mange flyktet."},
+    {q:"Hva betyr glasnost?",o:["Omstrukturering","Åpenhet","Oppløsning","Avspenning"],a:1,w:"Glasnost var en del av Gorbatsjovs reformpolitikk. Perestrojka betyr omstrukturering."},
+    {q:"Hva skjedde med Sovjetunionen i 1991?",o:["Det ble med i NATO","Det invaderte Afghanistan","Det ble oppløst i 15 selvstendige stater","Det ble slått sammen med Tyskland"],a:2,w:"Samme år ble Warszawapakten oppløst."}
+  ]}
+}
+];
+
+/* ---------- Lagring ---------- */
+const store = {
+  get(k,d){ try{ const v=localStorage.getItem("kaldkrig_"+k); return v==null?d:JSON.parse(v);}catch(e){return d;} },
+  set(k,v){ try{ localStorage.setItem("kaldkrig_"+k,JSON.stringify(v)); }catch(e){} }
+};
+let visited = new Set(store.get("visited",[]));
+
+/* ---------- Verden ---------- */
+const W=2400,H=1500, world=document.getElementById("world"), vp=document.getElementById("viewport");
+const N=S.length;
+S.forEach((s,i)=>{
+  const ang = (-90 + i*(360/N)) * Math.PI/180;
+  s.x = 1200 + 960*Math.cos(ang);
+  s.y = 750 + 570*Math.sin(ang);
+});
+// sti
+(function(){
+  const svg=document.getElementById("paths");
+  let d="M"+S.map(s=>s.x.toFixed(0)+" "+s.y.toFixed(0)).join(" L");
+  svg.innerHTML=`<path d="${d}" fill="none" stroke="#8fa3b8" stroke-width="6" stroke-dasharray="4 18" stroke-linecap="round"/>`;
+  // mandala
+  const m=document.getElementById("mandala"); let g="";
+  g+=`<circle r="400" fill="none" stroke="#1f3a5f" stroke-width="2" opacity=".35"/>`;
+  for(let k=1;k<6;k++){ g+=`<ellipse rx="${400*Math.sin(k*Math.PI/6)}" ry="400" fill="none" stroke="#1f3a5f" stroke-width="1.2" opacity=".2"/>`; }
+  for(let k=-2;k<=2;k++){ const y=k*140, rx=Math.sqrt(400*400-y*y); g+=`<ellipse cy="${y}" rx="${rx}" ry="${rx*0.12}" fill="none" stroke="#c0392b" stroke-width="1.2" opacity=".2"/>`; }
+  m.innerHTML=g;
+})();
+S.forEach((s,i)=>{
+  const b=document.createElement("button");
+  b.className="station"; b.id="st-"+s.id; b.style.left=s.x+"px"; b.style.top=s.y+"px"; b.style.setProperty("--c",s.c);
+  b.innerHTML=`<span class="num">${i+1}</span><span class="done">✓</span><span class="emo">${s.emo}</span><span class="t">${s.title}</span><span class="words">${s.words}</span>`;
+  b.setAttribute("aria-label",`Stasjon ${i+1}: ${s.title}`);
+  b.onclick=()=>openStation(i);
+  world.appendChild(b);
+});
+
+let cur=-1;
+function panelOpen(){return document.getElementById("panel").classList.contains("open");}
+function setView(x,y,s,leftShift){
+  const vw=vp.clientWidth, vh=vp.clientHeight;
+  const cx=(leftShift?leftShift:vw)/2, cy=vh/2;
+  world.style.transform=`translate(${cx-x*s}px,${cy-y*s}px) scale(${s})`;
+}
+function overview(){
+  const vw=vp.clientWidth, vh=vp.clientHeight;
+  const s=Math.min(vw/(W-60),vh/(H-40));
+  setView(W/2,H/2,s);
+}
+function zoomTo(i){
+  const vw=vp.clientWidth, vh=vp.clientHeight;
+  const panelW=document.getElementById("panel").offsetWidth;
+  const wide = vw>820;
+  const areaW = wide ? vw-panelW : vw;
+  const s = Math.max(0.5, Math.min(areaW,vh)*0.6/330);
+  setView(S[i].x, S[i].y+20, s, areaW);
+}
+
+/* ---------- Panel ---------- */
+const panel=document.getElementById("panel"), body=document.getElementById("panelBody");
+function openStation(i){
+  cur=i; const s=S[i];
+  zoomTo(i);
+  panel.style.setProperty("--c",s.c);
+  document.getElementById("panelHead").style.background=s.c;
+  document.getElementById("pEmo").textContent=s.emo;
+  document.getElementById("pNum").textContent=`Stasjon ${i+1} av ${N}`+(s.lm?` · Læringsmål ${s.lm}`:"");
+  document.getElementById("pTitle").textContent=s.title;
+  body.innerHTML=s.html; body.scrollTop=0;
+  if(s.task) body.appendChild(renderTask(s.task,s.id));
+  if(s.extra) body.appendChild(renderTask(s.extra,s.id+"x"));
+  document.getElementById("prevBtn").style.visibility = i===0?"hidden":"visible";
+  document.getElementById("nextBtn").textContent = i===N-1?"Til oversikten 🗺️":"Neste →";
+  setTimeout(()=>panel.classList.add("open"), 350);
+  visited.add(s.id); store.set("visited",[...visited]); updateProgress();
+  try{ history.replaceState(null,"","#"+s.id);}catch(e){}
+}
+function closePanel(){
+  panel.classList.remove("open"); cur=-1; overview();
+  try{ history.replaceState(null,"",location.pathname+location.search);}catch(e){}
+}
+function updateProgress(){
+  document.querySelectorAll(".station").forEach((el,i)=>el.classList.toggle("visited",visited.has(S[i].id)));
+  const n=S.filter(s=>visited.has(s.id)).length;
+  document.getElementById("progTxt").textContent=`${n}/${N} besøkt`;
+  document.getElementById("progBar").style.width=(n/N*100)+"%";
+}
+document.getElementById("closeBtn").onclick=closePanel;
+document.getElementById("overviewBtn").onclick=closePanel;
+document.getElementById("startBtn").onclick=()=>openStation(0);
+document.getElementById("prevBtn").onclick=()=>{ if(cur>0) openStation(cur-1); };
+document.getElementById("nextBtn").onclick=()=>{ if(cur<N-1) openStation(cur+1); else closePanel(); };
+document.addEventListener("keydown",e=>{
+  if(document.getElementById("modal").classList.contains("show")){ if(e.key==="Escape") closeModal(); return; }
+  if(/TEXTAREA|SELECT|INPUT/.test(document.activeElement.tagName)) return;
+  if(e.key==="Escape" && cur>=0) closePanel();
+  if(e.key==="ArrowRight"){ if(cur<0) openStation(0); else if(cur<N-1) openStation(cur+1); }
+  if(e.key==="ArrowLeft" && cur>0) openStation(cur-1);
+});
+window.addEventListener("resize",()=>{ cur>=0?zoomTo(cur):overview(); });
+
+/* ---------- Oppgaver ---------- */
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function el(h){ const d=document.createElement("div"); d.innerHTML=h.trim(); return d.firstChild; }
+
+function renderTask(t,sid){
+  const box=el(`<div class="task"><h3>✏️ ${t.title||"Oppgave"}</h3>${t.q?`<div class="q">${t.q}</div>`:""}</div>`);
+  if(t.type==="tf"){
+    t.items.forEach(([txt,ans,why])=>{
+      const r=el(`<div class="row"><span class="txt">${txt}</span><button class="pill">Sant</button><button class="pill">Usant</button><div class="fb"></div></div>`);
+      const [bS,bU]=r.querySelectorAll(".pill"), fb=r.querySelector(".fb");
+      const pick=(v)=>{ bS.classList.toggle("sel",v); bU.classList.toggle("sel",!v);
+        fb.className="fb show "+(v===ans?"ok":"bad"); fb.textContent=(v===ans?"✓ Riktig. ":"✗ Ikke helt. ")+why; };
+      bS.onclick=()=>pick(true); bU.onclick=()=>pick(false);
+      box.appendChild(r);
+    });
+  }
+  if(t.type==="match"){
+    const rights=[...new Set(t.pairs.map(p=>p[1]))], opts=shuffle(rights);
+    const sels=[];
+    t.pairs.forEach(([l,r])=>{
+      const row=el(`<div class="row"><span class="txt"><b>${l}</b></span><select><option value="">Velg …</option>${opts.map(o=>`<option>${o}</option>`).join("")}</select></div>`);
+      const s=row.querySelector("select"); s.dataset.a=r; s.onchange=()=>s.className=""; sels.push(s); box.appendChild(row);
+    });
+    const res=el(`<div class="result"></div>`), go=el(`<button class="go">Sjekk svarene</button>`);
+    go.onclick=()=>{ let ok=0; sels.forEach(s=>{ const g=s.value===s.dataset.a; if(g)ok++; s.className=s.value?(g?"ok":"bad"):"bad"; });
+      res.textContent = ok===sels.length?`🎉 Alle ${ok} riktige!`:`${ok} av ${sels.length} riktige. Rett opp de røde og prøv igjen.`; };
+    box.append(go,res);
+  }
+  if(t.type==="order"){
+    const chips=el(`<div class="chips"></div>`), ans=el(`<div class="answer"></div>`), res=el(`<div class="result"></div>`);
+    let picked=[];
+    const draw=()=>{ ans.innerHTML = picked.length? picked.map((p,i)=>`<div>${i+1}. ${p}</div>`).join("") : `<span style="color:var(--muted);padding:6px">Svaret ditt kommer her …</span>`; };
+    shuffle(t.items).forEach(it=>{ const c=el(`<button class="chip">${it}</button>`); c.onclick=()=>{ picked.push(it); c.classList.add("used"); draw(); res.textContent=""; }; chips.appendChild(c); });
+    draw();
+    const go=el(`<button class="go">Sjekk rekkefølgen</button>`), rs=el(`<button class="ghost">Start på nytt</button>`);
+    go.onclick=()=>{ if(picked.length<t.items.length){ res.textContent="Plasser alle hendelsene først."; return; }
+      let ok=0; [...ans.children].forEach((d,i)=>{ const g=picked[i]===t.items[i]; if(g)ok++; d.className=g?"ok":"bad"; });
+      res.textContent= ok===t.items.length?"🎉 Perfekt rekkefølge!":`${ok} av ${t.items.length} på riktig plass. Les tidslinjen igjen og prøv på nytt.`; };
+    rs.onclick=()=>{ picked=[]; chips.querySelectorAll(".chip").forEach(c=>c.classList.remove("used")); draw(); res.textContent=""; };
+    box.append(chips,ans,go,document.createTextNode(" "),rs,res);
+  }
+  if(t.type==="flip"){
+    const g=el(`<div class="flips"></div>`);
+    t.cards.forEach(([f,b])=>{ const c=el(`<button class="flip"><div class="in"><div class="f">${f}</div><div class="b">${b}</div></div></button>`); c.onclick=()=>c.classList.toggle("on"); g.appendChild(c); });
+    box.appendChild(g);
+  }
+  if(t.type==="reflect"){
+    box.appendChild(el(`<div class="q">Skriv svarene dine her. De lagres bare i nettleseren din, så kopier dem gjerne til et eget dokument.</div>`));
+    t.prompts.forEach((p,i)=>{
+      const k="r_"+sid+"_"+i;
+      box.appendChild(el(`<div class="prompt">${i+1}. ${p}</div>`));
+      const ta=document.createElement("textarea"); ta.value=store.get(k,""); ta.placeholder="Skriv her …";
+      const sv=el(`<div class="saved"></div>`);
+      ta.oninput=()=>{ store.set(k,ta.value); sv.textContent="Lagret i nettleseren ✓"; };
+      box.append(ta,sv);
+    });
+    const cp=el(`<button class="ghost">📋 Kopier svarene mine</button>`);
+    cp.onclick=()=>{ const txt=t.prompts.map((p,i)=>`${i+1}. ${p}\n${store.get("r_"+sid+"_"+i,"")}`).join("\n\n");
+      navigator.clipboard && navigator.clipboard.writeText(txt).then(()=>cp.textContent="✓ Kopiert!",()=>cp.textContent="Kunne ikke kopiere – merk teksten og kopier selv"); };
+    box.appendChild(cp);
+  }
+  if(t.type==="quiz"){
+    let i=0, score=0; const qs=t.qs;
+    const area=el(`<div></div>`); box.appendChild(area);
+    const show=()=>{
+      if(i>=qs.length){
+        const best=store.get("best",0); if(score>best) store.set("best",score);
+        const msg = score>=14?"Fantastisk – du er en ekspert! 🏆":score>=11?"Veldig bra! 🌟":score>=7?"Godt jobbet! Gå tilbake til stasjonene du var usikker på.":"Ta en ny runde gjennom stasjonene og prøv igjen!";
+        area.innerHTML=`<h3 style="font-size:28px">${score} av ${qs.length} riktige</h3><p>${msg}</p><p class="saved">Din beste poengsum: ${Math.max(score,best)} av ${qs.length}</p>`;
+        const again=el(`<button class="go">Ta quizen på nytt</button>`); again.onclick=()=>{i=0;score=0;show();}; area.appendChild(again); return;
+      }
+      const q=qs[i];
+      area.innerHTML=`<div class="qnum">Spørsmål ${i+1} av ${qs.length} · Poeng: ${score}</div><p style="font-weight:800;font-size:19px;margin:6px 0 10px">${q.q}</p>`;
+      const fb=el(`<div class="fb"></div>`);
+      const btns=q.o.map((o,k)=>{ const b=el(`<button class="qopt">${o}</button>`);
+        b.onclick=()=>{ btns.forEach(x=>x.disabled=true); btns[q.a].classList.add("ok");
+          if(k===q.a){score++; fb.className="fb show ok"; fb.textContent="✓ Riktig! "+q.w;} else {b.classList.add("bad"); fb.className="fb show bad"; fb.textContent="✗ "+q.w;}
+          const nx=el(`<button class="go">${i<qs.length-1?"Neste spørsmål →":"Se resultatet"}</button>`); nx.onclick=()=>{i++;show();}; area.appendChild(nx); };
+        area.appendChild(b); return b; });
+      area.appendChild(fb);
+    };
+    show();
+  }
+  return box;
+}
+
+/* ---------- Begrepsforklaring (tooltip) ---------- */
+const tip=document.getElementById("tip");
+function findGloss(w){ const k=Object.keys(GLOSS).find(k=>k.toLowerCase()===w.toLowerCase()); return k?[k,GLOSS[k]]:null; }
+document.addEventListener("click",e=>{
+  const t=e.target.closest(".term");
+  if(!t){ tip.style.display="none"; return; }
+  const g=findGloss(t.dataset.t); if(!g) return;
+  tip.innerHTML=`<b>${g[0]}</b><br>${g[1]}`; tip.style.display="block";
+  const r=t.getBoundingClientRect(), tw=Math.min(280,window.innerWidth-20);
+  let left=Math.min(Math.max(10,r.left), window.innerWidth-tw-10);
+  let top=r.bottom+8; if(top+120>window.innerHeight) top=r.top-tip.offsetHeight-8;
+  tip.style.left=left+"px"; tip.style.top=top+"px";
+});
+document.getElementById("panelBody").addEventListener("scroll",()=>tip.style.display="none");
+
+/* ---------- Modaler ---------- */
+const modal=document.getElementById("modal"), mbox=document.getElementById("modalBox");
+function openModal(h){ mbox.innerHTML=h; modal.classList.add("show"); const c=mbox.querySelector(".go"); if(c) c.onclick=closeModal; }
+function closeModal(){ modal.classList.remove("show"); }
+modal.addEventListener("click",e=>{ if(e.target===modal) closeModal(); });
+
+function goalsHTML(first){
+  return `<h2>${first?"Velkommen til reisen! 🌍":"🎯 Læringsmål"}</h2>
+  ${first?`<p>Du skal utforske den kalde krigen gjennom <b>${N} stasjoner</b>. Klikk på en stasjon for å zoome inn. Hver stasjon har fagtekst og en oppgave. Ord med <span class="term">blå bakgrunn</span> kan du klikke på for å få en forklaring.</p>`:""}
+  <p><b>Læringsmålene fra forberedelsesheftet:</b></p>
+  <ol>
+  <li>Forklare hva den kalde krigen var, og hvorfor konflikten mellom USA og Sovjetunionen oppstod etter andre verdenskrig.</li>
+  <li>Beskrive forskjellene mellom USA og Sovjetunionen når det gjelder ideologi, styresett og økonomiske systemer.</li>
+  <li>Forklare hvordan den kalde krigen påvirket Europa og resten av verden gjennom allianser, våpenkappløp, terrorbalanse og stedfortrederkriger.</li>
+  <li>Forklare hvordan propaganda, spionasje og overvåking ble brukt under den kalde krigen, og hvilke konsekvenser dette fikk for mennesker.</li>
+  <li>Gjøre rede for sentrale hendelser i Tyskland, Korea, Vietnam, Cuba og Afghanistan under den kalde krigen, og forklare årsaker og konsekvenser av disse.</li>
+  <li>Forklare hvorfor den kalde krigen tok slutt, og beskrive noen politiske, økonomiske og menneskelige konsekvenser av konflikten.</li>
+  </ol>
+  <p class="saved">Øverst i hver stasjon står det hvilket læringsmål den hører til.</p>
+  <button class="go">${first?"Ok, la oss starte!":"Lukk"}</button>`;
+}
+document.getElementById("goalsBtn").onclick=()=>openModal(goalsHTML(false));
+document.getElementById("glossBtn").onclick=()=>{
+  const keys=Object.keys(GLOSS).sort((a,b)=>a.localeCompare(b,"nb"));
+  openModal(`<h2>📖 Begrepsbank</h2><input id="search" placeholder="Søk etter et begrep …"><dl class="gloss" id="glist">${keys.map(k=>`<div data-k="${k.toLowerCase()}"><dt>${k}</dt><dd>${GLOSS[k]}</dd></div>`).join("")}</dl><button class="go">Lukk</button>`);
+  const s=document.getElementById("search");
+  s.oninput=()=>{ const v=s.value.toLowerCase(); document.querySelectorAll("#glist > div").forEach(d=>d.style.display=d.textContent.toLowerCase().includes(v)?"":"none"); };
+};
+
+/* ---------- Start ---------- */
+document.getElementById("nSt").textContent=N;
+updateProgress();
+overview();
+const h=location.hash.replace("#","");
+const hi=S.findIndex(s=>s.id===h);
+if(hi>=0){ setTimeout(()=>openStation(hi),200); }
+else if(!store.get("seenIntro",false)){ openModal(goalsHTML(true)); store.set("seenIntro",true); }
+</script>
+</body>
+</html>

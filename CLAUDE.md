@@ -34,7 +34,7 @@ portal.css            Felles stil for forside og fagside
 README.md             Kort brukerveiledning
 samfunnsfag/forste-verdenskrig/   Første verdenskrig (kart + spill)
 krle/hinduismen/                  Hinduismen (Reisen + Begrepsreisen)
-samfunnsfag/kalde-krigen/         Den kalde krigen (kort til Konkurranse JERNTEPPET)
+samfunnsfag/kalde-krigen/         Den kalde krigen (Reisen + Konkurranse JERNTEPPET)
 norsk/sinna-mann/                 Virkemidler i bildebok – Sinna Mann (kort til Konkurranse)
 verktoy/konkurranse.html          Felles konkurransemal for ALLE fag/temaer (se 6)
 arsakskjeden.html, begrepsjakten.html, krigsarkivet.html,
@@ -49,7 +49,7 @@ krigsdagbokene.html, togreisen.html   (i rot) = videresendinger til ny plasserin
 
 ### Tekniske prinsipper
 - Hver side er **én selvstendig HTML-fil** (CSS og JS inne i filen). Eneste eksterne avhengigheter: Google Fonts (og d3 i WWI-kartet). Sidene må fungere selv om fontene ikke lastes.
-- Fremdrift lagres i elevens nettleser med `localStorage` (alltid i `try/catch`). Brukte nøkler: `fvk-progress` (WWI, index.html), `fvkbgr_*` (WWI Begrepsreisen), `hindu_*` (Reisen), `bgr_*` (KRLE Begrepsreisen), `konk_sett_<id>` og `konk_spill_<id>` (konkurransemalen). Ikke endre nøklene – da mister elevene fremdriften. Siden alle sider deler samme nettsted-opprinnelse, deler de også localStorage – pass på at nye nøkler ikke kolliderer med disse.
+- Fremdrift lagres i elevens nettleser med `localStorage` (alltid i `try/catch`). Brukte nøkler: `fvk-progress` (WWI, index.html), `fvkbgr_*` (WWI Begrepsreisen), `hindu_*` (Reisen), `bgr_*` (KRLE Begrepsreisen), `konk_sett_<id>` og `konk_spill_<id>` (konkurransemalen), `kaldkrig_*` (Den kalde krigen – Reisen). Ikke endre nøklene – da mister elevene fremdriften. Siden alle sider deler samme nettsted-opprinnelse, deler de også localStorage – pass på at nye nøkler ikke kolliderer med disse.
 - Må fungere på Chromebook/PC (storskjerm) og mobil.
 
 ## 4. Samfunnsfag – Første verdenskrig (`samfunnsfag/forste-verdenskrig/`)
@@ -130,7 +130,8 @@ Status 20.11.2026: klassen hadde nesten fullført gallery walk-starteren (trinne
 - Merk: raw.githack.com er et delt nettsted, så det som ligger i localStorage der, kan i prinsippet leses av andre sider på samme adresse. Når portalen flyttes til egen adresse (Vercel), er dette løst.
 
 ### Samfunnsfag – Den kalde krigen (`samfunnsfag/kalde-krigen/`)
-- Bygger på trinnets forberedelseshefte til skriftlig prøve (6 læringsmål + fagbegreper). `index.html` har ett kort: **Konkurranse – JERNTEPPET** (`sett=samfunnsfag-kalde-krigen`).
+- Bygger på trinnets forberedelseshefte til skriftlig prøve (6 læringsmål + fagbegreper). `index.html` har to kort: **Reisen** og **Konkurranse – JERNTEPPET** (`sett=samfunnsfag-kalde-krigen`).
+- `reisen.html` – «Den kalde krigen – en reise i 13 stasjoner»: samme zoommotor som krle/hinduismen/reisen.html (stasjon → læringsmål vises i panelhodet). Stasjoner: `hva-er`, `truman`, `ideologi`, `blokker`, `vapen`, `propaganda`, `tyskland`, `korea`, `vietnam`, `cuba`, `afghanistan`, `slutten`, `quiz` (15 spørsmål). Begrepsbanken følger heftets begrepsliste. localStorage-prefiks: `kaldkrig_`.
 - Standardsett: `verktoy/sett/samfunnsfag-kalde-krigen.json` – 66 spørsmål, én kategori per læringsmål + «Fagbegreper». Fakta og definisjoner følger heftets tekster og begrepsliste.
 
 ### Norsk – Virkemidler i bildebok – Sinna Mann (`norsk/sinna-mann/`)
