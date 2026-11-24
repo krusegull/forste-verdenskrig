@@ -33,6 +33,8 @@ portal.css            Felles stil for forside og fagside
 README.md             Kort brukerveiledning
 samfunnsfag/forste-verdenskrig/   Første verdenskrig (kart + spill)
 krle/hinduismen/                  Hinduismen (Reisen + Begrepsreisen)
+norsk/sinna-mann/                 Virkemidler i bildebok – Sinna Mann (kort til Konkurranse)
+verktoy/konkurranse.html          Felles konkurransemal for ALLE fag/temaer (se 6)
 arsakskjeden.html, begrepsjakten.html, krigsarkivet.html,
 krigsdagbokene.html, togreisen.html   (i rot) = videresendinger til ny plassering – IKKE slett, gamle elevlenker bruker dem
 ```
@@ -45,7 +47,7 @@ krigsdagbokene.html, togreisen.html   (i rot) = videresendinger til ny plasserin
 
 ### Tekniske prinsipper
 - Hver side er **én selvstendig HTML-fil** (CSS og JS inne i filen). Eneste eksterne avhengigheter: Google Fonts (og d3 i WWI-kartet). Sidene må fungere selv om fontene ikke lastes.
-- Fremdrift lagres i elevens nettleser med `localStorage` (alltid i `try/catch`). Brukte nøkler: `fvk-progress` (WWI, index.html), `fvkbgr_*` (WWI Begrepsreisen), `hindu_*` (Reisen), `bgr_*` (KRLE Begrepsreisen). Ikke endre nøklene – da mister elevene fremdriften. Siden alle sider deler samme nettsted-opprinnelse, deler de også localStorage – pass på at nye nøkler ikke kolliderer med disse.
+- Fremdrift lagres i elevens nettleser med `localStorage` (alltid i `try/catch`). Brukte nøkler: `fvk-progress` (WWI, index.html), `fvkbgr_*` (WWI Begrepsreisen), `hindu_*` (Reisen), `bgr_*` (KRLE Begrepsreisen), `konk_sett_<id>` og `konk_spill_<id>` (konkurransemalen). Ikke endre nøklene – da mister elevene fremdriften. Siden alle sider deler samme nettsted-opprinnelse, deler de også localStorage – pass på at nye nøkler ikke kolliderer med disse.
 - Må fungere på Chromebook/PC (storskjerm) og mobil.
 
 ## 4. Samfunnsfag – Første verdenskrig (`samfunnsfag/forste-verdenskrig/`)
@@ -112,7 +114,22 @@ Trinnets PowerPoint inneholder elevlister – **legg aldri elevnavn i repoet.**
 1. Hva er hinduismen? (stasjon 1–2, tidslinje) · 2. Livets kretsløp og verden er evig (5) · 3. Gud og gudene (3, ekspertpar Ganesha/Krishna/Rama) · 4. Symboler og tre veier (4, 5) · 5. Puja og hindutempelet (7, tegn et tempel) · 6. Høytider og overgangsritualer (8, 7) · 7. Leveregler, kaste og hinduismen i Norge (9, 11, 12) · 8. Repetisjon og vurdering (13 + lærerspill).
 Status 20.11.2026: klassen hadde nesten fullført gallery walk-starteren (trinnets slide ~8); neste time = resten av uke 1.
 
-## 6. Lærerressurser som IKKE ligger her (bare lenker for Eirik – aldri til elevene)
+## 6. Konkurransemalen (`verktoy/konkurranse.html`) og Norsk
+
+### Konkurransemalen
+- Én felles, **tom** spillmotor (samme format som lærerspillene YUGA/FRONTLINJEN/SI FRA): skjebnehjul (velg selv, tilfeldig lag, lynrunde, dobbel ✖️2, samarbeid, bonus), opptil 7 kategorier × 5 nivåer (100–500), lynspørsmål på nivå 1–5, fire faser som blir vanskeligere, kraftkort, angrep på 500 i finalen, elevnavn, lærer-PIN og lærervisning.
+- **Ingen spørsmål eller fasit ligger i repoet.** Læreren lager kategorier, spørsmål, 2–6 svaralternativer, riktig svar, forklaring og bilder i «✏️ Rediger spørsmål». Alt lagres i lærerens nettleser (`konk_sett_<id>`); spilltilstand og elevnavn i `konk_spill_<id>`. «📤 Lagre som fil» / «📥 Hent inn sett» flytter et sett mellom PC-er (JSON med bildene innebygd).
+- Bilder kan vises sammen med spørsmålet, i X sekunder før spørsmålet (huskeoppgave) eller etter svaret.
+- **Samarbeid:** laget velger et hjelperlag og et spørsmål; riktig svar = 250 poeng, og 250 til hjelperlaget hvis læreren bekrefter at hjelpen bidro. Feil svar koster ingenting.
+- **Bruk i et nytt tema:** lenk fra temasiden til `../../verktoy/konkurranse.html?sett=<fag>-<tema>&tilbake=../<fag>/<tema>/index.html`. `sett` gir hvert tema sitt eget spørsmålssett; `tilbake` styrer tilbake-knappen.
+- Merk: raw.githack.com er et delt nettsted, så det som ligger i localStorage der, kan i prinsippet leses av andre sider på samme adresse. Når portalen flyttes til egen adresse (Vercel), er dette løst.
+
+### Norsk – Virkemidler i bildebok – Sinna Mann (`norsk/sinna-mann/`)
+- Bildebok av Gro Dahle (tekst) og Svein Nyhus (bilder), Cappelen 2003. Fokus: kontrast, besjeling, personifikasjon, sammenligning, metafor, motiv og tema.
+- `index.html` har ett kort: **Konkurranse** (`sett=norsk-sinna-mann`).
+- Det ferdige spørsmålssettet (62 spørsmål, med Eiriks egne bilder fra boka) er levert til Eirik som fil (`sinna-mann-konkurranse.json`) og hentes inn med «📥 Hent inn sett». **Fila skal aldri legges i repoet** – den inneholder fasit og bilder fra en opphavsrettsbeskyttet bok.
+
+## 7. Lærerressurser som IKKE ligger her (bare lenker for Eirik – aldri til elevene)
 
 Disse ligger privat på claude.ai (krever Eiriks innlogging):
 - **YUGA – begrepskampen (lærerspill, 2–8 grupper, elevnavn, elevpoeng bak PIN):** https://claude.ai/artifact/PKupCR918BZG6BtdT3pJxP
@@ -120,13 +137,15 @@ Disse ligger privat på claude.ai (krever Eiriks innlogging):
 - **Samsara – kappløpet mot moksha (lagspill på storskjerm):** https://claude.ai/artifact/3zn6aPMhuvu1v4K46A2NFQ
 - **FRONTLINJEN – kunnskapskampen, første verdenskrig (lærerspill, samme mekanikk som YUGA):** https://claude.ai/artifact/S8tATzQpKh4FrqKU6L7hJZ
   – skjebnehjul (velg selv, tilfeldig lag, lynrunde, storoffensiv ✖️2, forsyninger), 5 kategorier (Årsaker og allianser, Krigføring og teknologi, Norge og hjemmefronten, Den russiske revolusjonen, Fredsoppgjøret) × 5 vanskelighetsgrader (100–500) + lynspørsmål, runder = krigens faser (1914→1915–16→1917→1918, vanskeligere for hver), 500 i 1918-fasen = angrip og stjel 300 poeng, maktkort (Speiderrapport 50/50, Feltlegen nytt forsøk, Skyttergraven stopper angrep), elevnavn/PIN/lærervisning identisk med YUGA. Fasit bygger på samme kilder som samfunnsfag/forste-verdenskrig/ (Arena 9, trinnets PowerPoint).
+- **SI FRA – virkemiddelkampen om «Sinna Mann» (lærerspill med bilder fra boka):** https://claude.ai/artifact/4cJ5Jj4NspgDBA68hLxoeV – samme innhold som importfila til konkurransemalen.
+- **TROSS – diktkampen om «Aust-Vågøy» (Inger Hagerup):** https://claude.ai/artifact/Wo3qEWX8yEuEnKE2ni1GH1
 - **Åttukersplan (dokument):** https://claude.ai/artifact/4sW9FBbQJ1BJwH3dg3fMnQ
 - **Første versjon av Reisen (claude.ai):** https://claude.ai/artifact/P4YMx4XFx8KGyRCaRp8UtR og Begrepsreisen: https://claude.ai/artifact/HkXQb5qe4h8pgsATXSDYFW – **repoet er nå hovedversjonen**; gjør endringer her.
 - **PowerPoint «Hinduismen på 5 minutter»** (`Hinduismen_begreper.pptx`, 11 lysbilder, egne illustrasjoner, manus i notatene) – levert til Eirik som fil.
 
 Hvis lærerspill skal videreutvikles i Claude Code: legg dem i et **privat** repo (aldri dette).
 
-## 7. Stil
+## 8. Stil
 - Varme farger for KRLE/hinduismen (safran `#e8871e`, rødbrun `#8c2f39`, gull), mørk nattehimmel for spill. Samfunnsfag/WWI har sin egen stil – behold den.
 - Overskrifter: Fraunces (serif), brødtekst: Nunito. Store, tydelige knapper; tastatursnarveier der det passer.
 - Hver oppgave gir forklaring etter svar, så elevene lærer underveis.

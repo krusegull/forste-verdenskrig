@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Konkurranse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#f3efe0;--muted:#cdc4a8;--gold:#d4a73d;--ok:#22c55e;--bad:#ef4444;--panel:rgba(255,255,255,.07);--line:rgba(255,255,255,.14)}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;color:var(--ink);font-family:Nunito,system-ui,sans-serif;background:#161a13}
+button{font-family:inherit;cursor:pointer}
+h1,h2,h3{margin:0}
+#bg{position:fixed;inset:0;z-index:0;transition:background 2s}
+body.f1 #bg{background:radial-gradient(ellipse at 50% 20%,#2e4a6b 0,#142236 45%,#060b14 100%)}
+body.f2 #bg{background:radial-gradient(ellipse at 50% 20%,#1f5a5e 0,#0f2c30 45%,#040e10 100%)}
+body.f3 #bg{background:radial-gradient(ellipse at 50% 20%,#4a3a6b 0,#221a33 45%,#0a0712 100%)}
+body.f4 #bg{background:radial-gradient(ellipse at 50% 20%,#7a2e2e 0,#350f0f 45%,#0e0303 100%)}
+body.f0 #bg{background:radial-gradient(ellipse at 50% 30%,#22304a 0,#10141f 60%)}
+.screen{position:fixed;inset:0;z-index:1;display:none}
+.screen.on{display:flex}
+.logo{font-family:"Bebas Neue",sans-serif;font-weight:400;letter-spacing:5px;background:linear-gradient(180deg,#fff2c4,#d4a73d 50%,#9a6a1a);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 22px rgba(212,167,61,.35))}
+.big{border:0;border-radius:10px;padding:15px 36px;font-size:21px;font-weight:900;color:#241a00;background:linear-gradient(180deg,#f0d998,#d4a73d 60%,#9a6a1a);box-shadow:0 8px 28px rgba(212,167,61,.35),inset 0 -3px 0 rgba(0,0,0,.15);transition:transform .15s}
+.big:hover:not(:disabled){transform:translateY(-2px) scale(1.02)}
+.big:disabled{opacity:.35;cursor:default}
+.ghost{border:2px solid var(--line);background:rgba(255,255,255,.06);color:var(--ink);border-radius:10px;padding:10px 18px;font-weight:900;font-size:15px}
+.ghost:hover{border-color:var(--gold)}
+
+/* ---------- SETUP ---------- */
+#setup{overflow:auto;justify-content:center;padding:24px 16px}
+#sbox{max-width:1100px;width:100%}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;margin-bottom:14px}
+.panel h3{font-family:Fraunces,serif;color:var(--gold);font-size:20px;margin-bottom:10px}
+.seg{display:flex;gap:8px;flex-wrap:wrap}
+.seg button{flex:1 1 120px;border:2px solid var(--line);background:rgba(255,255,255,.04);color:var(--ink);border-radius:10px;padding:10px 12px;font-weight:900;font-size:15px;text-align:left}
+.seg button small{display:block;font-weight:600;color:var(--muted);font-size:12.5px}
+.seg button.sel{border-color:var(--gold);background:rgba(212,167,61,.14)}
+#gin{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.gi{border-radius:10px;background:rgba(0,0,0,.25);padding:10px;border-left:6px solid var(--gc)}
+.gi .h{display:flex;align-items:center;gap:8px;font-weight:900}
+.gi .h span{font-size:24px}
+.gi input,.gi textarea,.inp{width:100%;background:rgba(255,255,255,.07);border:1px solid var(--line);border-radius:8px;color:var(--ink);font:inherit;font-weight:800;padding:7px 9px}
+.gi textarea{margin-top:6px;min-height:62px;resize:vertical;font-weight:600;font-size:14px}
+.gi input:focus,.gi textarea:focus,.inp:focus{outline:2px solid var(--gold)}
+.note{color:var(--muted);font-size:14px;font-weight:600}
+
+/* ---------- GAME ---------- */
+#game{flex-direction:row}
+#stage{flex:1;min-width:0;display:flex;flex-direction:column;position:relative}
+#hud{display:flex;align-items:center;gap:14px;padding:12px 18px}
+#hud .logo{font-size:28px}
+#faseLbl{font-family:Fraunces,serif;font-size:20px;font-weight:900}
+#faseLbl small{display:block;font-family:Nunito;font-size:13px;color:var(--muted);font-weight:800}
+#hud .sp{flex:1}
+#main{flex:1;display:flex;align-items:center;justify-content:center;padding:10px 20px 20px;min-height:0;position:relative}
+#side{width:330px;flex:none;padding:12px 12px 12px 0;display:flex;flex-direction:column;gap:7px;overflow:auto}
+.gc{display:flex;align-items:center;gap:10px;border-radius:12px;padding:9px 12px;background:var(--panel);border:2px solid transparent;transition:all .35s;position:relative;cursor:pointer}
+.gc.cur{border-color:var(--gc);background:rgba(255,255,255,.14);box-shadow:0 0 22px -4px var(--gc)}
+.gc.flash{animation:flash .18s}
+@keyframes flash{50%{background:var(--gc)}}
+.gc.pick{background:var(--gc);color:#1b0f2a}
+.gc .s{font-size:26px;width:34px;text-align:center}
+.gc .n{font-weight:900;font-size:16px;line-height:1.1}
+.gc .cards{font-size:15px;letter-spacing:1px;min-height:18px}
+.gc .p{margin-left:auto;font-family:Fraunces,serif;font-weight:900;font-size:26px;min-width:70px;text-align:right}
+.gc .r{position:absolute;left:-6px;top:-6px;background:var(--gold);color:#241a00;border-radius:999px;font-size:11px;font-weight:900;padding:2px 6px}
+.fl{position:absolute;right:12px;top:-8px;font-weight:900;font-size:22px;animation:fl 1.6s forwards;pointer-events:none}
+@keyframes fl{0%{opacity:0;transform:translateY(10px)}20%{opacity:1}100%{opacity:0;transform:translateY(-34px)}}
+#ctrl{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:8px}
+#ctrl button{flex:1 1 45%;font-size:13px;padding:8px 6px}
+
+/* wheel */
+#wheelBox{display:flex;flex-direction:column;align-items:center;gap:16px}
+#turnBig{font-family:Fraunces,serif;font-weight:900;font-size:clamp(26px,3.4vw,44px);text-align:center}
+#wheelWrap{position:relative;width:min(56vh,520px);height:min(56vh,520px)}
+#wheel{width:100%;height:100%;transition:transform 4.2s cubic-bezier(.12,.75,.12,1)}
+#pointer{position:absolute;left:50%;top:-14px;transform:translateX(-50%);width:0;height:0;border-left:22px solid transparent;border-right:22px solid transparent;border-top:44px solid #fff;filter:drop-shadow(0 4px 6px rgba(0,0,0,.5));z-index:2}
+#hubBtn{position:absolute;left:50%;top:50%;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;border:6px solid #fff;background:radial-gradient(circle,#fff0c7,#d4a73d);color:#241a00;font-weight:900;font-size:18px;box-shadow:0 8px 30px rgba(0,0,0,.5)}
+#hubBtn:disabled{cursor:default}
+
+/* board */
+#board{width:100%;max-width:1150px}
+#board h2{font-family:Fraunces,serif;text-align:center;font-size:clamp(22px,2.6vw,34px);margin-bottom:6px}
+#board .sub{text-align:center;color:var(--muted);font-weight:800;margin-bottom:14px}
+.bgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.bh{border-radius:12px;padding:10px 6px;text-align:center;font-weight:900;font-size:clamp(12px,1.15vw,16px);background:var(--cc);min-height:76px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1}
+.bh span{font-size:28px;margin-bottom:4px}
+.cell{border:0;border-radius:12px;height:clamp(52px,8.4vh,80px);font-family:Fraunces,serif;font-weight:900;font-size:clamp(20px,2.4vw,34px);color:var(--gold);background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.12);position:relative;transition:transform .15s}
+.cell.av{background:linear-gradient(180deg,rgba(255,255,255,.18),rgba(255,255,255,.06));border-color:var(--gold);box-shadow:0 0 18px -6px var(--gold)}
+.cell.av:hover{transform:scale(1.06)}
+.cell.lock{color:rgba(255,255,255,.22);cursor:not-allowed}
+.cell.used{visibility:hidden}
+.cell .t5{position:absolute;right:6px;top:4px;font-size:16px}
+
+/* question card */
+#ov{position:fixed;inset:0;z-index:20;background:rgba(5,5,2,.74);display:none;align-items:center;justify-content:center;padding:14px;backdrop-filter:blur(3px)}
+#ov.on{display:flex}
+#qc{width:min(980px,100%);max-height:96vh;overflow:auto;border-radius:18px;background:#f4efe0;color:#241f17;box-shadow:0 30px 90px rgba(0,0,0,.6);animation:pop .45s cubic-bezier(.3,1.5,.5,1)}
+@keyframes pop{from{transform:scale(.6) rotate(-3deg);opacity:0}}
+#qh{display:flex;align-items:center;gap:14px;padding:14px 22px;background:var(--cc,#55452a);color:#fff}
+#qh .ic{font-size:44px}
+#qh small{display:block;font-weight:900;letter-spacing:.8px;text-transform:uppercase;font-size:12.5px;opacity:.92}
+#qh h2{font-family:Fraunces,serif;font-size:26px}
+#qh .val{margin-left:auto;font-family:Fraunces,serif;font-weight:900;font-size:34px;background:rgba(0,0,0,.2);border-radius:14px;padding:4px 14px;white-space:nowrap}
+#tmr{width:60px;height:60px;flex:none}
+#qb{padding:18px 24px 22px}
+.who{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#e9e1c8;border-radius:12px;padding:10px 14px;margin-bottom:14px;font-weight:900;font-size:18px}
+.who .nm{font-family:Fraunces,serif;font-size:24px;color:#6b4423}
+.who button{border:2px solid #cdbf98;background:#fff;border-radius:999px;padding:6px 12px;font-weight:900;font-size:14px;color:#241f17}
+.who select{font:inherit;font-size:15px;font-weight:800;border-radius:10px;padding:5px;border:2px solid #cdbf98}
+.qt{font-family:Fraunces,serif;font-weight:900;font-size:clamp(24px,3vw,36px);line-height:1.2;margin-bottom:16px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.opt{display:flex;align-items:center;gap:12px;border:3px solid #ddd0ac;background:#fff;border-radius:14px;padding:14px 16px;font-size:clamp(17px,1.9vw,22px);font-weight:900;color:#241f17;text-align:left;transition:all .15s}
+.opt:hover:not(:disabled){border-color:var(--cc);transform:translateY(-2px)}
+.opt .l{width:40px;height:40px;border-radius:9px;background:var(--cc,#55452a);color:#fff;display:flex;align-items:center;justify-content:center;flex:none;font-size:20px}
+.opt.ok{border-color:#16a34a;background:#dcfce7}
+.opt.bad{border-color:#dc2626;background:#fee2e2}
+.opt.out{opacity:.15}
+.opt:disabled{cursor:default}
+.pw{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.pw button{border:0;border-radius:999px;padding:8px 14px;font-weight:900;font-size:14px;color:#fff;background:#55452a}
+.pw button:disabled{opacity:.4}
+.res{margin-top:14px;font-family:Fraunces,serif;font-weight:900;font-size:26px;display:none}
+.res.on{display:block;animation:pop .35s}
+.ex{margin-top:10px;background:#e7e0ca;border-left:6px solid var(--cc);border-radius:10px;padding:12px 14px;font-size:17px;display:none}
+.ex.on{display:block}
+.act{display:flex;justify-content:flex-end;gap:10px;margin-top:16px;flex-wrap:wrap;align-items:center}
+.gbtns{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.gbtns button{border:0;border-radius:999px;padding:9px 14px;font-weight:900;font-size:15px;color:#1b0f2a}
+.gbtns button:disabled{opacity:.3}
+.lead{font-size:18px;font-weight:800;margin:6px 0}
+
+/* fase-overgang */
+#yt{position:fixed;inset:0;z-index:30;display:none;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:20px;background:rgba(0,0,0,.82)}
+#yt.on{display:flex;animation:fade .8s}
+@keyframes fade{from{opacity:0}}
+#yt .e{font-size:110px;animation:pop 1s}
+#yt h1{font-family:"Bebas Neue";font-size:clamp(40px,7vw,90px);color:var(--gold);margin:8px 0;letter-spacing:3px}
+#yt p{font-size:clamp(18px,2.2vw,26px);max-width:820px;color:#f1ead1;font-weight:700}
+
+/* slutt */
+#podium{display:flex;align-items:flex-end;justify-content:center;gap:18px;margin:20px 0}
+.pod{display:flex;flex-direction:column;align-items:center;gap:6px;animation:rise 1.2s cubic-bezier(.3,1.4,.5,1) both}
+@keyframes rise{from{transform:translateY(200px);opacity:0}}
+.pod .blk{width:170px;border-radius:12px 12px 0 0;display:flex;align-items:flex-start;justify-content:center;padding-top:10px;font-family:Fraunces,serif;font-weight:900;font-size:44px;color:#241a00}
+.pod .nm{font-weight:900;font-size:20px;text-align:center}
+.pod .pt{font-family:Fraunces,serif;font-weight:900;font-size:26px;color:var(--gold)}
+.rank{max-width:720px;margin:0 auto}
+.rank div{display:flex;gap:12px;align-items:center;padding:8px 14px;border-radius:10px;background:var(--panel);margin:5px 0;font-weight:900;font-size:18px}
+.rank div b{margin-left:auto;font-family:Fraunces,serif;color:var(--gold)}
+.petal{position:fixed;top:-40px;z-index:40;font-size:28px;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+#toast{position:fixed;left:50%;top:16px;transform:translateX(-50%);z-index:45;background:#f4efe0;color:#241f17;font-weight:900;padding:12px 22px;border-radius:999px;box-shadow:0 10px 30px rgba(0,0,0,.5);display:none;font-size:18px}
+#toast.on{display:block;animation:pop .3s}
+table.st{width:100%;border-collapse:collapse;font-size:15px}
+table.st th,table.st td{padding:7px 8px;border-bottom:1px solid #ddd0ac;text-align:left}
+table.st th{background:#e9e1c8;position:sticky;top:0}
+table.st td.n{text-align:right;font-weight:900}
+.rules{font-size:16px;line-height:1.55}
+.rules b{color:#6b4423}
+.rules li{margin-bottom:5px}
+@media (max-width:1000px){ html,body{overflow:auto} #game{flex-direction:column} .screen{position:absolute;min-height:100%} #side{width:auto;padding:0 12px 12px} .bgrid{gap:5px} .opts{grid-template-columns:1fr} }
+
+/* ---------- REDIGERING ---------- */
+#editor{position:fixed;inset:0;z-index:35;display:none;flex-direction:column;background:#120f14}
+#editor.on{display:flex}
+#edTop{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px 18px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.04)}
+#edTop h2{font-family:Fraunces,serif;color:var(--gold);font-size:24px;margin-right:auto}
+#edBody{flex:1;overflow:auto;padding:16px 18px 40px;max-width:1100px;width:100%;margin:0 auto}
+.edtabs{margin-bottom:14px;position:sticky;top:-16px;background:#120f14;padding:8px 0;z-index:2}
+.edtabs button{flex:1 1 auto}
+.eq{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+.eq.isoff{opacity:.5}
+.eqh{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.eqh b{color:var(--gold);font-size:16px}
+.eqh .sp{flex:1}
+.tag{font-size:12px;font-weight:900;border-radius:999px;padding:3px 9px}
+.tag.off{background:#7f1d1d;color:#fff}.tag.warn{background:#a16207;color:#fff}.tag.ch{background:#1e40af;color:#fff}
+.lb{display:block;font-weight:900;font-size:13px;color:var(--muted);margin:10px 0 4px}
+.eq textarea.inp{resize:vertical;font-weight:700}
+.orow{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.rad{display:flex;align-items:center;gap:4px;cursor:pointer;font-weight:900;color:var(--muted);flex:none}
+.rad input{width:20px;height:20px;accent-color:#22c55e}
+.mini{border:1px solid var(--line);background:rgba(255,255,255,.08);color:var(--ink);border-radius:8px;padding:6px 10px;font-weight:900;font-size:13px;flex:none}
+.mini:hover:not(:disabled){border-color:var(--gold)}
+.mini.danger{color:#fca5a5}.mini.on{color:#86efac;border-color:#86efac}
+.mini:disabled{opacity:.3;cursor:default}
+.cell.rm{color:rgba(255,255,255,.25);font-size:15px;cursor:not-allowed}
+
+.bgrid{grid-template-columns:repeat(var(--nc,6),1fr)!important}
+.team{display:flex;flex-wrap:wrap;gap:6px;align-items:center;background:#efe7d0;border-radius:10px;padding:8px 12px;margin-bottom:10px;font-weight:800;font-size:16px}
+.team b{font-family:Fraunces,serif;font-size:18px}
+.team .m{background:#fff;border:1px solid #ddd0ac;border-radius:999px;padding:2px 10px;font-size:15px}
+.qimg{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:0 0 14px}
+.qimg img{max-height:34vh;max-width:100%;border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.25);cursor:zoom-in;background:#fff}
+.ex .qimg{margin:10px 0 0;justify-content:flex-start}
+.ex .qimg img{max-height:26vh}
+.memwrap{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap}
+.memwrap img{max-height:58vh;max-width:32%;border-radius:10px;box-shadow:0 8px 26px rgba(0,0,0,.3)}
+.membar{height:10px;background:#e9e1c8;border-radius:999px;margin-top:14px;overflow:hidden}
+.membar i{display:block;height:100%;width:100%;background:var(--cc);transform-origin:left}
+#lb{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;cursor:zoom-out;padding:2vh}
+#lb.on{display:flex}#lb img{max-width:96vw;max-height:96vh;border-radius:8px}
+.edimgs{display:flex;gap:6px;align-items:center;margin:4px 0 2px;flex-wrap:wrap}.edimgs img{height:60px;border-radius:6px}
+
+#sbox{position:relative}
+.tag.ok{background:#166534;color:#fff}
+.crow .emo{width:64px;text-align:center;font-size:20px;flex:none}
+.crow input[type=color]{width:48px;height:40px;border:0;background:none;flex:none;cursor:pointer}
+.th{position:relative;display:inline-block}.th .mini{position:absolute;top:-6px;right:-6px;padding:2px 7px}
+.edimgs img{height:80px;border-radius:6px}
+.fil{cursor:pointer}
+.lvl{font-family:Fraunces,serif;color:var(--gold);font-size:20px;margin:18px 0 8px}
+select.inp{font-weight:800}
+.eq.note{line-height:1.5}
+</style>
+</head>
+<body class="f0">
+<div id="bg"></div>
+
+<!-- ================= SETUP ================= -->
+<section id="setup" class="screen on">
+ <div id="sbox">
+  <div style="text-align:center;margin-bottom:12px">
+   <a id="backLink" class="ghost" href="../index.html" style="position:absolute;left:16px;top:14px;text-decoration:none">← Tilbake</a>
+   <div style="font-size:50px;line-height:1">🏆</div>
+   <div class="logo" id="sTitle" style="font-size:clamp(40px,7vw,86px)">Konkurranse</div>
+   <div id="sUnder" style="font-family:Fraunces,serif;font-size:24px;color:var(--muted)"></div>
+   <div id="sCount" style="color:var(--muted);font-weight:800;margin-top:8px"></div>
+  </div>
+  <div id="resume"></div>
+  <div class="panel">
+   <h3>Lag og deltakere</h3>
+   <div class="seg" id="nSeg" style="margin-bottom:12px"></div>
+   <div id="gin"></div>
+   <p class="note" style="margin:10px 0 0">Skriv ett navn per linje eller skill med komma. Navnene brukes når skjebnen trekker hvem som skal svare, og til elevpoengene i lærerens oversikt.</p>
+  </div>
+  <div class="panel" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+   <div><h3>Lengde</h3><div class="seg" id="rSeg">
+     <button data-v="2">2 runder<small>per lag · ca. 25 min</small></button>
+     <button data-v="3" class="sel">3 runder<small>per lag · ca. 40 min</small></button>
+     <button data-v="4">4 runder<small>per lag · ca. 55 min</small></button></div></div>
+   <div><h3>Tidsur</h3><div class="seg" id="tSeg">
+     <button data-v="30" class="sel">30 sek</button><button data-v="45">45 sek</button><button data-v="0">Av</button></div></div>
+   <div><h3>Lærer-PIN</h3><input class="inp" id="pin" maxlength="8" placeholder="f.eks. 2468" inputmode="numeric">
+     <p class="note" style="margin:6px 0 0">Beskytter elevpoengene. La feltet stå tomt for ingen PIN.</p></div>
+  </div>
+  <div style="text-align:center"><button class="big" id="startBtn">Start spillet 🏆</button><br><button class="ghost" style="margin-top:12px" id="rulesBtn">📜 Slik fungerer spillet</button> <button class="ghost" style="margin-top:12px" id="editBtn">✏️ Rediger spørsmål</button> <button class="ghost" style="margin-top:12px" id="impBtn">📥 Hent inn sett</button></div>
+ </div>
+</section>
+
+<!-- ================= GAME ================= -->
+<section id="game" class="screen">
+ <div id="stage">
+  <div id="hud"><span class="logo" id="hudLogo" style="font-size:22px;max-width:30vw;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">Konkurranse</span><div id="faseLbl"></div><span class="sp"></span><div id="turnCount" style="font-weight:900;color:var(--muted)"></div></div>
+  <div id="main"></div>
+ </div>
+ <aside id="side">
+  <div id="groups"></div>
+  <div id="ctrl">
+   <button class="ghost" id="undoBtn">↶ Angre siste</button>
+   <button class="ghost" id="rules2">📜 Regler</button>
+   <button class="ghost" id="sndBtn">🔔 Lyd på</button>
+   <button class="ghost" id="fsBtn">⛶ Fullskjerm</button>
+   <button class="ghost" id="teachBtn">🔒 Lærer</button>
+   <button class="ghost" id="endBtn">🏁 Avslutt</button>
+  </div>
+ </aside>
+</section>
+
+<section id="editor"><div id="edTop"><h2>✏️ Rediger spørsmål</h2><button class="ghost" id="edExp">📤 Lagre som fil</button><button class="ghost" id="edImp">📥 Hent inn sett</button><button class="ghost" id="edReset">🗑 Tøm alt</button><button class="big" id="edClose" style="font-size:16px;padding:10px 22px">Ferdig</button></div>
+<div style="padding:6px 18px 0;max-width:1100px;width:100%;margin:0 auto" class="note">Alt lagres automatisk i denne nettleseren og blir aldri lagt ut på nettet. Spørsmål som er tomme, ufullstendige eller satt til «Hopp over», blir låst på tavla.</div>
+<div id="edBody"></div></section>
+<div id="lb"></div>
+<div id="ov"><div id="qc"><div id="qh"></div><div id="qb"></div></div></div>
+<div id="yt"></div>
+<div id="toast"></div>
+
+<script>
+/* =====================================================================
+   SPØRSMÅLSSETTET
+   Hvert tema lenker hit med ?sett=<id>. Spørsmål, fasit og bilder lagres
+   KUN i lærerens nettleser (localStorage) – aldri i repoet.
+   ===================================================================== */
+const PARAMS=new URLSearchParams(location.search);
+const SETT=((PARAMS.get("sett")||"standard").toLowerCase().replace(/[^a-z0-9-]/g,""))||"standard";
+const SKEY="konk_sett_"+SETT, KEY="konk_spill_"+SETT, TILBAKE=PARAMS.get("tilbake")||"";
+const KC=["#8c2f39","#4a3a6b","#2e4a6b","#a8622e","#3a5a3e","#6b4423","#2e6a8a"];
+const KE=["📘","🧩","💡","🔍","🎨","⭐","👁️"];
+const MAXCAT=7, MAXOPT=6, LETTERS="ABCDEF";
+function emptyQ(){ return {q:"",o:["","","",""],a:0,w:"",imgs:[],vis:"med",sek:5,off:false}; }
+function emptyCat(i){ return {n:"Kategori "+(i+1),e:KE[i%KE.length],c:KC[i%KC.length],q:[0,1,2,3,4].map(emptyQ)}; }
+function emptySet(){ return {v:1,tittel:"Konkurranse",under:"",slutt:"",kat:[0,1,2,3,4,5].map(emptyCat),lyn:{1:[],2:[],3:[],4:[],5:[]}}; }
+const strip=s=>String(s==null?"":s).replace(/[<>]/g,"");
+const okImg=s=>typeof s==="string"&&/^data:image\/(png|jpeg|jpg|webp|gif);base64,[A-Za-z0-9+/=]+$/.test(s);
+function normQ(r){ r=r||{}; const o=Array.isArray(r.o)?r.o.slice(0,MAXOPT).map(strip):["",""]; while(o.length<2) o.push("");
+  return {q:strip(r.q),o,a:Math.min(Math.max(0,+r.a||0),o.length-1),w:strip(r.w),imgs:(Array.isArray(r.imgs)?r.imgs:[]).filter(okImg).slice(0,6),
+    vis:["med","for","etter"].includes(r.vis)?r.vis:"med",sek:Math.min(30,Math.max(2,+r.sek||5)),off:!!r.off}; }
+function normSet(s){ if(!s||typeof s!=="object"||!Array.isArray(s.kat)||!s.kat.length) throw new Error("ugyldig");
+  const out={v:1,tittel:strip(s.tittel||"Konkurranse").slice(0,60),under:strip(s.under).slice(0,140),slutt:strip(s.slutt).slice(0,400),kat:[],lyn:{}};
+  s.kat.slice(0,MAXCAT).forEach((c,i)=>{ const q=Array.isArray(c.q)?c.q:[]; out.kat.push({n:strip(c.n||"Kategori "+(i+1)).slice(0,40),e:strip(c.e||KE[i%KE.length]).slice(0,4),
+    c:/^#[0-9a-f]{6}$/i.test(c.c)?c.c:KC[i%KC.length],q:[0,1,2,3,4].map(t=>normQ(q[t]))}); });
+  for(let t=1;t<=5;t++) out.lyn[t]=(s.lyn&&Array.isArray(s.lyn[t])?s.lyn[t]:[]).slice(0,40).map(normQ);
+  return out; }
+let QSET=null; try{ QSET=normSet(JSON.parse(localStorage.getItem(SKEY))); }catch(e){ QSET=emptySet(); }
+/* Spillbar versjon: tomme alternativer fjernes, ufullstendige spørsmål hoppes over */
+function clean(r){ const keep=r.o.map((t,i)=>[String(t).trim(),i]).filter(x=>x[0]); const a=keep.findIndex(x=>x[1]===r.a);
+  const bad=!r.q.trim()||keep.length<2||a<0;
+  const q={q:r.q,o:keep.map(x=>x[0]),a:Math.max(0,a),w:r.w||"",off:r.off||bad,bad};
+  if(r.imgs.length){ if(r.vis==="for") q.mem={imgs:r.imgs,sec:r.sek}; else if(r.vis==="etter") q.after=r.imgs; else q.img=r.imgs; }
+  return q; }
+const CATS=[], LYN={1:[],2:[],3:[],4:[],5:[]};
+function rebuild(){ CATS.length=0; QSET.kat.forEach(c=>CATS.push({n:c.n,e:c.e,c:c.c,q:c.q.map(clean)})); for(let t=1;t<=5;t++) LYN[t]=QSET.lyn[t].map(clean); }
+rebuild();
+function playable(){ return CATS.reduce((n,c)=>n+c.q.filter(q=>!q.off).length,0)+Object.values(LYN).reduce((n,a)=>n+a.filter(q=>!q.off).length,0); }
+function anyLyn(){ return Object.values(LYN).some(a=>a.some(q=>!q.off)); }
+let saveT=null;
+function saveSet(now){ rebuild(); clearTimeout(saveT); const go=()=>{ try{ localStorage.setItem(SKEY,JSON.stringify(QSET)); }catch(e){ toast("Det er ikke plass til mer i nettleseren. Bruk færre eller mindre bilder."); } updSetup(); };
+  if(now) go(); else saveT=setTimeout(go,350); }
+const FASE=[null,
+ {n:"Oppvarming",e:"🌱",d:"Spillet er i gang. Spørsmålene er ennå lette."},
+ {n:"Fordypning",e:"🔍",d:"Nå går vi dypere inn i stoffet. Spørsmålene blir litt vanskeligere."},
+ {n:"Utfordringen",e:"🧩",d:"Nå viser det seg hvem som kan stoffet, og hvem som gjetter."},
+ {n:"Finalen",e:"🔥",d:"Den siste og vanskeligste fasen. Riktig svar på et 500-spørsmål lar laget deres ANGRIPE og STJELE poeng!"}];
+const GSYM=["⭐","🚀","🌳","🎈","🏠","🌙","🔔","🌈"];
+const GCOL=["#d97a2b","#2e6a8a","#3a7a6a","#8c2f39","#a8862e","#4a3a6b","#5b6b7a","#6b4423"];
+const CARDS={speider:{e:"🤝",n:"Læringspartner",d:"Fjerner to gale svar"},felt:{e:"📝",n:"Førsteutkast",d:"Nytt forsøk ved feil svar"},skjold:{e:"🛡️",n:"Skjoldet",d:"Beskytter mot angrep"}};
+const WHEEL=[
+ {k:"choose",t:"Velg selv",e:"🎯",c:"#d4a73d",cc:"#241a00"},
+ {k:"random",t:"Tilfeldig lag",e:"🎲",c:"#2e4a5c",cc:"#fff"},
+ {k:"choose",t:"Velg selv",e:"🎯",c:"#c48a2e",cc:"#241a00"},
+ {k:"lyn",t:"Lynrunde",e:"⚡",c:"#3a5a3e",cc:"#fff"},
+ {k:"choose",t:"Velg selv",e:"🎯",c:"#b47a26",cc:"#241a00"},
+ {k:"double",t:"Dobbel",e:"✖️2",c:"#8c2f39",cc:"#fff"},
+ {k:"help",t:"Samarbeid",e:"🙋",c:"#4a3a6b",cc:"#fff"},
+ {k:"gift",t:"Bonus",e:"🎁",c:"#55452a",cc:"#fff"}];
+const STEAL=300;
+
+/* =====================================================================
+   TILSTAND, LAGRING, ANGRE
+   ===================================================================== */
+let G=null, HIST=[], soundOn=true;
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+function save(){ try{localStorage.setItem(KEY,JSON.stringify(G));}catch(e){} }
+function snap(){ HIST.push(JSON.stringify(G)); if(HIST.length>40) HIST.shift(); }
+function toast(t){ const e=$("toast"); e.textContent=t; e.classList.remove("on"); void e.offsetWidth; e.classList.add("on"); clearTimeout(toast.t); toast.t=setTimeout(()=>e.classList.remove("on"),2800); }
+
+/* lyd */
+let AC=null; function ac(){ if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}} return AC; }
+function tone(f,d,type="sine",v=.18,delay=0,glide){ if(!soundOn) return; const a=ac(); if(!a) return; const t=a.currentTime+delay,o=a.createOscillator(),g=a.createGain();
+ o.type=type;o.frequency.setValueAtTime(f,t); if(glide) o.frequency.exponentialRampToValueAtTime(glide,t+d); g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(v,t+.01); g.gain.exponentialRampToValueAtTime(.0001,t+d); o.connect(g).connect(a.destination); o.start(t); o.stop(t+d+.05); }
+const SND={ bell(){[1,2.76,5.4].forEach((m,i)=>tone(660*m,1.8-i*.4,"sine",.17/(i+1)))}, bad(){tone(190,.55,"triangle",.17,0,85)}, tick(){tone(1300,.035,"square",.03)},
+ gong(){[1,1.5,2.3,3.1].forEach((m,i)=>tone(98*m,3.4-i*.6,"sine",.2/(i+1)))}, win(){[523,659,784,1046].forEach((f,i)=>tone(f,1.3,"sine",.15,i*.15))},
+ steal(){[880,660,440,330].forEach((f,i)=>tone(f,.25,"sawtooth",.06,i*.09))}, click(){tone(700,.05,"sine",.08)} };
+
+/* =====================================================================
+   SETUP
+   ===================================================================== */
+const SET={n:8,R:3,T:30};
+const draft={names:GSYM.map((_,i)=>"Lag "+(i+1)),members:GSYM.map(()=>"")};
+function seg(id,cb){ $(id).querySelectorAll("button").forEach(b=>b.onclick=()=>{ $(id).querySelectorAll("button").forEach(x=>x.classList.remove("sel")); b.classList.add("sel"); cb(b.dataset.v); }); }
+$("nSeg").innerHTML=[2,3,4,5,6,7,8].map(n=>`<button data-v="${n}" class="${n===8?'sel':''}">${n} lag</button>`).join("");
+function drawGin(){
+  $("gin").innerHTML=Array.from({length:SET.n},(_,i)=>`<div class="gi" style="--gc:${GCOL[i]}"><div class="h"><span>${GSYM[i]}</span><input data-i="${i}" class="gname" value="${esc(draft.names[i])}" aria-label="Navn på lag ${i+1}"></div>
+    <textarea data-i="${i}" class="gmem" placeholder="Navn: Ola, Kari, Ali …" aria-label="Deltakere i lag ${i+1}">${esc(draft.members[i])}</textarea></div>`).join("");
+  $("gin").querySelectorAll(".gname").forEach(x=>x.oninput=()=>draft.names[+x.dataset.i]=x.value);
+  $("gin").querySelectorAll(".gmem").forEach(x=>x.oninput=()=>draft.members[+x.dataset.i]=x.value);
+}
+seg("nSeg",v=>{SET.n=+v;drawGin();}); seg("rSeg",v=>SET.R=+v); seg("tSeg",v=>SET.T=+v); drawGin();
+(function resumeOffer(){ let s=null; try{s=JSON.parse(localStorage.getItem(KEY));}catch(e){}
+  if(s && s.phase!=="ended" && s.groups){ $("resume").innerHTML=`<div class="panel" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-color:var(--gold)"><div style="flex:1;font-weight:800">⏸️ Det finnes et påbegynt spill (${s.groups.length} lag, tur ${s.turn+1} av ${s.groups.length*s.R}).</div><button class="big" id="resBtn" style="font-size:17px;padding:11px 24px">Fortsett spillet</button></div>`;
+    $("resBtn").onclick=()=>{ ac(); G=s; HIST=[]; enterGame(); startTurn(true); }; }
+  else if(s && s.phase==="ended"){ $("resume").innerHTML=`<div class="panel" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><div style="flex:1;font-weight:800">Forrige spill er avsluttet. Du kan fortsatt se resultatet og elevpoengene.</div><button class="ghost" id="lastBtn">Se forrige resultat</button></div>`;
+    $("lastBtn").onclick=()=>{ G=s; enterGame(); showEnd(); }; } })();
+
+$("startBtn").onclick=()=>{
+  if(!playable()){ toast("Legg inn noen spørsmål først!"); return openEditor(); }
+  ac();
+  const groups=Array.from({length:SET.n},(_,i)=>({name:(draft.names[i]||"").trim()||"Lag "+(i+1),sym:GSYM[i],col:GCOL[i],score:0,cards:[],
+    members:(draft.members[i]||"").split(/[,\n;]+/).map(s=>s.trim()).filter(Boolean)}));
+  const studs={}; groups.forEach((g,gi)=>g.members.forEach((m,mi)=>studs[gi+"-"+mi]={ans:0,ok:0,pts:0}));
+  G={groups,R:SET.R,T:SET.T,turn:0,used:{},lynUsed:{1:[],2:[],3:[],4:[],5:[]},studs,log:[],phase:"play",pin:$("pin").value.trim(),faseShown:0};
+  HIST=[]; save(); enterGame(); startTurn();
+};
+function enterGame(){ $("setup").classList.remove("on"); $("game").classList.add("on"); }
+
+/* =====================================================================
+   RUNDER OG VANSKELIGHET
+   ===================================================================== */
+const N=()=>G.groups.length;
+const roundIdx=()=>Math.floor(G.turn/N());
+function faseOf(r){ const R=G.R; if(R<=1) return 1; return 1+Math.round(r*3/(R-1)); }      // 1..4
+function allowedTiers(){ const y=faseOf(roundIdx()); return y===4?[4,5]:[y,y+1]; }           // stiger for hver runde
+function lynTier(){ return faseOf(roundIdx()); }
+
+/* =====================================================================
+   SIDEPANEL
+   ===================================================================== */
+function renderGroups(){
+  const order=G.groups.map((g,i)=>[g.score,i]).sort((a,b)=>b[0]-a[0]); const rank={}; order.forEach(([s,i],k)=>rank[i]=k+1);
+  const cur=G.turn%N();
+  $("groups").innerHTML=G.groups.map((g,i)=>`<div class="gc ${i===cur&&G.phase==="play"?'cur':''}" id="g${i}" style="--gc:${g.col}" title="Klikk for å justere poeng">
+    ${rank[i]<=3&&g.score>0?`<span class="r">#${rank[i]}</span>`:""}<span class="s">${g.sym}</span>
+    <div><div class="n">${esc(g.name)}</div><div class="cards">${g.cards.map(c=>CARDS[c].e).join(" ")}</div></div><span class="p">${g.score}</span></div>`).join("");
+  G.groups.forEach((g,i)=>$("g"+i).onclick=()=>adjustModal(i));
+  const y=faseOf(roundIdx()); document.body.className="f"+(G.phase==="play"?y:0);
+  if(G.phase!=="play"){ $("faseLbl").innerHTML="🏁 Spillet er ferdig"; $("turnCount").textContent=""; }
+  if(G.phase==="play"){ const Y=FASE[y]; $("faseLbl").innerHTML=`${Y.e} ${Y.n}<small>Runde ${roundIdx()+1} av ${G.R} · vanskelighet ${allowedTiers().map(t=>t*100).join("–")}</small>`;
+    $("turnCount").textContent=`Tur ${G.turn+1} / ${N()*G.R}`; }
+}
+function addPts(i,d,why){ const g=G.groups[i]; g.score=Math.max(0,g.score+d); G.log.push({t:G.turn,g:i,d,why}); renderGroups(); save();
+  const el=$("g"+i); if(el&&d){ const f=document.createElement("div"); f.className="fl"; f.style.color=d>0?"#4ade80":"#f87171"; f.textContent=(d>0?"+":"")+d; el.appendChild(f); setTimeout(()=>f.remove(),1700);} }
+function giveCard(i){ const g=G.groups[i]; if(g.cards.length>=3) return null; const k=["speider","felt","skjold"][Math.random()*3|0]; g.cards.push(k); save(); renderGroups(); return k; }
+
+/* =====================================================================
+   TURFLYT
+   ===================================================================== */
+function startTurn(resumed){
+  if(G.turn>=N()*G.R){ return finishGame(); }
+  closeOv(); renderGroups();
+  const r=roundIdx(), y=faseOf(r);
+  if(G.turn%N()===0 && G.faseShown!==r+1 && !resumed){ G.faseShown=r+1; save(); return faseTransition(y,()=>startTurn(true)); }
+  snap();
+  const g=G.groups[G.turn%N()];
+  $("main").innerHTML=`<div id="wheelBox"><div id="turnBig"><span style="color:${g.col}">${g.sym} ${esc(g.name)}</span> har tur</div>
+   <div id="wheelWrap"><div id="pointer"></div>${wheelSVG()}<button id="hubBtn">SNURR<br>🌀</button></div>
+   <div style="color:var(--muted);font-weight:800">Snurr skjebnehjulet!</div></div>`;
+  $("hubBtn").onclick=spin;
+}
+function wheelSVG(){ const n=WHEEL.length; let s=`<svg id="wheel" viewBox="-110 -110 220 220">`;
+  WHEEL.forEach((w,i)=>{ const a0=(i/n)*2*Math.PI-Math.PI/2, a1=((i+1)/n)*2*Math.PI-Math.PI/2, r=104;
+    s+=`<path d="M0 0 L${r*Math.cos(a0)} ${r*Math.sin(a0)} A${r} ${r} 0 0 1 ${r*Math.cos(a1)} ${r*Math.sin(a1)} Z" fill="${w.c}" stroke="#fff" stroke-width="1.5"/>`;
+    const am=(a0+a1)/2, deg=am*180/Math.PI, short={choose:"VELG SELV",random:"TILFELDIG",lyn:"LYNRUNDE",double:"DOBBEL",gift:"BONUS",help:"SAMARBEID"}[w.k];
+    const fl=Math.cos(am)<0?` transform="rotate(180 56 0)"`:"";
+    s+=`<g transform="rotate(${deg})"><text${fl} x="56" y="3.5" text-anchor="middle" font-size="9.5" font-weight="900" fill="${w.cc}" font-family="Nunito" letter-spacing=".3">${short}</text>
+      <text x="90" y="5" text-anchor="middle" font-size="14" transform="rotate(90 90 0)">${w.e==="✖️2"?"✖️":w.e}</text></g>`; });
+  s+=`<circle r="106" fill="none" stroke="#fff" stroke-width="3"/>`;
+  for(let i=0;i<32;i++){ const a=i/32*2*Math.PI; s+=`<circle cx="${106*Math.cos(a)}" cy="${106*Math.sin(a)}" r="2.2" fill="#f0e2c0"/>`; }
+  return s+`</svg>`; }
+let wheelRot=0;
+function spin(){
+  $("hubBtn").disabled=true; SND.click();
+  const idx=Math.random()*WHEEL.length|0, seg=360/WHEEL.length;
+  const target=360-(idx*seg+seg/2)+ (Math.random()-.5)*seg*.6;
+  wheelRot += 360*6 + ((target - wheelRot%360)+360)%360;
+  $("wheel").style.transform=`rotate(${wheelRot}deg)`;
+  let k=0; const iv=setInterval(()=>{ SND.tick(); if(++k>30) clearInterval(iv); },120);
+  setTimeout(()=>{ const w=WHEEL[idx]; toast(w.e+" "+w.t+"!"); SND.bell(); setTimeout(()=>outcome(w.k),900); },4400);
+}
+function outcome(k){
+  const gi=G.turn%N();
+  if(k==="choose") return showBoard(gi,1);
+  if(k==="double") return showBoard(gi,2);
+  if((k==="lyn"||k==="random")&&!anyLyn()){ toast("Det finnes ingen lynspørsmål – dere får velge selv!"); return showBoard(gi,1); }
+  if(k==="random") return randomGroup();
+  if(k==="lyn") return lynrunde();
+  if(k==="help") return chooseHelper(gi);
+  if(k==="gift"){ addPts(gi,100,"Bonus"); const c=giveCard(gi); SND.win();
+    openOv("#55452a","🎁","Bonus","Et lite hopp framover",`<div class="qt">${esc(G.groups[gi].name)} får +100 poeng${c?` og maktkortet ${CARDS[c].e} <b>${CARDS[c].n}</b>`:""}!</div>
+     ${c?`<div class="ex on">${CARDS[c].e} <b>${CARDS[c].n}:</b> ${CARDS[c].d}. Kortet kan brukes på et senere spørsmål.</div>`:""}<div class="act"><button class="big" id="nx">Neste tur →</button></div>`);
+    $("nx").onclick=nextTurn; }
+}
+function nextTurn(){ G.turn++; save(); startTurn(); }
+
+/* ---------------- TAVLE ---------------- */
+function showBoard(gi,mult,helper){
+  const al=allowedTiers(), g=G.groups[gi];
+  let html=`<div id="board"><h2><span style="color:${g.col}">${g.sym} ${esc(g.name)}</span>: velg kategori og vanskelighet${mult===2?' <span style="color:#4ade80">– DOBBEL ✖️2</span>':""}${helper!=null?` <span style="color:#c4b5fd">– samarbeid med ${G.groups[helper].sym} ${esc(G.groups[helper].name)}</span>`:""}</h2>
+   <div class="sub">I fasen «${FASE[faseOf(roundIdx())].n}» kan dere velge ${al.map(t=>t*100).join("- eller ")}-spørsmål. ${helper!=null?"Riktig svar gir 250 poeng, og feil svar koster ingenting. ":"Feil svar koster halvparten. "}${al.includes(5)&&helper==null?"⚔️ 500 = riktig svar lar dere angripe og stjele "+STEAL+" poeng!":""}</div><div class="bgrid" style="--nc:${CATS.length}">`;
+  CATS.forEach(c=>html+=`<div class="bh" style="--cc:${c.c}"><span>${c.e}</span>${c.n}</div>`);
+  let any=false;
+  for(let t=1;t<=5;t++) CATS.forEach((c,ci)=>{ const used=G.used[ci+"-"+t], rm=c.q[t-1].off, ok=al.includes(t)&&!used&&!rm; if(ok) any=true;
+    if(rm&&!used){ html+=`<button class="cell rm" disabled title="Fjernet av læreren">–</button>`; return; }
+    html+=`<button class="cell ${used?'used':ok?'av':'lock'}" data-c="${ci}" data-t="${t}" ${ok?"":"disabled"}>${ok||used?t*100:"🔒"}${t===5&&!used?'<span class="t5">⚔️</span>':""}</button>`; });
+  html+=`</div></div>`;
+  $("main").innerHTML=html;
+  if(!any){ toast("Tavla er tom for dette nivået – dere får et lynspørsmål!"); setTimeout(()=>askLyn(gi,al[al.length-1],mult,helper!=null?"help":"own",helper),800); return; }
+  $("main").querySelectorAll(".cell.av").forEach(b=>b.onclick=()=>{ SND.click(); const ci=+b.dataset.c,t=+b.dataset.t; G.used[ci+"-"+t]=1; save();
+    ask({gi,q:CATS[ci].q[t-1],tier:t,mult,cat:CATS[ci],mode:helper!=null?"help":"own",helper}); });
+}
+
+/* ---------------- ELEV SOM SVARER ---------------- */
+function whoHTML(gi){ const g=G.groups[gi]; if(!g.members.length) return "";
+  return `<div class="who" id="who">🎯 Skjebnen har valgt: <span class="nm" id="whoNm"></span><span style="flex:1"></span>
+   <button id="whoRe">🎲 Trekk på nytt</button><select id="whoSel"><option value="-1">Hele laget svarer</option>${g.members.map((m,i)=>`<option value="${i}">${esc(m)}</option>`).join("")}</select></div>`; }
+function bindWho(gi,state){ const g=G.groups[gi]; if(!g.members.length){ state.stud=-1; return; }
+  const set=i=>{ state.stud=i; $("whoNm").textContent=i<0?"hele laget":g.members[i]; $("whoSel").value=i; };
+  const roll=()=>{ let k=0; const iv=setInterval(()=>{ $("whoNm").textContent=g.members[Math.random()*g.members.length|0]; SND.tick(); if(++k>12){ clearInterval(iv); set(Math.random()*g.members.length|0);} },70); };
+  $("whoRe").onclick=roll; $("whoSel").onchange=e=>set(+e.target.value); roll(); }
+function creditStudent(gi,stud,ok,pts){ if(stud==null||stud<0) return; const s=G.studs[gi+"-"+stud]; if(!s) return; s.ans++; if(ok){ s.ok++; s.pts+=pts; } save(); }
+
+/* ---------------- SPØRSMÅLSKORT ---------------- */
+let TIV=null;
+function openOv(col,ic,title,small,body,val){ $("qc").style.setProperty("--cc",col);
+  $("qh").innerHTML=`<span class="ic">${ic}</span><div><small>${small}</small><h2>${title}</h2></div>${val?`<span class="val">${val}</span>`:""}<svg id="tmr" viewBox="0 0 60 60"></svg>`;
+  $("qb").innerHTML=body; $("ov").classList.add("on"); $("qc").scrollTop=0; }
+function closeOv(){ $("ov").classList.remove("on"); clearInterval(TIV); }
+function timer(onEnd){ clearInterval(TIV); if(!G.T) return; let left=G.T; const svg=$("tmr");
+  const d=()=>{ const a=2*Math.PI*25; svg.innerHTML=`<circle cx="30" cy="30" r="25" fill="rgba(0,0,0,.2)" stroke="rgba(255,255,255,.25)" stroke-width="5"/><circle cx="30" cy="30" r="25" fill="none" stroke="${left<=5?'#fecaca':'#fff'}" stroke-width="5" stroke-dasharray="${a}" stroke-dashoffset="${a*(1-left/G.T)}" transform="rotate(-90 30 30)" stroke-linecap="round"/><text x="30" y="37" text-anchor="middle" font-weight="900" font-size="19" fill="#fff" font-family="Nunito">${left}</text>`; };
+  d(); TIV=setInterval(()=>{ left--; d(); if(left<=5&&left>0) SND.tick(); if(left<=0){ clearInterval(TIV); onEnd(); } },1000); }
+function optsHTML(q){ return `<div class="opts">${q.o.map((o,i)=>`<button class="opt" data-i="${i}"><span class="l">${"ABCDEF"[i]}</span><span>${esc(o)}</span></button>`).join("")}</div>`; }
+
+function shufQ(q){ const idx=shuffle(q.o.map((_,i)=>i)); return {...q,o:idx.map(i=>q.o[i]),a:idx.indexOf(q.a)}; }
+function ask(S){
+  if(S.q.mem && !S.memDone) return showMem(S);
+  S.q=shufQ(S.q);
+  const g=G.groups[S.gi], val=S.mode==="help"?250:S.tier*100*S.mult;
+  const label = S.mode==="help" ? `🙋 Samarbeid med ${esc(G.groups[S.helper].name)}`+(S.cat?` · ${S.cat.e} ${S.cat.n}`:"") : S.mode==="own" ? (S.cat?`${S.cat.e} ${S.cat.n}`:"🎯 Ekstraspørsmål") : S.mode==="random" ? "🎲 Tilfeldig lag" : "⚡ Lynrunde";
+  const st={stud:-1,usedG:false,felt:false,tries:0,done:false};
+  openOv(S.cat?S.cat.c:"#55452a", g.sym, esc(g.name), label+(S.tier===5&&S.mode==="own"?" · ⚔️ ANGREPSSPØRSMÅL":""),
+   `${teamHTML(S.gi)}${S.mode==="help"?teamHTML(S.helper,"🙋 Hjelper"):""}${whoHTML(S.gi)}${imgsHTML(S.q.img)}<div class="qt">${esc(S.q.q)}</div>${optsHTML(S.q)}
+    ${S.mode==="own"&&g.cards.length?`<div class="pw" id="pw">${[...new Set(g.cards)].filter(c=>c!=="skjold").map(c=>`<button data-c="${c}">${CARDS[c].e} Bruk ${CARDS[c].n} – ${CARDS[c].d.toLowerCase()}</button>`).join("")}</div>`:""}
+    <div class="res" id="res"></div><div class="ex" id="ex"></div><div class="act" id="act"></div>`, val+" p");
+  bindWho(S.gi,st);
+  const btns=[...$("qb").querySelectorAll(".opt")];
+  // maktkort
+  if($("pw")) $("pw").querySelectorAll("button").forEach(b=>b.onclick=()=>{ const c=b.dataset.c, k=g.cards.indexOf(c); if(k<0) return; g.cards.splice(k,1); save(); renderGroups(); b.disabled=true; SND.bell();
+     if(c==="speider"){ const k=Math.max(0,Math.min(2,S.q.o.length-2)); shuffle(S.q.o.map((_,i)=>i).filter(i=>i!==S.q.a)).slice(0,k).forEach(i=>{btns[i].classList.add("out");btns[i].disabled=true;}); toast(k===2?"🤝 Læringspartneren fjernet to gale svar!":k===1?"🤝 Læringspartneren fjernet ett galt svar!":"🤝 Her var det ingen gale svar å fjerne."); }
+     if(c==="felt"){ st.felt=true; toast("📝 Førsteutkast – dere får et nytt forsøk hvis dere svarer feil!"); } });
+  const resolve=(i)=>{
+    if(st.done) return; st.tries++;
+    if(i===S.q.a && S.mode==="help"){ st.done=true; clearInterval(TIV); btns.forEach(b=>b.disabled=true); btns[i].classList.add("ok"); SND.bell(); creditStudent(S.gi,st.stud,true,val);
+      const h=G.groups[S.helper]; $("res").innerHTML=`🎉 Riktig! Bidro ${esc(h.name)} til det riktige svaret?`; $("res").classList.add("on"); showEx();
+      $("act").innerHTML=`<button class="ghost" style="color:#241f17;border-color:#cdbf98" id="hNo">Nei – bare ${esc(g.name)} får 250</button><button class="big" id="hYes">Ja – 250 poeng til begge lagene</button>`;
+      $("hYes").onclick=()=>{ addPts(S.gi,250,"Samarbeid"); addPts(S.helper,250,"Hjalp "+g.name); SND.win(); $("res").innerHTML=`🎉 Riktig! <span style="color:#16a34a">+250 poeng</span> til både ${esc(g.name)} og ${esc(h.name)}.`; doneBtn(); };
+      $("hNo").onclick=()=>{ addPts(S.gi,250,"Samarbeid"); $("res").innerHTML=`🎉 Riktig! <span style="color:#16a34a">+250 poeng</span> til ${esc(g.name)}.`; doneBtn(); };
+      return; }
+    if(i===S.q.a){ st.done=true; clearInterval(TIV); btns.forEach(b=>b.disabled=true); btns[i].classList.add("ok"); SND.bell();
+      addPts(S.gi,val,"Riktig "+S.tier*100); creditStudent(S.gi,st.stud,true,val);
+      let extra="";
+      if(S.mode==="own" && S.tier>=3){ const c=giveCard(S.gi); if(c) extra+=`<br>🃏 Nytt maktkort: ${CARDS[c].e} <b>${CARDS[c].n}</b> – ${CARDS[c].d.toLowerCase()}.`; }
+      $("res").innerHTML=`🎉 Riktig! <span style="color:#16a34a">+${val} poeng</span>${extra}`; $("res").classList.add("on");
+      showEx(); if(S.mode==="own" && S.tier===5) return stealStep(S.gi); return doneBtn(); }
+    // feil
+    if(i>=0){ btns[i].classList.add("bad"); btns[i].disabled=true; } SND.bad();
+    if(st.felt && st.tries===1){ st.felt=false; toast("📝 Det var bare et førsteutkast! Prøv én gang til."); $("res").innerHTML="Feil, men Førsteutkast gir dere et nytt forsøk!"; $("res").classList.add("on"); return; }
+    st.done=true; clearInterval(TIV); btns.forEach(b=>b.disabled=true); btns[S.q.a].classList.add("ok");
+    const loss = S.mode==="own" ? Math.round(val/2/50)*50 : 0;
+    if(loss) addPts(S.gi,-loss,"Feil "+S.tier*100); creditStudent(S.gi,st.stud,false,0);
+    $("res").innerHTML=`Feil svar.${loss?` <span style="color:#dc2626">−${loss} poeng</span>`:" Ingen poeng denne gangen."}`; $("res").classList.add("on"); showEx();
+    doneBtn();
+  };
+  btns.forEach(b=>b.onclick=()=>resolve(+b.dataset.i));
+  timer(()=>{ if(st.done) return; st.felt=false; st.tries=1; $("res").innerHTML="⏰ Tiden er ute!"; resolve(-1); });
+  function showEx(){ $("ex").innerHTML="💡 "+S.q.w+imgsHTML(S.q.after); $("ex").classList.add("on"); }
+  function doneBtn(){ $("act").innerHTML=`<button class="big" id="nx">Neste tur →</button>`; $("nx").onclick=()=>{ SND.click(); nextTurn(); }; $("nx").focus(); }
+  function stealStep(gi){
+    const others=G.groups.map((x,k)=>k).filter(k=>k!==gi);
+    $("act").innerHTML=`<div style="flex-basis:100%;font-family:Fraunces,serif;font-weight:900;font-size:24px;color:#6b4423">⚔️ Dere kan angripe og stjele ${STEAL} poeng! Hvilket lag angriper dere?</div><div class="gbtns">${others.map(k=>`<button style="background:${G.groups[k].col}" data-k="${k}">${G.groups[k].sym} ${esc(G.groups[k].name)} (${G.groups[k].score})${G.groups[k].cards.includes("skjold")?" 🛡️":""}</button>`).join("")}</div>`;
+    $("act").querySelectorAll(".gbtns button").forEach(b=>b.onclick=()=>{ const k=+b.dataset.k, vic=G.groups[k];
+      $("act").querySelectorAll(".gbtns button").forEach(x=>x.disabled=true);
+      if(vic.cards.includes("skjold")){ vic.cards.splice(vic.cards.indexOf("skjold"),1); save(); renderGroups(); SND.gong();
+        $("res").innerHTML+=`<br>🛡️ ${esc(vic.name)} hadde kortet <b>Skjoldet</b>! Angrepet ble stanset.`; }
+      else { const amt=Math.min(STEAL,vic.score); addPts(k,-amt,"Angrepet av "+G.groups[gi].name); addPts(gi,amt,"Erobret fra "+vic.name); SND.steal();
+        $("res").innerHTML+=`<br>⚔️ Dere erobret <b>${amt}</b> poeng fra ${esc(vic.name)}!`; }
+      doneBtn(); });
+  }
+}
+
+/* ---------------- TILFELDIG LAG ---------------- */
+function drawLyn(tier,again){ for(const t of [tier,tier+1,tier-1,tier+2,tier-2,5,4,3,2,1]){ if(!LYN[t]) continue; const free=LYN[t].map((_,i)=>i).filter(i=>!LYN[t][i].off&&!G.lynUsed[t].includes(i)); if(free.length){ const i=free[Math.random()*free.length|0]; G.lynUsed[t].push(i); save(); return {q:LYN[t][i],t}; } }
+  if(again) return null; G.lynUsed={1:[],2:[],3:[],4:[],5:[]}; return drawLyn(tier,true); }
+function noLyn(){ toast("Det er ingen lynspørsmål igjen – vi går videre til neste tur."); setTimeout(nextTurn,1400); }
+function randomGroup(){
+  const n=N(); let k=0, steps=18+(Math.random()*n|0), cur=G.turn%n;
+  $("main").innerHTML=`<div id="turnBig" style="font-size:44px">🎲 Skjebnen velger et tilfeldig lag …</div>`;
+  const iv=setInterval(()=>{ document.querySelectorAll(".gc").forEach(e=>e.classList.remove("pick")); cur=(cur+1)%n; $("g"+cur).classList.add("pick"); SND.tick();
+    if(++k>=steps){ clearInterval(iv); SND.gong(); const gi=cur; setTimeout(()=>{ $("g"+gi).classList.remove("pick"); toast(G.groups[gi].sym+" "+G.groups[gi].name+" må svare!"); askLyn(gi,lynTier(),1,"random"); },900); } }, 90+k*4);
+}
+function askLyn(gi,tier,mult,mode,helper){ const d=drawLyn(tier); if(!d) return noLyn(); ask({gi,q:d.q,tier:d.t,mult,cat:null,mode,helper}); }
+
+/* ---------------- LYNRUNDE ---------------- */
+function lynrunde(){
+  const d=drawLyn(Math.min(5,lynTier()+1)); if(!d) return noLyn(); const q=shufQ(d.q), val=d.t*100; let tried=[];
+  openOv("#3a5a3e","⚡","Lynrunde – alle lag!","Laget som først rekker opp hånda, får svare",
+   `<div class="qt">${esc(q.q)}</div>${optsHTML(q)}<div class="lead" id="lead">1) Hvilket lag rakk opp hånda først?</div><div class="gbtns" id="gb">${G.groups.map((g,k)=>`<button style="background:${g.col}" data-k="${k}">${g.sym} ${esc(g.name)}</button>`).join("")}</div>
+    <div class="res" id="res"></div><div class="ex" id="ex"></div><div class="act" id="act"><button class="ghost" style="color:#241f17;border-color:#cdbf98" id="none">Ingen klarer det – vis fasit</button></div>`, val+" p");
+  const btns=[...$("qb").querySelectorAll(".opt")]; btns.forEach(b=>b.disabled=true); let who=null;
+  const gb=$("gb");
+  const pickGroup=k=>{ who=k; gb.querySelectorAll("button").forEach(b=>b.disabled=true); $("lead").innerHTML=`2) ${G.groups[k].sym} <b>${esc(G.groups[k].name)}</b> svarer – klikk svaret de ga:${teamHTML(k)}`; btns.forEach(b=>{ if(!b.classList.contains("bad")) b.disabled=false; }); SND.click(); };
+  gb.querySelectorAll("button").forEach(b=>b.onclick=()=>pickGroup(+b.dataset.k));
+  const reveal=()=>{ clearInterval(TIV); btns.forEach(b=>b.disabled=true); btns[q.a].classList.add("ok"); $("ex").innerHTML="💡 "+q.w; $("ex").classList.add("on");
+    $("act").innerHTML=`<button class="big" id="nx">Neste tur →</button>`; $("nx").onclick=()=>{SND.click();nextTurn();}; };
+  btns.forEach(b=>b.onclick=()=>{ const i=+b.dataset.i;
+    if(i===q.a){ addPts(who,val,"Lynrunde"); SND.bell(); $("res").innerHTML=`⚡ ${esc(G.groups[who].name)} svarte riktig! <span style="color:#16a34a">+${val}</span>`; $("res").classList.add("on"); reveal(); }
+    else { b.classList.add("bad"); SND.bad(); tried.push(who); btns.forEach(x=>x.disabled=true);
+      $("res").innerHTML=`${esc(G.groups[who].name)} svarte feil. Neste lag som rekker opp hånda, kan prøve!`; $("res").classList.add("on");
+      $("lead").textContent="1) Hvilket lag rakk opp hånda nå?"; gb.querySelectorAll("button").forEach(x=>x.disabled=tried.includes(+x.dataset.k)); } });
+  $("none").onclick=()=>{ $("res").innerHTML="Ingen poeng denne gangen."; $("res").classList.add("on"); reveal(); };
+  timer(()=>{ $("res").innerHTML="⏰ Tiden er ute!"; $("res").classList.add("on"); reveal(); });
+}
+
+/* ---------------- FASE-OVERGANG ---------------- */
+function faseTransition(y,cb){ const Y=FASE[y]; document.body.className="f"+y; SND.gong();
+  $("yt").innerHTML=`<div class="e">${Y.e}</div><h1>${Y.n}</h1><p>${Y.d}</p><p style="font-size:20px;color:var(--gold);margin-top:10px">Nå kan dere velge ${(y===4?[4,5]:[y,y+1]).map(t=>t*100).join("- og ")}-spørsmål.</p><button class="big" style="margin-top:22px" id="ytGo">Begynn: ${Y.n} ${Y.e}</button>`;
+  $("yt").classList.add("on"); $("ytGo").onclick=()=>{ $("yt").classList.remove("on"); cb(); }; }
+
+/* ---------------- SLUTT ---------------- */
+function finishGame(){ closeOv(); G.phase="ended"; save(); SND.gong();
+  $("yt").innerHTML=`<div class="e">🏁</div><h1>Spillet er ferdig</h1><p>Hvilket lag kan mest? Nå får vi se!</p><button class="big" style="margin-top:22px" id="ytGo">Se vinnerne 🏆</button>`;
+  $("yt").classList.add("on"); $("ytGo").onclick=()=>{ $("yt").classList.remove("on"); showEnd(); }; }
+function showEnd(){
+  closeOv(); renderGroups(); document.body.className="f0";
+  const r=G.groups.map((g,i)=>({g,i})).sort((a,b)=>b.g.score-a.g.score);
+  const pod=[r[1],r[0],r[2]].filter(Boolean), h={0:220,1:160,2:120}, pl=x=>r.indexOf(x);
+  $("main").innerHTML=`<div style="width:100%;max-width:900px;text-align:center;overflow:auto;max-height:100%">
+   <div class="logo" style="font-size:52px">Seier!</div>
+   <div id="podium">${pod.map((x,k)=>`<div class="pod" style="animation-delay:${[.4,1.2,0][k]}s"><div style="font-size:44px">${x.g.sym}</div><div class="nm">${esc(x.g.name)}</div><div class="pt">${x.g.score}</div><div class="blk" style="height:${h[pl(x)]}px;background:${x.g.col}">${pl(x)+1}</div></div>`).join("")}</div>
+   <div class="rank">${r.slice(3).map((x,k)=>`<div><span>${k+4}.</span><span>${x.g.sym}</span><span>${esc(x.g.name)}</span><b>${x.g.score}</b></div>`).join("")}</div>
+   <p style="color:var(--muted);font-weight:800;margin-top:16px">Snakk sammen: Hvilket spørsmål var vanskeligst, og hva lærte dere?</p><p style="color:var(--muted);font-size:15px;margin-top:4px">Er det noen som har det sånn som Boj? Snakk med en voksen du stoler på – eller ring Alarmtelefonen for barn og unge: 116 111.</p>
+   <button class="ghost" id="newBtn" style="margin-top:6px">↺ Nytt spill</button></div>`;
+  $("newBtn").onclick=()=>{ confirmBox("Starte et nytt spill? Resultatet fra dette spillet forsvinner fra skjermen (elevpoengene kan du kopiere i lærervisningen først).",()=>{ try{localStorage.removeItem(KEY)}catch(e){} location.reload(); }); };
+  SND.win(); petals();
+}
+function petals(){ for(let i=0;i<70;i++){ const p=document.createElement("div"); p.className="petal"; p.textContent=["✉️","⭐","✨","👑","🌈"][i%5]; p.style.left=Math.random()*100+"vw"; p.style.animationDuration=(3+Math.random()*4)+"s"; p.style.animationDelay=Math.random()*2.5+"s"; p.style.fontSize=(18+Math.random()*26)+"px"; document.body.appendChild(p); setTimeout(()=>p.remove(),9500);} }
+
+/* =====================================================================
+   LÆRERVERKTØY: poengjustering, elevpoeng, angre
+   ===================================================================== */
+function confirmBox(msg,yes){ openOv("#55452a","❔","Er du sikker?","",`<p style="font-size:19px">${msg}</p><div class="act"><button class="ghost" style="color:#241f17;border-color:#cdbf98" id="cNo">Avbryt</button><button class="big" id="cYes">Ja</button></div>`);
+  $("cNo").onclick=closeOv; $("cYes").onclick=()=>{ closeOv(); yes(); }; return false; }
+function adjustModal(i){ if(!G||G.phase==="setup") return; const g=G.groups[i];
+  openOv(g.col,g.sym,esc(g.name),"Juster poeng manuelt",`<div class="qt" style="text-align:center">${g.score} poeng</div>
+   <div class="act" style="justify-content:center">${[-100,-50,50,100].map(d=>`<button class="big" data-d="${d}" style="font-size:18px;padding:10px 20px">${d>0?"+":""}${d}</button>`).join("")}</div>
+   <p style="text-align:center;color:#6d5a3e">Maktkort: ${g.cards.length?g.cards.map(c=>CARDS[c].e+" "+CARDS[c].n).join(", "):"ingen"}</p>
+   <div class="act"><button class="ghost" style="color:#241f17;border-color:#cdbf98" id="cl">Lukk</button></div>`);
+  $("qb").querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{ snap(); addPts(i,+b.dataset.d,"Manuell justering"); $("qb").querySelector(".qt").textContent=g.score+" poeng"; });
+  $("cl").onclick=closeOv; }
+$("undoBtn").onclick=()=>{ if(!HIST.length){ toast("Ingenting å angre"); return; }
+  confirmBox("Angre? Spillet går tilbake til starten av siste tur (eller før siste manuelle justering).",()=>{ G=JSON.parse(HIST.pop()); save(); toast("↶ Angret"); if(G.phase==="play") startTurn(true); else { renderGroups(); showEnd(); } }); };
+$("teachBtn").onclick=()=>{
+  const open=()=>teacherView();
+  if(!G.pin) return open();
+  openOv("#334155","🔒","Lærervisning","Elevpoeng",`<p style="font-size:18px">Skriv inn lærer-PIN. <b>Tips:</b> Slå av projektoren eller frys skjermen først.</p><input class="inp" id="pinIn" type="password" inputmode="numeric" style="color:#241f17;background:#fff;font-size:22px;max-width:240px"><div class="act"><button class="ghost" style="color:#241f17;border-color:#cdbf98" id="pc">Avbryt</button><button class="big" id="po">Åpne</button></div>`);
+  $("pinIn").focus(); $("pc").onclick=closeOv; const go=()=>{ if($("pinIn").value===G.pin) open(); else { SND.bad(); toast("Feil PIN"); } }; $("po").onclick=go; $("pinIn").onkeydown=e=>{ if(e.key==="Enter") go(); };
+};
+function teacherView(){
+  const rows=[]; G.groups.forEach((g,gi)=>{ if(!g.members.length) rows.push([g.name,"(ingen navn lagt inn)",g.score,"","",""]);
+    g.members.forEach((m,mi)=>{ const s=G.studs[gi+"-"+mi]||{ans:0,ok:0,pts:0}; rows.push([g.name,m,g.score,s.ans,s.ok,s.pts]); }); });
+  rows.sort((a,b)=>(b[2]+ (+b[5]||0)) - (a[2]+(+a[5]||0)));
+  const tsv=["Lag\tElev\tLagpoeng\tSvarte selv\tRiktige\tEgne poeng\tTotalt",...rows.map(r=>[...r,(+r[2]||0)+(+r[5]||0)].join("\t"))].join("\n");
+  openOv("#334155","📋","Elevpoeng","Kun for læreren",`<p style="margin-top:0;color:#6d5a3e;font-size:15px"><b>Lagpoeng</b> = poengene laget endte på (alle i laget får dem). <b>Svarte selv / Riktige / Egne poeng</b> = spørsmål der skjebnen trakk akkurat denne eleven. <b>Totalt</b> = lagpoeng + egne poeng.</p>
+   <div style="max-height:52vh;overflow:auto"><table class="st"><tr><th>Lag</th><th>Elev</th><th>Lagpoeng</th><th>Svarte selv</th><th>Riktige</th><th>Egne poeng</th><th>Totalt</th></tr>
+   ${rows.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td class="n">${r[2]}</td><td class="n">${r[3]}</td><td class="n">${r[4]}</td><td class="n">${r[5]}</td><td class="n">${(+r[2]||0)+(+r[5]||0)}</td></tr>`).join("")}</table></div>
+   <div class="act"><button class="ghost" style="color:#241f17;border-color:#cdbf98" id="cp">📋 Kopier til Excel/Teams</button><button class="big" id="tc">Lukk</button></div>`);
+  $("tc").onclick=closeOv;
+  $("cp").onclick=()=>{ if(navigator.clipboard) navigator.clipboard.writeText(tsv).then(()=>toast("Kopiert! Lim inn i Excel."),()=>toast("Kunne ikke kopiere")); else toast("Kopiering støttes ikke her"); };
+}
+$("endBtn").onclick=()=>{ if(G.phase==="ended") return showEnd(); confirmBox("Avslutte spillet nå og vise vinnerne?",finishGame); };
+$("sndBtn").onclick=()=>{ soundOn=!soundOn; $("sndBtn").textContent=soundOn?"🔔 Lyd på":"🔕 Lyd av"; };
+$("fsBtn").onclick=()=>{ try{ document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen().catch(()=>toast("Bruk F11 for fullskjerm")); }catch(e){ toast("Bruk F11 for fullskjerm"); } };
+function rules(){ openOv("#55452a","📜","Slik fungerer konkurransen","Regler",`<div class="rules"><ul>
+ <li><b>Lagene får tur etter tur.</b> Laget som har tur, snurrer <b>skjebnehjulet</b>:
+  <ul><li>🎯 <b>Velg selv:</b> laget velger kategori og vanskelighet på tavla. Høyere vanskelighet gir flere poeng – men feil svar koster halvparten.</li>
+  <li>✖️2 <b>Dobbel:</b> som «velg selv», men poengene dobles.</li>
+  <li>🎲 <b>Tilfeldig lag:</b> skjebnen velger hvilket lag som må svare. Feil svar koster ingenting.</li>
+  <li>🙋 <b>Samarbeid:</b> laget velger et annet lag å spørre om hjelp og deretter et spørsmål på tavla. Riktig svar gir 250 poeng. Hvis hjelpen bidro til det riktige svaret, får også hjelperlaget 250 poeng. Feil svar koster ingenting.</li>
+  <li>👁️ <b>Se nøye!</b> Bildespørsmål. Noen bilder vises bare i noen få sekunder før spørsmålet kommer – følg godt med!</li>
+  <li>⚡ <b>Lynrunde:</b> alle lagene kan svare, og laget som først rekker opp hånda, får svare.</li>
+  <li>🎁 <b>Bonus:</b> +100 poeng og et maktkort.</li></ul></li>
+ <li><b>Fire faser.</b> Hver runde er en ny fase, og spørsmålene blir vanskeligere: Oppvarming (100–200) → Fordypning (200–300) → Utfordringen (300–400) → Finalen (400–500).</li>
+ <li>⚔️ <b>500-spørsmål</b> (svært vanskelig) i finalen: riktig svar lar laget <b>angripe og stjele ${STEAL} poeng</b> fra et annet lag.</li>
+ <li>🃏 <b>Maktkort</b> får man ved riktig svar på 300 eller mer: 🤝 Læringspartner fjerner to gale svar · 📝 Førsteutkast gir et nytt forsøk · 🛡️ Skjoldet stopper ett angrep.</li>
+ <li>🎯 Er det lagt inn navn, <b>trekker skjebnen hvilken elev som skal svare</b>. Laget kan ikke hjelpe!</li>
+ <li><b>For læreren:</b> Klikk på et lag for å justere poeng. «Angre siste» går tilbake én tur. Alt lagres automatisk – også hvis siden lastes på nytt. «🔒 Lærer» viser elevpoengene.</li></ul></div>
+ <div class="act"><button class="big" id="rc">Skjønner!</button></div>`); $("rc").onclick=closeOv; }
+$("rulesBtn").onclick=rules; $("rules2").onclick=rules;
+document.addEventListener("keydown",e=>{ if(!$("ov").classList.contains("on")) return; if(/^[1-6]$/.test(e.key)&&document.activeElement.tagName!=="INPUT"){ const b=$("qb").querySelectorAll(".opt")[+e.key-1]; if(b&&!b.disabled) b.click(); } if(e.key==="Enter"&&$("nx")) $("nx").click(); });
+
+
+/* ---------------- LAGET, BILDER, SAMARBEID ---------------- */
+function teamHTML(gi,pre){ const g=G.groups[gi]; return `<div class="team">${pre?pre+": ":"👥 "}<b style="color:${g.col}">${g.sym} ${esc(g.name)}</b>${g.members.length?g.members.map(m=>`<span class="m">${esc(m)}</span>`).join(""):`<span class="note" style="color:#6d5a3e">(ingen navn lagt inn)</span>`}</div>`; }
+function imgsHTML(a){ return a&&a.length?`<div class="qimg">${a.map(s=>`<img src="${esc(s)}" alt="Bilde fra boka" onclick="zoomImg(this.src)">`).join("")}</div>`:""; }
+function zoomImg(src){ $("lb").innerHTML=`<img src="${src}" alt="">`; $("lb").classList.add("on"); }
+$("lb").onclick=()=>$("lb").classList.remove("on");
+function showMem(S){ const g=G.groups[S.gi], m=S.q.mem, sec=m.sec||5, val=S.mode==="help"?250:S.tier*100*S.mult, col=S.cat?S.cat.c:"#2e6a8a";
+  openOv(col,g.sym,esc(g.name),"👁️ Se nøye!",`${teamHTML(S.gi)}<div class="qt">Følg godt med! Dere får se ${m.imgs.length} bilder i ${sec} sekunder. Etterpå kommer spørsmålet.</div><div class="act"><button class="big" id="memGo">Vis bildene 👁️</button></div>`,val+" p");
+  $("memGo").onclick=()=>{ SND.gong(); $("qb").innerHTML=`<div class="memwrap">${m.imgs.map(s=>`<img src="${esc(s)}" alt="">`).join("")}</div><div class="membar"><i id="memI"></i></div>`;
+    const t0=Date.now(), iv=setInterval(()=>{ const f=Math.max(0,1-(Date.now()-t0)/(sec*1000)); const e=$("memI"); if(e) e.style.transform=`scaleX(${f})`; if(f<=0){ clearInterval(iv); S.memDone=true; ask(S); } },50); };
+  $("memGo").focus(); }
+function chooseHelper(gi){ const g=G.groups[gi], others=G.groups.map((x,k)=>k).filter(k=>k!==gi);
+  openOv("#4a3a6b","🙋",esc(g.name),"Samarbeid",`${teamHTML(gi)}<div class="qt">Hvilket lag vil dere spørre om hjelp?</div><p style="font-size:18px">Etterpå velger dere et spørsmål på tavla. Svarer dere riktig, får dere 250 poeng. Hvis hjelperlaget bidro til det riktige svaret, får de også 250 poeng. Feil svar koster ingenting.</p><div class="gbtns">${others.map(k=>`<button style="background:${G.groups[k].col};color:#fff" data-k="${k}">${G.groups[k].sym} ${esc(G.groups[k].name)}</button>`).join("")}</div>`);
+  $("qb").querySelectorAll(".gbtns button").forEach(b=>b.onclick=()=>{ SND.click(); closeOv(); showBoard(gi,1,+b.dataset.k); }); }
+
+/* =====================================================================
+   REDIGERING – læreren lager kategorier, spørsmål, alternativer og bilder.
+   Alt lagres i denne nettleseren. «Lagre som fil» / «Hent inn sett» flytter
+   settet mellom PC-er.
+   ===================================================================== */
+let edTab="opp";
+function updSetup(){ const t=QSET.tittel||"Konkurranse"; $("sTitle").textContent=t; $("sUnder").textContent=QSET.under||""; $("hudLogo").textContent=t; document.title=t;
+  const n=playable(); $("sCount").innerHTML=n?`✅ ${n} spørsmål er klare til bruk.`:`Det er ingen spørsmål her ennå. Trykk <b>✏️ Rediger spørsmål</b> for å lage dem, eller hent inn et ferdig sett.`; }
+function openEditor(){ $("editor").classList.add("on"); renderEditor(); }
+function closeEditor(){ saveSet(true); $("editor").classList.remove("on"); }
+function getRef(pid){ const [k,x,y]=pid.split("-").map((v,i)=>i?+v:v); return k==="c"?QSET.kat[x].q[y]:QSET.lyn[x][y]; }
+function readImg(file){ return new Promise((res,rej)=>{ const url=URL.createObjectURL(file), im=new Image();
+  im.onload=()=>{ const s=Math.min(1,900/Math.max(im.width,im.height)), cv=document.createElement("canvas"); cv.width=Math.round(im.width*s); cv.height=Math.round(im.height*s);
+    const x=cv.getContext("2d"); x.fillStyle="#fff"; x.fillRect(0,0,cv.width,cv.height); x.drawImage(im,0,0,cv.width,cv.height); URL.revokeObjectURL(url); res(cv.toDataURL("image/jpeg",0.72)); };
+  im.onerror=()=>{ URL.revokeObjectURL(url); rej(); }; im.src=url; }); }
+function qCard(pid,r,label,isLyn){ const cl=clean(r), empty=!r.q.trim()&&r.o.every(o=>!o.trim());
+  const tag=r.off?'<span class="tag off">Hoppes over</span>':empty?'<span class="tag warn">Tomt – brukes ikke</span>':cl.bad?'<span class="tag warn">Mangler spørsmål, riktig svar eller to alternativer – brukes ikke</span>':'<span class="tag ok">Klar</span>';
+  return `<div class="eq ${r.off?'isoff':''}" data-p="${pid}">
+   <div class="eqh"><b>${label}</b>${tag}<span class="sp"></span>${isLyn?`<button class="mini danger" data-act="delq">🗑 Slett</button>`:`<button class="mini" data-act="clear">Tøm</button><button class="mini ${r.off?'on':'danger'}" data-act="off">${r.off?'↩ Ta med igjen':'⏸ Hopp over'}</button>`}</div>
+   <label class="lb">Spørsmål</label><textarea class="inp" rows="2" data-f="q" placeholder="Skriv spørsmålet her">${esc(r.q)}</textarea>
+   <label class="lb">Svaralternativer <span class="note">– kryss av for riktig svar. Tomme alternativer blir ikke vist.</span></label>
+   ${r.o.map((o,i)=>`<div class="orow"><label class="rad" title="Riktig svar"><input type="radio" name="a_${pid}" value="${i}" ${i===r.a?'checked':''}><span>${LETTERS[i]}</span></label><input class="inp" data-o="${i}" value="${esc(o)}" placeholder="Alternativ ${LETTERS[i]}"><button class="mini danger" data-act="delo" data-i="${i}" ${r.o.length<=2?'disabled':''} title="Slett alternativet">✕</button></div>`).join("")}
+   ${r.o.length<MAXOPT?`<button class="mini" data-act="addo">＋ Legg til alternativ</button>`:""}
+   <label class="lb">Forklaring som vises etter svaret <span class="note">(valgfritt)</span></label><textarea class="inp" rows="2" data-f="w">${esc(r.w)}</textarea>
+   <label class="lb">Bilder <span class="note">(valgfritt)</span></label>
+   <div class="edimgs">${r.imgs.map((s,i)=>`<span class="th"><img src="${esc(s)}" alt=""><button class="mini danger" data-act="deli" data-i="${i}" title="Fjern bildet">✕</button></span>`).join("")}
+    <label class="mini fil">🖼️ Legg til bilde<input type="file" accept="image/*" multiple data-act="addi" hidden></label></div>
+   ${r.imgs.length?`<div class="orow" style="margin-top:6px"><select class="inp" data-f="vis" style="max-width:420px"><option value="med" ${r.vis==="med"?"selected":""}>Vis bildene sammen med spørsmålet</option><option value="for" ${r.vis==="for"?"selected":""}>Vis bildene i noen sekunder før spørsmålet (huskeoppgave)</option><option value="etter" ${r.vis==="etter"?"selected":""}>Vis bildene først etter at laget har svart</option></select>
+    ${r.vis==="for"?`<input class="inp" type="number" min="2" max="30" data-f="sek" value="${r.sek}" style="width:80px"> <span class="note">sekunder</span>`:""}</div>`:""}
+  </div>`; }
+function renderEditor(){
+  const keep=$("edBody").scrollTop;
+  const tabs=[`<button class="${edTab==="opp"?'sel':''}" data-t="opp">⚙️ Oppsett</button>`,...QSET.kat.map((c,i)=>`<button class="${edTab===i?'sel':''}" data-t="${i}">${esc(c.e)} ${esc(c.n)}</button>`),`<button class="${edTab==="lyn"?'sel':''}" data-t="lyn">⚡ Lynspørsmål</button>`].join("");
+  let body="";
+  if(edTab==="opp"){
+    body=`<div class="eq"><label class="lb">Tittel på spillet</label><input class="inp" id="eT" maxlength="60" value="${esc(QSET.tittel)}">
+      <label class="lb">Undertittel <span class="note">(valgfritt, f.eks. tema og fag)</span></label><input class="inp" id="eU" maxlength="140" value="${esc(QSET.under)}">
+      <label class="lb">Melding på sluttskjermen <span class="note">(valgfritt)</span></label><textarea class="inp" id="eS" rows="2">${esc(QSET.slutt)}</textarea></div>
+     <div class="eq"><div class="eqh"><b>Kategorier</b><span class="note">Hver kategori har fem spørsmål (100–500 poeng). Du kan ha opptil ${MAXCAT} kategorier.</span></div>
+      ${QSET.kat.map((c,i)=>`<div class="orow crow"><input class="inp emo" data-ce="${i}" maxlength="4" value="${esc(c.e)}" title="Ikon (emoji)"><input class="inp" data-cn="${i}" maxlength="40" value="${esc(c.n)}"><input type="color" data-cc="${i}" value="${c.c}" title="Farge"><button class="mini" data-cgo="${i}">Rediger spørsmål →</button><button class="mini danger" data-cdel="${i}" ${QSET.kat.length<=1?'disabled':''} title="Slett kategorien">✕</button></div>`).join("")}
+      ${QSET.kat.length<MAXCAT?`<button class="mini" id="cAdd">＋ Legg til kategori</button>`:""}</div>
+     <div class="eq note" style="font-size:15px">💾 Alt du skriver, lagres automatisk i denne nettleseren – ikke på nettet. Elevene ser aldri fasiten. Skal du bruke en annen PC, trykker du <b>📤 Lagre som fil</b> og henter fila inn med <b>📥 Hent inn sett</b> på den andre PC-en.<br>Settet heter <b>${esc(SETT)}</b> og hører til denne lenken.</div>`;
+  } else if(edTab==="lyn"){
+    body=`<div class="eq note" style="font-size:15px">⚡ Lynspørsmål brukes i lynrunder og når skjebnen velger et tilfeldig lag. Nivå 1 er lettest og brukes tidlig i spillet, nivå 5 er vanskeligst.</div>`+
+      [1,2,3,4,5].map(t=>`<h3 class="lvl">Nivå ${t} · ${t*100} poeng</h3>${QSET.lyn[t].map((r,i)=>qCard(`l-${t}-${i}`,r,`Lynspørsmål ${i+1}`,true)).join("")}<button class="mini" data-ladd="${t}">＋ Legg til lynspørsmål på nivå ${t}</button>`).join("");
+  } else { const c=QSET.kat[edTab]; body=`<div class="eq note" style="font-size:15px">${esc(c.e)} <b>${esc(c.n)}</b> – fem spørsmål fra lettest (100) til vanskeligst (500). I første runde kan lagene bare velge 100 og 200, deretter øker vanskelighetsgraden.</div>`+c.q.map((r,t)=>qCard(`c-${edTab}-${t}`,r,`${(t+1)*100} poeng`,false)).join(""); }
+  $("edBody").innerHTML=`<div class="seg edtabs">${tabs}</div>${body}`;
+  $("edBody").scrollTop=keep;
+  $("edBody").querySelectorAll(".edtabs button").forEach(b=>b.onclick=()=>{ edTab=b.dataset.t==="opp"||b.dataset.t==="lyn"?b.dataset.t:+b.dataset.t; renderEditor(); $("edBody").scrollTop=0; });
+  const rer=()=>{ saveSet(true); renderEditor(); };
+  if(edTab==="opp"){
+    $("eT").oninput=e=>{ QSET.tittel=strip(e.target.value); saveSet(); }; $("eU").oninput=e=>{ QSET.under=strip(e.target.value); saveSet(); }; $("eS").oninput=e=>{ QSET.slutt=strip(e.target.value); saveSet(); };
+    $("edBody").querySelectorAll("[data-ce]").forEach(x=>x.oninput=()=>{ QSET.kat[+x.dataset.ce].e=strip(x.value); saveSet(); });
+    $("edBody").querySelectorAll("[data-cn]").forEach(x=>x.oninput=()=>{ QSET.kat[+x.dataset.cn].n=strip(x.value); saveSet(); });
+    $("edBody").querySelectorAll("[data-cc]").forEach(x=>x.oninput=()=>{ QSET.kat[+x.dataset.cc].c=x.value; saveSet(); });
+    $("edBody").querySelectorAll("[data-cgo]").forEach(x=>x.onclick=()=>{ edTab=+x.dataset.cgo; renderEditor(); $("edBody").scrollTop=0; });
+    $("edBody").querySelectorAll("[data-cdel]").forEach(x=>x.onclick=()=>{ const i=+x.dataset.cdel; if(x.dataset.sure){ QSET.kat.splice(i,1); rer(); } else { x.dataset.sure=1; x.textContent="Slette? Klikk igjen"; } });
+    if($("cAdd")) $("cAdd").onclick=()=>{ QSET.kat.push(emptyCat(QSET.kat.length)); rer(); };
+  }
+  $("edBody").querySelectorAll("[data-ladd]").forEach(x=>x.onclick=()=>{ QSET.lyn[+x.dataset.ladd].push(emptyQ()); rer(); });
+  $("edBody").querySelectorAll(".eq[data-p]").forEach(box=>{ const pid=box.dataset.p, r=getRef(pid);
+    box.querySelectorAll("textarea[data-f],input[data-f]").forEach(x=>x.oninput=()=>{ const f=x.dataset.f; r[f]=f==="sek"?Math.min(30,Math.max(2,+x.value||5)):strip(x.value); saveSet(); });
+    box.querySelectorAll("select[data-f]").forEach(x=>x.onchange=()=>{ r.vis=x.value; rer(); });
+    box.querySelectorAll("[data-o]").forEach(x=>x.oninput=()=>{ r.o[+x.dataset.o]=strip(x.value); saveSet(); });
+    box.querySelectorAll('input[type=radio]').forEach(x=>x.onchange=()=>{ r.a=+x.value; rer(); });
+    box.querySelectorAll("input[type=file]").forEach(x=>x.onchange=async()=>{ const fs=[...x.files].slice(0,6-r.imgs.length); for(const f of fs){ try{ r.imgs.push(await readImg(f)); }catch(e){ toast("Bildet kunne ikke leses"); } } rer(); });
+    box.querySelectorAll("button[data-act]").forEach(b=>b.onclick=()=>{ const act=b.dataset.act, i=+b.dataset.i;
+      if(act==="off") r.off=!r.off;
+      if(act==="addo"&&r.o.length<MAXOPT) r.o.push("");
+      if(act==="delo"&&r.o.length>2){ r.o.splice(i,1); if(r.a===i) r.a=0; else if(r.a>i) r.a--; }
+      if(act==="deli") r.imgs.splice(i,1);
+      if(act==="clear"){ if(!b.dataset.sure){ b.dataset.sure=1; b.textContent="Tømme? Klikk igjen"; return; } Object.assign(r,emptyQ()); }
+      if(act==="delq"){ if(!b.dataset.sure){ b.dataset.sure=1; b.textContent="Slette? Klikk igjen"; return; } const [,t,j]=pid.split("-"); QSET.lyn[+t].splice(+j,1); }
+      rer(); }); });
+}
+function edExport(){ saveSet(true); const txt=JSON.stringify(QSET), big=txt.length>400000;
+  $("edBody").innerHTML=`<div class="eq"><h3 class="lvl">📤 Lagre spørsmålssettet som fil</h3><p class="note" style="font-size:15px">Fila inneholder alle spørsmål, svar og bilder. Hent den inn med «📥 Hent inn sett» på en annen PC, eller del den med en kollega.</p>
+   <div class="act" style="justify-content:flex-start"><button class="big" id="exDl" style="font-size:17px;padding:10px 22px">Last ned fil</button><button class="ghost" id="exCp">Kopier som tekst</button><button class="ghost" id="exBack">Tilbake</button></div>
+   ${big?`<p class="note">Settet er stort fordi det har bilder, så det er tryggest å laste ned fila.</p>`:`<textarea class="inp" id="exTxt" rows="6" readonly>${esc(txt)}</textarea>`}</div>`;
+  $("exDl").onclick=()=>{ try{ const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([txt],{type:"application/json"})); a.download=`konkurranse-${SETT}.json`; document.body.appendChild(a); a.click(); setTimeout(()=>{ URL.revokeObjectURL(a.href); a.remove(); },1000); toast("Fila er lastet ned"); }catch(e){ toast("Nedlastingen virket ikke her – bruk «Kopier som tekst»"); } };
+  $("exCp").onclick=()=>{ try{ navigator.clipboard.writeText(txt).then(()=>toast("Kopiert!"),()=>toast("Kopieringen virket ikke – bruk «Last ned fil»")); }catch(e){ toast("Kopieringen virket ikke – bruk «Last ned fil»"); } };
+  $("exBack").onclick=renderEditor; }
+function edImport(){ if(!$("editor").classList.contains("on")) $("editor").classList.add("on");
+  $("edBody").innerHTML=`<div class="eq"><h3 class="lvl">📥 Hent inn et spørsmålssett</h3><p class="note" style="font-size:15px">Velg en fil du har lagret med «📤 Lagre som fil», eller lim inn teksten. <b>Spørsmålene som ligger her nå, blir erstattet.</b></p>
+   <label class="big" style="display:inline-block;font-size:17px;padding:10px 22px;cursor:pointer">Velg fil<input type="file" accept=".json,application/json" id="imFile" hidden></label>
+   <label class="lb" style="margin-top:14px">… eller lim inn teksten her</label><textarea class="inp" id="imTxt" rows="6"></textarea>
+   <div class="act" style="justify-content:flex-start"><button class="ghost" id="imGo">Bruk teksten</button><button class="ghost" id="imBack">Tilbake</button></div></div>`;
+  const use=txt=>{ try{ QSET=normSet(JSON.parse(txt)); edTab="opp"; saveSet(true); toast("Spørsmålssettet er hentet inn"); renderEditor(); }catch(e){ toast("Fila eller teksten kunne ikke leses som et spørsmålssett"); } };
+  $("imFile").onchange=e=>{ const f=e.target.files[0]; if(!f) return; const rd=new FileReader(); rd.onload=()=>use(rd.result); rd.readAsText(f); };
+  $("imGo").onclick=()=>use($("imTxt").value); $("imBack").onclick=renderEditor; }
+$("editBtn").onclick=openEditor; $("edClose").onclick=closeEditor; $("edExp").onclick=edExport; $("edImp").onclick=edImport; $("impBtn").onclick=edImport;
+$("edReset").onclick=()=>{ const b=$("edReset"); if(b.dataset.sure){ QSET=emptySet(); edTab="opp"; saveSet(true); renderEditor(); toast("Alt er tømt"); delete b.dataset.sure; b.textContent="🗑 Tøm alt"; }
+  else { b.dataset.sure=1; b.textContent="Klikk igjen for å tømme alt"; setTimeout(()=>{ delete b.dataset.sure; b.textContent="🗑 Tøm alt"; },3500); } };
+if(TILBAKE && /^[a-z0-9\-\/\.]+\.html$/i.test(TILBAKE) && !/^\/\/|:/.test(TILBAKE)){ $("backLink").href=TILBAKE; $("backLink").hidden=false; }
+updSetup();
+</script>
+</body>
+</html>

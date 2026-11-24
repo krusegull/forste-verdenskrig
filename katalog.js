@@ -43,5 +43,20 @@ const KATALOG = [
         lenke: "krle/hinduismen/index.html"
       }
     ]
+  },
+  {
+    id: "norsk",
+    navn: "Norsk",
+    ikon: "📚",
+    farge: "#2e6a8a",
+    beskrivelse: "Lesing, skriving, språk og litteratur",
+    temaer: [
+      {
+        navn: "Virkemidler i bildebok – Sinna Mann",
+        ikon: "📖",
+        beskrivelse: "Kontrast, besjeling, personifikasjon, sammenligning, metafor, motiv og tema",
+        lenke: "norsk/sinna-mann/index.html"
+      }
+    ]
   }
 ];

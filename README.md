@@ -7,6 +7,8 @@ Interaktive læringsverktøy for elevene, sortert etter fag og tema.
 - `katalog.js` – **listen over fag og temaer. Her legger du til nye fag og temaer.**
 - `samfunnsfag/forste-verdenskrig/` – Første verdenskrig
 - `krle/hinduismen/` – Hinduismen
+- `norsk/sinna-mann/` – Virkemidler i bildebok – Sinna Mann
+- `verktoy/konkurranse.html` – konkurransemal som kan brukes i alle fag (læreren lager spørsmålene selv; de lagres bare i lærerens nettleser)
 
 ## Legge til et nytt tema
 1. Lag en mappe under faget, f.eks. `krle/islam/`, med en `index.html`.
