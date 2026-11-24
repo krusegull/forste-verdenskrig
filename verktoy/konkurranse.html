@@ -230,7 +230,7 @@ select.inp{font-weight:800}
    <div id="sUnder" style="font-family:Fraunces,serif;font-size:24px;color:var(--muted)"></div>
    <div id="sCount" style="color:var(--muted);font-weight:800;margin-top:8px"></div>
   </div>
-  <div class="panel" id="settPanel"><h3>Spørsmålssett</h3><div class="orow" style="flex-wrap:wrap;gap:8px"><select class="inp" id="settSel" style="max-width:460px;flex:1 1 260px"></select><button class="ghost" id="settNew">＋ Nytt sett</button><button class="ghost" id="settDel" hidden>🗑 Slett settet</button></div>
+  <div class="panel" id="settPanel"><h3>Spørsmålssett</h3><div class="orow" style="flex-wrap:wrap;gap:8px"><select class="inp" id="settSel" style="max-width:460px;flex:1 1 260px"></select><button class="ghost" id="impTop">📥 Hent inn sett</button><button class="ghost" id="editTop">✏️ Rediger spørsmål</button><button class="ghost" id="settNew">＋ Nytt sett</button><button class="ghost" id="settDel" hidden>🗑 Slett settet</button></div>
    <div id="settNewBox" hidden style="margin-top:10px"><div class="orow" style="flex-wrap:wrap;gap:8px"><input class="inp" id="settName" maxlength="60" placeholder="Navn på settet, f.eks. Første verdenskrig – repetisjon" style="flex:1 1 300px"><button class="big" id="settMake" style="font-size:16px;padding:9px 20px">Lag settet</button></div></div>
    <p class="note" style="margin:8px 0 0">Lag så mange sett du vil – ett for hvert tema eller hver repetisjon. Settene lagres bare i denne nettleseren.</p></div>
   <div id="resume"></div>
@@ -802,6 +802,7 @@ $("settMake").onclick=()=>{ const n=strip($("settName").value).trim(); if(!n) re
 $("settName").onkeydown=e=>{ if(e.key==="Enter") $("settMake").click(); };
 $("settDel").onclick=()=>{ const b=$("settDel"); if(!b.dataset.sure){ b.dataset.sure=1; b.textContent="Slette for godt? Klikk igjen"; return; }
   try{ localStorage.removeItem(SKEY); localStorage.removeItem(KEY); }catch(e){} location.href=settUrl(FAM); };
+$("impTop").onclick=edImport; $("editTop").onclick=openEditor;
 renderSett();
 updSetup();
 </script>
