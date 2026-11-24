@@ -6,7 +6,8 @@
 <title>Læringsportalen – velg fag</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,800;9..144,900&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="portal.css">
-<script src="katalog.js"></script>
+<script>/* Henter alltid nyeste fag-liste, så nye fag og temaer vises med en gang */
+document.write('<script src="katalog.js?t='+Date.now()+'"><\/script>');</script>
 </head>
 <body>
 <main class="wrap">
