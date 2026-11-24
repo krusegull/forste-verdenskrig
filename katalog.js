@@ -26,6 +26,12 @@ const KATALOG = [
         ikon: "🪖",
         beskrivelse: "Kart, krigsarkivet, årsakskjeden, krigsdagbøkene, togreisen og begrepsjakten",
         lenke: "samfunnsfag/forste-verdenskrig/index.html"
+      },
+      {
+        navn: "Den kalde krigen",
+        ikon: "🧊",
+        beskrivelse: "Supermaktene, ideologier, allianser, brennpunkter og slutten på den kalde krigen",
+        lenke: "samfunnsfag/kalde-krigen/index.html"
       }
     ]
   },

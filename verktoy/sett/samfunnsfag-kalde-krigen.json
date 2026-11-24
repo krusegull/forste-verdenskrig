@@ -1,0 +1,1059 @@
+{
+ "v": 1,
+ "tittel": "JERNTEPPET",
+ "under": "Kunnskapskampen om den kalde krigen – Samfunnsfag",
+ "slutt": "Lykke til på prøven! Bruk fagbegrepene bakerst i heftet når du skriver.",
+ "kat": [
+  {
+   "n": "Hva var den kalde krigen?",
+   "e": "🧊",
+   "c": "#2e4a6b",
+   "q": [
+    {
+     "q": "Hvilke to land var supermaktene under den kalde krigen?",
+     "o": [
+      "USA og Sovjetunionen",
+      "USA og Kina",
+      "Storbritannia og Tyskland",
+      "Frankrike og Sovjetunionen"
+     ],
+     "a": 0,
+     "w": "Etter andre verdenskrig i 1945 vokste USA og Sovjetunionen fram som verdens to supermakter. De hadde stor militær og politisk makt.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvorfor kalles konflikten «den kalde krigen»?",
+     "o": [
+      "Fordi supermaktene aldri gikk til direkte krig mot hverandre",
+      "Fordi mye av kampene foregikk i Arktis",
+      "Fordi konflikten bare foregikk om vinteren",
+      "Fordi landene sluttet helt å snakke sammen"
+     ],
+     "a": 0,
+     "w": "Supermaktene kjempet aldri direkte mot hverandre. Likevel konkurrerte de om makt, utviklet våpen og støttet ulike parter i kriger andre steder i verden.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Omtrent hvilken periode varte den kalde krigen?",
+     "o": [
+      "Fra omkring 1947 til 1991",
+      "Fra 1914 til 1918",
+      "Fra 1939 til 1945",
+      "Fra 1961 til 1989"
+     ],
+     "a": 0,
+     "w": "Den kalde krigen varte fra omtrent 1947 til Sovjetunionen ble oppløst i 1991.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva var Trumandoktrinen fra 1947?",
+     "o": [
+      "USAs politikk for å hindre at kommunismen spredte seg",
+      "En fredsavtale mellom USA og Sovjetunionen",
+      "En plan for å dele Tyskland i fire soner",
+      "Et forbud mot atomvåpen i Europa"
+     ],
+     "a": 0,
+     "w": "Med Trumandoktrinen lovet USA å støtte land som ble truet av kommunismen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvorfor fryktet USA og Sovjetunionen hverandre etter andre verdenskrig?",
+     "o": [
+      "USA fryktet at Sovjetunionen skulle spre kommunismen, og Sovjetunionen fryktet trusler fra USA og vestlige land",
+      "Begge fryktet at Japan skulle angripe dem",
+      "USA fryktet at Sovjetunionen skulle innføre demokrati",
+      "De var bare uenige om handel med olje"
+     ],
+     "a": 0,
+     "w": "Landene hadde samarbeidet under krigen, men var uenige om hvordan Europa skulle styres etterpå. Ulike ideologier skapte mistillit og spenning.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Ideologi og styresett",
+   "e": "⚖️",
+   "c": "#8c2f39",
+   "q": [
+    {
+     "q": "Hva slags styresett hadde USA?",
+     "o": [
+      "Demokrati",
+      "Diktatur",
+      "Ettpartistat",
+      "Eneveldig monarki"
+     ],
+     "a": 0,
+     "w": "I et demokrati kan innbyggerne velge hvem som skal styre landet, gjennom frie valg.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er en ettpartistat?",
+     "o": [
+      "Et land der bare ett parti har makten",
+      "Et land med to store partier som bytter på å styre",
+      "Et land uten regjering",
+      "Et land der alle partier styrer sammen"
+     ],
+     "a": 0,
+     "w": "Sovjetunionen var en ettpartistat. Kommunistpartiet hadde makten, og innbyggerne kunne ikke velge mellom ulike partier i frie valg.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er forskjellen på markedsøkonomi og planøkonomi?",
+     "o": [
+      "I markedsøkonomi styrer tilbud og etterspørsel produksjon og priser, mens staten bestemmer mye av dette i planøkonomi",
+      "I planøkonomi bestemmer bedriftene selv hva de vil produsere",
+      "I markedsøkonomi eier staten alle butikkene",
+      "Det er ingen forskjell – det er to ord for det samme"
+     ],
+     "a": 0,
+     "w": "USA hadde markedsøkonomi og kapitalisme. Sovjetunionen hadde planøkonomi, der staten bestemte hva som skulle produseres, hvordan varene skulle fordeles og hva de skulle koste.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er målet i kommunismen som ideologi?",
+     "o": [
+      "Et klasseløst samfunn med felles eierskap til produksjonsmidlene",
+      "Et samfunn der private bedrifter konkurrerer fritt",
+      "Et samfunn styrt av en konge",
+      "Et samfunn helt uten lover og regler"
+     ],
+     "a": 0,
+     "w": "Kapitalismen bygger på privat eiendomsrett og konkurranse. Kommunismen har som mål et klasseløst samfunn der produksjonsmidlene eies i fellesskap.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvorfor kunne de ulike ideologiene føre til konflikt mellom supermaktene?",
+     "o": [
+      "Begge ønsket å spre sitt eget samfunnssystem og hindre at den andre fikk større innflytelse",
+      "Fordi de snakket ulike språk",
+      "Fordi FN bestemte at de skulle være fiender",
+      "Fordi begge ville ha de samme koloniene i Afrika"
+     ],
+     "a": 0,
+     "w": "Begge supermaktene ønsket å spre sitt eget samfunnssystem og hindre at den andre fikk mer makt. Dette førte til konflikter både i Europa og i resten av verden.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Allianser og våpenkappløp",
+   "e": "☢️",
+   "c": "#55452a",
+   "q": [
+    {
+     "q": "Hva er NATO?",
+     "o": [
+      "En forsvarsallianse opprettet i 1949 med USA i spissen",
+      "En sovjetisk militærallianse",
+      "En del av FN som deler ut nødhjelp",
+      "En handelsavtale mellom Kina og Sovjetunionen"
+     ],
+     "a": 0,
+     "w": "NATO ble opprettet i 1949 av USA, Canada og flere vesteuropeiske land. Norge var blant medlemslandene.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilken allianse dannet Sovjetunionen og flere kommunistiske land i 1955?",
+     "o": [
+      "Warszawapakten",
+      "NATO",
+      "EU",
+      "Folkeforbundet"
+     ],
+     "a": 0,
+     "w": "Warszawapakten var en militærallianse mellom Sovjetunionen og flere kommunistiske land i Øst-Europa.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva betyr terrorbalanse?",
+     "o": [
+      "At frykten for et ødeleggende motangrep hindret landene i å angripe hverandre",
+      "At terrorister hadde like mye makt som statene",
+      "At begge sider hadde nøyaktig like mange soldater",
+      "At landene delte atomvåpnene sine med hverandre"
+     ],
+     "a": 0,
+     "w": "Begge supermaktene hadde atomvåpen. Den som angrep først, måtte regne med et ødeleggende motangrep.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er en stedfortrederkrig?",
+     "o": [
+      "En krig der supermaktene støtter ulike parter i stedet for å kjempe direkte mot hverandre",
+      "En krig som utkjempes av leiesoldater fra ett land",
+      "En krig som blir avlyst i siste øyeblikk",
+      "En borgerkrig uten innblanding fra andre land"
+     ],
+     "a": 0,
+     "w": "Koreakrigen og Vietnamkrigen er eksempler på stedfortrederkriger under den kalde krigen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvorfor kunne militære allianser og atomvåpen gjøre landene tryggere, men samtidig skape mer spenning?",
+     "o": [
+      "De skremte motparten fra å angripe, men fikk den andre siden til å ruste opp enda mer",
+      "Alle atomvåpen ble ødelagt etter hvert, så det ble tryggere",
+      "Alliansene gjorde at øst og vest ble venner",
+      "Atomvåpnene ble bare brukt i forsøk og hadde ingen betydning"
+     ],
+     "a": 0,
+     "w": "Allianser og atomvåpen kunne avskrekke angrep. Samtidig gjorde opprustningen motparten mer redd, og det ga et stadig farligere våpenkappløp.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Propaganda og spionasje",
+   "e": "🕵️",
+   "c": "#4a3a6b",
+   "q": [
+    {
+     "q": "Hva er propaganda?",
+     "o": [
+      "Informasjon som skal påvirke hva folk mener, ofte på en ensidig måte",
+      "Nøytrale nyheter som viser alle sider av en sak",
+      "Et hemmelig våpen",
+      "En annen betegnelse for spion"
+     ],
+     "a": 0,
+     "w": "Begge supermaktene brukte propaganda gjennom plakater, aviser, radio, filmer og TV for å framstille sitt eget samfunn som det beste og motstanderen som en trussel.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva het etterretningsorganisasjonene til USA og Sovjetunionen?",
+     "o": [
+      "CIA og KGB",
+      "FBI og NATO",
+      "KGB og FN",
+      "CIA og Warszawapakten"
+     ],
+     "a": 0,
+     "w": "USA hadde CIA og Sovjetunionen hadde KGB. Spionasjen bidro til mer mistillit og frykt mellom landene.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva var Red Scare (kommunistfrykten)?",
+     "o": [
+      "En periode i USA, særlig på 1950-tallet, da mange ble mistenkt for å være kommunister, ofte uten bevis",
+      "En alarm som skulle varsle om atomangrep i Sovjetunionen",
+      "Et kjent sovjetisk propagandaplakat",
+      "En militærøvelse i NATO"
+     ],
+     "a": 0,
+     "w": "Frykten for fienden førte til at USA overvåket egne innbyggere. Mange ble mistenkt for å være kommunister uten at det fantes bevis.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilken konsekvens kunne Red Scare få for vanlige mennesker i USA?",
+     "o": [
+      "Noen mistet jobben fordi de ble mistenkt for å være kommunister",
+      "De fikk høyere lønn",
+      "De ble sendt til Sovjetunionen",
+      "De fikk stemmerett for første gang"
+     ],
+     "a": 0,
+     "w": "Enkelte mistet jobbene sine, selv om mistanken ofte ikke var bevist.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvordan påvirket overvåking og sensur menneskers frihet i Sovjetunionen?",
+     "o": [
+      "Myndighetene kontrollerte informasjonen folk fikk, og overvåket dem som var kritiske til staten",
+      "Alle kunne si og skrive akkurat hva de ville",
+      "Bare utenlandske turister ble overvåket",
+      "Overvåkingen gjaldt bare soldater i hæren"
+     ],
+     "a": 0,
+     "w": "I Sovjetunionen var ytringsfriheten sterkt begrenset. Den som kritiserte staten, kunne bli overvåket.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Brennpunkter",
+   "e": "🌍",
+   "c": "#3a5a3e",
+   "q": [
+    {
+     "q": "Hva var Berlinmuren?",
+     "o": [
+      "En mur som ble bygd i 1961 for å hindre at folk flyktet fra Øst-Berlin til Vest-Berlin",
+      "En bymur fra middelalderen",
+      "Grensen mellom Tyskland og Polen",
+      "En mur som vestmaktene bygde rundt Øst-Berlin"
+     ],
+     "a": 0,
+     "w": "Muren delte byen og skilte familier fra hverandre. Den ble et viktig symbol på den kalde krigen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva skjedde under Berlinblokaden i 1948–1949?",
+     "o": [
+      "Sovjetunionen stengte landveiene inn til Vest-Berlin, og vestmaktene fraktet mat og varer inn med fly",
+      "Vestmaktene stengte alle veier inn til Øst-Berlin",
+      "Berlinmuren ble revet",
+      "Tyskland ble samlet til ett land"
+     ],
+     "a": 0,
+     "w": "Blokaden tok slutt i 1949. Samme år ble Tyskland delt i to stater: demokratiske Vest-Tyskland og kommunistiske Øst-Tyskland.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva utløste Cubakrisen i 1962?",
+     "o": [
+      "Sovjetunionen plasserte atomraketter på Cuba",
+      "USA invaderte Cuba",
+      "Cuba angrep USA med fly",
+      "Fidel Castro ble styrtet"
+     ],
+     "a": 0,
+     "w": "Rakettene kunne nå store deler av USA. Da amerikanerne oppdaget dem, var verden nær en atomkrig.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er dominoteorien?",
+     "o": [
+      "Frykten for at hvis ett land ble kommunistisk, ville nabolandene følge etter",
+      "En teori om hvorfor Berlinmuren falt",
+      "En plan for å bygge allianser i Europa",
+      "En strategi for å vinne våpenkappløpet i verdensrommet"
+     ],
+     "a": 0,
+     "w": "Dominoteorien var en viktig grunn til at USA deltok i Koreakrigen og Vietnamkrigen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvorfor invaderte Sovjetunionen Afghanistan i 1979, og hvordan ble krigen en del av den kalde krigen?",
+     "o": [
+      "Sovjetunionen ville støtte den kommunistiske regjeringen, og USA støttet motstandsgruppene for å svekke Sovjetunionen",
+      "Sovjetunionen ville skaffe seg olje, og USA holdt seg helt utenfor",
+      "Sovjetunionen ville stanse Vietnamkrigen",
+      "FN ba Sovjetunionen om å gripe inn"
+     ],
+     "a": 0,
+     "w": "Afghanske motstandsgrupper, kalt mujahedin, fikk penger og våpen fra USA. Sovjetunionen trakk seg ut i 1989, svekket både økonomisk og militært.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Slutten på den kalde krigen",
+   "e": "🧱",
+   "c": "#a8622e",
+   "q": [
+    {
+     "q": "Hvilket år ble Berlinmuren åpnet?",
+     "o": [
+      "1989",
+      "1961",
+      "1945",
+      "1991"
+     ],
+     "a": 0,
+     "w": "Berlinmuren ble åpnet i 1989, samme år som flere kommunistregimer i Øst-Europa mistet makten. Det ble et viktig symbol på slutten av den kalde krigen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvem ble leder i Sovjetunionen i 1985 og innførte reformer?",
+     "o": [
+      "Mikhail Gorbatsjov",
+      "Nikita Khrusjtsjov",
+      "Josef Stalin",
+      "Leonid Bresjnev"
+     ],
+     "a": 0,
+     "w": "Gorbatsjovs reformer skulle gi mer åpenhet, ytringsfrihet og økonomisk frihet.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva skjedde med Sovjetunionen i 1991?",
+     "o": [
+      "Det ble oppløst i 15 selvstendige stater",
+      "Det ble medlem av NATO",
+      "Det ble slått sammen med Øst-Tyskland",
+      "Det invaderte Afghanistan"
+     ],
+     "a": 0,
+     "w": "Samme år ble også Warszawapakten oppløst. Tyskland var blitt samlet året før, i 1990.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvorfor fikk Sovjetunionen store økonomiske problemer på 1980-tallet?",
+     "o": [
+      "Landet brukte mye penger på våpenkappløpet og krigen i Afghanistan, og det økonomiske systemet fungerte dårlig",
+      "Landet tjente for mye penger på olje",
+      "USA overtok styringen av den sovjetiske økonomien",
+      "Befolkningen ble for liten til å drive fabrikkene"
+     ],
+     "a": 0,
+     "w": "Våpenkappløpet, krigen i Afghanistan og en planøkonomi som fungerte dårlig, svekket Sovjetunionen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvordan bidro Gorbatsjovs politikk til at den kalde krigen tok slutt?",
+     "o": [
+      "Han ga mer åpenhet og frihet og ville ikke lenger støtte upopulære kommunistregimer i Øst-Europa på samme måte som før",
+      "Han startet et nytt våpenkappløp mot USA",
+      "Han bygde Berlinmuren høyere",
+      "Han meldte Sovjetunionen inn i NATO"
+     ],
+     "a": 0,
+     "w": "Tidligere hadde Sovjetunionen brukt militær makt for å stanse opprør i Øst-Europa. Da det ikke lenger skjedde, kunne folk kreve frihet og demokrati.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Fagbegreper",
+   "e": "📚",
+   "c": "#2e6a8a",
+   "q": [
+    {
+     "q": "Hva betyr sensur?",
+     "o": [
+      "At myndigheter eller andre med makt begrenser eller kontrollerer informasjon og ytringer",
+      "At innbyggerne kan si hva de vil",
+      "At et land samler inn informasjon om andre land",
+      "At et land deles i to"
+     ],
+     "a": 0,
+     "w": "Sensur var vanlig i Sovjetunionen, der myndighetene kontrollerte informasjonen befolkningen fikk.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva betyr glasnost?",
+     "o": [
+      "Åpenhet – Gorbatsjovs politikk som skulle gi større åpenhet i Sovjetunionen",
+      "Omstrukturering av økonomien",
+      "Et sovjetisk atomvåpen",
+      "Navnet på muren i Berlin"
+     ],
+     "a": 0,
+     "w": "Glasnost betyr åpenhet. Det var en del av Gorbatsjovs reformpolitikk.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva betyr perestrojka?",
+     "o": [
+      "Omstrukturering – Gorbatsjovs forsøk på å endre Sovjetunionens økonomiske og politiske system",
+      "Åpenhet i mediene",
+      "En sovjetisk etterretningsorganisasjon",
+      "Oppløsningen av Warszawapakten"
+     ],
+     "a": 0,
+     "w": "Perestrojka betyr omstrukturering. Sammen med glasnost var dette Gorbatsjovs viktigste reformer.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er forskjellen på spionasje og etterretning?",
+     "o": [
+      "Spionasje er å skaffe hemmelig informasjon, mens etterretning er å samle inn og analysere informasjon, ofte om andre lands planer",
+      "Det er to ord for nøyaktig det samme",
+      "Etterretning er ulovlig, mens spionasje er lovlig",
+      "Spionasje gjelder bare egne innbyggere"
+     ],
+     "a": 0,
+     "w": "Spionasje er én måte å skaffe informasjon på. Etterretning omfatter også arbeidet med å samle inn og analysere informasjonen. CIA og KGB var etterretningsorganisasjoner.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilket eksempel viser en ØKONOMISK konsekvens av den kalde krigen?",
+     "o": [
+      "Landene brukte store summer på våpen i stedet for andre ting",
+      "Mange mennesker måtte flykte",
+      "Europa ble delt mellom øst og vest",
+      "Folk ble overvåket og mistet friheten sin"
+     ],
+     "a": 0,
+     "w": "Økonomiske konsekvenser er følger for arbeid, produksjon, handel og økonomi. Flukt og tapt frihet er menneskelige konsekvenser, og delingen av Europa er en politisk konsekvens.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  }
+ ],
+ "lyn": {
+  "1": [
+   {
+    "q": "Hva betyr supermakt?",
+    "o": [
+     "Et land med stor politisk, økonomisk og militær makt i verden",
+     "Et land med mange innbyggere",
+     "Et land som har vunnet en krig",
+     "Et land med en sterk konge"
+    ],
+    "a": 0,
+    "w": "USA og Sovjetunionen var supermaktene under den kalde krigen.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva ble skillet mellom Øst-Europa og Vest-Europa kalt?",
+    "o": [
+     "Jernteppet",
+     "Berlinmuren",
+     "Dominoteorien",
+     "Terrorbalansen"
+    ],
+    "a": 0,
+    "w": "Jernteppet var betegnelsen på det politiske og ideologiske skillet mellom øst og vest.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilket år sluttet andre verdenskrig?",
+    "o": [
+     "1945",
+     "1939",
+     "1949",
+     "1918"
+    ],
+    "a": 0,
+    "w": "Etter andre verdenskrig i 1945 ble USA og Sovjetunionen supermakter.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Var Norge med i NATO eller Warszawapakten?",
+    "o": [
+     "NATO",
+     "Warszawapakten",
+     "Begge",
+     "Ingen av dem"
+    ],
+    "a": 0,
+    "w": "Norge var med fra NATO ble opprettet i 1949.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva betyr allianse?",
+    "o": [
+     "Samarbeid mellom land, ofte om forsvar og sikkerhet",
+     "Krig mellom to land",
+     "En handelsvare",
+     "En type styresett"
+    ],
+    "a": 0,
+    "w": "NATO og Warszawapakten var militære allianser.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "2": [
+   {
+    "q": "Hva betyr diktatur?",
+    "o": [
+     "Et styresett der makten er samlet hos én person eller en liten gruppe, og folket har begrenset politisk frihet",
+     "Et styresett med frie valg",
+     "Et land uten hær",
+     "Et land som styres av FN"
+    ],
+    "a": 0,
+    "w": "Sovjetunionen var et kommunistisk diktatur.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva er et våpenkappløp?",
+    "o": [
+     "Konkurranse mellom land om å utvikle og skaffe stadig flere og kraftigere våpen",
+     "En sportskonkurranse mellom soldater",
+     "En avtale om å kvitte seg med våpen",
+     "Et løp for å komme først til månen"
+    ],
+    "a": 0,
+    "w": "USA og Sovjetunionen konkurrerte om å utvikle stadig flere og kraftigere våpen, blant annet atomvåpen.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva er spionasje?",
+    "o": [
+     "Å skaffe seg hemmelig informasjon om andre land",
+     "Å spre propaganda på radio",
+     "Å bygge militære allianser",
+     "Å forhandle om fred"
+    ],
+    "a": 0,
+    "w": "Supermaktene spionerte for å finne ut mer om hverandres våpen, teknologi og militære planer.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvem var USAs president under Cubakrisen?",
+    "o": [
+     "John F. Kennedy",
+     "Harry S. Truman",
+     "Ronald Reagan",
+     "Richard Nixon"
+    ],
+    "a": 0,
+    "w": "Kennedy krevde at Sovjetunionen skulle fjerne rakettene fra Cuba.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvem kom til makten på Cuba etter revolusjonen i 1959?",
+    "o": [
+     "Fidel Castro",
+     "Nikita Khrusjtsjov",
+     "Che Guevara",
+     "Mikhail Gorbatsjov"
+    ],
+    "a": 0,
+    "w": "Castro kom i konflikt med USA, og Cuba fikk et tett samarbeid med Sovjetunionen.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva betyr ytringsfrihet?",
+    "o": [
+     "Retten til å uttrykke egne meninger uten urimelig innblanding eller straff fra myndighetene",
+     "Retten til å stemme ved valg",
+     "Retten til å eie en bedrift",
+     "Plikten til å tjenestegjøre i hæren"
+    ],
+    "a": 0,
+    "w": "Ytringsfriheten var sterkt begrenset i Sovjetunionen. Gorbatsjovs glasnost skulle gi mer av den.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "3": [
+   {
+    "q": "Hva var Marshallhjelpen?",
+    "o": [
+     "Økonomisk støtte fra USA til gjenoppbyggingen av Europa etter krigen",
+     "Militær hjelp fra Sovjetunionen til Øst-Europa",
+     "Matvarehjelp til Korea",
+     "Et lån som Europa måtte betale tilbake til Sovjetunionen"
+    ],
+    "a": 0,
+    "w": "Målet var blant annet å hindre at flere land ble kommunistiske.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilke fire land kontrollerte hver sin okkupasjonssone i Tyskland etter 1945?",
+    "o": [
+     "USA, Storbritannia, Frankrike og Sovjetunionen",
+     "USA, Kina, Frankrike og Sovjetunionen",
+     "Storbritannia, Polen, Frankrike og USA",
+     "USA, Italia, Sovjetunionen og Norge"
+    ],
+    "a": 0,
+    "w": "Både Tyskland og hovedstaden Berlin ble delt i fire okkupasjonssoner.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvordan endte Koreakrigen i 1953?",
+    "o": [
+     "Med en våpenhvile – Korea forble delt i to stater",
+     "Med at Nord-Korea erobret hele landet",
+     "Med at Korea ble samlet under USA",
+     "Med at FN tok over styringen av Korea"
+    ],
+    "a": 0,
+    "w": "Krigshandlingene stoppet, men Korea forble delt. Krigen førte til store ødeleggelser og mange menneskelige tap.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva bidro Norge med i Koreakrigen?",
+    "o": [
+     "Et feltsykehus",
+     "Et krigsskip med soldater",
+     "Jagerfly",
+     "Ingenting – Norge var helt nøytralt"
+    ],
+    "a": 0,
+    "w": "Norge sendte et feltsykehus til Korea.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva ble de afghanske motstandsgruppene som kjempet mot Sovjetunionen, kalt?",
+    "o": [
+     "Mujahedin",
+     "Vietcong",
+     "Stasi",
+     "Warszawapakten"
+    ],
+    "a": 0,
+    "w": "USA støttet mujahedin med penger og våpen for å svekke Sovjetunionen.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilket av disse er en menneskelig konsekvens av den kalde krigen?",
+    "o": [
+     "Familier ble skilt fra hverandre av Berlinmuren",
+     "Landene brukte store summer på våpen",
+     "Europa ble delt i to maktblokker",
+     "NATO ble opprettet"
+    ],
+    "a": 0,
+    "w": "Å bruke penger på våpen er en økonomisk konsekvens, og delingen av Europa og NATO er politiske konsekvenser. At familier ble skilt, er en menneskelig konsekvens.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva betyr reform?",
+    "o": [
+     "En endring som skal forbedre et eksisterende system",
+     "En revolusjon som river ned hele systemet",
+     "En militær allianse",
+     "En type økonomisk krise"
+    ],
+    "a": 0,
+    "w": "Gorbatsjov innførte reformer for å forbedre Sovjetunionen – ikke for å avskaffe det.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "4": [
+   {
+    "q": "Hvordan ble Cubakrisen løst?",
+    "o": [
+     "Khrusjtsjov gikk med på å fjerne rakettene fra Cuba, og USA fjernet noen av sine raketter fra Tyrkia",
+     "USA bombet rakettbasene på Cuba",
+     "FN sendte soldater til Cuba",
+     "Cuba ble en del av USA"
+    ],
+    "a": 0,
+    "w": "Krisen ble løst gjennom intense forhandlinger. Etterpå fulgte en periode med mindre spenning, kalt avspenning.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva er en ideologi?",
+    "o": [
+     "Ideer om hvordan et samfunn bør styres og organiseres",
+     "En type våpen",
+     "Et annet ord for økonomi",
+     "En hemmelig organisasjon"
+    ],
+    "a": 0,
+    "w": "Kommunisme og kapitalisme er eksempler på ideer om hvordan samfunnet bør organiseres.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva betyr avspenning?",
+    "o": [
+     "En periode med mindre spenning mellom øst og vest",
+     "Når et land legger ned hæren sin",
+     "At et land går ut av en allianse",
+     "At en krig blir avsluttet med en fredsavtale"
+    ],
+    "a": 0,
+    "w": "Etter Cubakrisen fulgte en periode med avspenning mellom supermaktene.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvorfor økte motstanden mot Vietnamkrigen, også i USA?",
+    "o": [
+     "Gjennom TV og andre medier så folk over hele verden bilder fra krigen",
+     "Fordi USA vant krigen for raskt",
+     "Fordi krigen ikke rammet sivile",
+     "Fordi Sovjetunionen sendte soldater til USA"
+    ],
+    "a": 0,
+    "w": "Krigen førte til enorme ødeleggelser og rammet sivilbefolkningen hardt. Bildene førte til store protester.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvordan endte Vietnamkrigen i 1975?",
+    "o": [
+     "Med kommunistisk seier – Vietnam ble samlet under kommunistisk styre",
+     "Med at USA erobret hele landet",
+     "Med en våpenhvile, slik at Vietnam forble delt",
+     "Med at Frankrike tok tilbake kolonien"
+    ],
+    "a": 0,
+    "w": "Mange flyktet fra landet, blant annet i båter, og noen av flyktningene kom til Norge.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva betyr demokratisering?",
+    "o": [
+     "En utvikling der et samfunn får mer demokratiske styreformer",
+     "At et land blir et diktatur",
+     "At et land melder seg inn i NATO",
+     "At et land får planøkonomi"
+    ],
+    "a": 0,
+    "w": "Etter 1989 ble mange land i Øst-Europa demokratisert.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "5": [
+   {
+    "q": "Hva utløste Berlinblokaden i 1948?",
+    "o": [
+     "Vestmaktene innførte nye penger i sine soner",
+     "Berlinmuren ble bygd",
+     "Øst-Tyskland ble med i NATO",
+     "Vest-Berlin erklærte seg som eget land"
+    ],
+    "a": 0,
+    "w": "Vestmaktene ville bygge opp den tyske økonomien, mens Sovjetunionen ville at Tyskland skulle betale erstatning. Da vestmaktene innførte nye penger, stengte Sovjetunionen landveiene inn til Vest-Berlin.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilket år ble Tyskland samlet igjen?",
+    "o": [
+     "1990",
+     "1989",
+     "1991",
+     "1961"
+    ],
+    "a": 0,
+    "w": "Berlinmuren ble åpnet i 1989, og Tyskland ble samlet året etter.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilke spørsmål reiser overvåking i dag?",
+    "o": [
+     "Spørsmål om personvern, ytringsfrihet og hvor mye kontroll myndighetene bør ha",
+     "Spørsmål om hvem som skal vinne våpenkappløpet",
+     "Spørsmål om hvordan Tyskland skal deles",
+     "Ingen – overvåking er ikke lenger i bruk"
+    ],
+    "a": 0,
+    "w": "Overvåking brukes fortsatt, blant annet for å forebygge kriminalitet og beskytte nasjonal sikkerhet. Samtidig må det veies opp mot personvern og ytringsfrihet.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvorfor var Cubakrisen et eksempel på terrorbalanse?",
+    "o": [
+     "Begge landene hadde atomvåpen, og et angrep kunne føre til et ødeleggende motangrep",
+     "Fordi terrorister tok kontroll over Cuba",
+     "Fordi bare USA hadde atomvåpen",
+     "Fordi Cuba var medlem av NATO"
+    ],
+    "a": 0,
+    "w": "Cubakrisen viste hvor farlig våpenkappløpet hadde blitt.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvorfor kan Sovjetunionen ha ment at det var viktig å støtte Cuba?",
+    "o": [
+     "Cuba var en kommunistisk alliert like ved USA, og rakettene der kunne veie opp for amerikanske raketter nær Sovjetunionen, blant annet i Tyrkia",
+     "Fordi Cuba hadde store oljereserver som Sovjetunionen trengte",
+     "Fordi Cuba var medlem av Warszawapakten fra starten",
+     "Fordi USA hadde bedt Sovjetunionen om å passe på Cuba"
+    ],
+    "a": 0,
+    "w": "Å se saken fra begge sider er viktig i samfunnsfag: USA følte seg truet av rakettene, mens Sovjetunionen så Cuba som en viktig alliert. Løsningen på krisen omfattet også USAs raketter i Tyrkia.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilken konsekvens fikk Vietnamkrigen for Norge?",
+    "o": [
+     "Noen av flyktningene som flyktet fra Vietnam, kom til Norge",
+     "Norge sendte tusenvis av soldater til Vietnam",
+     "Norge gikk ut av NATO",
+     "Norge ble medlem av Warszawapakten"
+    ],
+    "a": 0,
+    "w": "Etter 1975 flyktet mange fra Vietnam, blant annet i båter. Noen av dem fikk et nytt liv i Norge.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva betyr maktbalanse?",
+    "o": [
+     "En fordeling av makt mellom land, der ingen enkeltmakt nødvendigvis kan dominere de andre",
+     "At alle land har like mange soldater",
+     "At ett land har all makten",
+     "At makten deles mellom konge og regjering"
+    ],
+    "a": 0,
+    "w": "Under den kalde krigen holdt de to blokkene hverandre i sjakk – en maktbalanse mellom øst og vest.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ]
+ }
+}

@@ -34,6 +34,7 @@ portal.css            Felles stil for forside og fagside
 README.md             Kort brukerveiledning
 samfunnsfag/forste-verdenskrig/   Første verdenskrig (kart + spill)
 krle/hinduismen/                  Hinduismen (Reisen + Begrepsreisen)
+samfunnsfag/kalde-krigen/         Den kalde krigen (kort til Konkurranse JERNTEPPET)
 norsk/sinna-mann/                 Virkemidler i bildebok – Sinna Mann (kort til Konkurranse)
 verktoy/konkurranse.html          Felles konkurransemal for ALLE fag/temaer (se 6)
 arsakskjeden.html, begrepsjakten.html, krigsarkivet.html,
@@ -127,6 +128,10 @@ Status 20.11.2026: klassen hadde nesten fullført gallery walk-starteren (trinne
 - **Lenke fra en temaside (valgfritt):** `../../verktoy/konkurranse.html?sett=<fag>-<tema>&tilbake=../<fag>/<tema>/index.html` – brukes av Sinna Mann.
 - **Standardsett:** `verktoy/sett/<sett-id>.json` (samme format som «Lagre som fil») lastes automatisk hvis læreren ikke har en egen versjon i nettleseren. `verktoy/sett/liste.json` lister standardsettene (`id`, `tittel`) så de vises i menyen i riktig fag. Har læreren endret et standardsett, brukes den lokale versjonen; «↺ Tilbake til standardsettet» i redigeringen henter standarden igjen.
 - Merk: raw.githack.com er et delt nettsted, så det som ligger i localStorage der, kan i prinsippet leses av andre sider på samme adresse. Når portalen flyttes til egen adresse (Vercel), er dette løst.
+
+### Samfunnsfag – Den kalde krigen (`samfunnsfag/kalde-krigen/`)
+- Bygger på trinnets forberedelseshefte til skriftlig prøve (6 læringsmål + fagbegreper). `index.html` har ett kort: **Konkurranse – JERNTEPPET** (`sett=samfunnsfag-kalde-krigen`).
+- Standardsett: `verktoy/sett/samfunnsfag-kalde-krigen.json` – 66 spørsmål, én kategori per læringsmål + «Fagbegreper». Fakta og definisjoner følger heftets tekster og begrepsliste.
 
 ### Norsk – Virkemidler i bildebok – Sinna Mann (`norsk/sinna-mann/`)
 - Bildebok av Gro Dahle (tekst) og Svein Nyhus (bilder), Cappelen 2003. Fokus: kontrast, besjeling, personifikasjon, sammenligning, metafor, motiv og tema.
