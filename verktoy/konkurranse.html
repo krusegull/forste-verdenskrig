@@ -234,6 +234,7 @@ select.inp{font-weight:800}
    <div id="settNewBox" hidden style="margin-top:10px"><div class="orow" style="flex-wrap:wrap;gap:8px"><input class="inp" id="settName" maxlength="60" placeholder="Navn på settet, f.eks. Første verdenskrig – repetisjon" style="flex:1 1 300px"><button class="big" id="settMake" style="font-size:16px;padding:9px 20px">Lag settet</button></div></div>
    <p class="note" style="margin:8px 0 0">Lag så mange sett du vil – ett for hvert tema eller hver repetisjon. Settene lagres bare i denne nettleseren.</p></div>
   <div id="resume"></div>
+  <div id="lrBox"></div>
   <div class="panel">
    <h3>Lag og deltakere</h3>
    <div class="seg" id="nSeg" style="margin-bottom:12px"></div>
@@ -376,7 +377,29 @@ function drawGin(){
   $("gin").querySelectorAll(".gname").forEach(x=>x.oninput=()=>draft.names[+x.dataset.i]=x.value);
   $("gin").querySelectorAll(".gmem").forEach(x=>x.oninput=()=>draft.members[+x.dataset.i]=x.value);
 }
-seg("nSeg",v=>{SET.n=+v;drawGin();}); seg("rSeg",v=>SET.R=+v); seg("tSeg",v=>SET.T=+v); drawGin();
+/* ---------- LÆRERROMMET-KOBLING ----------
+   Lærerrommet (lærerens innloggede app) åpner denne siden med lagene fra
+   klassekartet i #lr=… . #-delen sendes aldri til noen server. Vi tar vare
+   på den i sessionStorage (bare denne fanen), så den overlever bytte av
+   spørsmålssett, og fjerner den fra adressen. Resultatet sendes tilbake
+   fra lærervisningen (bak PIN) til Lærerrommets importside. */
+const LR_URL="https://laererrommet.vercel.app";
+const cleanId=x=>String(x||"").replace(/[^A-Za-z0-9_-]/g,"").slice(0,40);
+function parseLr(raw){ try{ const d=JSON.parse(raw); if(!d||!Array.isArray(d.lag)||!d.lag.length) return null;
+  return {classId:cleanId(d.classId),klasse:strip(d.klasse).slice(0,60),fag:String(d.fag||"").toLowerCase().replace(/[^a-z0-9]/g,"").slice(0,30),tema:strip(d.tema).slice(0,120),
+   lag:d.lag.slice(0,8).map((l,i)=>({navn:strip(l&&l.navn||"Lag "+(i+1)).slice(0,40),elever:(Array.isArray(l&&l.elever)?l.elever:[]).slice(0,15).map(e=>({id:cleanId(e&&e.id),navn:strip(e&&e.navn).trim().slice(0,60)})).filter(e=>e.navn)}))}; }catch(e){ return null; } }
+let LRIN=null;
+(function readLr(){ const m=location.hash.match(/(?:^#|&)lr=([^&]*)/);
+  if(m){ let raw=""; try{ raw=decodeURIComponent(m[1]); }catch(e){} LRIN=parseLr(raw); try{ if(LRIN) sessionStorage.setItem("konk_lr",raw); }catch(e){}
+    try{ history.replaceState(null,"",location.pathname+location.search); }catch(e){} }
+  else { try{ const raw=sessionStorage.getItem("konk_lr"); if(raw) LRIN=parseLr(raw); }catch(e){} } })();
+function applyLr(){ if(!LRIN){ $("lrBox").innerHTML=""; return; }
+  SET.n=Math.max(2,LRIN.lag.length);
+  LRIN.lag.forEach((l,i)=>{ draft.names[i]=l.navn; draft.members[i]=l.elever.map(e=>e.navn).join(", "); });
+  $("nSeg").querySelectorAll("button").forEach(b=>b.classList.toggle("sel",+b.dataset.v===SET.n));
+  $("lrBox").innerHTML=`<div class="panel" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-color:var(--gold)"><div style="flex:1;font-weight:800">🔗 Lagene er hentet fra Lærerrommet${LRIN.klasse?" ("+esc(LRIN.klasse)+")":""}. Etter spillet kan du sende poengene tilbake fra 🔒 Lærer.</div><button class="ghost" id="lrOff">Ikke bruk disse lagene</button></div>`;
+  $("lrOff").onclick=()=>{ LRIN=null; try{ sessionStorage.removeItem("konk_lr"); }catch(e){} draft.names=GSYM.map((_,i)=>"Lag "+(i+1)); draft.members=GSYM.map(()=>""); applyLr(); drawGin(); }; }
+seg("nSeg",v=>{SET.n=+v;drawGin();}); seg("rSeg",v=>SET.R=+v); seg("tSeg",v=>SET.T=+v); applyLr(); drawGin();
 (function resumeOffer(){ let s=null; try{s=JSON.parse(localStorage.getItem(KEY));}catch(e){}
   if(s && s.phase!=="ended" && s.groups){ $("resume").innerHTML=`<div class="panel" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-color:var(--gold)"><div style="flex:1;font-weight:800">⏸️ Det finnes et påbegynt spill (${s.groups.length} lag, tur ${s.turn+1} av ${s.groups.length*s.R}).</div><button class="big" id="resBtn" style="font-size:17px;padding:11px 24px">Fortsett spillet</button></div>`;
     $("resBtn").onclick=()=>{ ac(); G=s; HIST=[]; enterGame(); startTurn(true); }; }
@@ -389,7 +412,10 @@ $("startBtn").onclick=()=>{
   const groups=Array.from({length:SET.n},(_,i)=>({name:(draft.names[i]||"").trim()||"Lag "+(i+1),sym:GSYM[i],col:GCOL[i],score:0,cards:[],
     members:(draft.members[i]||"").split(/[,\n;]+/).map(s=>s.trim()).filter(Boolean)}));
   const studs={}; groups.forEach((g,gi)=>g.members.forEach((m,mi)=>studs[gi+"-"+mi]={ans:0,ok:0,pts:0}));
-  G={groups,R:SET.R,T:SET.T,turn:0,used:{},lynUsed:{1:[],2:[],3:[],4:[],5:[]},studs,log:[],phase:"play",pin:$("pin").value.trim(),faseShown:0};
+  let lr=null; if(LRIN){ const ids={}, byName={}; LRIN.lag.forEach(l=>l.elever.forEach(e=>{ if(e.id) byName[e.navn.toLowerCase()]=e.id; }));
+    groups.forEach((g,gi)=>g.members.forEach((m,mi)=>{ const id=byName[m.toLowerCase()]; if(id) ids[gi+"-"+mi]=id; }));
+    lr={classId:LRIN.classId,klasse:LRIN.klasse,fag:LRIN.fag,tema:LRIN.tema,ids}; }
+  G={groups,R:SET.R,T:SET.T,turn:0,used:{},lynUsed:{1:[],2:[],3:[],4:[],5:[]},studs,log:[],phase:"play",pin:$("pin").value.trim(),faseShown:0,lr};
   HIST=[]; save(); enterGame(); startTurn();
 };
 function enterGame(){ $("setup").classList.remove("on"); $("game").classList.add("on"); }
@@ -617,7 +643,7 @@ function showEnd(){
    <div class="logo" style="font-size:52px">Seier!</div>
    <div id="podium">${pod.map((x,k)=>`<div class="pod" style="animation-delay:${[.4,1.2,0][k]}s"><div style="font-size:44px">${x.g.sym}</div><div class="nm">${esc(x.g.name)}</div><div class="pt">${x.g.score}</div><div class="blk" style="height:${h[pl(x)]}px;background:${x.g.col}">${pl(x)+1}</div></div>`).join("")}</div>
    <div class="rank">${r.slice(3).map((x,k)=>`<div><span>${k+4}.</span><span>${x.g.sym}</span><span>${esc(x.g.name)}</span><b>${x.g.score}</b></div>`).join("")}</div>
-   <p style="color:var(--muted);font-weight:800;margin-top:16px">Snakk sammen: Hvilket spørsmål var vanskeligst, og hva lærte dere?</p><p style="color:var(--muted);font-size:15px;margin-top:4px">Er det noen som har det sånn som Boj? Snakk med en voksen du stoler på – eller ring Alarmtelefonen for barn og unge: 116 111.</p>
+   <p style="color:var(--muted);font-weight:800;margin-top:16px">Snakk sammen: Hvilket spørsmål var vanskeligst, og hva lærte dere?</p>${QSET.slutt?`<p style="color:var(--muted);font-size:15px;margin-top:4px">${esc(QSET.slutt)}</p>`:""}
    <button class="ghost" id="newBtn" style="margin-top:6px">↺ Nytt spill</button></div>`;
   $("newBtn").onclick=()=>{ confirmBox("Starte et nytt spill? Resultatet fra dette spillet forsvinner fra skjermen (elevpoengene kan du kopiere i lærervisningen først).",()=>{ try{localStorage.removeItem(KEY)}catch(e){} location.reload(); }); };
   SND.win(); petals();
@@ -652,9 +678,19 @@ function teacherView(){
   openOv("#334155","📋","Elevpoeng","Kun for læreren",`<p style="margin-top:0;color:#6d5a3e;font-size:15px"><b>Lagpoeng</b> = poengene laget endte på (alle i laget får dem). <b>Svarte selv / Riktige / Egne poeng</b> = spørsmål der skjebnen trakk akkurat denne eleven. <b>Totalt</b> = lagpoeng + egne poeng.</p>
    <div style="max-height:52vh;overflow:auto"><table class="st"><tr><th>Lag</th><th>Elev</th><th>Lagpoeng</th><th>Svarte selv</th><th>Riktige</th><th>Egne poeng</th><th>Totalt</th></tr>
    ${rows.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td class="n">${r[2]}</td><td class="n">${r[3]}</td><td class="n">${r[4]}</td><td class="n">${r[5]}</td><td class="n">${(+r[2]||0)+(+r[5]||0)}</td></tr>`).join("")}</table></div>
-   <div class="act"><button class="ghost" style="color:#241f17;border-color:#cdbf98" id="cp">📋 Kopier til Excel/Teams</button><button class="big" id="tc">Lukk</button></div>`);
-  $("tc").onclick=closeOv;
+   <div class="act"><button class="ghost" style="color:#241f17;border-color:#cdbf98" id="cp">📋 Kopier til Excel/Teams</button><button class="ghost" style="color:#241f17;border-color:#cdbf98" id="lrSend">📤 Send til Lærerrommet</button><button class="big" id="tc">Lukk</button></div>
+   <p class="note" style="color:#6d5a3e;margin:6px 0 0">«Send til Lærerrommet» åpner Lærerrommet i en ny fane (du må være logget inn). Der ser du over poengene og kobler dem til elevene før de lagres.</p>`);
+  $("tc").onclick=closeOv; $("lrSend").onclick=sendToLr;
   $("cp").onclick=()=>{ if(navigator.clipboard) navigator.clipboard.writeText(tsv).then(()=>toast("Kopiert! Lim inn i Excel."),()=>toast("Kunne ikke kopiere")); else toast("Kopiering støttes ikke her"); };
+}
+function sendToLr(){
+  if(!G.groups.some(g=>g.members.length)){ toast("Lagene har ingen deltakernavn å sende"); return; }
+  const d=new Date(), lr=G.lr||{}, ids=lr.ids||{};
+  const p={v:1,tittel:QSET.tittel||"Konkurranse",fag:lr.fag||FAM,tema:lr.tema||"",classId:lr.classId||"",
+    dato:d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"),
+    lag:G.groups.map((g,gi)=>({navn:g.name,poeng:g.score,elever:g.members.map((m,mi)=>({navn:m,id:ids[gi+"-"+mi]||"",egne:(G.studs[gi+"-"+mi]||{}).pts||0}))}))};
+  const w=window.open(LR_URL+"/poeng/importer#d="+encodeURIComponent(JSON.stringify(p)),"_blank");
+  if(w){ try{ w.opener=null; }catch(e){} } else toast("Nettleseren blokkerte den nye fanen – tillat popup-vinduer og prøv igjen");
 }
 $("endBtn").onclick=()=>{ if(G.phase==="ended") return showEnd(); confirmBox("Avslutte spillet nå og vise vinnerne?",finishGame); };
 $("sndBtn").onclick=()=>{ soundOn=!soundOn; $("sndBtn").textContent=soundOn?"🔔 Lyd på":"🔕 Lyd av"; };

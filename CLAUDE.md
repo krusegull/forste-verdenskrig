@@ -127,6 +127,11 @@ Status 20.11.2026: klassen hadde nesten fullført gallery walk-starteren (trinne
 - **Flere sett per fag:** på startskjermen velger læreren spørsmålssett i en meny eller lager et nytt («＋ Nytt sett» → id `<fag>-<navn>`). Menyen viser alle sett i nettleseren som hører til faget (`<fag>` og `<fag>-*`), også sett som åpnes fra en temaside.
 - **Lenke fra en temaside (valgfritt):** `../../verktoy/konkurranse.html?sett=<fag>-<tema>&tilbake=../<fag>/<tema>/index.html` – brukes av Sinna Mann.
 - **Standardsett:** `verktoy/sett/<sett-id>.json` (samme format som «Lagre som fil») lastes automatisk hvis læreren ikke har en egen versjon i nettleseren. `verktoy/sett/liste.json` lister standardsettene (`id`, `tittel`) så de vises i menyen i riktig fag. Har læreren endret et standardsett, brukes den lokale versjonen; «↺ Tilbake til standardsettet» i redigeringen henter standarden igjen.
+- **Kobling til Lærerrommet (laererrommet.vercel.app, Eiriks innloggede lærerapp – privat repo krusegull/laererrommet):**
+  - *Inn:* Klassekart → Poeng → «Start konkurranse med gruppene» åpner `konkurranse.html?sett=<fag>&fag=<fag>#lr=<json>` med lag og elever fra klassekartet. #-delen sendes aldri til serveren; den lagres i `sessionStorage` (`konk_lr`, bare fanen) og fjernes fra adressen. Banner «Lagene er hentet fra Lærerrommet» + «Ikke bruk disse lagene». Elev-id-ene huskes i `G.lr`.
+  - *Ut:* Lærervisningen (bak PIN) har «📤 Send til Lærerrommet», som åpner `https://laererrommet.vercel.app/poeng/importer#d=<json>` (tittel, fag, tema, classId, dato, lag med lagpoeng og elever med egne poeng). Der kobler læreren deltakerne til elever, velger «lag + egne / bare lag / bare egne» og skalering (÷1/÷10/÷100) og lagrer. Poengene havner under hver elev (Tilbakemeldingslogg → elev → «Poeng per fag»).
+  - Ingen elevnavn, poeng eller nøkler ligger i repoet – bare koden og adressen til Lærerrommet. Knappen ligger kun i lærervisningen.
+- Sluttskjermen viser settets egen «Melding på sluttskjermen» (`slutt`), ikke en fast tekst.
 - Merk: raw.githack.com er et delt nettsted, så det som ligger i localStorage der, kan i prinsippet leses av andre sider på samme adresse. Når portalen flyttes til egen adresse (Vercel), er dette løst.
 
 ### Samfunnsfag – Den kalde krigen (`samfunnsfag/kalde-krigen/`)
