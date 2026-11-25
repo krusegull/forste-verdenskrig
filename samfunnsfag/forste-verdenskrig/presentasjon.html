@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Første verdenskrig – presentasjon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Libre+Franklin:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#efe6d2;--ink:#2a2418;--muted:#6a5d44;--line:#cdbd98;--poppy:#b8322a;--olive:#4b5320}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:#d9ccad;color:var(--ink);font-family:"Libre Franklin",system-ui,sans-serif}
+button{font-family:inherit;cursor:pointer}
+h1,h2,h3,.os{font-family:Oswald,"Arial Narrow",Impact,sans-serif;font-weight:700;margin:0;letter-spacing:.3px}
+
+#stage{position:fixed;inset:0;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 45%,#f4ecda 0,#e6d9ba 55%,#cfbf98 100%)}
+#world{position:absolute;left:0;top:0;width:11000px;height:8600px;transform-origin:0 0;
+  transition:transform 1.15s cubic-bezier(.55,.05,.25,1);will-change:transform}
+#paths{position:absolute;inset:0;pointer-events:none}
+
+/* klynger (læringsmål) */
+.cl{position:absolute;width:2200px;height:2200px;border-radius:50%;background:color-mix(in srgb,var(--c) 10%,#f6efdf);
+  border:14px solid color-mix(in srgb,var(--c) 55%,#f6efdf);box-shadow:0 30px 80px rgba(60,40,10,.18);cursor:pointer}
+.cl .big{position:absolute;left:50%;top:150px;transform:translateX(-50%);font-family:Oswald,Impact,sans-serif;font-weight:700;
+  font-size:300px;line-height:1;color:var(--c);opacity:.12;pointer-events:none}
+.ct{position:absolute;left:400px;top:230px;width:1400px;text-align:center;pointer-events:none}
+.ct small{display:block;font-family:Oswald,sans-serif;font-size:44px;letter-spacing:6px;text-transform:uppercase;color:var(--c)}
+.ct h2{font-size:96px;line-height:1.02;color:var(--ink);margin-top:6px}
+.ct p{font-size:36px;margin:12px 0 0;color:var(--muted);font-style:italic}
+
+/* kort */
+.card{position:absolute;width:760px;height:560px;background:#fffdf7;border-radius:10px;padding:30px 36px;
+  box-shadow:0 14px 34px rgba(60,40,10,.22),inset 0 0 0 1px rgba(0,0,0,.05);overflow:hidden;cursor:pointer;
+  border-top:16px solid var(--c);font-size:23px;line-height:1.42}
+.card h3{font-size:42px;line-height:1.05;color:var(--c);margin:0 0 12px;display:flex;gap:14px;align-items:center}
+.card h3 .e{font-size:44px}
+.card p{margin:0 0 10px}
+.card ul{margin:0 0 8px;padding-left:28px}
+.card li{margin-bottom:4px}
+.card b{color:#1d180f}
+.tk{margin-top:10px;background:color-mix(in srgb,var(--c) 10%,#fff);border-left:6px solid var(--c);padding:8px 14px;border-radius:6px;font-size:21px}
+.tk b{color:var(--c)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.box{border:2px solid var(--line);border-radius:10px;padding:10px 14px;background:#fbf7ec}
+.box h4{margin:0 0 4px;font-family:Oswald,sans-serif;font-size:26px}
+.chain{display:flex;flex-direction:column;gap:6px;font-size:21px}
+.chain div{background:#fbf7ec;border:2px solid var(--line);border-radius:8px;padding:5px 12px}
+.chain div:before{content:"→ ";color:var(--c);font-weight:800}
+.tl{list-style:none;padding:0!important;border-left:5px solid var(--c);margin-left:6px!important}
+.tl li{padding-left:16px;position:relative}
+.tl li:before{content:"";position:absolute;left:-12px;top:10px;width:14px;height:14px;border-radius:50%;background:var(--c)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{background:#fbf7ec;border:2px solid var(--line);border-radius:999px;padding:3px 14px;font-weight:600}
+.big-n{font-family:Oswald,sans-serif;font-size:60px;color:var(--poppy);line-height:1}
+a{color:var(--c);font-weight:800}
+
+/* trinnvis visning */
+.b{transition:opacity .4s,transform .4s}
+.b.hide{opacity:0;transform:translateY(12px)}
+
+/* tittel og test */
+.title{position:absolute;width:1800px;height:760px;text-align:center;padding:40px 60px;cursor:pointer}
+.title .k{font-family:Oswald,sans-serif;font-size:56px;letter-spacing:12px;color:var(--poppy)}
+.title h1{font-size:210px;line-height:.95;color:var(--ink);text-transform:uppercase}
+.title h1 span{display:block;font-size:120px;color:var(--olive)}
+.title p{font-size:44px;color:var(--muted);margin:22px 0 0}
+.poppy{font-size:90px}
+.test{position:absolute;width:1800px;height:900px;background:#fffdf7;border-radius:14px;padding:40px 50px;border-top:20px solid var(--poppy);
+  box-shadow:0 20px 50px rgba(60,40,10,.2);cursor:pointer}
+.test h2{font-size:72px;color:var(--poppy)}
+.test p{font-size:30px;margin:6px 0 20px;color:var(--muted)}
+.flips{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.flip{height:150px;border:0;border-radius:12px;background:var(--olive);color:#fff;font-family:Oswald,sans-serif;font-size:34px;padding:10px;line-height:1.1}
+.flip.on{background:#fbf7ec;color:var(--ink);font-family:"Libre Franklin",sans-serif;font-size:19px;border:2px solid var(--olive);line-height:1.3}
+
+/* kontroller */
+#bar{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);display:flex;gap:8px;align-items:center;z-index:10;
+  background:rgba(42,36,24,.86);color:#fff;padding:8px 10px;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+#bar button,#bar a{border:0;background:rgba(255,255,255,.12);color:#fff;border-radius:999px;padding:9px 14px;font-weight:800;font-size:15px;text-decoration:none;white-space:nowrap}
+#bar button:hover,#bar a:hover{background:rgba(255,255,255,.25)}
+#bar #nextBtn{background:var(--poppy)}
+#cnt{font-weight:800;font-size:14px;min-width:64px;text-align:center;opacity:.85}
+#lbl{position:fixed;left:16px;top:14px;z-index:10;background:rgba(255,253,247,.9);border-radius:999px;padding:8px 16px;font-weight:800;font-size:14px;color:var(--muted);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+#hint{position:fixed;right:16px;top:14px;z-index:10;font-size:13px;color:var(--muted);background:rgba(255,253,247,.85);padding:6px 12px;border-radius:999px}
+
+/* listevisning (mobil) */
+#list{display:none;position:fixed;inset:0;overflow-y:auto;background:var(--paper);padding:16px 14px 90px;z-index:5}
+body.list #list{display:block}
+body.list #stage,body.list #lbl,body.list #hint{display:none}
+#list .card{position:relative;width:auto;height:auto;margin:0 0 14px;font-size:16px;cursor:default;padding:18px 18px}
+#list .card h3{font-size:26px}
+#list .card h3 .e{font-size:28px}
+#list .tk{font-size:15px}
+#list .chain{font-size:15px}
+#list .two{grid-template-columns:1fr}
+#list .big-n{font-size:40px}
+#list h2.lh{font-size:28px;margin:22px 0 8px;color:var(--c)}
+#list .b.hide{opacity:1;transform:none}
+#list .flips{grid-template-columns:repeat(2,1fr)}
+#list .flip{height:auto;min-height:80px;font-size:20px}
+#list .flip.on{font-size:14px}
+@media (max-width:700px){ #hint{display:none} #bar{gap:4px;padding:6px} #bar button,#bar a{padding:8px 10px;font-size:13px} #lbl{max-width:70vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap} }
+@media (prefers-reduced-motion:reduce){ #world{transition:none} }
+</style>
+</head>
+<body>
+<div id="stage"><div id="world"><svg id="paths" width="11000" height="8600"></svg></div></div>
+<div id="list"></div>
+<div id="lbl"></div>
+<div id="hint">← → eller mellomrom · Esc = oversikt · F = fullskjerm</div>
+<div id="bar">
+  <a href="index.html" title="Tilbake til kartet">🏠</a>
+  <button id="ovBtn" title="Oversikt (Esc)">🗺️</button>
+  <button id="prevBtn" aria-label="Forrige">←</button>
+  <span id="cnt"></span>
+  <button id="nextBtn" aria-label="Neste">Neste →</button>
+  <button id="fsBtn" title="Fullskjerm (F)">⛶</button>
+  <button id="listBtn" title="Les som liste">📄</button>
+</div>
+
+<script>
+{
+/* =====================================================================
+   INNHOLD – bygger på Arena 9, del 2, kapittel 5
+   «Første verdenskrig – årsaker og konsekvenser» (s. 106–129).
+   Klasse "b" = vises trinnvis når læreren trykker →.
+   ===================================================================== */
+const CL=[
+{t:"Hvorfor ble det krig?",lm:"Læringsmål 1",goal:"Forklare viktige årsaker til første verdenskrig",c:"#6b4f22",e:"💥",cards:[
+ {h:"1914: Europa går i krig",e:"🌍",html:`<p>I <b>1914</b> brøt første verdenskrig ut. Den varte i <b>fire år</b> og ble langt større enn noen hadde forestilt seg.</p>
+ <ul><li class="b">Nye, dødelige våpen ble brukt for første gang.</li><li class="b">Nesten <b>18 millioner</b> mennesker ble drept.</li><li class="b">Europakartet ble tegnet på nytt, og flere nye stater ble til.</li></ul>
+ <div class="tk b"><b>Før vi starter:</b> Hva tenker du på når du hører ordet <i>verdenskrig</i>? Nevn tre stikkord.</div>`},
+ {h:"Grunnleggende årsaker",e:"🧱",html:`<div class="chain"><div class="b"><b>Imperialisme</b> og <b>nasjonalisme</b> skapte spenninger mellom landene</div><div class="b">Spenningene førte til <b>militær opprustning</b></div><div class="b">Landene dannet to militære <b>allianser</b></div></div>
+ <div class="two b" style="margin-top:12px"><div class="box"><h4>Trippelalliansen</h4>Tyskland · Østerrike-Ungarn · Italia*</div><div class="box"><h4>Trippelententen</h4>Storbritannia · Frankrike · Russland</div></div>
+ <p class="b" style="font-size:19px;margin-top:8px">*Italia skiftet side under krigen og gikk over til trippelententen.</p>`},
+ {h:"Skuddene i Sarajevo",e:"🔫",html:`<p>I <b>juni 1914</b> besøkte <b>Franz Ferdinand</b>, tronarvingen i Østerrike-Ungarn, byen Sarajevo sammen med kona Sophie. En 19 år gammel mann skjøt og drepte dem begge.</p>
+ <ul><li class="b">Balkan var et urolig hjørne av Europa: Serbia ønsket deler av Bosnia-Hercegovina, som tilhørte Østerrike-Ungarn.</li><li class="b">Gjerningsmannen hadde tilknytning til Serbia. Østerrike-Ungarn fikk påskuddet de trengte, og en måned senere angrep de Serbia.</li><li class="b">På forhånd hadde Tyskland lovet full støtte: <b>blankofullmakten</b>.</li></ul>`},
+ {h:"Fyrstikken og bålet",e:"🔥",html:`<div class="two"><div class="box b"><h4>🔥 Grunnleggende årsaker</h4>Bålet som lenge var bygget opp: imperialisme, nasjonalisme, allianser og spenningen på Balkan.</div>
+ <div class="box b"><h4>🪵 Utløsende årsak</h4>Fyrstikken som tente bålet: skuddene i Sarajevo.</div></div>
+ <p class="b" style="margin-top:12px">Uten bålet hadde ikke fyrstikken ført til en verdenskrig.</p>
+ <div class="tk b"><b>Reflekter:</b> Kan du tenke deg en konflikt i hverdagen som har både grunnleggende og utløsende årsaker?</div>`}
+]},
+{t:"Kunne krigen vært unngått?",lm:"Læringsmål 2",goal:"Reflektere over om krigen kunne vært unngått",c:"#8a4a1f",e:"🤔",cards:[
+ {h:"Alliansene trekker landene inn",e:"⛓️",html:`<div class="chain"><div class="b">Østerrike-Ungarn angriper Serbia – med støtte fra Tyskland</div><div class="b">Russland har lovet å støtte Serbia</div><div class="b">Frankrike er alliert med Russland</div><div class="b">Tyskland angriper Frankrike først – gjennom Belgia</div><div class="b">Storbritannia har lovet å beskytte Belgia og går inn i krigen</div></div>`},
+ {h:"Sorter: hvem var på hvilken side?",e:"⚖️",html:`<p>Tyskland · Serbia · Østerrike-Ungarn · Frankrike · Russland · Belgia · Storbritannia</p>
+ <div class="two b"><div class="box"><h4>Den ene siden</h4>Tyskland<br>Østerrike-Ungarn<br><span style="color:var(--muted)">senere også Det osmanske riket</span></div>
+ <div class="box"><h4>Den andre siden</h4>Serbia · Russland<br>Frankrike · Belgia<br>Storbritannia<br><span style="color:var(--muted)">senere også Italia og USA</span></div></div>`},
+ {h:"Diskuter: kunne det gått annerledes?",e:"💬",html:`<ul><li class="b">Hva om Tyskland <b>ikke</b> hadde gitt Østerrike-Ungarn blankofullmakten?</li><li class="b">Hva om alliansene ikke hadde fantes?</li><li class="b">Hva om landene hadde løst konflikten på Balkan ved forhandlinger?</li></ul>
+ <div class="tk b"><b>Var krigen Tysklands skyld alene?</b> Etter krigen fikk Tyskland hele skylden. I dag mener de fleste historikere at flere land hadde ansvar for at krigen ble så stor.</div>`}
+]},
+{t:"Den første moderne krigen",lm:"Læringsmål 3 · del 1",goal:"Vurdere hvilke konsekvenser krigen har hatt – helt fram til i dag",c:"#4b5320",e:"🪖",cards:[
+ {h:"Vestfronten og østfronten",e:"🗺️",html:`<div class="two"><div class="box b"><h4>Vestfronten</h4>Hærene gravde seg ned i <b>skyttergraver</b> fra Den engelske kanal til Sveits. I fire år kjempet de uten at noen av sidene kom framover.</div>
+ <div class="box b"><h4>Østfronten</h4>Tyskland kjempet mot Russland. Her var det <b>mer bevegelse</b>. Det var krevende for Tyskland å kjempe i både vest og øst samtidig.</div></div>`},
+ {h:"Ny teknologi – nye våpen",e:"☠️",html:`<p>Den teknologiske utviklingen ga nye våpen som ble brukt i krig for første gang. Derfor kalles første verdenskrig ofte <b>«den første moderne krigen»</b>.</p>
+ <ul><li class="b"><b>Giftgass</b> – et fryktet våpen. Soldatene måtte bruke gassmasker.</li><li class="b"><b>Maskingevær</b> gjorde det nesten umulig å storme fiendens skyttergraver.</li><li class="b"><b>Ubåter</b> senket skip med varer til Storbritannia og Frankrike.</li></ul>`},
+ {h:"En europeisk krig – eller en verdenskrig?",e:"🌐",html:`<ul><li class="b">I <b>Øst-Afrika</b> kjempet tyske kolonisoldater mot britene.</li><li class="b">Storbritannia og Frankrike hentet soldater fra koloniene sine i Afrika og Asia til skyttergravene i Europa.</li><li class="b">I Asia ble flere tyske kolonier erobret.</li><li class="b">Tyske ubåter senket også amerikanske skip – i <b>1917</b> gikk USA inn i krigen.</li><li class="b"><b>Det osmanske riket</b> allierte seg med Tyskland, og krigen spredte seg til Midtøsten.</li></ul>
+ <div class="tk b"><b>Reflekter:</b> Var første verdenskrig en verdenskrig?</div>`},
+ {h:"En ny kvinnerolle?",e:"🏭",html:`<ul><li class="b">Mennene dro i krigen. Kvinnene overtok jobbene deres, særlig i fabrikker som laget våpen.</li><li class="b">Mange kvinner fikk jobb utenfor hjemmet og egne penger <b>for første gang</b>. Mange var sykepleiere nær fronten.</li><li class="b">Da mennene kom hjem, måtte mange slutte igjen. Men erfaringene kan ha styrket kvinnefrigjøringen.</li><li class="b">Flere land innførte <b>stemmerett for kvinner</b> i årene etter krigen.</li></ul>`}
+]},
+{t:"Norge – den nøytrale allierte",lm:"Læringsmål 3 · del 2",goal:"Hvordan påvirket krigen Norge?",c:"#2e4a6b",e:"⚓",cards:[
+ {h:"Nøytral – men ettertraktet",e:"🇳🇴",html:`<p>Da krigen brøt ut, erklærte Norge seg <b>nøytralt</b>.</p>
+ <ul><li class="b">De krigførende landene ville ha den store norske <b>handelsflåten</b> og norske råvarer som metaller og fisk.</li><li class="b">De første krigsårene handlet Norge med begge sider.</li><li class="b">Etter hvert knyttet Norge seg tettere til <b>Storbritannia</b>, blant annet fordi vi trengte kull og andre varer derfra.</li></ul>`},
+ {h:"Sjøfolkene betalte prisen",e:"🚢",html:`<div class="two"><div class="b"><div class="big-n">800+</div>norske skip ble senket av tyske ubåter</div><div class="b"><div class="big-n">≈ 2000</div>norske sjømenn mistet livet</div></div>
+ <p class="b" style="margin-top:12px">Det skapte en antitysk stemning i Norge, og store deler av handelsflåten ble stilt til disposisjon for Storbritannia.</p>
+ <p class="b" style="font-size:19px;color:var(--muted)">Minnehallen i Stavern (reist 1926) er et nasjonalt minnesmerke over sjøfolk som falt.</p>`},
+ {h:"Dyrtid og rasjonering",e:"🍞",html:`<ul><li class="b">I starten tjente noen mye penger, særlig de som eide skipsaksjer.</li><li class="b">De siste krigsårene steg prisene mer enn lønningene. Perioden kalles <b>dyrtid</b>.</li><li class="b">Det ble mangel på varer, og mat og drivstoff måtte <b>rasjoneres</b> – for eksempel med brødkort.</li><li class="b">Forskjellen mellom rik og fattig ble tydeligere. Det kan være én grunn til at <b>Arbeiderpartiet</b> ble Norges største parti i mellomkrigstiden.</li></ul>
+ <div class="tk b"><b>Reflekter:</b> Hvordan kan en ny verdenskrig påvirke oss i Norge i dag?</div>`}
+]},
+{t:"Fred – hevn eller forsoning?",lm:"Læringsmål 3 · del 3",goal:"Fredsoppgjøret og et nytt europakart",c:"#7a2e2e",e:"🕊️",cards:[
+ {h:"Krigen slutter",e:"🕚",html:`<ul class="tl"><li class="b">Østerrike-Ungarn var tappet for krefter og gikk i oppløsning.</li><li class="b">I Tyskland innså stadig flere at krigen ikke kunne vinnes. Keiseren gikk av.</li><li class="b"><b>11. november 1918 kl. 11.00</b> ble våpenhvilen undertegnet.</li></ul>
+ <p class="b">Krigen ble kalt <b>The Great War</b>. Mange trodde den skulle gjøre slutt på all krig – men det skulle vise seg å være helt feil.</p>`},
+ {h:"Versaillestraktaten 1919",e:"📜",html:`<div class="two"><div class="box b"><h4>Wilson (USA) ville …</h4>nedrustning, rettferdig handel, mer respekt for folk i koloniene og et <b>Folkeforbund</b>.</div>
+ <div class="box b"><h4>Men avtalen ble hard</h4>Tyskland måtte ta <b>skylden</b>, betale store <b>erstatninger</b>, gi fra seg land og kolonier og bare ha en liten hær uten flyvåpen.</div></div>
+ <p class="b" style="margin-top:10px">Mange tyskere følte seg ydmyket. De harde kravene bidro til nye konflikter.</p>`},
+ {h:"Folkeforbundet",e:"🤝",html:`<ul><li class="b">En ny organisasjon der landene kunne møtes for å løse konflikter <b>uten krig</b>. Noe slikt hadde verden aldri hatt før.</li><li class="b">Folkeforbundet klarte ikke å hindre en ny storkrig drøyt tjue år senere.</li><li class="b">Likevel regnes det som forløperen til <b>FN</b>, som i dag er verdens viktigste organisasjon for å forebygge kriger.</li></ul>
+ <div class="tk b"><b>Reflekter:</b> Du har kranglet med en venn. Hvordan blir dere venner igjen? Kan løsningen brukes på konflikter mellom land?</div>`},
+ {h:"Et nytt europakart",e:"🗺️",html:`<p>Mange av grensene og statene vi har i dag, er et resultat av første verdenskrig.</p>
+ <ul><li class="b"><b>Østerrike-Ungarn</b> ble delt i Østerrike og Ungarn.</li><li class="b">Nye stater: <span class="chips" style="display:inline-flex"><span>Polen</span><span>Tsjekkoslovakia</span><span>Finland</span><span>Estland</span><span>Latvia</span><span>Litauen</span><span>Jugoslavia</span></span></li></ul>
+ <p class="b" style="font-size:20px;color:var(--muted)">🌺 I november bærer mange i Storbritannia røde valmuer for å minnes de falne.</p>`}
+]},
+{t:"Den russiske revolusjonen",lm:"Læringsmål 5",goal:"Forklare årsaker til og konsekvenser av den russiske revolusjonen",c:"#a3241f",e:"☭",cards:[
+ {h:"Årsaker: en upopulær tsar",e:"👑",html:`<ul><li class="b">Russland var styrt av en eneveldig <b>tsar</b> som nektet å innføre demokrati.</li><li class="b">Arbeiderne hadde lav lønn og dårlige levekår, og de fikk ikke organisere seg slik arbeiderne i Norge kunne.</li><li class="b">Krigen gjorde alt verre: både soldatene og sivilbefolkningen manglet mat.</li></ul>`},
+ {h:"1917: To revolusjoner",e:"✊",html:`<ul class="tl"><li class="b"><b>Mars 1917:</b> Tusenvis av kvinner la ned arbeidet i protest. Soldatene nektet å skyte, og tsaren måtte gå av.</li><li class="b">De nye lederne ville innføre demokrati – men fortsette den upopulære krigen.</li><li class="b"><b>Høsten 1917:</b> <b>Lenin</b> og <b>bolsjevikene</b> tok makten ved et statskupp. Slagordet var <b>«Fred, jord, brød»</b>.</li></ul>`},
+ {h:"Konsekvenser: diktatur",e:"⛓️",html:`<ul><li class="b">Bolsjevikene ville ikke ha demokrati. Nasjonalforsamlingen ble oppløst, og andre partier ble forbudt.</li><li class="b">Det brøt ut en brutal borgerkrig som varte i tre år. Bolsjevikene vant.</li><li class="b">Målet var en <b>verdensrevolusjon</b>. I <b>1922</b> fikk landet navnet <b>Sovjetunionen</b>.</li><li class="b">Frykten for kommunismen fikk mange til å støtte andre ikke-demokratiske ideologier, som <b>nazismen</b>.</li></ul>`},
+ {h:"Kommunisme og planøkonomi",e:"🏭",html:`<p><b>Kommunisme</b> kommer av latin <i>communis</i>, «felles». Målet var et <b>klasseløst samfunn</b> uten forskjell på fattig og rik.</p>
+ <ul><li class="b"><b>Planøkonomi:</b> Staten eier fabrikkene og bestemmer hva som skal produseres og hva det skal koste.</li><li class="b">Tanken var at alle skulle få arbeid, og at urettferdighet og nød skulle forsvinne.</li><li class="b">Mange var imot at staten skulle ta fabrikker og eiendom fra privatpersoner.</li></ul>`}
+]},
+{t:"Fascismen får fotfeste",lm:"Læringsmål 6",goal:"Forklare årsaker til at fascismen fikk fotfeste",c:"#2b2b2b",e:"🏛️",cards:[
+ {h:"Uro i Italia etter krigen",e:"🇮🇹",html:`<ul><li class="b">Det var politisk uro i Italia både før og etter krigen.</li><li class="b">Noen steder okkuperte arbeiderne bedrifter, og mange fryktet en revolusjon som i Russland.</li><li class="b">Mange var misfornøyde fordi Italia ikke fikk de landområdene de mente de var lovet for å gå inn i krigen.</li></ul>`},
+ {h:"Mussolini og fascismen",e:"🎖️",html:`<p>I <b>1921</b> startet <b>Benito Mussolini</b> et nytt parti med en ny ideologi: <b>fascismen</b>.</p>
+ <ul><li class="b">Demokratiet fungerte ikke, mente de. Én sterk leder – en fører, en <b>diktator</b> – skulle styre.</li><li class="b">De var positive til vold og krig og sterkt <b>nasjonalistiske</b>.</li><li class="b">Sosialister og kommunister var hovedfiendene.</li></ul>`},
+ {h:"Marsjen mot Roma 1922",e:"🚶",html:`<ul class="tl"><li class="b">Fascistene arrangerte en væpnet marsj mot hovedstaden.</li><li class="b">Mussolini ble utnevnt til <b>statsminister</b>.</li><li class="b">Raskt fikk fascistene all makt: nasjonalforsamlingen ble oppløst, andre partier ble forbudt, og mediene ble <b>sensurert</b>.</li></ul>`},
+ {h:"Veien mot en ny krig",e:"⚠️",html:`<ul><li class="b">Fascistenes maktovertakelse inspirerte lignende bevegelser i andre land.</li><li class="b">Etter <b>børskrakket i USA i 1929</b> fulgte en økonomisk krise.</li><li class="b">Misnøye, økonomiske problemer og politisk uro ga grobunn for ikke-demokratiske ideologier – og banet veien for <b>Hitler</b> og en ny verdenskrig.</li></ul>
+ <div class="tk b"><b>Diskuter:</b> Både Norge og Russland hadde fattige arbeidere. Hvorfor gikk utviklingen så ulikt? Tenk på demokrati og stemmerett.</div>`}
+]},
+{t:"Historiske kilder",lm:"Læringsmål 4",goal:"Bruke digitale ressurser til å finne og bearbeide historiske kilder",c:"#3f5a4a",e:"🔎",cards:[
+ {h:"Kan vi stole på et bilde?",e:"📷",html:`<p>Et kjent fotografi fra 1920 viser Lenin som holder tale. På originalen står <b>Lev Trotskij</b> ved siden av talerstolen.</p>
+ <ul><li class="b">Da Stalin overtok makten, ble Trotskij <b>redigert bort</b> fra bildet.</li><li class="b">Stalin ville «fjerne» Trotskij fra historien.</li><li class="b">Bildet er et kjent eksempel på <b>bildemanipulering</b>. Også fotografier kan være propaganda.</li></ul>`},
+ {h:"Spør kilden",e:"🧐",html:`<ul><li class="b"><b>Hvem</b> har laget kilden?</li><li class="b"><b>Når</b> og <b>hvorfor</b> ble den laget?</li><li class="b">Er det en kilde fra <b>samtiden</b> (1914–1918) eller laget senere?</li><li class="b">Hva får vi vite – og hva får vi <b>ikke</b> vite?</li><li class="b">Stemmer det med andre kilder?</li></ul>`},
+ {h:"Utforsk digitalt",e:"💻",html:`<ul><li class="b"><a href="https://snl.no/første_verdenskrig" target="_blank" rel="noopener">Store norske leksikon</a> – søk på «første verdenskrig» eller «Versaillestraktaten».</li><li class="b"><a href="https://www.nb.no/search" target="_blank" rel="noopener">Nasjonalbiblioteket</a> – finn en norsk avis fra 1914 eller 1918. Hva skrev de om krigen?</li></ul>
+ <div class="tk b"><b>Utforsk:</b> I 1922 fikk Sovjetunionen et rødt flagg med hammer, sigd og stjerne. Finn ut hva symbolene betyr.</div>`}
+]}
+];
+const TERMS=[["Trippelalliansen","Tyskland, Østerrike-Ungarn og Italia. Italia skiftet side under krigen."],["Trippelententen","Storbritannia, Frankrike og Russland."],["Utløsende årsak","Fyrstikken som tente bålet – skuddene i Sarajevo."],["Blankofullmakten","Tysklands løfte om full støtte til Østerrike-Ungarn før angrepet på Serbia."],["Vestfronten","Skyttergraver fra Den engelske kanal til Sveits – fire år uten framgang."],["Østfronten","Tyskland mot Russland. Her var det mer bevegelse."],["Nøytralitet","Å ikke ta side i en krig. Norge var nøytralt."],["Dyrtid","Prisene steg mer enn lønningene de siste krigsårene."],["Versaillestraktaten","Den harde fredsavtalen fra 1919. Tyskland fikk skylden."],["Folkeforbundet","Organisasjon for å løse konflikter uten krig – forløperen til FN."],["Den russiske revolusjonen","1917: Tsaren gikk av, og Lenin og bolsjevikene tok makten."],["Fascisme","Ideologi med én sterk fører, nasjonalisme og vold. Mussolini, 1921."]];
+
+/* ===================== OPPBYGGING ===================== */
+const W=11000,H=8600,CX=5500,CY=4300,RX=4200,RY=3000;
+const world=document.getElementById("world"), esc=s=>String(s);
+const steps=[]; // {x,y,w,h,r,el,label}
+const N=CL.length;
+const SLOTS={3:[[-410,-90],[410,-90],[0,490]],4:[[-410,-90],[410,-90],[-410,490],[410,490]]};
+const ROT=[-2,1.6,1.4,-1.8];
+function add(el){ world.appendChild(el); return el; }
+function mk(tag,cls,html){ const d=document.createElement(tag); if(cls) d.className=cls; if(html!=null) d.innerHTML=html; return d; }
+
+// oversikt
+steps.push({x:CX,y:CY,w:W-200,h:H-200,r:0,label:"Oversikt"});
+// tittel
+const tEl=add(mk("div","title",`<div class="k">ARENA 9 · KAPITTEL 5</div><h1>Første verdenskrig<span>årsaker og konsekvenser</span></h1><p><span class="poppy">🌺</span><br>1914 – 1918</p>`));
+tEl.style.left=(CX-900)+"px"; tEl.style.top=(CY-520-380)+"px";
+steps.push({x:CX,y:CY-520,w:1900,h:820,r:0,el:tEl,label:"Første verdenskrig"});
+
+const centers=[];
+CL.forEach((c,i)=>{
+  const a=(-90+i*360/N)*Math.PI/180, x=CX+RX*Math.cos(a), y=CY+RY*Math.sin(a); centers.push([x,y]);
+  const cl=add(mk("div","cl",`<div class="big">${i+1}</div><div class="ct"><small>${c.lm}</small><h2>${c.e} ${c.t}</h2><p>${c.goal}</p></div>`));
+  cl.style.left=(x-1100)+"px"; cl.style.top=(y-1100)+"px"; cl.style.setProperty("--c",c.c);
+  const ci=steps.length; steps.push({x,y,w:2300,h:2300,r:0,el:cl,label:`${c.lm}: ${c.t}`});
+  cl.onclick=e=>{ if(e.target===cl||e.target.closest(".ct")||e.target.classList.contains("big")) go(ci,false); };
+  const sl=SLOTS[c.cards.length];
+  c.cards.forEach((k,j)=>{
+    const [ox,oy]=sl[j], r=ROT[j%4];
+    const el=add(mk("div","card",`<h3><span class="e">${k.e}</span>${k.h}</h3>${k.html}`));
+    el.style.left=(x+ox-380)+"px"; el.style.top=(y+oy-280)+"px"; el.style.transform=`rotate(${r}deg)`; el.style.setProperty("--c",c.c);
+    const si=steps.length; steps.push({x:x+ox,y:y+oy,w:800,h:600,r,el,label:`${c.lm} · ${k.h}`});
+    el.onclick=()=>{ if(cur!==si) go(si,false); };
+    k._el=el; k._c=c.c;
+  });
+});
+// test deg selv
+const test=add(mk("div","test",`<h2>🌺 Test deg selv!</h2><p>Fortell høyt om første verdenskrig med utgangspunkt i begrepene. Trykk på et begrep for å se forklaringen.</p>
+<div class="flips">${TERMS.map(([t,d])=>`<button class="flip" data-t="${t}" data-d="${d}">${t}</button>`).join("")}</div>`));
+test.style.left=(CX-900)+"px"; test.style.top=(CY+480-450)+"px";
+steps.push({x:CX,y:CY+480,w:1900,h:1000,r:0,el:test,label:"Test deg selv"});
+steps.push({x:CX,y:CY,w:W-200,h:H-200,r:0,label:"Oversikt"});
+document.querySelectorAll(".flip").forEach(b=>b.onclick=e=>{ e.stopPropagation(); b.classList.toggle("on"); b.textContent=b.classList.contains("on")?b.dataset.d:b.dataset.t; });
+tEl.onclick=()=>go(1,false); test.onclick=()=>go(steps.length-2,false);
+
+// sti mellom klyngene
+(function(){ const pts=[[CX,CY-520],...centers,[CX,CY+480]];
+  document.getElementById("paths").innerHTML=`<path d="M${pts.map(p=>p[0].toFixed(0)+" "+p[1].toFixed(0)).join(" L")}" fill="none" stroke="#8a7a4f" stroke-width="18" stroke-dasharray="10 60" stroke-linecap="round" opacity=".55"/>`; })();
+
+/* ===================== KAMERA ===================== */
+let cur=0;
+function cam(s){ const vw=innerWidth, vh=innerHeight-70, sc=Math.min(vw/s.w,vh/s.h);
+  world.style.transform=`translate(${vw/2}px,${vh/2+6}px) scale(${sc}) rotate(${-s.r}deg) translate(${-s.x}px,${-s.y}px)`; }
+function builds(i){ const el=steps[i].el; return el&&el.classList.contains("card")?[...el.querySelectorAll(".b")]:[]; }
+function go(i,fresh){ cur=Math.max(0,Math.min(steps.length-1,i)); const bs=builds(cur);
+  bs.forEach(b=>b.classList.toggle("hide",!!fresh)); cam(steps[cur]); ui(); try{ history.replaceState(null,"","#"+cur); }catch(e){} }
+function next(){ const h=builds(cur).filter(b=>b.classList.contains("hide")); if(h.length){ h[0].classList.remove("hide"); return; } if(cur<steps.length-1) go(cur+1,true); }
+function prev(){ if(cur>0) go(cur-1,false); }
+function ui(){ document.getElementById("cnt").textContent=`${cur+1} / ${steps.length}`; document.getElementById("lbl").textContent=steps[cur].label;
+  document.getElementById("prevBtn").disabled=cur===0; }
+document.getElementById("nextBtn").onclick=next; document.getElementById("prevBtn").onclick=prev;
+document.getElementById("ovBtn").onclick=()=>go(0,false);
+function fs(){ try{ document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen(); }catch(e){} }
+document.getElementById("fsBtn").onclick=fs;
+addEventListener("keydown",e=>{ if(document.body.classList.contains("list")) return;
+  if(["ArrowRight"," ","PageDown","Enter"].includes(e.key)){ e.preventDefault(); next(); }
+  else if(["ArrowLeft","PageUp","Backspace"].includes(e.key)){ e.preventDefault(); prev(); }
+  else if(e.key==="Escape") go(0,false); else if(e.key==="Home") go(0,false); else if(e.key==="End") go(steps.length-1,false);
+  else if(e.key==="f"||e.key==="F") fs(); });
+let tx=null; addEventListener("touchstart",e=>{ tx=e.touches[0].clientX; },{passive:true});
+addEventListener("touchend",e=>{ if(tx==null||document.body.classList.contains("list")) return; const d=e.changedTouches[0].clientX-tx; if(Math.abs(d)>50) d<0?next():prev(); tx=null; },{passive:true});
+addEventListener("resize",()=>cam(steps[cur]));
+addEventListener("hashchange",()=>{ const n=parseInt(location.hash.slice(1),10); if(!isNaN(n)&&n!==cur) go(n,false); });
+
+/* ===================== LISTEVISNING ===================== */
+function buildList(){ const L=document.getElementById("list"); let h=`<h1 style="font-size:34px">🌺 Første verdenskrig – årsaker og konsekvenser</h1>`;
+  CL.forEach(c=>{ h+=`<h2 class="lh" style="--c:${c.c}">${c.lm}: ${c.e} ${c.t}</h2>`; c.cards.forEach(k=>{ h+=`<div class="card" style="--c:${c.c}"><h3><span class="e">${k.e}</span>${k.h}</h3>${k.html}</div>`; }); });
+  h+=`<h2 class="lh" style="--c:var(--poppy)">🌺 Test deg selv!</h2><div class="flips">${TERMS.map(([t,d])=>`<button class="flip" data-t="${t}" data-d="${d}">${t}</button>`).join("")}</div>`;
+  L.innerHTML=h; L.querySelectorAll(".flip").forEach(b=>b.onclick=()=>{ b.classList.toggle("on"); b.textContent=b.classList.contains("on")?b.dataset.d:b.dataset.t; }); }
+buildList();
+document.getElementById("listBtn").onclick=()=>{ document.body.classList.toggle("list"); document.getElementById("listBtn").textContent=document.body.classList.contains("list")?"🔍":"📄"; if(!document.body.classList.contains("list")) cam(steps[cur]); };
+if(innerWidth<600){ document.body.classList.add("list"); document.getElementById("listBtn").textContent="🔍"; }
+
+const h0=parseInt(location.hash.slice(1),10);
+world.style.transition="none"; go(isNaN(h0)?0:h0,false); world.offsetHeight; world.style.transition="";
+}
+</script>
+</body>
+</html>
