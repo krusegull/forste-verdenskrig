@@ -62,6 +62,12 @@ const KATALOG = [
         ikon: "📖",
         beskrivelse: "Kontrast, besjeling, personifikasjon, sammenligning, metafor, motiv og tema",
         lenke: "norsk/sinna-mann/index.html"
+      },
+      {
+        navn: "Dikttolkning – «Aust-Vågøy»",
+        ikon: "✍️",
+        beskrivelse: "Øving til tentamen: motiv og tema, oppbygging og virkemidler i diktet av Inger Hagerup",
+        lenke: "norsk/aust-vagoy/index.html"
       }
     ]
   }

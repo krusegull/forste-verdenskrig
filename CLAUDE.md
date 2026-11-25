@@ -36,6 +36,7 @@ samfunnsfag/forste-verdenskrig/   Første verdenskrig (kart + spill)
 krle/hinduismen/                  Hinduismen (Reisen + Begrepsreisen)
 samfunnsfag/kalde-krigen/         Den kalde krigen (Reisen + Konkurranse JERNTEPPET)
 norsk/sinna-mann/                 Virkemidler i bildebok – Sinna Mann (kort til Konkurranse)
+norsk/aust-vagoy/                 Dikttolkning – «Aust-Vågøy» (kort til Konkurranse TROSS)
 verktoy/konkurranse.html          Felles konkurransemal for ALLE fag/temaer (se 6)
 arsakskjeden.html, begrepsjakten.html, krigsarkivet.html,
 krigsdagbokene.html, togreisen.html   (i rot) = videresendinger til ny plassering – IKKE slett, gamle elevlenker bruker dem
@@ -145,6 +146,11 @@ Status 20.11.2026: klassen hadde nesten fullført gallery walk-starteren (trinne
 - **Standardsettet ligger fast i portalen:** `verktoy/sett/norsk-sinna-mann.json` (62 spørsmål, 7 kategorier, *uten* bilder fra boka – 📖-spørsmål ber læreren vise oppslaget). Lastes automatisk når nettleseren ikke har en egen versjon.
 - Versjonen **med** Eiriks bilder fra boka finnes privat som SI FRA på claude.ai (se 7) og som fila `sinna-mann-konkurranse.json` hos Eirik. **Disse bildene skal aldri legges i repoet** (opphavsrett).
 
+### Norsk – Dikttolkning – «Aust-Vågøy» (`norsk/aust-vagoy/`)
+- Øving til tentamen (skriveramme: innledning · hoveddel med motiv og tema, oppbygging, virkemidler · avslutning med budskap). Diktet av Inger Hagerup (1905–1985), skrevet etter Lofotraidet 4. mars 1941, spredt illegalt, utgitt i «Videre» 1945.
+- `index.html` har ett kort: **Konkurranse – TROSS** (`sett=norsk-aust-vagoy`). Standardsett `verktoy/sett/norsk-aust-vagoy.json`: 61 spørsmål, 7 kategorier (Bakgrunn, Motiv og tema, Oppbygging, Gjentakelse og kontrast, Bilder og lyd, Lyrikkbegreper, Skriverammen), 500 og lyn 5 med fem alternativer.
+- **Diktet er opphavsrettsbeskyttet (Hagerup døde 1985): legg aldri hele diktet eller hele strofer i repoet.** Bare korte sitater; elevene leser diktet på arket. Modellteksten etter skriverammen ligger som dokument på claude.ai (se 7).
+
 ## 7. Lærerressurser som IKKE ligger her (bare lenker for Eirik – aldri til elevene)
 
 Disse ligger privat på claude.ai (krever Eiriks innlogging):
@@ -154,7 +160,8 @@ Disse ligger privat på claude.ai (krever Eiriks innlogging):
 - **FRONTLINJEN – kunnskapskampen, første verdenskrig (lærerspill, samme mekanikk som YUGA):** https://claude.ai/artifact/S8tATzQpKh4FrqKU6L7hJZ
   – skjebnehjul (velg selv, tilfeldig lag, lynrunde, storoffensiv ✖️2, forsyninger), 5 kategorier (Årsaker og allianser, Krigføring og teknologi, Norge og hjemmefronten, Den russiske revolusjonen, Fredsoppgjøret) × 5 vanskelighetsgrader (100–500) + lynspørsmål, runder = krigens faser (1914→1915–16→1917→1918, vanskeligere for hver), 500 i 1918-fasen = angrip og stjel 300 poeng, maktkort (Speiderrapport 50/50, Feltlegen nytt forsøk, Skyttergraven stopper angrep), elevnavn/PIN/lærervisning identisk med YUGA. Fasit bygger på samme kilder som samfunnsfag/forste-verdenskrig/ (Arena 9, trinnets PowerPoint).
 - **SI FRA – virkemiddelkampen om «Sinna Mann» (lærerspill med bilder fra boka):** https://claude.ai/artifact/4cJ5Jj4NspgDBA68hLxoeV – samme innhold som importfila til konkurransemalen.
-- **TROSS – diktkampen om «Aust-Vågøy» (Inger Hagerup):** https://claude.ai/artifact/Wo3qEWX8yEuEnKE2ni1GH1
+- **TROSS – diktkampen om «Aust-Vågøy» (Inger Hagerup):** https://claude.ai/artifact/Wo3qEWX8yEuEnKE2ni1GH1 (privat versjon med hele diktet; portalversjonen er standardsettet over)
+- **Diktanalyse: «Aust-Vågøy» – modelltekst etter skriverammen (dokument):** https://claude.ai/artifact/VT88GH7L2oeodKswXAUp9n
 - **Åttukersplan (dokument):** https://claude.ai/artifact/4sW9FBbQJ1BJwH3dg3fMnQ
 - **Første versjon av Reisen (claude.ai):** https://claude.ai/artifact/P4YMx4XFx8KGyRCaRp8UtR og Begrepsreisen: https://claude.ai/artifact/HkXQb5qe4h8pgsATXSDYFW – **repoet er nå hovedversjonen**; gjør endringer her.
 - **PowerPoint «Hinduismen på 5 minutter»** (`Hinduismen_begreper.pptx`, 11 lysbilder, egne illustrasjoner, manus i notatene) – levert til Eirik som fil.

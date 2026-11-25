@@ -1,0 +1,992 @@
+{
+ "v": 1,
+ "tittel": "TROSS",
+ "under": "Diktkampen om «Aust-Vågøy» av Inger Hagerup – ha diktet klart på arket",
+ "slutt": "Lykke til på tentamen! Husk: navn på virkemiddelet + eksempel fra diktet + hvilken virkning det har.",
+ "kat": [
+  {
+   "n": "Bakgrunn",
+   "e": "📜",
+   "c": "#5b4636",
+   "q": [
+    {
+     "q": "Hvem har skrevet diktet «Aust-Vågøy»?",
+     "o": [
+      "Inger Hagerup",
+      "Nordahl Grieg",
+      "Arnulf Øverland",
+      "Gro Dahle"
+     ],
+     "a": 0,
+     "w": "Inger Hagerup (1905–1985) regnes som en av de største norske lyrikerne på 1900-tallet.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilket land okkuperte Norge da diktet ble skrevet?",
+     "o": [
+      "Tyskland",
+      "Storbritannia",
+      "Sovjetunionen",
+      "Sverige"
+     ],
+     "a": 0,
+     "w": "Tyskland okkuperte Norge i april 1940. Okkupasjonen varte til mai 1945.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva skjedde i Lofoten 4. mars 1941?",
+     "o": [
+      "Britiske soldater, sammen med noen nordmenn, angrep tyske mål",
+      "Tyskland gikk i land i Norge for første gang",
+      "Krigen i Norge tok slutt",
+      "Kongen flyktet til England"
+     ],
+     "a": 0,
+     "w": "Raidet ødela fabrikker og skip som tyskerne hadde nytte av. Etterpå hevnet tyskerne seg på lokalbefolkningen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvorfor ble diktet spredt i hemmelighet på lapper og i illegale aviser?",
+     "o": [
+      "Det var forbudt å gi ut slike dikt under okkupasjonen",
+      "Hagerup ville ikke tjene penger på det",
+      "Det fantes ikke papir til bøker",
+      "Diktet var bare ment for barn"
+     ],
+     "a": 0,
+     "w": "Dikt som oppfordret til motstand var ulovlige. Ingen visste hvem som hadde skrevet diktet før krigen var over.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Når og hvordan kom diktet ut i en bok for første gang?",
+     "o": [
+      "I 1945, i samlingen «Videre», etter at krigen var over",
+      "I 1941, rett etter raidet",
+      "I 1940, før okkupasjonen",
+      "I 1950, i en barnebok",
+      "Det har aldri kommet ut i en bok"
+     ],
+     "a": 0,
+     "w": "Samlingen «Videre» kom i fredsåret 1945 og ga Hagerup det store gjennombruddet.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Motiv og tema",
+   "e": "🎯",
+   "c": "#7a2e2e",
+   "q": [
+    {
+     "q": "Hva er forskjellen på motiv og tema?",
+     "o": [
+      "Motivet er det som skjer i teksten. Temaet er det teksten handler om på et dypere plan",
+      "Motivet er tittelen. Temaet er forfatteren",
+      "Motivet er rimene. Temaet er rytmen",
+      "Det er ingen forskjell"
+     ],
+     "a": 0,
+     "w": "Motivet kan du se direkte i teksten. Temaet finner du ved å spørre: Hva handler dette egentlig om?",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er motivet i «Aust-Vågøy»?",
+     "o": [
+      "Et folk som sørger og reagerer etter at fienden har brent og drept",
+      "En familie som flytter til Lofoten",
+      "En fisker som drar på havet",
+      "Barn som leker i snøen"
+     ],
+     "a": 0,
+     "w": "Diktet beskriver det som har skjedd i Aust-Vågøy, og hvordan «vi» reagerer på det.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvem er «de» i diktet?",
+     "o": [
+      "De tyske okkupantene",
+      "De britiske soldatene",
+      "Fiskerne i Lofoten",
+      "De døde kameratene"
+     ],
+     "a": 0,
+     "w": "Fienden får aldri et navn i diktet, men leseren forstår at det er tyskerne som hevnet seg etter raidet.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilket tema passer best for diktet?",
+     "o": [
+      "Motstand og samhold i krig",
+      "Kjærlighet mellom to mennesker",
+      "Naturen i Lofoten",
+      "Vennskap mellom barn"
+     ],
+     "a": 0,
+     "w": "Diktet viser hvordan sorg og sinne blir til styrke og samhold mot fienden.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er budskapet i diktet?",
+     "o": [
+      "Fienden kan brenne og drepe, men kan ikke knekke et folk som står sammen",
+      "Krig er spennende",
+      "Det er best å gi seg når man taper",
+      "Lofoten er et fint sted å bo",
+      "Man skal glemme det vonde så fort som mulig"
+     ],
+     "a": 0,
+     "w": "Den siste linjen er et løfte om at folket aldri skal gi seg. Det er derfor diktet ga folk mot under krigen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Oppbygging",
+   "e": "🧱",
+   "c": "#2e4a6b",
+   "q": [
+    {
+     "q": "Hvor mange strofer har diktet?",
+     "o": [
+      "Fire",
+      "To",
+      "Seks",
+      "Åtte"
+     ],
+     "a": 0,
+     "w": "Diktet har fire strofer. På arket står de i to kolonner.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvor mange verselinjer er det i hver strofe?",
+     "o": [
+      "Fire",
+      "Tre",
+      "Fem",
+      "Åtte"
+     ],
+     "a": 0,
+     "w": "Fire strofer med fire linjer gir til sammen 16 verselinjer.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilke linjer rimer i hver strofe?",
+     "o": [
+      "Andre og fjerde linje",
+      "Første og andre linje",
+      "Alle fire linjene",
+      "Ingen av linjene"
+     ],
+     "a": 0,
+     "w": "For eksempel rimer «slag» og «dag», og «tross» og «oss».",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva skjer i diktet fra strofe 3 til strofe 4?",
+     "o": [
+      "Sorgen snur til tross: for hver som døde, står mange flere igjen",
+      "Diktet begynner å handle om naturen",
+      "Fienden ber om unnskyldning",
+      "Diktet blir morsomt"
+     ],
+     "a": 0,
+     "w": "Dette er vendingen i diktet. Fra nå av handler det om motstand, ikke bare om sorg.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvorfor passer de korte setningene og den faste rytmen til innholdet?",
+     "o": [
+      "De gir en hard og bestemt stemme som minner om hjerteslag eller marsjtakt",
+      "De gjør diktet lett og lekent",
+      "De viser at forfatteren hadde dårlig tid",
+      "De gjør diktet lettere å synge på fest",
+      "De har ingen betydning"
+     ],
+     "a": 0,
+     "w": "Formen speiler innholdet: et folk som er sint, bestemt og står sammen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Gjentakelse og kontrast",
+   "e": "🔁",
+   "c": "#8a4a1f",
+   "q": [
+    {
+     "q": "Hvor mange ganger står linjen «De brente våre gårder» i diktet?",
+     "o": [
+      "Tre ganger",
+      "Én gang",
+      "To ganger",
+      "Fem ganger"
+     ],
+     "a": 0,
+     "w": "Linjen står i strofe 1, i strofe 2 og i strofe 3.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva oppnår Hagerup med å gjenta linjen «De brente våre gårder»?",
+     "o": [
+      "Det som har skjedd, hamres inn, og det kan ikke glemmes",
+      "Hun hadde glemt at hun hadde skrevet den",
+      "Diktet blir lengre",
+      "Det skaper humor"
+     ],
+     "a": 0,
+     "w": "Gjentakelsen viser at hendelsen ikke går ut av hodet, og den gjør budskapet sterkt.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva kalles det når flere linjer begynner med det samme ordet, som «De ...»?",
+     "o": [
+      "Anafor",
+      "Allitterasjon",
+      "Apostrofe",
+      "Sammenligning"
+     ],
+     "a": 0,
+     "w": "Anafor er gjentakelse av samme ord i starten av flere linjer eller setninger.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilken kontrast er den viktigste i diktet?",
+     "o": [
+      "«De» som brenner og dreper, mot «vi» som sørger og står samlet",
+      "Sommer mot vinter",
+      "Gammel mot ung",
+      "By mot land"
+     ],
+     "a": 0,
+     "w": "Kontrasten mellom «de» og «vi» viser hvem som er overgriperne, og hvem som holder sammen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "I strofe 3 står det at det bak hver som døde, står «tusener» igjen. Hvilke virkemidler er dette?",
+     "o": [
+      "Kontrast og overdrivelse",
+      "Rim og rytme",
+      "Sammenligning og lydord",
+      "Ironi og humor",
+      "Besjeling og apostrofe"
+     ],
+     "a": 0,
+     "w": "De få døde står i kontrast til de mange som lever. Tallet er overdrevet for å vise at motstanden er stor.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Bilder og lyd",
+   "e": "💓",
+   "c": "#8c2f39",
+   "q": [
+    {
+     "q": "Hjertene skal «hamre» og «hugge». Hva slags virkemiddel er dette?",
+     "o": [
+      "Besjeling",
+      "Rim",
+      "Anafor",
+      "Lydord"
+     ],
+     "a": 0,
+     "w": "Hjertene får egenskaper som levende redskaper. Det er besjeling. Bildet er også en metafor for sorg og sinne.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Ordene «hjerter», «hamre», «hugge» og «harde» begynner alle med h. Hva kalles det?",
+     "o": [
+      "Allitterasjon",
+      "Anafor",
+      "Enderim",
+      "Kontrast"
+     ],
+     "a": 0,
+     "w": "Allitterasjon er når flere ord tett etter hverandre begynner med samme lyd. Her forsterker den lyden av slag.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "«Å, døde kamerater» – diktet snakker direkte til de døde. Hva kalles det?",
+     "o": [
+      "Apostrofe",
+      "Sammenligning",
+      "Personifikasjon",
+      "Gjentakelse"
+     ],
+     "a": 0,
+     "w": "Apostrofe er når teksten tiltaler noen som ikke kan svare, for eksempel de døde. Det gjør diktet personlig og høytidelig.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva beskriver uttrykket «steil og naken tross»?",
+     "o": [
+      "En motstand som står rakt og ubeskyttet, men som ikke gir seg",
+      "At folket fryser",
+      "At folket er redde og gjemmer seg",
+      "At folket er sinte på hverandre"
+     ],
+     "a": 0,
+     "w": "«Steil» betyr rett opp og uten å bøye seg. «Naken» viser at de ikke har noe å beskytte seg med.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvorfor står «i dag» med i strofe 2?",
+     "o": [
+      "Det viser at overgrepet nettopp har skjedd, og gjør det nært og sterkt",
+      "Det forteller hvilken ukedag det var",
+      "Det er bare for å få rim",
+      "Det viser at diktet er en dagbok",
+      "Det betyr at hendelsen er glemt"
+     ],
+     "a": 0,
+     "w": "«I dag» gjør hendelsen nær og levende. Sammen med tittelen og datoen gjør det diktet aktuelt for leserne i 1941.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Lyrikkbegreper",
+   "e": "📖",
+   "c": "#3f5a4a",
+   "q": [
+    {
+     "q": "Hva er en strofe?",
+     "o": [
+      "En gruppe verselinjer i et dikt",
+      "Én enkelt linje i et dikt",
+      "Tittelen på diktet",
+      "Et ord som rimer"
+     ],
+     "a": 0,
+     "w": "Strofer i dikt er som avsnitt i en vanlig tekst.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er det lyriske jeget?",
+     "o": [
+      "Stemmen som snakker i diktet",
+      "Forfatteren selv",
+      "Den som leser diktet",
+      "Hovedpersonen i en roman"
+     ],
+     "a": 0,
+     "w": "Det lyriske jeget er ikke alltid det samme som forfatteren. I «Aust-Vågøy» er stemmen et «vi».",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er besjeling?",
+     "o": [
+      "Når noe som ikke er levende, får levende egenskaper",
+      "Når et ord gjentas",
+      "Når to ord rimer",
+      "Når noe overdrives"
+     ],
+     "a": 0,
+     "w": "Personifikasjon er beslektet: da får noe menneskelige egenskaper.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er en metafor?",
+     "o": [
+      "Et språklig bilde der noe beskrives som noe annet, uten «som» eller «lik»",
+      "En sammenligning med «som»",
+      "Et ord som etterligner en lyd",
+      "Et ord som betyr det motsatte"
+     ],
+     "a": 0,
+     "w": "«Hjertene hamrer» er et bilde på sterke følelser, ikke på ekte hammerslag.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er et kampdikt?",
+     "o": [
+      "Et dikt som oppfordrer til motstand og samhold i en vanskelig tid",
+      "Et dikt om sport",
+      "Et dikt som bare handler om natur",
+      "Et morsomt dikt for barn",
+      "Et dikt uten rim"
+     ],
+     "a": 0,
+     "w": "Under okkupasjonen ble kampdikt spredt for å gi folk mot. «Aust-Vågøy» er et av de mest kjente.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Skriverammen",
+   "e": "✍️",
+   "c": "#4b5320",
+   "q": [
+    {
+     "q": "Hva skal stå i innledningen til en diktanalyse?",
+     "o": [
+      "Tittel, forfatter, kort om forfatteren og sammenhengen diktet er skrevet i",
+      "Budskapet og en oppsummering",
+      "Bare en liste over virkemidler",
+      "Hele diktet skrevet av"
+     ],
+     "a": 0,
+     "w": "Innledningen presenterer diktet og forfatteren, og forteller når og hvorfor diktet ble skrevet.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilke tre temaer skal hoveddelen ifølge skriverammen ha?",
+     "o": [
+      "Motiv og tema, oppbygging og virkemidler",
+      "Forfatter, tittel og årstall",
+      "Innledning, hoveddel og avslutning",
+      "Rim, rytme og strofer"
+     ],
+     "a": 0,
+     "w": "Skriverammen sier tre avsnitt eller mer, med ett tema i hvert avsnitt.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva skal du alltid gjøre når du skriver om et virkemiddel?",
+     "o": [
+      "Gi et eksempel fra diktet og forklare hvilken virkning det har",
+      "Bare nevne navnet på virkemiddelet",
+      "Skrive av hele strofen",
+      "Skrive om din egen favorittsang"
+     ],
+     "a": 0,
+     "w": "Navn + eksempel + virkning: «Hagerup bruker gjentakelse når ... Det gjør at ...»",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva skal stå i avslutningen?",
+     "o": [
+      "En kort oppsummering og budskapet, med begrunnelse",
+      "Nye virkemidler du ikke har nevnt",
+      "Informasjon om forfatteren",
+      "Spørsmål til læreren"
+     ],
+     "a": 0,
+     "w": "Avslutningen samler trådene og forteller hva diktet vil si oss, og hvorfor du mener det.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilken setning passer best i hoveddelen om virkemidler?",
+     "o": [
+      "Hagerup gjentar linjen om de brente gårdene tre ganger. Det hamrer inn det som har skjedd.",
+      "Diktet er bra og jeg likte det.",
+      "Det finnes mange virkemidler i dikt.",
+      "Inger Hagerup ble født i 1905.",
+      "Budskapet er at man skal stå sammen."
+     ],
+     "a": 0,
+     "w": "Den beste setningen viser virkemiddelet med eksempel og forklarer virkningen. Fødselsåret hører hjemme i innledningen, og budskapet i avslutningen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  }
+ ],
+ "lyn": {
+  "1": [
+   {
+    "q": "Hva heter diktet?",
+    "o": [
+     "Aust-Vågøy",
+     "Lofoten",
+     "Videre",
+     "Motstand"
+    ],
+    "a": 0,
+    "w": "Hele tittelen er «Aust-Vågøy (mars 1941)».",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilken landsdel ligger Aust-Vågøy i?",
+    "o": [
+     "Nord-Norge (Lofoten)",
+     "Vestlandet",
+     "Sørlandet",
+     "Østlandet"
+    ],
+    "a": 0,
+    "w": "Austvågøy er en av de store øyene i Lofoten.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Rimer «slag» og «dag»?",
+    "o": [
+     "Ja",
+     "Nei"
+    ],
+    "a": 0,
+    "w": "Ordene har samme lyd på slutten. Det er enderim.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva slags dikt er «Aust-Vågøy»?",
+    "o": [
+     "Et kampdikt",
+     "Et kjærlighetsdikt"
+    ],
+    "a": 0,
+    "w": "Diktet oppfordrer til motstand og samhold.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilket år er diktet skrevet?",
+    "o": [
+     "1941",
+     "1914",
+     "1945",
+     "1905"
+    ],
+    "a": 0,
+    "w": "Diktet ble skrevet i 1941, men kom i bok først i 1945.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "2": [
+   {
+    "q": "Hvor mange linjer har diktet til sammen?",
+    "o": [
+     "16",
+     "12",
+     "20",
+     "8"
+    ],
+    "a": 0,
+    "w": "Fire strofer med fire linjer = 16 linjer.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvem tiltales i siste strofe?",
+    "o": [
+     "De døde kameratene",
+     "Tyskerne",
+     "Kongen",
+     "Leseren"
+    ],
+    "a": 0,
+    "w": "«Å, døde kamerater» er en apostrofe.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilket pronomen brukes om fienden?",
+    "o": [
+     "De",
+     "Vi",
+     "Han",
+     "Dere"
+    ],
+    "a": 0,
+    "w": "Fienden blir bare kalt «de».",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilket pronomen brukes om folket i Lofoten?",
+    "o": [
+     "Vi / våre",
+     "De",
+     "Hun",
+     "Jeg"
+    ],
+    "a": 0,
+    "w": "«Våre gårder», «våre menn» og «oss» viser samhold.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva brente fienden ifølge diktet?",
+    "o": [
+     "Gårdene",
+     "Skolene",
+     "Kirkene",
+     "Båtene"
+    ],
+    "a": 0,
+    "w": "Linjen om de brente gårdene står tre ganger.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "3": [
+   {
+    "q": "Hva kalles gjentakelse av samme ord først i flere linjer?",
+    "o": [
+     "Anafor",
+     "Allitterasjon",
+     "Apostrofe",
+     "Metafor"
+    ],
+    "a": 0,
+    "w": "Flere linjer i diktet begynner med «De».",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva kalles det når flere ord begynner med samme lyd?",
+    "o": [
+     "Allitterasjon",
+     "Anafor",
+     "Rim",
+     "Rytme"
+    ],
+    "a": 0,
+    "w": "For eksempel «hjerter hamre».",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilken samling kom diktet ut i i 1945?",
+    "o": [
+     "Videre",
+     "Lille Persille",
+     "Sinna Mann",
+     "Fabel 9"
+    ],
+    "a": 0,
+    "w": "Samlingen «Videre» ga Hagerup gjennombruddet.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva skjer i strofe 3 som er nytt?",
+    "o": [
+     "Vendingen: for hver som døde, står tusener igjen",
+     "Diktet slutter",
+     "Fienden blir navngitt",
+     "Det kommer et nytt rim"
+    ],
+    "a": 0,
+    "w": "Her snur sorgen til tross.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvor mange trykk har hver linje omtrent?",
+    "o": [
+     "Tre",
+     "Ett",
+     "Sju",
+     "Ti"
+    ],
+    "a": 0,
+    "w": "Tre trykk per linje gir en jevn, tung rytme.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva gjorde tyskerne etter raidet?",
+    "o": [
+     "De hevnet seg på lokalbefolkningen",
+     "De forlot Norge",
+     "De ba om fred",
+     "Ingenting"
+    ],
+    "a": 0,
+    "w": "De brente hus og arresterte mennesker som ble sendt i fangeleir.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "4": [
+   {
+    "q": "Hva er en vending i et dikt?",
+    "o": [
+     "Et sted der stemningen eller tankegangen snur",
+     "Den siste linjen",
+     "Et ord som rimer",
+     "Tittelen"
+    ],
+    "a": 0,
+    "w": "I «Aust-Vågøy» snur sorgen til tross i strofe 3.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvorfor fikk ikke folk vite hvem som skrev diktet under krigen?",
+    "o": [
+     "Det var farlig å skrive slike dikt",
+     "Hagerup var ukjent",
+     "Diktet var på engelsk",
+     "Avisene var stengt"
+    ],
+    "a": 0,
+    "w": "Den som skrev motstandsdikt, kunne bli arrestert.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva betyr «kue»?",
+    "o": [
+     "Tvinge noen til å gi seg og bli underdanige",
+     "Hjelpe",
+     "Trøste",
+     "Rope"
+    ],
+    "a": 0,
+    "w": "«De kuer aldri oss» betyr at fienden aldri skal få folket til å gi seg.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvorfor står «i dag» i diktet?",
+    "o": [
+     "Det gjør hendelsen nær og aktuell",
+     "For å fortelle ukedagen",
+     "For rimets skyld",
+     "Det har ingen betydning"
+    ],
+    "a": 0,
+    "w": "Det viser at overgrepet nettopp har skjedd.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva er forskjellen på forfatteren og det lyriske jeget?",
+    "o": [
+     "Forfatteren skriver diktet. Det lyriske jeget er stemmen som snakker i det",
+     "Det er det samme",
+     "Det lyriske jeget er leseren",
+     "Forfatteren er hovedpersonen"
+    ],
+    "a": 0,
+    "w": "I dette diktet snakker stemmen som et «vi».",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "5": [
+   {
+    "q": "Hvilket virkemiddel er «hjertene hugger med harde, vonde slag»?",
+    "o": [
+     "Besjeling, metafor og allitterasjon",
+     "Bare rim",
+     "Apostrofe",
+     "Ironi",
+     "Sammenligning med «som»"
+    ],
+    "a": 0,
+    "w": "Hjertene får levende egenskaper (besjeling), slagene er et bilde på følelser (metafor), og h-lydene gjentas (allitterasjon).",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvordan henger formen sammen med budskapet?",
+    "o": [
+     "Den faste, strenge formen og de korte setningene viser et folk som står fast og samlet",
+     "Formen er tilfeldig",
+     "Den frie formen viser kaos",
+     "Rimene gjør diktet morsomt",
+     "Formen viser at diktet er for barn"
+    ],
+    "a": 0,
+    "w": "Form og innhold støtter hverandre: diktet er like steilt og bestemt som motstanden det beskriver.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvorfor er overdrivelsen «tusener» effektiv?",
+    "o": [
+     "Den viser at motstanden vokser for hver som blir drept",
+     "Den er et nøyaktig tall",
+     "Den gjør diktet morsomt",
+     "Den viser at krigen var kort",
+     "Den skaper rim"
+    ],
+    "a": 0,
+    "w": "Fienden oppnår det motsatte av det den vil: flere står samlet.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilken del av skriverammen passer best for informasjon om Lofotraidet?",
+    "o": [
+     "Innledningen",
+     "Avsnittet om virkemidler",
+     "Avsnittet om oppbygging",
+     "Avslutningen",
+     "Ingen av dem"
+    ],
+    "a": 0,
+    "w": "Sammenhengen diktet er skrevet i, hører hjemme i innledningen.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvorfor fikk diktet så stor betydning under krigen?",
+    "o": [
+     "Det ga folk mot og håp når det ble spredt i hemmelighet",
+     "Det ble lest på radio av tyskerne",
+     "Det var pensum på skolen",
+     "Det vant en pris i 1941",
+     "Det ble trykt på frimerker"
+    ],
+    "a": 0,
+    "w": "Kampdikt som dette styrket motstandsviljen. Mange kan fortsatt de første linjene utenat.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ]
+ }
+}
