@@ -235,10 +235,12 @@ select.inp{font-weight:800}
    <p class="note" style="margin:8px 0 0">Lag så mange sett du vil – ett for hvert tema eller hver repetisjon. Settene lagres bare i denne nettleseren.</p></div>
   <div id="resume"></div>
   <div id="lrBox"></div>
+  <div id="arkivBox"></div>
   <div class="panel">
    <h3>Lag og deltakere</h3>
    <div class="seg" id="nSeg" style="margin-bottom:12px"></div>
    <div id="gin"></div>
+   <div class="orow" style="flex-wrap:wrap;gap:8px;margin-top:10px"><button class="ghost" id="mixBtn">🎲 Bland lagene</button><span class="note" id="mixNote">Fordeler alle navnene tilfeldig på lagene.</span></div>
    <p class="note" style="margin:10px 0 0">Skriv ett navn per linje eller skill med komma. Navnene brukes når skjebnen trekker hvem som skal svare, og til elevpoengene i lærerens oversikt.</p>
   </div>
   <div class="panel" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
@@ -385,8 +387,9 @@ function drawGin(){
    fra lærervisningen (bak PIN) til Lærerrommets importside. */
 const LR_URL="https://laererrommet.vercel.app";
 const cleanId=x=>String(x||"").replace(/[^A-Za-z0-9_-]/g,"").slice(0,40);
-function parseLr(raw){ try{ const d=JSON.parse(raw); if(!d||!Array.isArray(d.lag)||!d.lag.length) return null;
+function parseLr(raw){ try{ const d=JSON.parse(raw); if(!d||!Array.isArray(d.lag)||(!d.lag.length&&!(Array.isArray(d.alle)&&d.alle.length))) return null;
   return {classId:cleanId(d.classId),klasse:strip(d.klasse).slice(0,60),fag:String(d.fag||"").toLowerCase().replace(/[^a-z0-9]/g,"").slice(0,30),tema:strip(d.tema).slice(0,120),
+   alle:(Array.isArray(d.alle)?d.alle:[]).slice(0,60).map(e=>({id:cleanId(e&&e.id),navn:strip(e&&e.navn).trim().slice(0,60)})).filter(e=>e.navn),
    lag:d.lag.slice(0,8).map((l,i)=>({navn:strip(l&&l.navn||"Lag "+(i+1)).slice(0,40),elever:(Array.isArray(l&&l.elever)?l.elever:[]).slice(0,15).map(e=>({id:cleanId(e&&e.id),navn:strip(e&&e.navn).trim().slice(0,60)})).filter(e=>e.navn)}))}; }catch(e){ return null; } }
 let LRIN=null;
 (function readLr(){ const m=location.hash.match(/(?:^#|&)lr=([^&]*)/);
@@ -394,12 +397,21 @@ let LRIN=null;
     try{ history.replaceState(null,"",location.pathname+location.search); }catch(e){} }
   else { try{ const raw=sessionStorage.getItem("konk_lr"); if(raw) LRIN=parseLr(raw); }catch(e){} } })();
 function applyLr(){ if(!LRIN){ $("lrBox").innerHTML=""; return; }
-  SET.n=Math.max(2,LRIN.lag.length);
-  LRIN.lag.forEach((l,i)=>{ draft.names[i]=l.navn; draft.members[i]=l.elever.map(e=>e.navn).join(", "); });
+  if(LRIN.lag.length){ SET.n=Math.max(2,LRIN.lag.length); LRIN.lag.forEach((l,i)=>{ draft.names[i]=l.navn; draft.members[i]=l.elever.map(e=>e.navn).join(", "); }); }
+  else { SET.n=Math.min(8,Math.max(2,Math.round(LRIN.alle.length/4))); mixTeams(LRIN.alle.map(e=>e.navn)); }
   $("nSeg").querySelectorAll("button").forEach(b=>b.classList.toggle("sel",+b.dataset.v===SET.n));
-  $("lrBox").innerHTML=`<div class="panel" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-color:var(--gold)"><div style="flex:1;font-weight:800">🔗 Lagene er hentet fra Lærerrommet${LRIN.klasse?" ("+esc(LRIN.klasse)+")":""}. Etter spillet kan du sende poengene tilbake fra 🔒 Lærer.</div><button class="ghost" id="lrOff">Ikke bruk disse lagene</button></div>`;
+  $("lrBox").innerHTML=`<div class="panel" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-color:var(--gold)"><div style="flex:1;font-weight:800">🔗 Lagene er hentet fra Lærerrommet${LRIN.klasse?" ("+esc(LRIN.klasse)+")":""}. ${LRIN.lag.length?"":" Klassen har ingen grupper ennå, så lagene er blandet tilfeldig."} Etter spillet kan du sende poengene tilbake fra 🔒 Lærer.</div><button class="ghost" id="lrOff">Ikke bruk disse lagene</button></div>`;
   $("lrOff").onclick=()=>{ LRIN=null; try{ sessionStorage.removeItem("konk_lr"); }catch(e){} draft.names=GSYM.map((_,i)=>"Lag "+(i+1)); draft.members=GSYM.map(()=>""); applyLr(); drawGin(); }; }
+/* Bland lagene: alle navn (hele klassen fra Lærerrommet, ellers navnene som
+   står i feltene) fordeles tilfeldig og jevnt på antall lag som er valgt. */
+const splitNames=t=>String(t||"").split(/[,\n;]+/).map(x=>x.trim()).filter(Boolean);
+function mixTeams(names){ const pool=shuffle(names); draft.members=GSYM.map(()=>""); const buckets=Array.from({length:SET.n},()=>[]);
+  pool.forEach((n,i)=>buckets[i%SET.n].push(n)); buckets.forEach((b,i)=>{ draft.members[i]=b.join(", "); draft.names[i]="Lag "+(i+1); }); }
+$("mixBtn").onclick=()=>{ const names=LRIN&&LRIN.alle.length?LRIN.alle.map(e=>e.navn):draft.members.slice(0,8).flatMap(splitNames);
+  if(names.length<2){ toast("Skriv inn navn først (eller start fra Lærerrommet)"); return; }
+  mixTeams(names); drawGin(); SND.click(); toast("🎲 "+names.length+" elever fordelt på "+SET.n+" lag"); };
 seg("nSeg",v=>{SET.n=+v;drawGin();}); seg("rSeg",v=>SET.R=+v); seg("tSeg",v=>SET.T=+v); applyLr(); drawGin();
+if(LRIN&&LRIN.alle.length) $("mixNote").textContent="Blander hele klassen fra Lærerrommet ("+LRIN.alle.length+" elever) på antall lag du har valgt.";
 (function resumeOffer(){ let s=null; try{s=JSON.parse(localStorage.getItem(KEY));}catch(e){}
   if(s && s.phase!=="ended" && s.groups){ $("resume").innerHTML=`<div class="panel" style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;border-color:var(--gold)"><div style="flex:1;font-weight:800">⏸️ Det finnes et påbegynt spill (${s.groups.length} lag, tur ${s.turn+1} av ${s.groups.length*s.R}).</div><button class="big" id="resBtn" style="font-size:17px;padding:11px 24px">Fortsett spillet</button></div>`;
     $("resBtn").onclick=()=>{ ac(); G=s; HIST=[]; enterGame(); startTurn(true); }; }
@@ -411,11 +423,12 @@ $("startBtn").onclick=()=>{
   ac();
   const groups=Array.from({length:SET.n},(_,i)=>({name:(draft.names[i]||"").trim()||"Lag "+(i+1),sym:GSYM[i],col:GCOL[i],score:0,cards:[],
     members:(draft.members[i]||"").split(/[,\n;]+/).map(s=>s.trim()).filter(Boolean)}));
-  const studs={}; groups.forEach((g,gi)=>g.members.forEach((m,mi)=>studs[gi+"-"+mi]={ans:0,ok:0,pts:0}));
-  let lr=null; if(LRIN){ const ids={}, byName={}; LRIN.lag.forEach(l=>l.elever.forEach(e=>{ if(e.id) byName[e.navn.toLowerCase()]=e.id; }));
+  const studs={}; groups.forEach((g,gi)=>g.members.forEach((m,mi)=>studs[gi+"-"+mi]={ans:0,ok:0,pts:0,star:0,atf:0}));
+  let lr=null; if(LRIN){ const ids={}, byName={}; LRIN.alle.concat(...LRIN.lag.map(l=>l.elever)).forEach(e=>{ if(e.id) byName[e.navn.toLowerCase()]=e.id; });
     groups.forEach((g,gi)=>g.members.forEach((m,mi)=>{ const id=byName[m.toLowerCase()]; if(id) ids[gi+"-"+mi]=id; }));
     lr={classId:LRIN.classId,klasse:LRIN.klasse,fag:LRIN.fag,tema:LRIN.tema,ids}; }
-  G={groups,R:SET.R,T:SET.T,turn:0,used:{},lynUsed:{1:[],2:[],3:[],4:[],5:[]},studs,log:[],phase:"play",pin:$("pin").value.trim(),faseShown:0,lr};
+  try{ const old=JSON.parse(localStorage.getItem(KEY)); if(old&&old.groups&&old.phase!=="ended"&&old.turn>0) archiveGame(old); }catch(e){}
+  G={id:Date.now().toString(36),dato:today(),groups,R:SET.R,T:SET.T,turn:0,used:{},lynUsed:{1:[],2:[],3:[],4:[],5:[]},studs,log:[],phase:"play",pin:$("pin").value.trim(),faseShown:0,lr};
   HIST=[]; save(); enterGame(); startTurn();
 };
 function enterGame(){ $("setup").classList.remove("on"); $("game").classList.add("on"); }
@@ -632,7 +645,7 @@ function faseTransition(y,cb){ const Y=FASE[y]; document.body.className="f"+y; S
   $("yt").classList.add("on"); $("ytGo").onclick=()=>{ $("yt").classList.remove("on"); cb(); }; }
 
 /* ---------------- SLUTT ---------------- */
-function finishGame(){ closeOv(); G.phase="ended"; save(); SND.gong();
+function finishGame(){ closeOv(); G.phase="ended"; save(); if(G.groups.some(g=>g.members.length)) archiveGame(G); SND.gong();
   $("yt").innerHTML=`<div class="e">🏁</div><h1>Spillet er ferdig</h1><p>Hvilket lag kan mest? Nå får vi se!</p><button class="big" style="margin-top:22px" id="ytGo">Se vinnerne 🏆</button>`;
   $("yt").classList.add("on"); $("ytGo").onclick=()=>{ $("yt").classList.remove("on"); showEnd(); }; }
 function showEnd(){
@@ -644,8 +657,8 @@ function showEnd(){
    <div id="podium">${pod.map((x,k)=>`<div class="pod" style="animation-delay:${[.4,1.2,0][k]}s"><div style="font-size:44px">${x.g.sym}</div><div class="nm">${esc(x.g.name)}</div><div class="pt">${x.g.score}</div><div class="blk" style="height:${h[pl(x)]}px;background:${x.g.col}">${pl(x)+1}</div></div>`).join("")}</div>
    <div class="rank">${r.slice(3).map((x,k)=>`<div><span>${k+4}.</span><span>${x.g.sym}</span><span>${esc(x.g.name)}</span><b>${x.g.score}</b></div>`).join("")}</div>
    <p style="color:var(--muted);font-weight:800;margin-top:16px">Snakk sammen: Hvilket spørsmål var vanskeligst, og hva lærte dere?</p>${QSET.slutt?`<p style="color:var(--muted);font-size:15px;margin-top:4px">${esc(QSET.slutt)}</p>`:""}
-   <button class="ghost" id="newBtn" style="margin-top:6px">↺ Nytt spill</button></div>`;
-  $("newBtn").onclick=()=>{ confirmBox("Starte et nytt spill? Resultatet fra dette spillet forsvinner fra skjermen (elevpoengene kan du kopiere i lærervisningen først).",()=>{ try{localStorage.removeItem(KEY)}catch(e){} location.reload(); }); };
+   ${G.groups.some(g=>g.members.length)?`<p style="color:var(--muted);font-size:14px;margin:6px 0">Resultatet er lagret under «Tidligere resultater». Send poengene til Lærerrommet fra 🔒 Lærer.</p>`:""}<button class="ghost" id="newBtn" style="margin-top:6px">↺ Nytt spill</button></div>`;
+  $("newBtn").onclick=()=>{ confirmBox("Starte et nytt spill? Resultatet ligger fortsatt under «Tidligere resultater» på startskjermen.",()=>{ if(G.groups.some(g=>g.members.length)) archiveGame(G); try{localStorage.removeItem(KEY)}catch(e){} location.reload(); }); };
   SND.win(); petals();
 }
 function petals(){ for(let i=0;i<70;i++){ const p=document.createElement("div"); p.className="petal"; p.textContent=["✉️","⭐","✨","👑","🌈"][i%5]; p.style.left=Math.random()*100+"vw"; p.style.animationDuration=(3+Math.random()*4)+"s"; p.style.animationDelay=Math.random()*2.5+"s"; p.style.fontSize=(18+Math.random()*26)+"px"; document.body.appendChild(p); setTimeout(()=>p.remove(),9500);} }
@@ -659,7 +672,13 @@ function adjustModal(i){ if(!G||G.phase==="setup") return; const g=G.groups[i];
   openOv(g.col,g.sym,esc(g.name),"Juster poeng manuelt",`<div class="qt" style="text-align:center">${g.score} poeng</div>
    <div class="act" style="justify-content:center">${[-100,-50,50,100].map(d=>`<button class="big" data-d="${d}" style="font-size:18px;padding:10px 20px">${d>0?"+":""}${d}</button>`).join("")}</div>
    <p style="text-align:center;color:#6d5a3e">Maktkort: ${g.cards.length?g.cards.map(c=>CARDS[c].e+" "+CARDS[c].n).join(", "):"ingen"}</p>
+   ${g.members.length?`<div style="border-top:1px solid #ddd0ac;padding-top:10px"><b>⭐ Ekstrapoeng</b> <span style="color:#6d5a3e;font-size:15px">– til elever som utmerker seg positivt på laget</span>
+   <div id="starList" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px"></div></div>`:""}
    <div class="act"><button class="ghost" style="color:#241f17;border-color:#cdbf98" id="cl">Lukk</button></div>`);
+  const drawStars=()=>{ const el=$("starList"); if(!el) return; el.innerHTML=g.members.map((m,mi)=>{ const st=G.studs[i+"-"+mi]||{}; const n=st.star||0;
+      return `<span style="display:inline-flex;align-items:center;gap:4px;border:1px solid #cdbf98;border-radius:10px;padding:4px 6px"><b>${esc(m)}</b> <span>${n?"⭐".repeat(Math.min(n,5))+(n>5?"×"+n:""):""}</span><button class="ghost" data-s="${mi}" data-v="1" style="color:#241f17;border-color:#cdbf98;padding:2px 10px">+⭐</button>${n?`<button class="ghost" data-s="${mi}" data-v="-1" style="color:#241f17;border-color:#cdbf98;padding:2px 8px" aria-label="Fjern stjerne">−</button>`:""}</span>`; }).join("");
+    el.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{ const k=i+"-"+b.dataset.s; const st=G.studs[k]||(G.studs[k]={ans:0,ok:0,pts:0}); st.star=Math.max(0,(st.star||0)+(+b.dataset.v)); if(+b.dataset.v>0){ SND.bell(); toast("⭐ "+g.members[+b.dataset.s]); } save(); drawStars(); }); };
+  drawStars();
   $("qb").querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{ snap(); addPts(i,+b.dataset.d,"Manuell justering"); $("qb").querySelector(".qt").textContent=g.score+" poeng"; });
   $("cl").onclick=closeOv; }
 $("undoBtn").onclick=()=>{ if(!HIST.length){ toast("Ingenting å angre"); return; }
@@ -671,27 +690,60 @@ $("teachBtn").onclick=()=>{
   $("pinIn").focus(); $("pc").onclick=closeOv; const go=()=>{ if($("pinIn").value===G.pin) open(); else { SND.bad(); toast("Feil PIN"); } }; $("po").onclick=go; $("pinIn").onkeydown=e=>{ if(e.key==="Enter") go(); };
 };
 function teacherView(){
-  const rows=[]; G.groups.forEach((g,gi)=>{ if(!g.members.length) rows.push([g.name,"(ingen navn lagt inn)",g.score,"","",""]);
-    g.members.forEach((m,mi)=>{ const s=G.studs[gi+"-"+mi]||{ans:0,ok:0,pts:0}; rows.push([g.name,m,g.score,s.ans,s.ok,s.pts]); }); });
-  rows.sort((a,b)=>(b[2]+ (+b[5]||0)) - (a[2]+(+a[5]||0)));
-  const tsv=["Lag\tElev\tLagpoeng\tSvarte selv\tRiktige\tEgne poeng\tTotalt",...rows.map(r=>[...r,(+r[2]||0)+(+r[5]||0)].join("\t"))].join("\n");
-  openOv("#334155","📋","Elevpoeng","Kun for læreren",`<p style="margin-top:0;color:#6d5a3e;font-size:15px"><b>Lagpoeng</b> = poengene laget endte på (alle i laget får dem). <b>Svarte selv / Riktige / Egne poeng</b> = spørsmål der skjebnen trakk akkurat denne eleven. <b>Totalt</b> = lagpoeng + egne poeng.</p>
-   <div style="max-height:52vh;overflow:auto"><table class="st"><tr><th>Lag</th><th>Elev</th><th>Lagpoeng</th><th>Svarte selv</th><th>Riktige</th><th>Egne poeng</th><th>Totalt</th></tr>
-   ${rows.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td class="n">${r[2]}</td><td class="n">${r[3]}</td><td class="n">${r[4]}</td><td class="n">${r[5]}</td><td class="n">${(+r[2]||0)+(+r[5]||0)}</td></tr>`).join("")}</table></div>
+  const rows=[]; G.groups.forEach((g,gi)=>{ if(!g.members.length) rows.push({lag:g.name,navn:"(ingen navn lagt inn)",lp:g.score,k:null});
+    g.members.forEach((m,mi)=>rows.push({lag:g.name,navn:m,lp:g.score,k:gi+"-"+mi})); });
+  const st=k=>(k&&G.studs[k])||{ans:0,ok:0,pts:0,star:0,atf:0};
+  rows.sort((a,b)=>(b.lp+st(b.k).pts)-(a.lp+st(a.k).pts));
+  const tsv=()=>["Lag\tElev\tLagpoeng\tSvarte selv\tRiktige\tEgne poeng\tTotalt\tEkstra (⭐)\tAtferd",...rows.map(r=>{ const s=st(r.k); return [r.lag,r.navn,r.lp,s.ans,s.ok,s.pts,r.lp+s.pts,s.star||0,s.atf||0].join("\t"); })].join("\n");
+  const sb=(k,f,v,lbl)=>`<button class="ghost" data-k="${k}" data-f="${f}" data-v="${v}" style="color:#241f17;border-color:#cdbf98;padding:1px 9px;font-size:14px">${lbl}</button>`;
+  openOv("#334155","📋","Elevpoeng","Kun for læreren",`<p style="margin-top:0;color:#6d5a3e;font-size:15px"><b>Lagpoeng</b> = poengene laget endte på. <b>Egne poeng</b> = poeng fra spørsmål der skjebnen trakk akkurat denne eleven. <b>⭐</b> = ekstrapoeng for å utmerke seg positivt. <b>Atferd</b> = pluss- og minuspoeng for oppførsel – sendes til Lærerrommet atskilt fra de faglige poengene og merkes med konkurransen.</p>
+   <div style="max-height:52vh;overflow:auto"><table class="st"><tr><th>Lag</th><th>Elev</th><th>Lagpoeng</th><th>Svarte selv</th><th>Riktige</th><th>Egne poeng</th><th>⭐</th><th>Atferd</th></tr>
+   ${rows.map(r=>{ const s=st(r.k); return `<tr><td>${esc(r.lag)}</td><td>${esc(r.navn)}</td><td class="n">${r.lp}</td><td class="n">${r.k?s.ans:""}</td><td class="n">${r.k?s.ok:""}</td><td class="n">${r.k?s.pts:""}</td>
+     <td style="white-space:nowrap">${r.k?`${sb(r.k,"star",-1,"−")} <b>${s.star||0}</b> ${sb(r.k,"star",1,"+")}`:""}</td>
+     <td style="white-space:nowrap">${r.k?`${sb(r.k,"atf",-1,"−")} <b style="color:${(s.atf||0)<0?"#b3261e":(s.atf||0)>0?"#2e7d32":"inherit"}">${(s.atf||0)>0?"+":""}${s.atf||0}</b> ${sb(r.k,"atf",1,"+")}`:""}</td></tr>`; }).join("")}</table></div>
    <div class="act"><button class="ghost" style="color:#241f17;border-color:#cdbf98" id="cp">📋 Kopier til Excel/Teams</button><button class="ghost" style="color:#241f17;border-color:#cdbf98" id="lrSend">📤 Send til Lærerrommet</button><button class="big" id="tc">Lukk</button></div>
-   <p class="note" style="color:#6d5a3e;margin:6px 0 0">«Send til Lærerrommet» åpner Lærerrommet i en ny fane (du må være logget inn). Der ser du over poengene og kobler dem til elevene før de lagres.</p>`);
+   <p class="note" style="color:#6d5a3e;margin:6px 0 0">«Send til Lærerrommet» åpner Lærerrommet i en ny fane (du må være logget inn). Der ser du over poengene og kobler dem til elevene før de lagres. Resultatet huskes også under «Tidligere resultater» på startskjermen, så du kan sende det senere.</p>`);
   $("tc").onclick=closeOv; $("lrSend").onclick=sendToLr;
-  $("cp").onclick=()=>{ if(navigator.clipboard) navigator.clipboard.writeText(tsv).then(()=>toast("Kopiert! Lim inn i Excel."),()=>toast("Kunne ikke kopiere")); else toast("Kopiering støttes ikke her"); };
+  $("qb").querySelectorAll("[data-k]").forEach(b=>b.onclick=()=>{ const k=b.dataset.k, f=b.dataset.f; const s=G.studs[k]||(G.studs[k]={ans:0,ok:0,pts:0});
+    s[f]=(s[f]||0)+(+b.dataset.v); if(f==="star") s.star=Math.max(0,s.star); save(); teacherView(); });
+  $("cp").onclick=()=>{ if(navigator.clipboard) navigator.clipboard.writeText(tsv()).then(()=>toast("Kopiert! Lim inn i Excel."),()=>toast("Kunne ikke kopiere")); else toast("Kopiering støttes ikke her"); };
 }
+/* ---------- RESULTATARKIV ----------
+   Ferdige (og avbrutte) spill huskes i lærerens nettleser, så poengene kan
+   sendes til Lærerrommet senere. Inneholder elevnavn – ligger bare lokalt. */
+const AKEY="konk_resultater";
+function today(){ const d=new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function buildPayload(g){ const lr=g.lr||{}, ids=lr.ids||{};
+  return {v:1,tittel:QSET.tittel||"Konkurranse",fag:lr.fag||FAM,tema:lr.tema||"",classId:lr.classId||"",dato:g.dato||today(),
+    lag:g.groups.map((t,gi)=>({navn:t.name,poeng:t.score,elever:t.members.map((m,mi)=>{ const s=g.studs[gi+"-"+mi]||{}; return {navn:m,id:ids[gi+"-"+mi]||"",egne:s.pts||0,ekstra:s.star||0,atferd:s.atf||0}; })}))}; }
+function loadArkiv(){ try{ const a=JSON.parse(localStorage.getItem(AKEY)); return Array.isArray(a)?a:[]; }catch(e){ return []; } }
+function saveArkiv(a){ try{ localStorage.setItem(AKEY,JSON.stringify(a.slice(0,60))); }catch(e){} }
+function archiveGame(g,sendt){ if(!g||!g.groups) return null; if(!g.id) g.id=Date.now().toString(36); if(!g.dato) g.dato=today();
+  const a=loadArkiv(), i=a.findIndex(x=>x.id===g.id), prev=i>=0?a[i]:null;
+  const e={id:g.id,sett:SETT,fag:(g.lr&&g.lr.fag)||FAM,tittel:QSET.tittel||"Konkurranse",dato:g.dato,klasse:(g.lr&&g.lr.klasse)||"",
+    ferdig:g.phase==="ended",vinner:(g.groups.slice().sort((x,y)=>y.score-x.score)[0]||{}).name||"",sendt:sendt||(prev&&prev.sendt)||"",payload:buildPayload(g)};
+  if(i>=0) a.splice(i,1); a.unshift(e); saveArkiv(a); return e; }
+function openLr(payload){ const w=window.open(LR_URL+"/poeng/importer#d="+encodeURIComponent(JSON.stringify(payload)),"_blank");
+  if(w){ try{ w.opener=null; }catch(e){} return true; } toast("Nettleseren blokkerte den nye fanen – tillat popup-vinduer og prøv igjen"); return false; }
 function sendToLr(){
   if(!G.groups.some(g=>g.members.length)){ toast("Lagene har ingen deltakernavn å sende"); return; }
-  const d=new Date(), lr=G.lr||{}, ids=lr.ids||{};
-  const p={v:1,tittel:QSET.tittel||"Konkurranse",fag:lr.fag||FAM,tema:lr.tema||"",classId:lr.classId||"",
-    dato:d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"),
-    lag:G.groups.map((g,gi)=>({navn:g.name,poeng:g.score,elever:g.members.map((m,mi)=>({navn:m,id:ids[gi+"-"+mi]||"",egne:(G.studs[gi+"-"+mi]||{}).pts||0}))}))};
-  const w=window.open(LR_URL+"/poeng/importer#d="+encodeURIComponent(JSON.stringify(p)),"_blank");
-  if(w){ try{ w.opener=null; }catch(e){} } else toast("Nettleseren blokkerte den nye fanen – tillat popup-vinduer og prøv igjen");
+  const e=archiveGame(G); save(); if(openLr(e.payload)){ archiveGame(G,today()); }
 }
+function drawArkiv(){ const box=$("arkivBox"); if(!box) return;
+  const a=loadArkiv().filter(x=>x.fag===FAM||x.sett===SETT);
+  if(!a.length){ box.innerHTML=""; return; }
+  const ikkeSendt=a.filter(x=>!x.sendt).length;
+  box.innerHTML=`<details class="panel"${ikkeSendt?" open":""}><summary style="cursor:pointer;font-weight:900;font-size:18px">📁 Tidligere resultater (${a.length})${ikkeSendt?` – <span style="color:var(--gold)">${ikkeSendt} ikke sendt til Lærerrommet</span>`:""}</summary>
+   <p class="note" style="margin:8px 0">Send poengene når det passer – datoen fra spillet blir med, og kan endres i Lærerrommet.</p>
+   <div style="display:flex;flex-direction:column;gap:8px">${a.map(x=>`<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.12);padding-top:8px">
+    <div style="flex:1;min-width:220px"><b>${esc(x.tittel)}</b> · ${esc(x.dato)}${x.klasse?" · "+esc(x.klasse):""}${x.ferdig?"":" · <i>ikke fullført</i>"}<br><span class="note">Vinner: ${esc(x.vinner)} · ${x.sendt?"✅ Sendt "+esc(x.sendt):"⏳ Ikke sendt"}</span></div>
+    <button class="ghost" data-send="${esc(x.id)}">📤 ${x.sendt?"Send igjen":"Send til Lærerrommet"}</button><button class="ghost" data-del="${esc(x.id)}" aria-label="Slett resultat">🗑</button></div>`).join("")}</div></details>`;
+  box.querySelectorAll("[data-send]").forEach(b=>b.onclick=()=>{ const all=loadArkiv(), e=all.find(x=>x.id===b.dataset.send); if(!e) return;
+    if(e.sendt){ confirmBox("Dette resultatet er allerede sendt ("+esc(e.sendt)+"). Sende igjen? Pass på at du ikke lagrer poengene to ganger i Lærerrommet.",()=>{ if(openLr(e.payload)){ e.sendt=today(); saveArkiv(all); drawArkiv(); } }); return; }
+    if(openLr(e.payload)){ e.sendt=today(); saveArkiv(all); drawArkiv(); } });
+  box.querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>confirmBox("Slette dette resultatet fra nettleseren? Poeng som allerede er lagret i Lærerrommet, blir ikke slettet.",()=>{ saveArkiv(loadArkiv().filter(x=>x.id!==b.dataset.del)); drawArkiv(); }));
+}
+drawArkiv();
 $("endBtn").onclick=()=>{ if(G.phase==="ended") return showEnd(); confirmBox("Avslutte spillet nå og vise vinnerne?",finishGame); };
 $("sndBtn").onclick=()=>{ soundOn=!soundOn; $("sndBtn").textContent=soundOn?"🔔 Lyd på":"🔕 Lyd av"; };
 $("fsBtn").onclick=()=>{ try{ document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen().catch(()=>toast("Bruk F11 for fullskjerm")); }catch(e){ toast("Bruk F11 for fullskjerm"); } };

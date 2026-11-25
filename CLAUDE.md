@@ -50,7 +50,7 @@ krigsdagbokene.html, togreisen.html   (i rot) = videresendinger til ny plasserin
 
 ### Tekniske prinsipper
 - Hver side er **én selvstendig HTML-fil** (CSS og JS inne i filen). Eneste eksterne avhengigheter: Google Fonts (og d3 i WWI-kartet). Sidene må fungere selv om fontene ikke lastes.
-- Fremdrift lagres i elevens nettleser med `localStorage` (alltid i `try/catch`). Brukte nøkler: `fvk-progress` (WWI, index.html), `fvkbgr_*` (WWI Begrepsreisen), `hindu_*` (Reisen), `bgr_*` (KRLE Begrepsreisen), `konk_sett_<id>` og `konk_spill_<id>` (konkurransemalen), `kaldkrig_*` (Den kalde krigen – Reisen), `fvkreise_*` (Første verdenskrig – Reisen). Ikke endre nøklene – da mister elevene fremdriften. Siden alle sider deler samme nettsted-opprinnelse, deler de også localStorage – pass på at nye nøkler ikke kolliderer med disse.
+- Fremdrift lagres i elevens nettleser med `localStorage` (alltid i `try/catch`). Brukte nøkler: `fvk-progress` (WWI, index.html), `fvkbgr_*` (WWI Begrepsreisen), `hindu_*` (Reisen), `bgr_*` (KRLE Begrepsreisen), `konk_sett_<id>`, `konk_spill_<id>` og `konk_resultater` (konkurransemalen; `konk_lr` i sessionStorage), `kaldkrig_*` (Den kalde krigen – Reisen), `fvkreise_*` (Første verdenskrig – Reisen). Ikke endre nøklene – da mister elevene fremdriften. Siden alle sider deler samme nettsted-opprinnelse, deler de også localStorage – pass på at nye nøkler ikke kolliderer med disse.
 - Må fungere på Chromebook/PC (storskjerm) og mobil.
 
 ## 4. Samfunnsfag – Første verdenskrig (`samfunnsfag/forste-verdenskrig/`)
@@ -131,6 +131,10 @@ Status 20.11.2026: klassen hadde nesten fullført gallery walk-starteren (trinne
 - **Kobling til Lærerrommet (laererrommet.vercel.app, Eiriks innloggede lærerapp – privat repo krusegull/laererrommet):**
   - *Inn:* Klassekart → Poeng → «Start konkurranse med gruppene» åpner `konkurranse.html?sett=<fag>&fag=<fag>#lr=<json>` med lag og elever fra klassekartet. #-delen sendes aldri til serveren; den lagres i `sessionStorage` (`konk_lr`, bare fanen) og fjernes fra adressen. Banner «Lagene er hentet fra Lærerrommet» + «Ikke bruk disse lagene». Elev-id-ene huskes i `G.lr`.
   - *Ut:* Lærervisningen (bak PIN) har «📤 Send til Lærerrommet», som åpner `https://laererrommet.vercel.app/poeng/importer#d=<json>` (tittel, fag, tema, classId, dato, lag med lagpoeng og elever med egne poeng). Der kobler læreren deltakerne til elever, velger «lag + egne / bare lag / bare egne» og skalering (÷1/÷10/÷100) og lagrer. Poengene havner under hver elev (Tilbakemeldingslogg → elev → «Poeng per fag»).
+  - Lærerrommet sender også hele klassen (`alle`). Har klassen ingen grupper, blandes lagene automatisk. «🎲 Bland lagene» på startskjermen fordeler alle navn tilfeldig på valgt antall lag (hele klassen fra Lærerrommet, ellers navnene i feltene).
+  - Under spillet: klikk på et lag → «⭐ Ekstrapoeng» til elever som utmerker seg positivt (vises for klassen). Atferd ± gis bare i lærervisningen (bak PIN) og sendes som egen kategori «atferd», merket med konkurransen.
+  - **Resultatarkiv** (`konk_resultater`, maks 60, bare i lærerens nettleser): ferdige spill (og avbrutte spill når et nytt startes) huskes med dato og status «sendt/ikke sendt». «📁 Tidligere resultater» på startskjermen sender senere.
+  - Poengmodell i Lærerrommet (forslag fra Eirik 25.11.2026): 1. plass 10, 2. plass 7, 3. plass 5, øvrige 3 poeng per elev, ⭐ = +2. Læreren kan endre alt før lagring.
   - Ingen elevnavn, poeng eller nøkler ligger i repoet – bare koden og adressen til Lærerrommet. Knappen ligger kun i lærervisningen.
 - Sluttskjermen viser settets egen «Melding på sluttskjermen» (`slutt`), ikke en fast tekst.
 - Merk: raw.githack.com er et delt nettsted, så det som ligger i localStorage der, kan i prinsippet leses av andre sider på samme adresse. Når portalen flyttes til egen adresse (Vercel), er dette løst.
