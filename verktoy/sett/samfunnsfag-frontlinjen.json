@@ -1,0 +1,805 @@
+{
+ "v": 1,
+ "tittel": "FRONTLINJEN",
+ "under": "Kunnskapskampen om første verdenskrig – Samfunnsfag (Arena 9, kapittel 5)",
+ "slutt": "Godt kjempet! Husk å forklare både årsaker og konsekvenser – og hvordan de henger sammen.",
+ "kat": [
+  {
+   "n": "Årsaker og allianser",
+   "e": "⚔️",
+   "c": "#8a5a1f",
+   "q": [
+    {
+     "q": "Hva kalles sterk stolthet over egen nasjon, og troen på at et folk bør ha sin egen stat?",
+     "o": [
+      "Nasjonalisme",
+      "Imperialisme",
+      "Nøytralitet",
+      "Militarisme"
+     ],
+     "a": 0,
+     "w": "Nasjonalisme var en av de grunnleggende årsakene til krigen – spesielt på Balkan.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva kalles det når stormakter konkurrerer om kolonier og makt over andre områder?",
+     "o": [
+      "Imperialisme",
+      "Pasifisme",
+      "Revolusjon",
+      "Nøytralitet"
+     ],
+     "a": 0,
+     "w": "Imperialisme skapte misunnelse og mistillit mellom stormaktene, særlig Tyskland som følte seg forbigått.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilke to allianser sto mot hverandre da krigen brøt ut?",
+     "o": [
+      "Folkeforbundet og FN",
+      "Trippelalliansen og Trippelententen",
+      "NATO og Warszawapakten",
+      "Sentralmaktene og Nordmaktene"
+     ],
+     "a": 1,
+     "w": "Trippelalliansen (Tyskland, Østerrike-Ungarn, Italia) mot Trippelententen (Frankrike, Storbritannia, Russland).",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva var den utløsende årsaken til at første verdenskrig brøt ut?",
+     "o": [
+      "Den tyske keiseren erklærte krig mot Frankrike",
+      "Skuddene i Sarajevo drepte Franz Ferdinand",
+      "Russland angrep Østerrike-Ungarn",
+      "Storbritannia invaderte Belgia"
+     ],
+     "a": 1,
+     "w": "19 år gamle Gavrilo Princip skjøt og drepte tronarvingen Franz Ferdinand og kona Sophie 28. juni 1914.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvorfor endte attentatet på to mennesker i Sarajevo med at store deler av Europa gikk til krig?",
+     "o": [
+      "Fordi alle landene hadde lovet hverandre støtte gjennom alliansesystemet",
+      "Fordi FN krevde det",
+      "Fordi Norge ba om det",
+      "Fordi Italia angrep Russland med en gang"
+     ],
+     "a": 0,
+     "w": "Østerrike-Ungarn erklærte krig mot Serbia → Russland (alliert med Serbia) ble trukket inn → Tyskland (alliert med Østerrike-Ungarn) erklærte krig mot Russland → Frankrike og Storbritannia fulgte etter.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Krigføring og teknologi",
+   "e": "💥",
+   "c": "#55452a",
+   "q": [
+    {
+     "q": "Hva kalles de lange grøftene soldatene gravde seg ned i for å beskytte seg?",
+     "o": [
+      "Skyttergraver",
+      "Ingenmannsland",
+      "Festningsverk",
+      "Brohoder"
+     ],
+     "a": 0,
+     "w": "Skyttergravene strakte seg fra Nordsjøen i nord til Sveits i sør på vestfronten.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva kalte man det farlige, øde området mellom fiendens skyttergraver?",
+     "o": [
+      "Frontlinjen",
+      "Ingenmannsland",
+      "Festningsbyen",
+      "Sentralsonen"
+     ],
+     "a": 1,
+     "w": "Ingenmannsland var dekket av piggtråd og granathull – svært farlig å krysse.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilket nytt våpen ble for første gang brukt i stort omfang under slaget ved Somme i 1916?",
+     "o": [
+      "Giftgass",
+      "Stridsvogner (tanks)",
+      "Ubåter",
+      "Maskingevær"
+     ],
+     "a": 1,
+     "w": "Britene satte inn stridsvogner for første gang i september 1916, men teknologien var fortsatt umoden.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvorfor klarte ingen av sidene å bryte gjennom på vestfronten i lange perioder?",
+     "o": [
+      "Fordi det var fredsforhandlinger hele tiden",
+      "Fordi maskingevær, piggtråd og artilleri gjorde angrep enormt kostbare",
+      "Fordi soldatene nektet å kjempe",
+      "Fordi det var vinter hele året"
+     ],
+     "a": 1,
+     "w": "Ny våpenteknologi hadde utviklet seg raskere enn taktikkene – forsvar var mye sterkere enn angrep.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva var hovedforskjellen på vestfronten og østfronten?",
+     "o": [
+      "Det var ingen kamper på østfronten",
+      "Vestfronten var preget av stillingskrig, østfronten av mer bevegelige kamper",
+      "Østfronten lå i Frankrike",
+      "Vestfronten ble aldri angrepet"
+     ],
+     "a": 1,
+     "w": "På vestfronten sto frontene nesten stille i fire år. På østfronten beveget kampene seg over store områder.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Norge og hjemmefronten",
+   "e": "🇳🇴",
+   "c": "#3a5a3e",
+   "q": [
+    {
+     "q": "Var Norge med i første verdenskrig?",
+     "o": [
+      "Ja, på ententens side",
+      "Ja, på sentralmaktenes side",
+      "Nei, Norge var nøytralt",
+      "Ja, men bare til sjøs"
+     ],
+     "a": 2,
+     "w": "Norge erklærte seg nøytralt, slik som de andre nordiske landene.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva kalles en periode der prisene på varer stiger mye mer enn lønningene?",
+     "o": [
+      "Rasjonering",
+      "Dyrtid",
+      "Nøytralitet",
+      "Blokade"
+     ],
+     "a": 1,
+     "w": "Dyrtiden rammet vanlige folk i Norge hardt under krigen, selv om landet ikke var med i krigen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva kalles det når myndighetene bestemmer hvor mye hver person får kjøpe av en vare det er mangel på?",
+     "o": [
+      "Dyrtid",
+      "Nøytralitet",
+      "Rasjonering",
+      "Opprustning"
+     ],
+     "a": 2,
+     "w": "Rasjoneringskort ble innført for varer som det ble mangel på, som mel.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvorfor ble Norge rammet av vareknapphet og dyrtid, selv om landet var nøytralt?",
+     "o": [
+      "Fordi Norge sluttet å fiske",
+      "Fordi handelen og skipsfarten ble rammet av krigen, blant annet ubåtkrig",
+      "Fordi kongen innførte forbud mot import",
+      "Fordi Sverige stengte grensen"
+     ],
+     "a": 1,
+     "w": "Varer som kom med skip risikerte å bli senket, og mye av det Norge produserte gikk til eksport i stedet for hjemmemarkedet.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvorfor skapte norsk handel med Storbritannia problemer med Tyskland?",
+     "o": [
+      "Fordi Norge solgte våpen til britene",
+      "Fordi tyske ubåter senket skip som handlet med britene, også norske",
+      "Fordi Norge nektet å handle med Tyskland i det hele tatt",
+      "Fordi Norge ble med i Trippelententen"
+     ],
+     "a": 1,
+     "w": "Tyskland erklærte uinnskrenket ubåtkrig og senket skip – også nøytrale norske skip – som handlet med Storbritannia.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Den russiske revolusjonen",
+   "e": "☭",
+   "c": "#7a2e2e",
+   "q": [
+    {
+     "q": "Hva het tsaren som styrte Russland fram til revolusjonen i 1917?",
+     "o": [
+      "Nikolaj II",
+      "Lenin",
+      "Alexander III",
+      "Peter den store"
+     ],
+     "a": 0,
+     "w": "Nikolaj II abdiserte etter marsrevolusjonen i 1917.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva lovet bolsjevikene det russiske folket i 1917?",
+     "o": [
+      "Frihet, likhet, brorskap",
+      "Fred, jord, brød",
+      "Ett folk, én stat",
+      "Arbeid, orden, framtid"
+     ],
+     "a": 1,
+     "w": "Parolen lovet slutt på krigen, jord til bøndene og mat til alle.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvem ledet bolsjevikene da de tok makten i november 1917?",
+     "o": [
+      "Nikolaj II",
+      "Vladimir Lenin",
+      "Leo Trotskij alene",
+      "Josef Stalin"
+     ],
+     "a": 1,
+     "w": "Lenin ledet statskuppet i november 1917 og ble den nye lederen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva skjedde med Russland kort tid etter at bolsjevikene tok makten?",
+     "o": [
+      "Russland ble med i Trippelententen for fullt",
+      "Russland trakk seg ut av krigen og gikk inn i en borgerkrig",
+      "Russland erklærte krig mot Tyskland på nytt",
+      "Tsaren tok makten tilbake"
+     ],
+     "a": 1,
+     "w": "Russland gikk ut av første verdenskrig, men landet gikk inn i en blodig borgerkrig som varte til 1922.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Omtrent hvor mange mennesker døde i den russiske borgerkrigen, og hva var en viktig årsak til de mange dødsfallene?",
+     "o": [
+      "12 millioner, mange av dem av sult",
+      "100 000, mest i kamp",
+      "2 millioner, mest av sykdom",
+      "Ingen døde – det var en fredelig maktovertakelse"
+     ],
+     "a": 0,
+     "w": "Rundt 12 millioner mennesker mistet livet i borgerkrigen, halvparten av dem fordi de sultet i hjel.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Fredsoppgjøret",
+   "e": "🕊️",
+   "c": "#4a4420",
+   "q": [
+    {
+     "q": "Hva het fredsavtalen som Tyskland måtte signere etter krigen?",
+     "o": [
+      "Versaillestraktaten",
+      "Folkeforbundspakten",
+      "Svalbardtraktaten",
+      "Wien-kongressen"
+     ],
+     "a": 0,
+     "w": "Versaillestraktaten (1919) påla Tyskland krigsskyld og store erstatninger.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva het den nye internasjonale organisasjonen som skulle forebygge nye kriger?",
+     "o": [
+      "FN",
+      "Folkeforbundet",
+      "Røde Kors",
+      "NATO"
+     ],
+     "a": 1,
+     "w": "Folkeforbundet regnes som forløperen til FN.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilket rike gikk i oppløsning og ble delt opp i flere nye, selvstendige stater etter krigen?",
+     "o": [
+      "Storbritannia",
+      "Frankrike",
+      "Østerrike-Ungarn",
+      "Sveits"
+     ],
+     "a": 2,
+     "w": "Østerrike-Ungarn ble oppløst; blant de nye statene var Polen, Tsjekkoslovakia og Jugoslavia.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvorfor opplevde mange tyskere Versaillestraktaten som ydmykende?",
+     "o": [
+      "Tyskland måtte ta skylden for krigen og betale enorme erstatninger",
+      "Tyskland fikk beholde alle koloniene sine",
+      "Tyskland fikk lov til å ha en stor hær",
+      "Tyskland ble den eneste stormakten i Folkeforbundet"
+     ],
+     "a": 0,
+     "w": "Krigsskyldparagrafen og erstatningskravene ble oppfattet som svært urettferdige av mange tyskere.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilken ideologi tok makten i Italia i 1922, og hva kjennetegnet den?",
+     "o": [
+      "Kommunisme – et klasseløst samfunn uten privat eiendom",
+      "Fascisme – én sterk leder i stedet for demokrati",
+      "Liberalisme – fritt marked og flerpartidemokrati",
+      "Pasifisme – fullstendig avvæpning"
+     ],
+     "a": 1,
+     "w": "Benito Mussolini og fascistene tok makten etter «marsjen mot Roma» og innførte diktatur med én leder.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  }
+ ],
+ "lyn": {
+  "1": [
+   {
+    "q": "Hvilket år startet første verdenskrig?",
+    "o": [
+     "1914",
+     "1916",
+     "1918",
+     "1912"
+    ],
+    "a": 0,
+    "w": "Krigen startet i 1914, etter attentatet i Sarajevo i juni.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilket år sluttet første verdenskrig?",
+    "o": [
+     "1917",
+     "1918",
+     "1919",
+     "1920"
+    ],
+    "a": 1,
+    "w": "Våpenhvilen ble signert 11. november 1918.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "På hvilket kontinent startet første verdenskrig?",
+    "o": [
+     "Europa",
+     "Afrika",
+     "Asia",
+     "Nord-Amerika"
+    ],
+    "a": 0,
+    "w": "Krigen startet på Balkan i Sørøst-Europa, men spredte seg til store deler av verden.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva kalles et land som ikke tar side i en krig?",
+    "o": [
+     "Alliert",
+     "Nøytralt",
+     "Okkupert",
+     "Nasjonalistisk"
+    ],
+    "a": 1,
+    "w": "Norge, Sverige, Danmark, Nederland og Sveits var blant de nøytrale landene i Europa.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilket av disse landene var IKKE med i Trippelententen?",
+    "o": [
+     "Frankrike",
+     "Storbritannia",
+     "USA",
+     "Russland"
+    ],
+    "a": 2,
+    "w": "USA gikk først inn i krigen i 1917.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "2": [
+   {
+    "q": "I hvilken by ble Franz Ferdinand skutt og drept?",
+    "o": [
+     "Sarajevo",
+     "Beograd",
+     "Wien",
+     "Berlin"
+    ],
+    "a": 0,
+    "w": "Attentatet skjedde i Sarajevo 28. juni 1914.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Franz Ferdinand var tronarving i hvilket land?",
+    "o": [
+     "Serbia",
+     "Østerrike-Ungarn",
+     "Tyskland",
+     "Russland"
+    ],
+    "a": 1,
+    "w": "Han var tronarving i keiserdømmet Østerrike-Ungarn.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva kalles en avtale mellom land om å støtte hverandre militært?",
+    "o": [
+     "Allianse",
+     "Blokade",
+     "Revolusjon",
+     "Rasjonering"
+    ],
+    "a": 0,
+    "w": "Alliansesystemet var en viktig grunn til at krigen spredte seg så raskt i 1914.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilket land byttet side og sluttet seg til ententen i 1915?",
+    "o": [
+     "Italia",
+     "Bulgaria",
+     "Spania",
+     "Hellas"
+    ],
+    "a": 0,
+    "w": "Italia hadde vært med i Trippelalliansen, men erklærte krig mot Østerrike-Ungarn i mai 1915.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilket land kjempet Tyskland og Østerrike-Ungarn mot på østfronten?",
+    "o": [
+     "Frankrike",
+     "Russland",
+     "Storbritannia",
+     "Belgia"
+    ],
+    "a": 1,
+    "w": "Østfronten gikk mellom sentralmaktene og Russland, med mer bevegelige kamper enn i vest.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "3": [
+   {
+    "q": "Hva kalles militær opprustning og våpenkappløp mellom land, en av årsakene til krigen?",
+    "o": [
+     "Militarisme",
+     "Imperialisme",
+     "Pasifisme",
+     "Diplomati"
+    ],
+    "a": 0,
+    "w": "Tyskland og Storbritannia konkurrerte blant annet om å ha størst marine før krigen.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilket land erklærte USA krig mot i 1917?",
+    "o": [
+     "Russland",
+     "Tyskland",
+     "Italia",
+     "Serbia"
+    ],
+    "a": 1,
+    "w": "USA gikk med i krigen mot Tyskland i 1917, blant annet på grunn av tysk ubåtkrig.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva kalte man det da Tyskland forsøkte å stanse all skipstrafikk til Storbritannia med ubåter?",
+    "o": [
+     "Rasjonering",
+     "Uinnskrenket ubåtkrig",
+     "Dyrtid",
+     "Mobilisering"
+    ],
+    "a": 1,
+    "w": "Dette rammet også nøytrale skip og bidro til at USA gikk med i krigen.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilken festningsby i Frankrike ble rammet av et av krigens blodigste slag i 1916?",
+    "o": [
+     "Verdun",
+     "Lyon",
+     "Calais",
+     "Reims"
+    ],
+    "a": 0,
+    "w": "Slaget ved Verdun varte fra februar til desember 1916. Rundt 700 000 soldater ble drept eller såret.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "I hvilket slag i 1916 ble stridsvogner brukt for første gang?",
+    "o": [
+     "Verdun",
+     "Somme",
+     "Marne",
+     "Ypres"
+    ],
+    "a": 1,
+    "w": "Slaget ved Somme varte fra juli til november 1916. Over en million soldater ble drept eller såret.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "4": [
+   {
+    "q": "Hva het den regjeringen som styrte Russland i en kort periode mellom tsarens fall og bolsjevikenes maktovertakelse?",
+    "o": [
+     "Den provisoriske (midlertidige) regjering",
+     "Sovjetunionens regjering",
+     "Det russiske Folkeforbundet",
+     "Tsarens krigskabinett"
+    ],
+    "a": 0,
+    "w": "Den midlertidige regjeringen ønsket å demokratisere Russland, men fortsatte krigen, noe som var upopulært.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvorfor var mange italienske ledere misfornøyde etter krigen, selv om Italia var på vinnersiden?",
+    "o": [
+     "De følte seg lurt fordi de ikke fikk landområdene de var lovet",
+     "Italia hadde ikke mistet noen soldater",
+     "Italia måtte betale krigserstatning",
+     "Italia mistet retten til å ha hær"
+    ],
+    "a": 0,
+    "w": "Skuffelsen over fredsoppgjøret var en av grunnene til politisk uro og fascismens framvekst i Italia.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva betyr «planøkonomi», slik det ble praktisert i Sovjetunionen?",
+    "o": [
+     "Staten bestemmer hva som skal produseres og hva varene skal koste",
+     "Hver bedrift planlegger sin egen produksjon fritt",
+     "Prisene bestemmes av tilbud og etterspørsel",
+     "Alle varer deles likt uansett hvor mye som produseres"
+    ],
+    "a": 0,
+    "w": "Målet var et klasseløst samfunn, med staten – ikke private eiere – i kontroll over økonomien.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Når brøt den russiske borgerkrigen ut, og når tok den slutt?",
+    "o": [
+     "1917–1918",
+     "1917–1922",
+     "1914–1918",
+     "1918–1920"
+    ],
+    "a": 1,
+    "w": "Borgerkrigen startet rett etter maktovertakelsen i november 1917 og varte til 1922.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvorfor valgte bolsjevikene å gå ut av første verdenskrig i 1918?",
+    "o": [
+     "De hadde vunnet krigen",
+     "De ville konsentrere seg om borgerkrigen hjemme og innfri løftet om fred",
+     "Tyskland ba dem om det uten motkrav",
+     "Folkeforbundet krevde det"
+    ],
+    "a": 1,
+    "w": "Bolsjevikene hadde lovet folket fred, og måtte også håndtere motstand hjemme i Russland.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "5": [
+   {
+    "q": "Hva var «blankofullmakten» Tyskland ga Østerrike-Ungarn i 1914?",
+    "o": [
+     "Et løfte om ubetinget støtte før angrepet på Serbia",
+     "En fredsavtale mellom Tyskland og Russland",
+     "Et handelsforbud mot Frankrike",
+     "Et løfte om nøytralitet"
+    ],
+    "a": 0,
+    "w": "Blankofullmakten ga Østerrike-Ungarn Tysklands fulle støtte uten noen klare grenser for hvor langt det kunne gå.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva var «marsjen mot Roma» i 1922?",
+    "o": [
+     "En fredsmarkering mot krigen",
+     "En væpnet marsj som fascistene arrangerte for å ta makten i Italia",
+     "En religiøs vandring til Vatikanet",
+     "Kongens flukt fra Italia"
+    ],
+    "a": 1,
+    "w": "Marsjen endte med at Benito Mussolini ble utnevnt til statsminister, og fascistene fikk snart all makt.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvorfor var Russlands uttreden av krigen i 1918 til fordel for Tyskland på kort sikt?",
+    "o": [
+     "Tyskland fikk flyttet soldater fra østfronten til vestfronten",
+     "Russland begynte å kjempe på Tysklands side",
+     "Tyskland overtok hele den russiske hæren",
+     "Det hadde ingen betydning for Tyskland"
+    ],
+    "a": 0,
+    "w": "Tyskland forsøkte å utnytte de frigjorte styrkene i en siste storoffensiv i vest i 1918, men det var for sent.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilke fire riker gikk i oppløsning som følge av første verdenskrig?",
+    "o": [
+     "Østerrike-Ungarn, Det tyske keiserriket, Det russiske tsarriket og Det osmanske riket",
+     "Storbritannia, Frankrike, USA og Italia",
+     "Sverige, Norge, Danmark og Finland",
+     "Spania, Portugal, Nederland og Belgia"
+    ],
+    "a": 0,
+    "w": "Alle disse fire gamle keiserdømmene ble borte eller fundamentalt endret etter krigen.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvorfor regnes Folkeforbundet som relativt mislykket med å forhindre en ny verdenskrig?",
+    "o": [
+     "Det manglet makt til å håndheve egne vedtak, og store land som USA var ikke medlem",
+     "Det ble oppløst allerede i 1920",
+     "Det hadde ingen medlemsland i det hele tatt",
+     "Det tok aldri stilling til noen konflikter"
+    ],
+    "a": 0,
+    "w": "Uten egen hær og uten alle stormaktene som medlemmer kunne Folkeforbundet vanskelig stanse aggressive stater på 1930-tallet.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ]
+ }
+}

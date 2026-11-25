@@ -1,0 +1,887 @@
+{
+ "v": 1,
+ "tittel": "YUGA",
+ "under": "Begrepskampen om hinduismen – KRLE (Horisonter 9)",
+ "slutt": "Godt jobbet! Husk de viktigste begrepene: dharma, samsara, karma, moksha, atman og Brahman.",
+ "kat": [
+  {
+   "n": "Sjelen og kretsløpet",
+   "e": "🔄",
+   "c": "#0f766e",
+   "q": [
+    {
+     "q": "Hva kalles sjelen – det evige selvet – i hinduismen?",
+     "o": [
+      "Atman",
+      "Brahman",
+      "Avatar",
+      "Murti"
+     ],
+     "a": 0,
+     "w": "Atman er det evige selvet. Kroppen dør, men atman lever videre.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er samsara?",
+     "o": [
+      "En høytid om våren",
+      "Gjenfødelsens kretsløp",
+      "Et tempel",
+      "Skaperguden"
+     ],
+     "a": 1,
+     "w": "Samsara er kretsløpet der atman dør og fødes på nytt, igjen og igjen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Mira hjelper alltid andre. Ifølge hinduismen kan det gi henne et bedre neste liv. Hvilket begrep forklarer dette?",
+     "o": [
+      "Moksha",
+      "Darshan",
+      "Karma",
+      "Prasad"
+     ],
+     "a": 2,
+     "w": "Karma: handlinger får følger – også for neste liv.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva skjer med atman når en person oppnår moksha?",
+     "o": [
+      "Atman fødes som en gud",
+      "Atman blir ett med Brahman",
+      "Atman blir til Brahma",
+      "Atman fødes som menneske igjen"
+     ],
+     "a": 1,
+     "w": "Ved moksha blir atman ett med Brahman, og gjenfødelsene tar slutt.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilket utsagn om karma er RIKTIG?",
+     "o": [
+      "Karma er en straff fra Shiva",
+      "Karma påvirker bare dette livet",
+      "Karma er en lov om årsak og virkning – ikke en dom fra en gud",
+      "Bare prester kan få god karma"
+     ],
+     "a": 2,
+     "w": "Karma virker som en naturlov: handlinger får følger, i dette livet og i neste.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Plikt og leveregler",
+   "e": "📏",
+   "c": "#15803d",
+   "q": [
+    {
+     "q": "Hva betyr ahimsa?",
+     "o": [
+      "Ikkevold",
+      "Bønn",
+      "Faste",
+      "Frigjøring"
+     ],
+     "a": 0,
+     "w": "Ahimsa betyr å ikke skade noe levende. Derfor er mange hinduer vegetarianere.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva betyr dharma?",
+     "o": [
+      "Gjenfødelse",
+      "Plikt og rett orden",
+      "Frigjøring",
+      "Gudebilde"
+     ],
+     "a": 1,
+     "w": "Dharma er plikt, rett handling og den evige orden der alt henger sammen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva kalles de fire samfunnsklassene i gamle hindutekster?",
+     "o": [
+      "Yuga",
+      "Samskara",
+      "Varna",
+      "Murti"
+     ],
+     "a": 2,
+     "w": "Varna: brahminer, kshatriyaer, vaishyaer og shudraer.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilken rekkefølge har de fire livsfasene?",
+     "o": [
+      "Husholder → elev → asket → skogboer",
+      "Elev → husholder → skogboer → asket",
+      "Elev → asket → husholder → skogboer",
+      "Asket → elev → skogboer → husholder"
+     ],
+     "a": 1,
+     "w": "Elev (lære) → husholder (familie og arbeid) → skogboer (trekke seg tilbake) → asket (gi avkall på alt).",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvorfor kan to hinduer ha ulik dharma?",
+     "o": [
+      "Fordi de tilber ulike guder",
+      "Fordi plikten avhenger av alder, livsfase og rolle",
+      "Fordi bare den ene har nådd moksha",
+      "Fordi dharma bare gjelder prester"
+     ],
+     "a": 1,
+     "w": "Dharma er ikke lik for alle: en elev, en forelder og en asket har ulike plikter.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Guder og avatarer",
+   "e": "🔱",
+   "c": "#c2410c",
+   "q": [
+    {
+     "q": "Hvilken gud har elefanthode?",
+     "o": [
+      "Shiva",
+      "Vishnu",
+      "Ganesha",
+      "Brahma"
+     ],
+     "a": 2,
+     "w": "Ganesha fjerner hindringer. Han er sønn av Shiva og Parvati.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva kalles Brahma, Vishnu og Shiva til sammen?",
+     "o": [
+      "Trishula",
+      "Trimurti",
+      "Tri-yuga",
+      "Trivarna"
+     ],
+     "a": 1,
+     "w": "Trimurti: Brahma skaper, Vishnu opprettholder og Shiva ødelegger og fornyer. (Trishula er Shivas trefork!)",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er en avatar?",
+     "o": [
+      "Et hellig tempel",
+      "En gud som stiger ned til jorda i en skikkelse",
+      "En prest i templet",
+      "En hellig tekst"
+     ],
+     "a": 1,
+     "w": "Avatar betyr «nedstigning». Rama og Krishna er avatarer av Vishnu.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Rama og Krishna er avatarer av …",
+     "o": [
+      "Shiva",
+      "Brahma",
+      "Ganesha",
+      "Vishnu"
+     ],
+     "a": 3,
+     "w": "Vishnu, opprettholderen, kommer til jorda når verden trenger ham.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er Shakti?",
+     "o": [
+      "Shivas okse",
+      "Det tredje øyet",
+      "Den guddommelige kvinnelige kraften",
+      "En hellig elv"
+     ],
+     "a": 2,
+     "w": "Shakti er den kvinnelige guddommelige kraften – gudinnen, for eksempel Durga og Parvati.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Tilbedelse og tempel",
+   "e": "🛕",
+   "c": "#be185d",
+   "q": [
+    {
+     "q": "Hva heter et hindutempel?",
+     "o": [
+      "Moské",
+      "Mandir",
+      "Synagoge",
+      "Katedral"
+     ],
+     "a": 1,
+     "w": "Mandir – gudenes palass.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er puja?",
+     "o": [
+      "Tilbedelse med ofringer, hjemme eller i templet",
+      "En pilegrimsreise",
+      "En høytid om høsten",
+      "En samfunnsklasse"
+     ],
+     "a": 0,
+     "w": "Puja (pudsja): blomster, mat, røkelse, lys og bønner til guden.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva kalles maten som er ofret til guden og så delt ut?",
+     "o": [
+      "Puja",
+      "Murti",
+      "Prasad",
+      "Mantra"
+     ],
+     "a": 2,
+     "w": "Prasad regnes som velsignet mat.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva betyr darshan?",
+     "o": [
+      "Å ofre mat",
+      "Å synge et mantra",
+      "Å se – og bli sett av – guden",
+      "Å bade i Ganges"
+     ],
+     "a": 2,
+     "w": "Darshan er møtet med guden, for eksempel foran murtien i templet.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva symboliserer det innerste rommet i et hindutempel?",
+     "o": [
+      "En fjelltopp",
+      "En hule – verdens midtpunkt, der hovedguden bor",
+      "Himmelen",
+      "Havet"
+     ],
+     "a": 1,
+     "w": "Tårnet er fjellet – det innerste rommet er hulen der hovedguden bor. Bare prestene får gå inn.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Veier og tid",
+   "e": "🛤️",
+   "c": "#1d4ed8",
+   "q": [
+    {
+     "q": "Hva betyr det at tiden er syklisk?",
+     "o": [
+      "Den går rett fram som en pil",
+      "Den går i sirkel og gjentar seg",
+      "Den står stille",
+      "Den går baklengs"
+     ],
+     "a": 1,
+     "w": "Verden skapes, ødelegges og skapes på nytt – i all evighet.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilken vei til frelse handler om å tilbe en gud med kjærlighet?",
+     "o": [
+      "Erkjennelsens vei",
+      "Handlingens vei",
+      "Kjærlighetens vei",
+      "Pilegrimsveien"
+     ],
+     "a": 2,
+     "w": "Kjærlighetens vei (bhakti) – bønn, sang og puja. Åpen for alle.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilken vei til frelse handler om meditasjon, yoga og innsikt?",
+     "o": [
+      "Erkjennelsens vei",
+      "Kjærlighetens vei",
+      "Handlingens vei",
+      "Pilegrimsveien"
+     ],
+     "a": 0,
+     "w": "Erkjennelsens vei (jnana) var særlig viktig for asketer.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilken tidsalder mener mange hinduer at vi lever i nå?",
+     "o": [
+      "Satya yuga",
+      "Treta yuga",
+      "Dvapara yuga",
+      "Kali yuga"
+     ],
+     "a": 3,
+     "w": "Kali yuga – den siste og mørkeste. Akkurat som i dette spillet!",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva lærer Krishna Arjuna om handlingens vei i Bhagavadgita?",
+     "o": [
+      "Unngå all handling",
+      "Gjør plikten din uten å være bundet til belønningen",
+      "Gjør det som gir mest ros",
+      "Bare prester kan handle riktig"
+     ],
+     "a": 1,
+     "w": "Kjernen i handlingens vei: gjør det riktige fordi det er riktig.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Høytider og ritualer",
+   "e": "🎉",
+   "c": "#7e22ce",
+   "q": [
+    {
+     "q": "Hvilken høytid kalles lysfesten?",
+     "o": [
+      "Holi",
+      "Diwali",
+      "Navaratri",
+      "Thai Pongal"
+     ],
+     "a": 1,
+     "w": "Diwali feires om høsten med lys, søtsaker og fyrverkeri.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilken høytid er fargefesten om våren?",
+     "o": [
+      "Diwali",
+      "Navaratri",
+      "Holi",
+      "Ganesh Chaturthi"
+     ],
+     "a": 2,
+     "w": "På Holi kaster man farget pulver, og skillene mellom folk viskes ut for en dag.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva gjør de fleste hinduer med sine døde?",
+     "o": [
+      "Begraver dem",
+      "Kremerer dem",
+      "Legger dem i templet",
+      "Senker dem i havet"
+     ],
+     "a": 1,
+     "w": "Kroppen brennes, og asken strøs ofte i en hellig elv.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva kalles livsritene – overgangsritualene – i hinduismen?",
+     "o": [
+      "Yugaer",
+      "Varnaer",
+      "Samskaraer",
+      "Avatarer"
+     ],
+     "a": 2,
+     "w": "Samskaraer: navngiving, den hellige snoren, bryllup og død.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Diwali minner om at Rama kom hjem. Hvem hadde han beseiret?",
+     "o": [
+      "Hanuman",
+      "Ravana",
+      "Arjuna",
+      "Ganesha"
+     ],
+     "a": 1,
+     "w": "Demonkongen Ravana hadde kidnappet Sita. Hanuman hjalp Rama å redde henne.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  }
+ ],
+ "lyn": {
+  "1": [
+   {
+    "q": "Hva er ॐ (Om)?",
+    "o": [
+     "En hellig lyd og et symbol",
+     "Et gudebilde",
+     "En høytid",
+     "En kaste"
+    ],
+    "a": 0,
+    "w": "Om sies i begynnelsen og slutten av bønner og mantraer.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva heter den hellige elva mange hinduer bader i?",
+    "o": [
+     "Nilen",
+     "Ganges",
+     "Donau",
+     "Amazonas"
+    ],
+    "a": 1,
+    "w": "Mange reiser til Varanasi for å bade i Ganges.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilket dyr regnes som hellig av mange hinduer?",
+    "o": [
+     "Grisen",
+     "Kua",
+     "Hesten",
+     "Hunden"
+    ],
+    "a": 1,
+    "w": "De fleste hinduer spiser ikke storfekjøtt.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "I hvilket land bor flest hinduer?",
+    "o": [
+     "Sri Lanka",
+     "Kina",
+     "India",
+     "Norge"
+    ],
+    "a": 2,
+    "w": "Omtrent 8 av 10 i India er hinduer.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva betyr gjenfødelse?",
+    "o": [
+     "At atman fødes i en ny kropp etter døden",
+     "At man feirer bursdag",
+     "At verden blir skapt",
+     "At man blir prest"
+    ],
+    "a": 0,
+    "w": "Ny kropp – samme sjel.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "2": [
+   {
+    "q": "Hva er en murti?",
+    "o": [
+     "Et gudebilde eller en statue",
+     "En bønn",
+     "En prest",
+     "En fest"
+    ],
+    "a": 0,
+    "w": "Mange mener guden er til stede i murtien.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva er et mantra?",
+    "o": [
+     "Et hellig ord eller vers som gjentas",
+     "En hellig elv",
+     "Et hellig dyr",
+     "En tidsalder"
+    ],
+    "a": 0,
+    "w": "Mantraer brukes i bønn og meditasjon.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvem er skaperen i trimurti?",
+    "o": [
+     "Shiva",
+     "Vishnu",
+     "Brahma",
+     "Ganesha"
+    ],
+    "a": 2,
+    "w": "Brahma skaper, Vishnu opprettholder, Shiva ødelegger og fornyer.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvem er ødeleggeren og fornyeren i trimurti?",
+    "o": [
+     "Brahma",
+     "Shiva",
+     "Vishnu",
+     "Krishna"
+    ],
+    "a": 1,
+    "w": "Shiva bryter ned det gamle så noe nytt kan skapes.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva er moksha?",
+    "o": [
+     "Frigjøring fra samsara",
+     "En høytid",
+     "Plikt",
+     "Et tempel"
+    ],
+    "a": 0,
+    "w": "Moksha er det høyeste målet.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "3": [
+   {
+    "q": "Hva er forskjellen på Brahma og Brahman?",
+    "o": [
+     "Ingen – det er samme ord",
+     "Brahma er skaperguden, Brahman er den ene guddommelige virkeligheten",
+     "Brahman er en prest, Brahma et tempel",
+     "Brahma er en tidsalder"
+    ],
+    "a": 1,
+    "w": "Brahman er alt – Brahma er en av gudene.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilken vei til frelse er mest utbredt i dag?",
+    "o": [
+     "Erkjennelsens vei",
+     "Handlingens vei",
+     "Kjærlighetens vei",
+     "Ingen av dem"
+    ],
+    "a": 2,
+    "w": "Kjærlighetens vei (bhakti) er åpen for alle.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva betyr satya?",
+    "o": [
+     "Ikkevold",
+     "Sannferdighet",
+     "Plikt",
+     "Frigjøring"
+    ],
+    "a": 1,
+    "w": "Satya – å ikke lyve – er en viktig leveregel.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva er Navaratri?",
+    "o": [
+     "Ni netter for gudinnen Durga",
+     "Fargefesten",
+     "Ganeshas fødselsdag",
+     "En livsrite"
+    ],
+    "a": 0,
+    "w": "Nava = ni, ratri = netter.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilken gud har trefork, tredje øye og halvmåne i håret?",
+    "o": [
+     "Vishnu",
+     "Brahma",
+     "Shiva",
+     "Ganesha"
+    ],
+    "a": 2,
+    "w": "Det tredje øyet står for innsikt som ødelegger ondskap.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "4": [
+   {
+    "q": "Hva kalles de mange mindre gruppene man fødes inn i, ofte knyttet til et yrke?",
+    "o": [
+     "Varna",
+     "Jati",
+     "Yuga",
+     "Samskara"
+    ],
+    "a": 1,
+    "w": "Jati er det vi i dagligtale kaller kaster.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvem er Vishnus kone?",
+    "o": [
+     "Parvati",
+     "Durga",
+     "Lakshmi",
+     "Kali"
+    ],
+    "a": 2,
+    "w": "Lakshmi er gudinne for rikdom og lykke.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvorfor passer ordet «polyteisme» dårlig på hinduismen?",
+    "o": [
+     "Hinduer tror ikke på guder",
+     "Mange ser gudene som sider ved én guddom, Brahman",
+     "Det finnes bare én gud i hinduismen",
+     "Gudene regnes som eventyr"
+    ],
+    "a": 1,
+    "w": "De mange gudene kan forstås som ansikter av den ene virkeligheten.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva symboliserer tårnet på et hindutempel?",
+    "o": [
+     "Et skip",
+     "En fjelltopp der gudene bor",
+     "Et tre",
+     "Et øye"
+    ],
+    "a": 1,
+    "w": "Templet er gudenes palass.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva kalles de som ble regnet som «urørlige»?",
+    "o": [
+     "Brahminer",
+     "Dalitter",
+     "Kshatriyaer",
+     "Sadhuer"
+    ],
+    "a": 1,
+    "w": "Indias grunnlov fra 1950 forbyr kastediskriminering.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "5": [
+   {
+    "q": "Hva betyr «sanatana dharma» – navnet mange hinduer bruker på religionen sin?",
+    "o": [
+     "Den evige orden/veien",
+     "Den hellige elva",
+     "De tre gudene",
+     "Lysets fest"
+    ],
+    "a": 0,
+    "w": "Hinduismen har ingen grunnlegger – den regnes som evig.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Bhagavadgita er en del av hvilket epos?",
+    "o": [
+     "Ramayana",
+     "Mahabharata",
+     "Rigveda",
+     "Upanishadene"
+    ],
+    "a": 1,
+    "w": "Mahabharata – med samtalen mellom Krishna og Arjuna.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva er de fire livsmålene i hinduismen?",
+    "o": [
+     "Dharma, artha, kama og moksha",
+     "Atman, Brahman, karma og samsara",
+     "Elev, husholder, skogboer og asket",
+     "Satya, Treta, Dvapara og Kali"
+    ],
+    "a": 0,
+    "w": "Plikt, velstand, glede og frigjøring.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvorfor kremerer mange hinduer sine døde?",
+    "o": [
+     "Fordi atman ikke trenger kroppen lenger og skal videre",
+     "For å unngå å bli født på nytt",
+     "Fordi Brahma krever det",
+     "For å feire Diwali"
+    ],
+    "a": 0,
+    "w": "Kremasjon hjelper sjelen å forlate kroppen.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilken retning tilber gudinnen (Shakti) som den høyeste?",
+    "o": [
+     "Vaishnavisme",
+     "Shaivisme",
+     "Shaktisme",
+     "Bhakti"
+    ],
+    "a": 2,
+    "w": "Vaishnavisme: Vishnu. Shaivisme: Shiva. Shaktisme: gudinnen.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ]
+ }
+}

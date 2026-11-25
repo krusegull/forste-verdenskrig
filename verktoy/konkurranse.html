@@ -230,7 +230,7 @@ select.inp{font-weight:800}
    <div id="sUnder" style="font-family:Fraunces,serif;font-size:24px;color:var(--muted)"></div>
    <div id="sCount" style="color:var(--muted);font-weight:800;margin-top:8px"></div>
   </div>
-  <div class="panel" id="settPanel"><h3>Spørsmålssett</h3><div class="orow" style="flex-wrap:wrap;gap:8px"><select class="inp" id="settSel" style="max-width:460px;flex:1 1 260px"></select><button class="ghost" id="impTop">📥 Hent inn sett</button><button class="ghost" id="editTop">✏️ Rediger spørsmål</button><button class="ghost" id="settNew">＋ Nytt sett</button><button class="ghost" id="settDel" hidden>🗑 Slett settet</button></div>
+  <div class="panel" id="settPanel"><h3>Spørsmålssett</h3><div class="orow" style="flex-wrap:wrap;gap:8px"><select class="inp" id="settSel" style="max-width:460px;flex:1 1 260px"></select><button class="ghost" id="impTop">📥 Hent inn sett</button><button class="ghost" id="editTop">✏️ Rediger spørsmål</button><button class="ghost" id="settNew">＋ Nytt sett</button><button class="ghost" id="settDel" hidden>🗑 Slett settet</button></div><div id="stdPick"></div>
    <div id="settNewBox" hidden style="margin-top:10px"><div class="orow" style="flex-wrap:wrap;gap:8px"><input class="inp" id="settName" maxlength="60" placeholder="Navn på settet, f.eks. Første verdenskrig – repetisjon" style="flex:1 1 300px"><button class="big" id="settMake" style="font-size:16px;padding:9px 20px">Lag settet</button></div></div>
    <p class="note" style="margin:8px 0 0">Lag så mange sett du vil – ett for hvert tema eller hver repetisjon. Settene lagres bare i denne nettleseren.</p></div>
   <div id="resume"></div>
@@ -313,7 +313,12 @@ function normSet(s){ if(!s||typeof s!=="object"||!Array.isArray(s.kat)||!s.kat.l
   return out; }
 let QSET=null; try{ QSET=normSet(JSON.parse(localStorage.getItem(SKEY))); }catch(e){ QSET=emptySet(); }
 let HAS_LOCAL=false; try{ HAS_LOCAL=localStorage.getItem(SKEY)!==null; }catch(e){}
-let STDRAW=null, STDLIST=[];
+let STDRAW=null, STDLIST=[], STDALL=[];
+/* Åpnes det tomme grunnsettet i et fag som har ferdige konkurranser, vises de som store knapper. */
+function drawStdPick(){ const box=$("stdPick"); if(!box) return; const n=(QSET.kat||[]).reduce((s,k)=>s+((k.q||[]).filter(q=>q&&String(q.q||"").trim()).length),0);
+  if(SETT!==FAM||n>0||!STDLIST.length){ box.innerHTML=""; return; }
+  box.innerHTML=`<p style="font-weight:900;margin:14px 0 8px">Velg en ferdig konkurranse:</p><div style="display:flex;flex-wrap:wrap;gap:10px">${STDLIST.map(x=>`<button class="big" style="font-size:17px;padding:11px 22px" data-std="${esc(x.id)}">🏆 ${esc(x.tittel)}</button>`).join("")}</div>`;
+  box.querySelectorAll("[data-std]").forEach(b=>b.onclick=()=>{ location.href=settUrl(b.dataset.std); }); }
 /* Spillbar versjon: tomme alternativer fjernes, ufullstendige spørsmål hoppes over */
 function clean(r){ const keep=r.o.map((t,i)=>[String(t).trim(),i]).filter(x=>x[0]); const a=keep.findIndex(x=>x[1]===r.a);
   const bad=!r.q.trim()||keep.length<2||a<0;
@@ -877,13 +882,17 @@ $("edReset").onclick=()=>{ const b=$("edReset"), lbl=STDRAW?"↺ Tilbake til sta
   else { b.dataset.sure=1; b.textContent=STDRAW?"Klikk igjen – endringene dine forsvinner":"Klikk igjen for å tømme alt"; setTimeout(()=>{ delete b.dataset.sure; b.textContent=lbl; },3500); } };
 if(TILBAKE && /^[a-z0-9\-\/\.]+\.html(\?fag=[a-z0-9\-]+)?$/i.test(TILBAKE) && !/^\/\/|:/.test(TILBAKE)){ $("backLink").href=TILBAKE; $("backLink").hidden=false; }
 /* ---------- flere spørsmålssett per fag ---------- */
-function settUrl(id){ const q=new URLSearchParams(); q.set("sett",id); q.set("fag",FAM); if(TILBAKE) q.set("tilbake",TILBAKE); return "konkurranse.html?"+q.toString(); }
+const FAGNAVN={samfunnsfag:"Samfunnsfag",krle:"KRLE",norsk:"Norsk"};
+function settUrl(id){ const q=new URLSearchParams(); q.set("sett",id); const fam=(id===FAM||id.startsWith(FAM+"-"))?FAM:id.split("-")[0]; q.set("fag",fam); if(TILBAKE) q.set("tilbake",TILBAKE); return "konkurranse.html?"+q.toString(); }
 function listSett(){ const out=[]; try{ for(let i=0;i<localStorage.length;i++){ const k=localStorage.key(i); if(!k||!k.startsWith("konk_sett_")) continue; const id=k.slice(10);
     if(id===FAM||id.startsWith(FAM+"-")){ let t=id; try{ t=JSON.parse(localStorage.getItem(k)).tittel||id; }catch(e){} out.push({id,t}); } } }catch(e){}
   if(!out.some(x=>x.id===SETT)) out.push({id:SETT,t:QSET.tittel||SETT});
   STDLIST.forEach(x=>{ if(!out.some(y=>y.id===x.id)) out.push({id:x.id,t:x.tittel||x.id}); });
   if(!out.some(x=>x.id===FAM)) out.push({id:FAM,t:"Konkurranse (tomt sett)"}); return out.sort((a,b)=>a.t.localeCompare(b.t,"nb")); }
-function renderSett(){ const l=listSett(); $("settSel").innerHTML=l.map(x=>`<option value="${esc(x.id)}" ${x.id===SETT?"selected":""}>${esc(x.t)}${x.id===SETT?"":""}</option>`).join("");
+function renderSett(){ const l=listSett(), opt=x=>`<option value="${esc(x.id)}" ${x.id===SETT?"selected":""}>${esc(x.t)}</option>`;
+  const andre=STDALL.filter(x=>!(x.id===FAM||x.id.startsWith(FAM+"-")));
+  $("settSel").innerHTML=(andre.length?`<optgroup label="${esc(FAGNAVN[FAM]||"Dette faget")}">${l.map(opt).join("")}</optgroup><optgroup label="Andre fag">${andre.map(x=>opt({id:x.id,t:(FAGNAVN[x.id.split("-")[0]]||x.id.split("-")[0])+": "+x.tittel})).join("")}</optgroup>`:l.map(opt).join(""));
+  drawStdPick();
   $("settDel").hidden=!(SETT!==FAM && l.length>1); }
 $("settSel").onchange=e=>{ location.href=settUrl(e.target.value); };
 $("settNew").onclick=()=>{ $("settNewBox").hidden=!$("settNewBox").hidden; if(!$("settNewBox").hidden) $("settName").focus(); };
@@ -898,7 +907,8 @@ $("settDel").onclick=()=>{ const b=$("settDel"); if(!b.dataset.sure){ b.dataset.
 $("impTop").onclick=edImport; $("editTop").onclick=openEditor;
 renderSett();
 /* ---------- standardsett fra portalen (verktoy/sett/) ---------- */
-fetch("sett/liste.json",{cache:"no-cache"}).then(r=>r.ok?r.json():[]).then(l=>{ STDLIST=(Array.isArray(l)?l:[]).filter(x=>x&&typeof x.id==="string"&&/^[a-z0-9-]+$/.test(x.id)&&(x.id===FAM||x.id.startsWith(FAM+"-"))).map(x=>({id:x.id,tittel:strip(x.tittel||x.id)})); renderSett(); }).catch(()=>{});
+fetch("sett/liste.json",{cache:"no-cache"}).then(r=>r.ok?r.json():[]).then(l=>{ STDALL=(Array.isArray(l)?l:[]).filter(x=>x&&typeof x.id==="string"&&/^[a-z0-9-]+$/.test(x.id)).map(x=>({id:x.id,tittel:strip(x.tittel||x.id)}));
+  STDLIST=STDALL.filter(x=>x.id===FAM||x.id.startsWith(FAM+"-")); renderSett(); }).catch(()=>{});
 fetch("sett/"+SETT+".json",{cache:"no-cache"}).then(r=>r.ok?r.text():null).then(t=>{ if(!t) return; normSet(JSON.parse(t)); STDRAW=t; $("edReset").textContent="↺ Tilbake til standardsettet";
   if(!HAS_LOCAL){ QSET=normSet(JSON.parse(t)); rebuild(); updSetup(); if($("editor").classList.contains("on")) renderEditor(); } }).catch(()=>{});
 

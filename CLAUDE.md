@@ -136,6 +136,9 @@ Status 20.11.2026: klassen hadde nesten fullført gallery walk-starteren (trinne
   - **Resultatarkiv** (`konk_resultater`, maks 60, bare i lærerens nettleser): ferdige spill (og avbrutte spill når et nytt startes) huskes med dato og status «sendt/ikke sendt». «📁 Tidligere resultater» på startskjermen sender senere.
   - Poengmodell i Lærerrommet (forslag fra Eirik 25.11.2026): 1. plass 10, 2. plass 7, 3. plass 5, øvrige 3 poeng per elev, ⭐ = +2. Læreren kan endre alt før lagring.
   - Ingen elevnavn, poeng eller nøkler ligger i repoet – bare koden og adressen til Lærerrommet. Knappen ligger kun i lærervisningen.
+- **Alle konkurranser i menyen:** settmenyen viser settene i faget øverst og standardsett fra andre fag under «Andre fag» (bytter da `fag` i adressen). Åpnes det tomme grunnsettet i et fag med ferdige sett, vises de som store knapper («Velg en ferdig konkurranse»).
+- **Standardsett nå:** `samfunnsfag-forste-verdenskrig` (SKYTTERGRAVEN), `samfunnsfag-frontlinjen` (FRONTLINJEN, 50 spm., fra lærerspillet – tre fakta rettet: Verdun/Somme = drepte *og* sårede, Italia erklærte først krig mot Østerrike-Ungarn), `samfunnsfag-kalde-krigen` (JERNTEPPET), `krle-hinduismen` (YUGA, 55 spm., fra lærerspillet), `norsk-sinna-mann` (SI FRA), `norsk-aust-vagoy` (TROSS). YUGA-kort på krle/hinduismen/index.html, FRONTLINJEN-lenke på WWI-kartsiden.
+- **Lærerrommet speiler portalen** på siden /laeringsportalen (src/lib/portal/katalog.ts i laererrommet-repoet): alle verktøy per fag/tema og alle konkurranser, startes med klasse og grupper. **Nye temaer, verktøy eller standardsett må også legges inn i katalog.ts der.**
 - Sluttskjermen viser settets egen «Melding på sluttskjermen» (`slutt`), ikke en fast tekst.
 - Merk: raw.githack.com er et delt nettsted, så det som ligger i localStorage der, kan i prinsippet leses av andre sider på samme adresse. Når portalen flyttes til egen adresse (Vercel), er dette løst.
 
