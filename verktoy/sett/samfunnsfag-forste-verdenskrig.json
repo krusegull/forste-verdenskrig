@@ -1,0 +1,996 @@
+{
+ "v": 1,
+ "tittel": "SKYTTERGRAVEN",
+ "under": "Begrepskampen om første verdenskrig – Samfunnsfag (Arena 9, kapittel 5)",
+ "slutt": "Lykke til på prøven! Husk å forklare både årsaker og konsekvenser – og hvordan de henger sammen.",
+ "kat": [
+  {
+   "n": "Årsaker",
+   "e": "💥",
+   "c": "#6b4f22",
+   "q": [
+    {
+     "q": "Hva betyr nasjonalisme?",
+     "o": [
+      "Tanken om at nasjonen og folket er det viktigste",
+      "Tanken om at alle land bør samarbeide",
+      "Tanken om at kongen skal ha all makt",
+      "Tanken om at staten skal eie fabrikkene"
+     ],
+     "a": 0,
+     "w": "Nasjonalisme var en av de grunnleggende årsakene til krigen. Den skapte spenninger mellom landene i Europa.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva betyr imperialisme?",
+     "o": [
+      "At mektige land skaffer seg makt over andre land og områder, for eksempel kolonier",
+      "At et land holder seg utenfor kriger",
+      "At folket velger lederne sine",
+      "At land handler fritt med hverandre"
+     ],
+     "a": 0,
+     "w": "Stormaktene konkurrerte om kolonier og makt. Det skapte spenninger og var en grunnleggende årsak til krigen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva betyr militær opprustning?",
+     "o": [
+      "At land bygger opp hæren og skaffer seg flere og bedre våpen",
+      "At land legger ned hæren sin",
+      "At soldater får mer utdanning",
+      "At land deler våpen med hverandre"
+     ],
+     "a": 0,
+     "w": "Spenningene mellom statene førte til opprustning – og opprustningen gjorde spenningene enda større.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er forskjellen på en grunnleggende og en utløsende årsak?",
+     "o": [
+      "Grunnleggende årsaker bygger seg opp over lang tid. En utløsende årsak setter konflikten i gang",
+      "Grunnleggende årsaker skjer sist, utløsende årsaker skjer først",
+      "Det er to ord for det samme",
+      "Utløsende årsaker er viktigst, grunnleggende årsaker betyr lite"
+     ],
+     "a": 0,
+     "w": "Boka bruker bildet av et bål og en fyrstikk: Bålet er de grunnleggende årsakene, fyrstikken er den utløsende.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva var blankofullmakten?",
+     "o": [
+      "Tysklands løfte om full støtte til Østerrike-Ungarn før angrepet på Serbia",
+      "Serbias svar til Østerrike-Ungarn",
+      "En fredsavtale mellom Russland og Tyskland",
+      "Storbritannias løfte om å beskytte Belgia",
+      "Avtalen som opprettet Folkeforbundet"
+     ],
+     "a": 0,
+     "w": "Blankofullmakten bidro til at Tyskland senere fikk skylden for at krigen brøt ut.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Allianser og land",
+   "e": "🤝",
+   "c": "#8a4a1f",
+   "q": [
+    {
+     "q": "Hva er en allianse?",
+     "o": [
+      "Et samarbeid mellom land, ofte om forsvar",
+      "En krig mellom to land",
+      "En fredsavtale etter en krig",
+      "Et nytt politisk parti"
+     ],
+     "a": 0,
+     "w": "Før krigen var Europa delt i to militære allianser.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilke land dannet trippelententen?",
+     "o": [
+      "Storbritannia, Frankrike og Russland",
+      "Tyskland, Østerrike-Ungarn og Italia",
+      "Storbritannia, USA og Norge",
+      "Frankrike, Belgia og Serbia"
+     ],
+     "a": 0,
+     "w": "Tyskland, Østerrike-Ungarn og Italia dannet trippelalliansen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilke land dannet trippelalliansen?",
+     "o": [
+      "Tyskland, Østerrike-Ungarn og Italia",
+      "Storbritannia, Frankrike og Russland",
+      "Tyskland, Russland og Det osmanske riket",
+      "Østerrike-Ungarn, Serbia og Italia"
+     ],
+     "a": 0,
+     "w": "Italia skiftet side under krigen og gikk over til trippelententen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvorfor gikk Storbritannia inn i krigen?",
+     "o": [
+      "Tyskland angrep Frankrike gjennom Belgia, og Storbritannia hadde lovet å beskytte Belgia",
+      "Storbritannia ble angrepet av Russland",
+      "Storbritannia ville ha kolonier i Serbia",
+      "Storbritannia var med i trippelalliansen"
+     ],
+     "a": 0,
+     "w": "Alliansesystemene trakk land etter land inn i krigen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilket land skiftet side under krigen og gikk over til trippelententen?",
+     "o": [
+      "Italia",
+      "Russland",
+      "Det osmanske riket",
+      "Belgia",
+      "Serbia"
+     ],
+     "a": 0,
+     "w": "Italia hadde vært med i trippelalliansen. Etter krigen var mange italienere misfornøyde fordi de ikke fikk landområdene de mente de var lovet.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Krigføring",
+   "e": "🪖",
+   "c": "#4b5320",
+   "q": [
+    {
+     "q": "Hvilket år brøt krigen ut, og hvilket år sluttet den?",
+     "o": [
+      "1914 og 1918",
+      "1912 og 1916",
+      "1914 og 1919",
+      "1918 og 1922"
+     ],
+     "a": 0,
+     "w": "Krigen varte i fire år.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er en skyttergrav?",
+     "o": [
+      "En grøft der soldatene søkte dekning og kjempet fra",
+      "Et sted der falne soldater ble begravet",
+      "En militær flyplass",
+      "Et lager for våpen"
+     ],
+     "a": 0,
+     "w": "På vestfronten gravde hærene seg ned i skyttergraver fra Den engelske kanal til Sveits.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva var vestfronten?",
+     "o": [
+      "Frontlinjen i vest der hærene kjempet fra skyttergraver i fire år uten å komme framover",
+      "Frontlinjen mellom Tyskland og Russland",
+      "Kampene ved kysten av Norge",
+      "Frontlinjen i Øst-Afrika"
+     ],
+     "a": 0,
+     "w": "Langs østfronten, der Tyskland kjempet mot Russland, var det mer bevegelse.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvorfor kalles første verdenskrig ofte «den første moderne krigen»?",
+     "o": [
+      "Ny teknologi ga nye våpen som ble brukt i krig for første gang, som giftgass",
+      "Det var den første krigen i Europa",
+      "Det var første gang soldater brukte uniform",
+      "Det var den korteste krigen i historien"
+     ],
+     "a": 0,
+     "w": "Den teknologiske utviklingen ga nye, dødelige våpen. Nesten 18 millioner mennesker ble drept.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilket argument er best for at første verdenskrig var en VERDENSkrig?",
+     "o": [
+      "Det var kamper i Afrika, Asia og Midtøsten, soldater fra koloniene kjempet i Europa, og USA gikk med",
+      "De fleste kampene var i Europa",
+      "Krigen varte i fire år",
+      "Den startet i Sarajevo",
+      "Alle land i verden var med"
+     ],
+     "a": 0,
+     "w": "Ikke alle land var med – Norge var for eksempel nøytralt. Men krigen spredte seg langt utenfor Europa.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Norge i krigen",
+   "e": "⚓",
+   "c": "#2e4a6b",
+   "q": [
+    {
+     "q": "Hva betyr nøytralitet?",
+     "o": [
+      "Å ikke ta side i en krig",
+      "Å angripe først",
+      "Å være med i en allianse",
+      "Å være okkupert av et annet land"
+     ],
+     "a": 0,
+     "w": "Da krigen brøt ut, erklærte Norge seg nøytralt.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva betyr rasjonering?",
+     "o": [
+      "At varer det er lite av, blir fordelt slik at hver person bare får kjøpe en bestemt mengde",
+      "At prisene går ned",
+      "At staten eier butikkene",
+      "At varer blir solgt til utlandet"
+     ],
+     "a": 0,
+     "w": "Under krigen måtte mat og drivstoff rasjoneres. Folk fikk for eksempel brødkort.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva menes med dyrtid?",
+     "o": [
+      "Perioden da prisene steg mer enn lønningene",
+      "Perioden da mange tjente mye på skipsaksjer",
+      "Perioden da Norge var i krig",
+      "Perioden da det var mangel på arbeid"
+     ],
+     "a": 0,
+     "w": "Dyrtiden gjorde forskjellen mellom rike og fattige tydeligere.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvorfor knyttet Norge seg etter hvert sterkere til Storbritannia?",
+     "o": [
+      "Norge var avhengig av kull og andre varer fra Storbritannia",
+      "Norge var med i trippelententen",
+      "Storbritannia okkuperte Norge",
+      "Kongen var britisk"
+     ],
+     "a": 0,
+     "w": "Over 800 norske skip ble senket av tyske ubåter. Det skapte også en antitysk stemning i Norge.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilken følge av krigen kan forklare at Arbeiderpartiet ble Norges største parti i mellomkrigstiden?",
+     "o": [
+      "Forskjellen mellom rike og fattige ble større og mer synlig under dyrtiden",
+      "Norge fikk kolonier etter krigen",
+      "Kvinnene mistet stemmeretten",
+      "Norge ble med i trippelententen",
+      "Den russiske tsaren støttet partiet"
+     ],
+     "a": 0,
+     "w": "Arbeiderklassen reagerte på forskjellene, og Arbeiderpartiet ville bedre levekårene for arbeiderne.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Freden",
+   "e": "🕊️",
+   "c": "#7a2e2e",
+   "q": [
+    {
+     "q": "Hva er en våpenhvile?",
+     "o": [
+      "En avtale om å stoppe kampene",
+      "En fredsavtale som deler et land",
+      "Et lager for våpen",
+      "En pause for å bygge flere våpen"
+     ],
+     "a": 0,
+     "w": "Våpenhvilen ble undertegnet 11. november 1918 klokka 11.00.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva var Folkeforbundet?",
+     "o": [
+      "En verdensomspennende organisasjon som skulle løse konflikter uten krig",
+      "En allianse mellom Tyskland og Østerrike-Ungarn",
+      "Et kommunistisk parti",
+      "Navnet på fredsavtalen etter krigen"
+     ],
+     "a": 0,
+     "w": "Folkeforbundet regnes som forløperen til FN.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er krigsskadeerstatninger?",
+     "o": [
+      "Penger et land må betale for skadene etter en krig",
+      "Penger soldatene fikk i lønn",
+      "Lån som USA ga til Europa",
+      "Penger til å bygge nye våpen"
+     ],
+     "a": 0,
+     "w": "I Versaillestraktaten måtte Tyskland betale store krigsskadeerstatninger.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilket krav måtte Tyskland IKKE godta i Versaillestraktaten?",
+     "o": [
+      "Å melde seg inn i Folkeforbundet med en gang",
+      "Å ta på seg skylden for krigen",
+      "Å gi fra seg landområder og kolonier",
+      "Å bare ha en liten hær uten flyvåpen"
+     ],
+     "a": 0,
+     "w": "Tyskland måtte ta skylden, betale erstatninger, gi fra seg land og kolonier og bare ha en liten hær.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilke nye stater ble opprettet etter første verdenskrig?",
+     "o": [
+      "Polen, Tsjekkoslovakia, Finland, Estland, Latvia, Litauen og Jugoslavia",
+      "Polen, Norge, Sverige og Danmark",
+      "Tyskland, Italia og Belgia",
+      "Serbia, Russland og Det osmanske riket",
+      "Sovjetunionen, USA og Storbritannia"
+     ],
+     "a": 0,
+     "w": "I tillegg ble Østerrike-Ungarn delt i Østerrike og Ungarn. Mange grenser vi har i dag, er et resultat av krigen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Den russiske revolusjonen",
+   "e": "☭",
+   "c": "#a3241f",
+   "q": [
+    {
+     "q": "Hva var en tsar?",
+     "o": [
+      "Keiseren i Russland",
+      "En russisk soldat",
+      "Lederen for bolsjevikene",
+      "Et russisk parlament"
+     ],
+     "a": 0,
+     "w": "Tsaren styrte eneveldig og nektet å innføre demokrati.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva betyr eneveldig?",
+     "o": [
+      "At én person har all makt",
+      "At folket bestemmer gjennom valg",
+      "At flere partier deler makten",
+      "At landet ikke har noen leder"
+     ],
+     "a": 0,
+     "w": "Den eneveldige tsaren var upopulær i store deler av befolkningen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvem var bolsjevikene?",
+     "o": [
+      "Lenins parti, som tok makten i Russland i 1917",
+      "Tsarens soldater",
+      "Mussolinis parti i Italia",
+      "Et parti som ville innføre demokrati i Russland"
+     ],
+     "a": 0,
+     "w": "Bolsjevikene kalte seg senere kommunister.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er et statskupp?",
+     "o": [
+      "Når en gruppe tar makten i et land med makt, ikke gjennom valg",
+      "Når et land vinner en krig",
+      "Når folket velger en ny regjering",
+      "Når en konge arver tronen"
+     ],
+     "a": 0,
+     "w": "Høsten 1917 tok Lenin og bolsjevikene makten ved et statskupp.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er planøkonomi?",
+     "o": [
+      "Staten eier fabrikkene og bestemmer hva som skal produseres og hva det skal koste",
+      "Bedrifter konkurrerer fritt om kundene",
+      "Hver familie produserer det den trenger selv",
+      "Prisene bestemmes av tilbud og etterspørsel",
+      "Landet handler bare med allierte"
+     ],
+     "a": 0,
+     "w": "Planøkonomien skulle skape et klasseløst samfunn uten forskjeller og arbeidsledighet.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Fascismen",
+   "e": "🏛️",
+   "c": "#2b2b2b",
+   "q": [
+    {
+     "q": "Hvem startet fascismen i Italia?",
+     "o": [
+      "Benito Mussolini",
+      "Vladimir Lenin",
+      "Adolf Hitler",
+      "Woodrow Wilson"
+     ],
+     "a": 0,
+     "w": "Mussolini startet partiet i 1921.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er en diktator?",
+     "o": [
+      "En leder med all makt som ikke er valgt av folket",
+      "En leder som blir valgt hvert fjerde år",
+      "En dommer i en domstol",
+      "En leder for en fagforening"
+     ],
+     "a": 0,
+     "w": "Fascistene ville ha én sterk leder, en fører, i stedet for demokrati.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva var marsjen mot Roma?",
+     "o": [
+      "Fascistenes væpnede marsj i 1922 som ga Mussolini makten",
+      "En fredsmarsj etter krigen",
+      "En protest mot tsaren",
+      "Et slag mellom Italia og Østerrike-Ungarn"
+     ],
+     "a": 0,
+     "w": "Etter marsjen ble Mussolini utnevnt til statsminister, og snart hadde fascistene all makt.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva betyr sensur?",
+     "o": [
+      "At myndighetene kontrollerer hva mediene får skrive og si",
+      "At folket får si hva de vil",
+      "At aviser blir solgt billig",
+      "At alle partier får like mye plass i mediene"
+     ],
+     "a": 0,
+     "w": "I Italia ble alle andre partier enn fascistpartiet forbudt, og mediene ble sensurert.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilken forklaring passer best på at fascismen fikk fotfeste i Italia?",
+     "o": [
+      "Politisk uro, frykt for en revolusjon som i Russland og misnøye med fredsoppgjøret",
+      "Italia hadde vunnet alle landområdene de ønsket",
+      "Folket var fornøyd med demokratiet",
+      "Kongen var kommunist",
+      "Italia var nøytralt i krigen"
+     ],
+     "a": 0,
+     "w": "Mange mente at en sterk leder ville gi mindre kaos.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  }
+ ],
+ "lyn": {
+  "1": [
+   {
+    "q": "Hvem ble skutt i Sarajevo i juni 1914?",
+    "o": [
+     "Franz Ferdinand, tronarvingen i Østerrike-Ungarn, og kona Sophie",
+     "Den russiske tsaren",
+     "Keiseren av Tyskland",
+     "Kongen av Serbia"
+    ],
+    "a": 0,
+    "w": "Attentatet kalles skuddene i Sarajevo.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilket land ble angrepet av Østerrike-Ungarn en måned etter skuddene i Sarajevo?",
+    "o": [
+     "Serbia",
+     "Belgia",
+     "Russland",
+     "Frankrike"
+    ],
+    "a": 0,
+    "w": "Østerrike-Ungarn ga Serbia ansvaret for drapet.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvem tok makten i Russland høsten 1917?",
+    "o": [
+     "Lenin og bolsjevikene",
+     "Tsaren",
+     "Mussolini",
+     "Stalin"
+    ],
+    "a": 0,
+    "w": "Slagordet var «Fred, jord, brød».",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilket land var nøytralt under første verdenskrig?",
+    "o": [
+     "Norge",
+     "Frankrike",
+     "Belgia",
+     "Italia"
+    ],
+    "a": 0,
+    "w": "Selv om Norge var nøytralt, mistet rundt 2000 norske sjømenn livet.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva er en ideologi?",
+    "o": [
+     "Ideer om hvordan samfunnet bør være organisert",
+     "En type våpen",
+     "Et land i Øst-Europa",
+     "En fredsavtale"
+    ],
+    "a": 0,
+    "w": "Kommunisme og fascisme er eksempler på ideologier.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "2": [
+   {
+    "q": "Hvilket land fikk skylden for krigen i fredsavtalen?",
+    "o": [
+     "Tyskland",
+     "Serbia",
+     "Russland",
+     "Italia"
+    ],
+    "a": 0,
+    "w": "I dag mener de fleste historikere at flere land hadde ansvar.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilket år gikk USA inn i krigen?",
+    "o": [
+     "1917",
+     "1914",
+     "1916",
+     "1918"
+    ],
+    "a": 0,
+    "w": "Tyske ubåter senket også amerikanske skip.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilket land allierte seg med Tyskland og trakk Midtøsten inn i krigen?",
+    "o": [
+     "Det osmanske riket",
+     "Italia",
+     "Belgia",
+     "Serbia"
+    ],
+    "a": 0,
+    "w": "Det osmanske riket gikk inn på Tysklands og Østerrike-Ungarns side.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilket land måtte Tyskland gjennom for å angripe Frankrike?",
+    "o": [
+     "Belgia",
+     "Sveits",
+     "Nederland",
+     "Italia"
+    ],
+    "a": 0,
+    "w": "Angrepet på Belgia trakk Storbritannia inn i krigen.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilken amerikansk president foreslo Folkeforbundet?",
+    "o": [
+     "Woodrow Wilson",
+     "Abraham Lincoln",
+     "Franklin D. Roosevelt",
+     "George Washington"
+    ],
+    "a": 0,
+    "w": "Wilson var den mest forsonlige av seierherrene.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "3": [
+   {
+    "q": "Hva var østfronten?",
+    "o": [
+     "Frontlinjen der Tyskland kjempet mot Russland",
+     "Frontlinjen mellom Frankrike og Tyskland",
+     "Kampene i Øst-Afrika",
+     "Kampene på havet"
+    ],
+    "a": 0,
+    "w": "Her var det mer bevegelse enn på vestfronten.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva betyr mellomkrigstiden?",
+    "o": [
+     "Perioden mellom første og andre verdenskrig (1918–1939)",
+     "De fire årene første verdenskrig varte",
+     "Tiden før 1914",
+     "Perioden etter andre verdenskrig"
+    ],
+    "a": 0,
+    "w": "Mellomkrigstiden var preget av politisk uro.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva er en borgerkrig?",
+    "o": [
+     "En krig mellom grupper i samme land",
+     "En krig mellom to naboland",
+     "En krig om kolonier",
+     "En krig som foregår på havet"
+    ],
+    "a": 0,
+    "w": "Etter revolusjonen ble det en brutal borgerkrig i Russland i tre år.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilket navn fikk Russland i 1922?",
+    "o": [
+     "Sovjetunionen",
+     "Jugoslavia",
+     "Det russiske riket",
+     "Øst-Europa"
+    ],
+    "a": 0,
+    "w": "Landet fikk et rødt flagg med hammer, sigd og stjerne.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilken ny stat oppfylte serbernes ønske om en større stat på Balkan?",
+    "o": [
+     "Jugoslavia",
+     "Tsjekkoslovakia",
+     "Albania",
+     "Bulgaria"
+    ],
+    "a": 0,
+    "w": "Jugoslavia ble opprettet etter krigen.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilket land ble delt i to mindre stater etter krigen?",
+    "o": [
+     "Østerrike-Ungarn",
+     "Tyskland",
+     "Russland",
+     "Italia"
+    ],
+    "a": 0,
+    "w": "Østerrike-Ungarn ble delt i Østerrike og Ungarn.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "4": [
+   {
+    "q": "Hva betyr kommunisme?",
+    "o": [
+     "En ideologi med mål om et klasseløst samfunn der verdiene eies i fellesskap",
+     "En ideologi med én sterk fører og nasjonalisme",
+     "Et styresett med konge og parlament",
+     "Et system der bedrifter konkurrerer fritt"
+    ],
+    "a": 0,
+    "w": "Ordet kommer av latin communis, «felles».",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva var verdensrevolusjonen?",
+    "o": [
+     "Lenins mål om at revolusjonen skulle spre seg til hele verden",
+     "Revolusjonen i alle koloniene etter krigen",
+     "Navnet på marsjen mot Roma",
+     "Revolusjonen i Tyskland i 1918"
+    ],
+    "a": 0,
+    "w": "Ideen fikk begrenset oppslutning, men frykten for kommunismen var stor.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva var børskrakket i 1929?",
+    "o": [
+     "Et kraftig fall i aksjekursene i USA som førte til økonomisk krise",
+     "En bank som gikk konkurs i Norge",
+     "En krig om handel mellom USA og Europa",
+     "Et streik i Italia"
+    ],
+    "a": 0,
+    "w": "Krisen ga grobunn for fascistiske bevegelser i flere land, særlig i Tyskland.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva er bildemanipulering?",
+    "o": [
+     "Å endre et bilde for å gi et falskt inntrykk",
+     "Å ta bilder i krig",
+     "Å lage kopier av gamle bilder",
+     "Å fargelegge svart-hvitt-bilder"
+    ],
+    "a": 0,
+    "w": "Stalin fikk fjernet Trotskij fra fotografier for å «fjerne» ham fra historien.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvordan endret kvinnenes rolle seg under krigen?",
+    "o": [
+     "Mange kvinner fikk jobb utenfor hjemmet og egne penger for første gang",
+     "Kvinnene dro i krigen som soldater",
+     "Kvinnene mistet stemmeretten",
+     "Ingenting endret seg"
+    ],
+    "a": 0,
+    "w": "Etter krigen innførte flere land stemmerett for kvinner.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "5": [
+   {
+    "q": "Hvorfor ble skuddene i Sarajevo bare en UTLØSENDE årsak til krigen?",
+    "o": [
+     "Det ville ikke blitt krig uten spenningene som allerede fantes, som nasjonalisme, imperialisme og allianser",
+     "Fordi skuddene skjedde i juni",
+     "Fordi Franz Ferdinand ikke var viktig",
+     "Fordi Serbia vant krigen",
+     "Fordi Tyskland ikke brydde seg"
+    ],
+    "a": 0,
+    "w": "Skuddene var fyrstikken – men bålet var bygget opp over lang tid.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvorfor sluttet soldatene å støtte tsaren i mars 1917?",
+    "o": [
+     "De nektet å skyte på sultne demonstranter, fordi krigen og matmangelen rammet alle",
+     "Lenin betalte dem",
+     "Tyskland beordret dem",
+     "De ville ha Mussolini som leder",
+     "Tsaren hadde allerede gått av"
+    ],
+    "a": 0,
+    "w": "Uten støtte fra hæren måtte tsaren gå av.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvorfor var mange tyskere bitre etter Versaillestraktaten?",
+    "o": [
+     "De følte seg ydmyket fordi de måtte ta hele skylden og betale store erstatninger",
+     "De fikk flere kolonier enn Frankrike",
+     "De ble medlem av Folkeforbundet",
+     "De fikk beholde en stor hær",
+     "Keiseren ble gjeninnsatt"
+    ],
+    "a": 0,
+    "w": "Bitterheten bidro til nye konflikter – og ble senere brukt av Hitler.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvorfor fikk fascister og nazister støtte fra mange som var redde for kommunismen?",
+    "o": [
+     "De så på sosialister og kommunister som hovedfiender og lovet orden",
+     "De ville også ha planøkonomi",
+     "De støttet verdensrevolusjonen",
+     "De ville innføre mer demokrati",
+     "De samarbeidet med Lenin"
+    ],
+    "a": 0,
+    "w": "Frykten for kommunismen kan forklare hvorfor mange sluttet opp om andre ikke-demokratiske ideologier.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilken konsekvens av første verdenskrig ser vi tydeligst i Europa i dag?",
+    "o": [
+     "Mange av grensene og statene, og FN som bygger videre på Folkeforbundet",
+     "At Østerrike-Ungarn fortsatt finnes",
+     "At Norge har kolonier",
+     "At Russland styres av en tsar",
+     "At alle land har vernepliktige hærer"
+    ],
+    "a": 0,
+    "w": "Krigen endret Europakartet, og Folkeforbundet var en forløper til FN.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ]
+ }
+}
