@@ -1,96 +1,13 @@
 {
  "v": 1,
  "tittel": "NYHETSKAMPEN",
- "under": "Verden høsten 2026 – Samfunnsfag (nyheter fram til 26. november 2026)",
+ "under": "Nyheter høsten 2026 + pensum fra 8.–10. trinn: samfunnsfag, KRLE, matte, norsk og kroppsøving",
  "slutt": "Godt jobbet! Følg med på nyhetene – på NRK Supernytt og i Aftenposten Junior får du nyhetene forklart. Mye kan ha skjedd siden dette ble laget (26. november 2026).",
  "kat": [
   {
-   "n": "Krig og konflikt",
+   "n": "Nyheter: verden",
    "e": "🌍",
    "c": "#8c2f39",
-   "q": [
-    {
-     "q": "Hvilket land har vært i krig med USA og Israel i 2026?",
-     "o": [
-      "Brasil",
-      "Iran",
-      "Norge",
-      "Japan"
-     ],
-     "a": 1,
-     "w": "USA og Israel angrep Iran 28. februar 2026. Krigen har påvirket hele verden.",
-     "imgs": [],
-     "vis": "med",
-     "sek": 5,
-     "off": false
-    },
-    {
-     "q": "Hva har blitt mye dyrere i mange land på grunn av krigen i Iran?",
-     "o": [
-      "Sjokolade",
-      "Bensin og olje",
-      "Kinobilletter",
-      "Mobiltelefoner"
-     ],
-     "a": 1,
-     "w": "Mye av verdens olje kommer fra landene rundt Iran. Når oljen ikke kommer fram, stiger prisene på bensin og olje.",
-     "imgs": [],
-     "vis": "med",
-     "sek": 5,
-     "off": false
-    },
-    {
-     "q": "Hormuzstredet har vært mye i nyhetene. Hva er et stred?",
-     "o": [
-      "En lang elv",
-      "En stor ørken",
-      "Et høyt fjell",
-      "Et smalt stykke hav mellom to landområder"
-     ],
-     "a": 3,
-     "w": "Hormuzstredet ligger mellom Iran og Oman. Mange skip med olje må seile gjennom det.",
-     "imgs": [],
-     "vis": "med",
-     "sek": 5,
-     "off": false
-    },
-    {
-     "q": "Hvorfor er Hormuzstredet så viktig for resten av verden?",
-     "o": [
-      "Det er der FN har hovedkontor",
-      "Mange skip med olje seiler gjennom det",
-      "Det er der fotball-VM ble spilt",
-      "Det er verdens største badestrand"
-     ],
-     "a": 1,
-     "w": "Omtrent en femdel av verdens olje går gjennom stredet. Når Iran truer skipene der, blir det mindre olje å kjøpe, og prisene stiger.",
-     "imgs": [],
-     "vis": "med",
-     "sek": 5,
-     "off": false
-    },
-    {
-     "q": "Hvilket land i Midtøsten hadde valg 27. oktober 2026?",
-     "o": [
-      "Iran",
-      "Saudi-Arabia",
-      "Israel",
-      "Tyrkia",
-      "Egypt"
-     ],
-     "a": 2,
-     "w": "Israelerne valgte ny nasjonalforsamling. Den heter Knesset.",
-     "imgs": [],
-     "vis": "med",
-     "sek": 5,
-     "off": false
-    }
-   ]
-  },
-  {
-   "n": "Valg og politikk",
-   "e": "🗳️",
-   "c": "#2e4a6b",
    "q": [
     {
      "q": "Hvem er president i USA?",
@@ -108,144 +25,61 @@
      "off": false
     },
     {
-     "q": "USA hadde et stort valg 3. november 2026. Hva kalles et valg som holdes midt i presidentperioden?",
-     "o": [
-      "Skolevalg",
-      "Mellomvalg",
-      "Kommunevalg",
-      "Juleavstemning"
-     ],
-     "a": 1,
-     "w": "I mellomvalget velger amerikanerne hvem som skal sitte i Kongressen. Presidenten er ikke på valg.",
-     "imgs": [],
-     "vis": "med",
-     "sek": 5,
-     "off": false
-    },
-    {
-     "q": "Hvilke to store partier kjemper om makten i USA?",
-     "o": [
-      "Demokratene og Republikanerne",
-      "Arbeiderpartiet og Høyre",
-      "Kongepartiet og Folkepartiet",
-      "De grønne og De blå"
-     ],
-     "a": 0,
-     "w": "Trump tilhører Republikanerne. Demokratene er det andre store partiet.",
-     "imgs": [],
-     "vis": "med",
-     "sek": 5,
-     "off": false
-    },
-    {
-     "q": "Hvilket parti vant mellomvalget i USA?",
-     "o": [
-      "Arbeiderpartiet",
-      "Republikanerne",
-      "Ingen – valget ble avlyst",
-      "Demokratene"
-     ],
-     "a": 3,
-     "w": "Demokratene vant flertall i Kongressen. Fra januar 2027 får Demokratene dermed mer makt i Kongressen, som vedtar lovene i USA.",
-     "imgs": [],
-     "vis": "med",
-     "sek": 5,
-     "off": false
-    },
-    {
-     "q": "Hva var noen av sakene velgerne i USA var mest opptatt av, ifølge nyhetsbyrået AP?",
-     "o": [
-      "Månen og Mars",
-      "Skolemat og ferier",
-      "Fotball-VM og Eurovision",
-      "Kjæledyr og hager",
-      "Høye priser, bensinpriser og krigen i Iran"
-     ],
-     "a": 4,
-     "w": "Mange syntes det var blitt for dyrt å leve. Bensinprisene steg blant annet på grunn av krigen i Iran.",
-     "imgs": [],
-     "vis": "med",
-     "sek": 5,
-     "off": false
-    }
-   ]
-  },
-  {
-   "n": "Klima og miljø",
-   "e": "🌱",
-   "c": "#3a5a3e",
-   "q": [
-    {
-     "q": "Hva handler et klimatoppmøte om?",
-     "o": [
-      "Hvilken sang som er best",
-      "Hvordan man lager mat",
-      "Hvem som er best i fotball",
-      "Hvordan verden kan stoppe global oppvarming"
-     ],
-     "a": 3,
-     "w": "Ledere fra nesten alle land i verden møtes hvert år for å bli enige om hva de skal gjøre med klimaendringene.",
-     "imgs": [],
-     "vis": "med",
-     "sek": 5,
-     "off": false
-    },
-    {
-     "q": "Hvem arrangerer de store klimatoppmøtene, som COP31?",
-     "o": [
-      "FN (De forente nasjoner)",
-      "NATO",
-      "Fotballforbundet FIFA",
-      "EU"
-     ],
-     "a": 0,
-     "w": "COP er FNs årlige klimatoppmøte. Møtet i 2026 var nummer 31, derfor heter det COP31.",
-     "imgs": [],
-     "vis": "med",
-     "sek": 5,
-     "off": false
-    },
-    {
-     "q": "I hvilket land var klimatoppmøtet COP31 i november 2026?",
+     "q": "Hvilket land har vært i krig med USA og Israel i 2026?",
      "o": [
       "Norge",
-      "Kina",
-      "Brasil",
-      "Tyrkia"
+      "Iran",
+      "Japan",
+      "Brasil"
+     ],
+     "a": 1,
+     "w": "USA og Israel angrep Iran 28. februar 2026. Krigen har påvirket hele verden.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva har blitt mye dyrere i mange land på grunn av krigen i Iran?",
+     "o": [
+      "Kinobilletter",
+      "Mobiltelefoner",
+      "Sjokolade",
+      "Bensin og olje"
      ],
      "a": 3,
-     "w": "Møtet ble holdt i byen Antalya i Tyrkia fra 9. til 20. november.",
+     "w": "Mye av verdens olje kommer fra landene rundt Iran. Mange oljeskip må seile gjennom Hormuzstredet, og der har Iran truet skipene. Da stiger prisene.",
      "imgs": [],
      "vis": "med",
      "sek": 5,
      "off": false
     },
     {
-     "q": "Hvilken gass er den viktigste årsaken til global oppvarming?",
+     "q": "I hvilket land var FNs klimatoppmøte COP31 i november 2026?",
      "o": [
-      "Helium",
-      "Vanndamp fra kokende vann",
-      "CO2 (karbondioksid)",
-      "Oksygen"
-     ],
-     "a": 2,
-     "w": "CO2 slippes ut når vi brenner kull, olje og gass. En rapport fra FN viste at det var rekordmye CO2 i lufta i 2025.",
-     "imgs": [],
-     "vis": "med",
-     "sek": 5,
-     "off": false
-    },
-    {
-     "q": "Parisavtalen har et mål for hvor mye varmere jorda maks bør bli. Hvilket tall er det viktigste målet?",
-     "o": [
-      "100 grader",
-      "1,5 grader",
-      "0 grader",
-      "10 grader",
-      "25 grader"
+      "Brasil",
+      "Tyrkia",
+      "Kina",
+      "Norge"
      ],
      "a": 1,
-     "w": "Landene ble enige om å prøve å holde oppvarmingen under 1,5 grader. På COP31 ble det advart om at verden er på vei forbi det målet.",
+     "w": "Møtet var i Antalya i Tyrkia. Ledere fra hele verden møtes hvert år for å bli enige om hva de skal gjøre med klimaendringene.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilket parti vant mellomvalget i USA i november 2026?",
+     "o": [
+      "Republikanerne",
+      "Ingen – valget ble avlyst",
+      "Demokratene",
+      "Arbeiderpartiet",
+      "De grønne"
+     ],
+     "a": 2,
+     "w": "Demokratene vant flertall i Kongressen, som vedtar lovene i USA. Trump tilhører Republikanerne.",
      "imgs": [],
      "vis": "med",
      "sek": 5,
@@ -254,92 +88,9 @@
    ]
   },
   {
-   "n": "Norge",
-   "e": "🇳🇴",
+   "n": "Nyheter: Norge, sport og kultur",
+   "e": "📰",
    "c": "#a8622e",
-   "q": [
-    {
-     "q": "Hva heter statsministeren i Norge?",
-     "o": [
-      "Erling Haaland",
-      "Erna Solberg",
-      "Jonas Gahr Støre",
-      "Kong Harald"
-     ],
-     "a": 2,
-     "w": "Jonas Gahr Støre (Arbeiderpartiet) er statsminister og leder regjeringen.",
-     "imgs": [],
-     "vis": "med",
-     "sek": 5,
-     "off": false
-    },
-    {
-     "q": "Hva heter Norges nasjonalforsamling, der politikerne vedtar lover?",
-     "o": [
-      "Riksdagen",
-      "Kongressen",
-      "Stortinget",
-      "Rådhuset"
-     ],
-     "a": 2,
-     "w": "Stortinget ligger i Oslo. Riksdagen er Sveriges nasjonalforsamling, og Kongressen er USAs.",
-     "imgs": [],
-     "vis": "med",
-     "sek": 5,
-     "off": false
-    },
-    {
-     "q": "Hva er statsbudsjettet?",
-     "o": [
-      "En liste over alle som bor i Norge",
-      "En bok om norsk historie",
-      "Planen for hva staten skal tjene og bruke penger på neste år",
-      "Resultatet av et fotballvalg"
-     ],
-     "a": 2,
-     "w": "Regjeringen legger fram forslaget om høsten, og Stortinget bestemmer før jul.",
-     "imgs": [],
-     "vis": "med",
-     "sek": 5,
-     "off": false
-    },
-    {
-     "q": "Jens Stoltenberg la fram statsbudsjettet i oktober 2026. Hvilken jobb har han nå?",
-     "o": [
-      "NATO-sjef",
-      "Konge",
-      "Finansminister",
-      "Fotballtrener"
-     ],
-     "a": 2,
-     "w": "Stoltenberg var NATO-sjef før, men nå er han finansminister. Han har ansvaret for statens penger.",
-     "imgs": [],
-     "vis": "med",
-     "sek": 5,
-     "off": false
-    },
-    {
-     "q": "Hva sa regjeringen at den vil bruke mer penger på i budsjettet for 2027?",
-     "o": [
-      "Å flytte hovedstaden",
-      "Forsvaret",
-      "Å bygge en rakett til månen",
-      "Å legge ned alle sykehus",
-      "Gratis godteri på skolen"
-     ],
-     "a": 1,
-     "w": "Finansministeren sa at regjeringen vil ruste opp forsvaret av Norge, fordi det er en urolig tid i verden.",
-     "imgs": [],
-     "vis": "med",
-     "sek": 5,
-     "off": false
-    }
-   ]
-  },
-  {
-   "n": "Sport",
-   "e": "⚽",
-   "c": "#2e6a8a",
    "q": [
     {
      "q": "Hvilket land vant fotball-VM for menn i 2026?",
@@ -350,87 +101,19 @@
       "Tyskland"
      ],
      "a": 1,
-     "w": "Spania slo Argentina 1–0 i finalen 19. juli 2026.",
+     "w": "Spania slo Argentina 1–0 i finalen 19. juli 2026. Norge var med i VM for første gang siden 1998.",
      "imgs": [],
      "vis": "med",
      "sek": 5,
      "off": false
     },
-    {
-     "q": "Hvilket land tapte VM-finalen mot Spania?",
-     "o": [
-      "Argentina",
-      "Sverige",
-      "Frankrike",
-      "England"
-     ],
-     "a": 0,
-     "w": "Finalen sto 0–0 etter vanlig tid. Spania scoret i ekstraomgangene.",
-     "imgs": [],
-     "vis": "med",
-     "sek": 5,
-     "off": false
-    },
-    {
-     "q": "Hvilken norsk spiller er mest kjent på fotballandslaget?",
-     "o": [
-      "Karsten Warholm",
-      "Erling Haaland",
-      "Therese Johaug",
-      "Magnus Carlsen"
-     ],
-     "a": 1,
-     "w": "Haaland scoret 16 mål i kvalifiseringen og hjalp Norge til VM. Carlsen er sjakkspiller, Warholm er friidrettsutøver og Johaug er skiløper.",
-     "imgs": [],
-     "vis": "med",
-     "sek": 5,
-     "off": false
-    },
-    {
-     "q": "Hvilke tre land arrangerte VM 2026?",
-     "o": [
-      "Kina, Japan og Korea",
-      "Spania, Italia og Frankrike",
-      "USA, Canada og Mexico",
-      "Norge, Sverige og Danmark"
-     ],
-     "a": 2,
-     "w": "VM ble spilt i 16 byer i Nord-Amerika.",
-     "imgs": [],
-     "vis": "med",
-     "sek": 5,
-     "off": false
-    },
-    {
-     "q": "Hvorfor var det ekstra stort at Norge var med i VM 2026?",
-     "o": [
-      "Norge hadde aldri spilt fotball før",
-      "Norge arrangerte VM",
-      "Norge spilte uten keeper",
-      "Norge vant hele VM",
-      "Det var første gang siden 1998"
-     ],
-     "a": 4,
-     "w": "Norge hadde ikke vært med i et VM for menn på 28 år.",
-     "imgs": [],
-     "vis": "med",
-     "sek": 5,
-     "off": false
-    }
-   ]
-  },
-  {
-   "n": "Kultur og vitenskap",
-   "e": "🏆",
-   "c": "#4a3a6b",
-   "q": [
     {
      "q": "Hvilket land vant Eurovision 2026?",
      "o": [
-      "USA",
+      "Sverige",
       "Bulgaria",
       "Norge",
-      "Sverige"
+      "USA"
      ],
      "a": 1,
      "w": "Sangeren Dara vant med låta «Bangaranga». Det var første gang Bulgaria vant.",
@@ -440,15 +123,30 @@
      "off": false
     },
     {
-     "q": "I hvilken by deles Nobels fredspris ut hvert år 10. desember?",
+     "q": "Hva heter statsministeren i Norge?",
      "o": [
-      "London",
-      "New York",
-      "Oslo",
-      "Paris"
+      "Jonas Gahr Støre",
+      "Erna Solberg",
+      "Kong Harald",
+      "Erling Haaland"
      ],
-     "a": 2,
-     "w": "Fredsprisen deles ut i Oslo rådhus. De andre nobelprisene deles ut i Stockholm.",
+     "a": 0,
+     "w": "Jonas Gahr Støre (Arbeiderpartiet) er statsminister og leder regjeringen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Jens Stoltenberg la fram statsbudsjettet i oktober 2026. Hvilken jobb har han nå?",
+     "o": [
+      "Fotballtrener",
+      "Konge",
+      "NATO-sjef",
+      "Finansminister"
+     ],
+     "a": 3,
+     "w": "Stoltenberg var NATO-sjef før. Nå er han finansminister og har ansvaret for statens penger.",
      "imgs": [],
      "vis": "med",
      "sek": 5,
@@ -457,44 +155,429 @@
     {
      "q": "Hvem fikk Nobels fredspris for 2026?",
      "o": [
+      "Donald Trump",
+      "Greta Thunberg",
       "Erling Haaland",
       "Dara fra Bulgaria",
-      "Navi Pillay",
-      "Donald Trump"
+      "Navi Pillay"
      ],
-     "a": 2,
+     "a": 4,
      "w": "Navi Pillay er en jurist fra Sør-Afrika. Hun har jobbet for at folk som begår krigsforbrytelser, skal bli straffet.",
      "imgs": [],
      "vis": "med",
      "sek": 5,
      "off": false
-    },
+    }
+   ]
+  },
+  {
+   "n": "Samfunnsfag",
+   "e": "🏛️",
+   "c": "#2e4a6b",
+   "q": [
     {
-     "q": "Hvor skulle romferden Artemis 2 med astronauter fly i 2026?",
+     "q": "Hva betyr demokrati?",
      "o": [
-      "Til sola",
-      "Til Mars",
-      "Rundt månen",
-      "Til bunnen av havet"
+      "Hærstyre",
+      "Ett partis styre",
+      "Kongestyre",
+      "Folkestyre"
      ],
-     "a": 2,
-     "w": "Artemis 2 var første gang siden 1972 at astronauter reiste mot månen.",
+     "a": 3,
+     "w": "Demokrati kommer fra gresk: demos = folk og kratos = makt. Folket velger hvem som skal styre.",
      "imgs": [],
      "vis": "med",
      "sek": 5,
      "off": false
     },
     {
-     "q": "Hva jobber en jurist med?",
+     "q": "Hvilket år fikk Norge grunnloven sin?",
      "o": [
-      "Å bygge hus",
-      "Å fly fly",
-      "Å lage mat",
-      "Å stelle dyr",
-      "Lover og rettigheter"
+      "1814",
+      "1905",
+      "1945",
+      "1066"
+     ],
+     "a": 0,
+     "w": "Grunnloven ble skrevet på Eidsvoll og vedtatt 17. mai 1814. Derfor feirer vi nasjonaldagen 17. mai.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Makta i Norge er delt i tre. Hvem har den dømmende makta?",
+     "o": [
+      "Stortinget",
+      "Kongen",
+      "Regjeringen",
+      "Domstolene"
+     ],
+     "a": 3,
+     "w": "Stortinget har den lovgivende makta, regjeringen den utøvende og domstolene den dømmende. Det kalles maktfordeling.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilket år begynte første verdenskrig?",
+     "o": [
+      "1918",
+      "1939",
+      "1914",
+      "1905"
+     ],
+     "a": 2,
+     "w": "Krigen startet etter skuddene i Sarajevo i 1914 og varte til 1918.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilket år ble FN (De forente nasjoner) opprettet?",
+     "o": [
+      "1989",
+      "1945",
+      "2001",
+      "1914",
+      "1919"
+     ],
+     "a": 1,
+     "w": "FN ble opprettet etter andre verdenskrig for å sikre fred. Folkeforbundet fra 1919/1920 var en forløper.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "KRLE",
+   "e": "🕊️",
+   "c": "#e8871e",
+   "q": [
+    {
+     "q": "Hva heter den hellige boka i kristendommen?",
+     "o": [
+      "Vedaene",
+      "Koranen",
+      "Bibelen",
+      "Toraen"
+     ],
+     "a": 2,
+     "w": "Bibelen består av Det gamle testamentet og Det nye testamentet.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva heter den hellige boka i islam?",
+     "o": [
+      "Bibelen",
+      "Vedaene",
+      "Koranen",
+      "Tripitaka"
+     ],
+     "a": 2,
+     "w": "Muslimer mener Koranen er Guds ord, åpenbart til profeten Muhammed.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva betyr karma i hinduismen?",
+     "o": [
+      "En straff fra en gud",
+      "En høytid med farger",
+      "At handlingene dine får følger",
+      "Et tempel"
+     ],
+     "a": 2,
+     "w": "Karma er en lov om årsak og virkning: gode handlinger gir gode følger, dårlige handlinger gir dårlige følger. Det er ikke en straff fra en gud.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva betyr samsara i hinduismen?",
+     "o": [
+      "Bønn i templet",
+      "Lysfesten om høsten",
+      "Kretsløpet av fødsel, død og gjenfødsel",
+      "Den hellige elva Ganges"
+     ],
+     "a": 2,
+     "w": "Målet er å bli fri fra samsara. Det kalles moksha.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva sier «den gylne regel»?",
+     "o": [
+      "Du skal alltid si ja",
+      "Gjør mot andre det du vil at de skal gjøre mot deg",
+      "Den sterkeste skal alltid bestemme",
+      "Øye for øye, tann for tann",
+      "Gull er mer verdt enn sølv"
+     ],
+     "a": 1,
+     "w": "Den gylne regel finnes i mange religioner og livssyn, blant annet i Bergprekenen i Bibelen. Den er en viktig regel i etikk.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Matte",
+   "e": "➗",
+   "c": "#3a5a3e",
+   "q": [
+    {
+     "q": "Hva er 25 % av 200?",
+     "o": [
+      "100",
+      "50",
+      "25",
+      "75"
+     ],
+     "a": 1,
+     "w": "25 % er det samme som en firedel. 200 : 4 = 50.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er 3² (tre i andre)?",
+     "o": [
+      "9",
+      "27",
+      "6",
+      "5"
+     ],
+     "a": 0,
+     "w": "3² betyr 3 · 3 = 9.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Et rektangel er 6 cm langt og 4 cm bredt. Hva er arealet?",
+     "o": [
+      "10 cm²",
+      "24 cm²",
+      "24 cm",
+      "20 cm²"
+     ],
+     "a": 1,
+     "w": "Areal = lengde · bredde = 6 · 4 = 24 cm². Areal måles i kvadratcentimeter.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Løs likningen: 2x + 3 = 11",
+     "o": [
+      "x = 8",
+      "x = 5,5",
+      "x = 4",
+      "x = 7"
+     ],
+     "a": 2,
+     "w": "Trekk fra 3 på begge sider: 2x = 8. Del på 2: x = 4.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "En rettvinklet trekant har katetene 3 cm og 4 cm. Hvor lang er hypotenusen?",
+     "o": [
+      "7 cm",
+      "6 cm",
+      "25 cm",
+      "12 cm",
+      "5 cm"
      ],
      "a": 4,
-     "w": "Fredsprisvinneren Navi Pillay er jurist. Hun har jobbet med at alle land skal følge internasjonale lover, også i krig.",
+     "w": "Pytagoras: 3² + 4² = 9 + 16 = 25. Kvadratroten av 25 er 5.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Norsk",
+   "e": "📖",
+   "c": "#2e6a8a",
+   "q": [
+    {
+     "q": "Hvilket av disse ordene er et substantiv?",
+     "o": [
+      "Raskt",
+      "Katt",
+      "Løpe",
+      "Fin"
+     ],
+     "a": 1,
+     "w": "Substantiv er navn på ting, dyr, personer og steder. Løpe er et verb, fin er et adjektiv og raskt er et adverb.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er et verb?",
+     "o": [
+      "Et ord som beskriver hvordan noe er",
+      "Et lite bindeord",
+      "Et ord som forteller hva noen gjør",
+      "Et navn på en ting"
+     ],
+     "a": 2,
+     "w": "Eksempler på verb: løpe, spise, tenke, skrive.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva er en metafor?",
+     "o": [
+      "En sammenligning med «som»",
+      "En overskrift",
+      "Et bilde der noe sies å VÆRE noe annet",
+      "Et rim på slutten av linjene"
+     ],
+     "a": 2,
+     "w": "«Livet er en reise» er en metafor. «Sterk som en bjørn» er en sammenligning, fordi den bruker «som».",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvem skrev skuespillene «Et dukkehjem» og «Peer Gynt»?",
+     "o": [
+      "Henrik Wergeland",
+      "Inger Hagerup",
+      "Henrik Ibsen",
+      "Jo Nesbø"
+     ],
+     "a": 2,
+     "w": "Henrik Ibsen (1828–1906) er Norges mest kjente dramatiker. Skuespillene hans blir spilt over hele verden.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva kalles det når flere ord etter hverandre begynner med samme lyd, som i «sinte, sure Sigurd»?",
+     "o": [
+      "Enderim",
+      "Kontrast",
+      "Personifikasjon",
+      "Metafor",
+      "Bokstavrim (allitterasjon)"
+     ],
+     "a": 4,
+     "w": "Bokstavrim brukes i dikt, reklame og overskrifter for å gi rytme og gjøre teksten lett å huske.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Kroppsøving",
+   "e": "🏃",
+   "c": "#4a3a6b",
+   "q": [
+    {
+     "q": "Hvor mange spillere har hvert lag på banen i fotball?",
+     "o": [
+      "5",
+      "15",
+      "7",
+      "11"
+     ],
+     "a": 3,
+     "w": "Ti utespillere og én keeper.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva bør du gjøre før du trener hardt, for å unngå skader?",
+     "o": [
+      "Sove",
+      "Varme opp",
+      "Strekke deg i ti minutter uten å bevege deg",
+      "Spise en stor middag"
+     ],
+     "a": 1,
+     "w": "Oppvarming gjør musklene varme og klare, og pulsen går gradvis opp.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvor mange spillere har hvert lag på banen i håndball?",
+     "o": [
+      "5",
+      "11",
+      "6",
+      "7"
+     ],
+     "a": 3,
+     "w": "Seks utespillere og én keeper.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva skjer med pulsen når du trener hardt?",
+     "o": [
+      "Den går opp",
+      "Den går ned",
+      "Den stopper",
+      "Den blir helt lik"
+     ],
+     "a": 0,
+     "w": "Hjertet slår fortere for å sende mer oksygen ut til musklene.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Helsedirektoratet anbefaler at barn og unge er fysisk aktive minst hvor lenge hver dag?",
+     "o": [
+      "15 minutter",
+      "5 minutter",
+      "60 minutter",
+      "3 timer",
+      "10 timer"
+     ],
+     "a": 2,
+     "w": "Minst 60 minutter daglig, og noe av det bør være med høy intensitet – altså så du blir andpusten.",
      "imgs": [],
      "vis": "med",
      "sek": 5,
@@ -506,30 +589,30 @@
  "lyn": {
   "1": [
    {
-    "q": "Hvilken sport handler fotball-VM om?",
+    "q": "Hva er 7 · 8?",
     "o": [
-     "Ishockey",
-     "Ski",
-     "Håndball",
-     "Fotball"
+     "64",
+     "48",
+     "56",
+     "54"
     ],
-    "a": 3,
-    "w": "Fotball-VM for menn ble spilt sommeren 2026.",
+    "a": 2,
+    "w": "7 · 8 = 56.",
     "imgs": [],
     "vis": "med",
     "sek": 5,
     "off": false
    },
    {
-    "q": "Hva heter hovedstaden i Norge?",
+    "q": "Hvilken dato er Norges nasjonaldag?",
     "o": [
-     "Trondheim",
-     "Oslo",
-     "Stockholm",
-     "Bergen"
+     "17. juni",
+     "24. desember",
+     "17. mai",
+     "1. mai"
     ],
-    "a": 1,
-    "w": "Oslo er Norges hovedstad. Der ligger Stortinget og der deles fredsprisen ut.",
+    "a": 2,
+    "w": "17. mai feirer vi grunnloven fra 1814.",
     "imgs": [],
     "vis": "med",
     "sek": 5,
@@ -538,13 +621,13 @@
    {
     "q": "Hvilket land vant fotball-VM 2026?",
     "o": [
-     "Italia",
+     "Spania",
      "Norge",
      "Brasil",
-     "Spania"
+     "Italia"
     ],
-    "a": 3,
-    "w": "Spania vant VM for andre gang.",
+    "a": 0,
+    "w": "Spania slo Argentina 1–0 i finalen.",
     "imgs": [],
     "vis": "med",
     "sek": 5,
@@ -553,45 +636,45 @@
   ],
   "2": [
    {
-    "q": "Hva heter FNs klimatoppmøte i 2026?",
+    "q": "Hvilket år falt Berlinmuren?",
     "o": [
-     "COP31",
-     "VM31",
-     "EU31",
-     "NATO31"
+     "2001",
+     "1961",
+     "1945",
+     "1989"
+    ],
+    "a": 3,
+    "w": "Muren ble bygd i 1961 og falt i 1989. Det var starten på slutten for den kalde krigen.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilken hindugud har elefanthode?",
+    "o": [
+     "Ganesha",
+     "Vishnu",
+     "Shiva",
+     "Krishna"
     ],
     "a": 0,
-    "w": "COP er FNs klimatoppmøte, og dette var nummer 31.",
+    "w": "Ganesha er sønnen til Shiva og Parvati, og fjerner hindringer.",
     "imgs": [],
     "vis": "med",
     "sek": 5,
     "off": false
    },
    {
-    "q": "Hvilken by var vertskap for Eurovision 2026?",
+    "q": "Hva er et synonym?",
     "o": [
-     "Paris",
-     "Oslo",
-     "Wien",
-     "Roma"
+     "Et ord som betyr det motsatte",
+     "Et navn på en by",
+     "Et ord som rimer",
+     "Et ord som betyr det samme som et annet ord"
     ],
-    "a": 2,
-    "w": "Wien er hovedstaden i Østerrike, som vant Eurovision året før.",
-    "imgs": [],
-    "vis": "med",
-    "sek": 5,
-    "off": false
-   },
-   {
-    "q": "Hvem er finansminister i Norge?",
-    "o": [
-     "Donald Trump",
-     "Kong Harald",
-     "Jens Stoltenberg",
-     "Erling Haaland"
-    ],
-    "a": 2,
-    "w": "Han la fram statsbudsjettet i oktober 2026.",
+    "a": 3,
+    "w": "«Glad» og «blid» er synonymer. «Glad» og «trist» er antonymer (motsetninger).",
     "imgs": [],
     "vis": "med",
     "sek": 5,
@@ -600,45 +683,45 @@
   ],
   "3": [
    {
-    "q": "Hvilket land ligger ved Hormuzstredet?",
+    "q": "Hva er 10 % av 350?",
     "o": [
-     "Island",
-     "Mexico",
-     "Iran",
-     "Norge"
-    ],
-    "a": 2,
-    "w": "Hormuzstredet ligger mellom Iran og Oman.",
-    "imgs": [],
-    "vis": "med",
-    "sek": 5,
-    "off": false
-   },
-   {
-    "q": "Hvilket land var vertskap for COP31?",
-    "o": [
-     "Tyrkia",
-     "Sverige",
-     "Canada",
-     "Japan"
+     "35",
+     "10",
+     "3,5",
+     "350"
     ],
     "a": 0,
-    "w": "Møtet var i byen Antalya i Tyrkia.",
+    "w": "10 % er en tidel: 350 : 10 = 35.",
     "imgs": [],
     "vis": "med",
     "sek": 5,
     "off": false
    },
    {
-    "q": "Hvilket parti tilhører president Trump?",
+    "q": "Hvilken religion feirer lysfesten Diwali?",
     "o": [
-     "De grønne",
-     "Arbeiderpartiet",
-     "Demokratene",
-     "Republikanerne"
+     "Hinduismen",
+     "Jødedommen",
+     "Islam",
+     "Kristendommen"
     ],
-    "a": 3,
-    "w": "Republikanerne tapte mellomvalget i november 2026.",
+    "a": 0,
+    "w": "Diwali (divali) er hinduismens lysfest om høsten.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilke to land var supermaktene under den kalde krigen?",
+    "o": [
+     "Kina og Japan",
+     "USA og Sovjetunionen",
+     "Norge og Sverige",
+     "Tyskland og Frankrike"
+    ],
+    "a": 1,
+    "w": "De kjempet om makt og innflytelse i verden fra 1945 til 1991.",
     "imgs": [],
     "vis": "med",
     "sek": 5,
@@ -647,45 +730,45 @@
   ],
   "4": [
    {
-    "q": "Hva heter låta som vant Eurovision 2026?",
+    "q": "Hvem er finansminister i Norge nå?",
     "o": [
-     "«Bangaranga»",
-     "«Euphoria»",
-     "«Fire»",
-     "«Waterloo»"
+     "Donald Trump",
+     "Erling Haaland",
+     "Jens Stoltenberg",
+     "Kong Harald"
     ],
-    "a": 0,
-    "w": "Dara fra Bulgaria vant med «Bangaranga».",
+    "a": 2,
+    "w": "Han la fram statsbudsjettet i oktober 2026.",
     "imgs": [],
     "vis": "med",
     "sek": 5,
     "off": false
    },
    {
-    "q": "Hvilket land kommer fredsprisvinneren Navi Pillay fra?",
+    "q": "Hva er omkretsen av et kvadrat med sider på 5 cm?",
     "o": [
-     "Norge",
-     "Kina",
-     "USA",
-     "Sør-Afrika"
+     "25 cm",
+     "10 cm",
+     "20 cm²",
+     "20 cm"
     ],
     "a": 3,
-    "w": "Hun ble født i byen Durban i Sør-Afrika.",
+    "w": "Omkrets = alle sidene lagt sammen: 5 + 5 + 5 + 5 = 20 cm.",
     "imgs": [],
     "vis": "med",
     "sek": 5,
     "off": false
    },
    {
-    "q": "Hvilket lag slo Norge 3–1 på Ullevaal i november 2026?",
+    "q": "Hva heter de to skriftformene av norsk?",
     "o": [
-     "Wales",
-     "Argentina",
-     "Brasil",
-     "Spania"
+     "Bokmål og nynorsk",
+     "Nynorsk og samisk",
+     "Bokmål og dansk",
+     "Riksmål og engelsk"
     ],
     "a": 0,
-    "w": "Kampen var i Nations League. Haaland scoret det tredje målet på straffe.",
+    "w": "Alle elever lærer begge. Den du bruker mest, kalles hovedmål, den andre sidemål.",
     "imgs": [],
     "vis": "med",
     "sek": 5,
@@ -694,48 +777,48 @@
   ],
   "5": [
    {
-    "q": "Hvilken måned begynte krigen mellom USA/Israel og Iran?",
+    "q": "Hvilket år fikk alle kvinner i Norge stemmerett ved stortingsvalg?",
     "o": [
-     "Februar 2026",
-     "Januar 2020",
-     "Desember 2025",
-     "November 2026",
-     "Juli 2026"
-    ],
-    "a": 0,
-    "w": "Angrepene på Iran startet 28. februar 2026.",
-    "imgs": [],
-    "vis": "med",
-    "sek": 5,
-    "off": false
-   },
-   {
-    "q": "Hvor mange lag var med i fotball-VM 2026?",
-    "o": [
-     "24",
-     "16",
-     "48",
-     "64",
-     "32"
-    ],
-    "a": 2,
-    "w": "Det var første VM med 48 lag. Tidligere var det 32 lag.",
-    "imgs": [],
-    "vis": "med",
-    "sek": 5,
-    "off": false
-   },
-   {
-    "q": "Fredsprisen ble delt ut første gang for 125 år siden (2026 minus 125). Hvilket år var det?",
-    "o": [
-     "2001",
-     "1901",
-     "1945",
+     "1913",
      "1905",
+     "1945",
+     "1884",
      "1814"
     ],
+    "a": 0,
+    "w": "Norge var et av de første landene i verden som ga kvinner allmenn stemmerett.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilken dato ble Norge angrepet av Tyskland under andre verdenskrig?",
+    "o": [
+     "8. mai 1945",
+     "9. april 1940",
+     "22. juli 2011",
+     "17. mai 1814",
+     "1. september 1939"
+    ],
     "a": 1,
-    "w": "2026 – 125 = 1901. Alfred Nobel bestemte i testamentet sitt at prisene skulle deles ut.",
+    "w": "Norge ble okkupert fra 9. april 1940 til frigjøringen 8. mai 1945.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva er arealet av en sirkel med radius 2 cm? (Bruk π ≈ 3,14)",
+    "o": [
+     "3,14 cm²",
+     "6,28 cm²",
+     "4 cm²",
+     "12,56 cm²",
+     "12,56 cm"
+    ],
+    "a": 3,
+    "w": "Areal = π · r² = 3,14 · 2 · 2 = 12,56 cm².",
     "imgs": [],
     "vis": "med",
     "sek": 5,

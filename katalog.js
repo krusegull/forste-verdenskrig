@@ -36,7 +36,7 @@ const KATALOG = [
       {
         navn: "Nyheter i verden",
         ikon: "📰",
-        beskrivelse: "Konkurransen NYHETSKAMPEN – krig, valg, klima, Norge, sport og kultur høsten 2026",
+        beskrivelse: "Konkurransen NYHETSKAMPEN – nyheter høsten 2026 + pensum i samfunnsfag, KRLE, matte, norsk og kroppsøving",
         lenke: "samfunnsfag/nyheter/index.html"
       }
     ]
