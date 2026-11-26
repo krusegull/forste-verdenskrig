@@ -1,0 +1,746 @@
+{
+ "v": 1,
+ "tittel": "NYHETSKAMPEN",
+ "under": "Verden høsten 2026 – Samfunnsfag (nyheter fram til 26. november 2026)",
+ "slutt": "Godt jobbet! Følg med på nyhetene – mye kan ha skjedd siden dette ble laget (26. november 2026).",
+ "kat": [
+  {
+   "n": "Krig og konflikt",
+   "e": "🌍",
+   "c": "#8c2f39",
+   "q": [
+    {
+     "q": "Hvilket smalt havstred har vært i sentrum under Iran-krigen fordi mye av verdens olje fraktes gjennom det?",
+     "o": [
+      "Gibraltarstredet",
+      "Hormuzstredet",
+      "Suezkanalen",
+      "Bosporos"
+     ],
+     "a": 1,
+     "w": "Hormuzstredet ligger mellom Iran og Oman. Iran har truet og angrepet skip der, og trafikken av oljetankere har falt kraftig.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilke to land begynte angrepene på Iran 28. februar 2026?",
+     "o": [
+      "Russland og Kina",
+      "USA og Israel",
+      "Storbritannia og Frankrike",
+      "Saudi-Arabia og Egypt"
+     ],
+     "a": 1,
+     "w": "USA og Israel angrep Iran 28. februar 2026. Iran svarte blant annet med å true og angripe skip i Hormuzstredet.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Omtrent hvor stor del av verdens olje går vanligvis gjennom Hormuzstredet?",
+     "o": [
+      "Omtrent tre firedeler",
+      "Omtrent en hundredel",
+      "Omtrent halvparten",
+      "Omtrent en femdel"
+     ],
+     "a": 3,
+     "w": "Omtrent en femdel av verdens olje går gjennom stredet. Land som Kuwait, Qatar, Irak, Saudi-Arabia og De forente arabiske emirater bruker det til eksport.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvorfor merker folk i mange land Iran-krigen, selv om de bor langt unna?",
+     "o": [
+      "Internett ble slått av i hele verden",
+      "Olje-, gass- og drivstoffprisene har steget",
+      "Strømmen gikk i hele Europa",
+      "Alle skoler i Europa ble stengt"
+     ],
+     "a": 1,
+     "w": "Det internasjonale energibyrået (IEA) sier krigen har ført til den største forstyrrelsen noensinne i handelen med olje og gass. Det gir høyere priser over hele verden.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilket land holdt valg til nasjonalforsamlingen sin 27. oktober 2026 – et valg mange kalte et av de viktigste i landets historie?",
+     "o": [
+      "Iran",
+      "Libanon",
+      "Israel",
+      "Tyrkia",
+      "Egypt"
+     ],
+     "a": 2,
+     "w": "Israel valgte ny nasjonalforsamling (Knesset) 27. oktober 2026. Etter valget tok det tid å avklare hvem som skulle danne regjering.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Valg og politikk",
+   "e": "🗳️",
+   "c": "#2e4a6b",
+   "q": [
+    {
+     "q": "Hva kalles valget i USA som holdes midt i presidentperioden?",
+     "o": [
+      "Kommunevalg",
+      "Mellomvalg",
+      "Presidentvalg",
+      "Folkeavstemning"
+     ],
+     "a": 1,
+     "w": "Mellomvalget ble holdt 3. november 2026. Da velges hele Representantenes hus og rundt en tredel av Senatet – men ikke presidenten.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilket parti vant flertall i Representantenes hus i mellomvalget 2026?",
+     "o": [
+      "De grønne",
+      "Demokratene",
+      "Republikanerne",
+      "Libertarianerne"
+     ],
+     "a": 1,
+     "w": "Demokratene vant tilbake flertallet i Representantenes hus. Ifølge AP vant de også flertall i Senatet. Republikanerne hadde hatt flertall i huset siden 2023.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvor mange plasser i Representantenes hus var på valg i 2026?",
+     "o": [
+      "Alle 435",
+      "100",
+      "218",
+      "50"
+     ],
+     "a": 0,
+     "w": "Alle 435 plassene velges hvert andre år. 218 plasser trengs for å få flertall.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilke saker preget valgkampen i USA, ifølge nyhetsbyrået AP?",
+     "o": [
+      "Romfart og månelandinger",
+      "Fotball-VM og Eurovision",
+      "Skolemat og ferietider",
+      "Høye priser, bensinpriser og krigen i Iran"
+     ],
+     "a": 3,
+     "w": "AP skrev at Demokratene vant på velgernes frustrasjon over levekostnader, stigende bensinpriser og krigen i Iran.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvem ligger an til å bli ny leder (speaker) av Representantenes hus – og blir i så fall den første svarte i den rollen?",
+     "o": [
+      "Barack Obama",
+      "Roy Cooper",
+      "Mike Johnson",
+      "Zohran Mamdani",
+      "Hakeem Jeffries"
+     ],
+     "a": 4,
+     "w": "Hakeem Jeffries leder Demokratene i huset. Mike Johnson (republikaner) har vært speaker fram til nå. Den nye kongressen tar over 3. januar 2027.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Klima og miljø",
+   "e": "🌱",
+   "c": "#3a5a3e",
+   "q": [
+    {
+     "q": "Hva kalles FNs store, årlige klimatoppmøte?",
+     "o": [
+      "G7",
+      "OPEC",
+      "NATO",
+      "COP"
+     ],
+     "a": 3,
+     "w": "COP betyr partsmøte (Conference of the Parties) under FNs klimakonvensjon. Møtet i 2026 var nummer 31: COP31.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "I hvilket land ble klimatoppmøtet COP31 holdt i november 2026?",
+     "o": [
+      "Tyrkia",
+      "Brasil",
+      "Norge",
+      "Egypt"
+     ],
+     "a": 0,
+     "w": "COP31 ble holdt i Antalya i Tyrkia fra 9. til 20. november 2026. Året før (COP30) var møtet i Brasil.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilket land ledet selve forhandlingene på COP31, selv om møtet ble holdt i Tyrkia?",
+     "o": [
+      "USA",
+      "Tyskland",
+      "Kina",
+      "Australia"
+     ],
+     "a": 3,
+     "w": "Tyrkia og Australia delte på vertskapet: Tyrkia arrangerte møtet, mens Australia ledet forhandlingene.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilken temperaturgrense fra Parisavtalen advarte COP31-ledelsen om at verden er på vei til å passere?",
+     "o": [
+      "10 grader",
+      "0,5 grader",
+      "1,5 grader",
+      "5 grader"
+     ],
+     "a": 2,
+     "w": "Parisavtalen har som mål å begrense oppvarmingen til godt under 2 grader, helst 1,5 grader. Australias klimaminister advarte om at verden er på vei forbi 1,5 grader.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva viste en rapport fra Verdens meteorologiske organisasjon (WMO) om drivhusgasser i 2025?",
+     "o": [
+      "Bare vanndamp økte",
+      "Nivåene av CO2 og andre drivhusgasser slo rekord",
+      "Målingene ble stanset",
+      "CO2-nivået sank til det samme som før industrien",
+      "Nivåene var helt uendret"
+     ],
+     "a": 1,
+     "w": "WMO-rapporten viste at nivåene av CO2 og andre drivhusgasser i lufta var rekordhøye i 2025.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Norge",
+   "e": "🇳🇴",
+   "c": "#a8622e",
+   "q": [
+    {
+     "q": "Hva er statsbudsjettet?",
+     "o": [
+      "Resultatet av stortingsvalget",
+      "En lov om hvem som kan stemme",
+      "Statens plan for inntekter og utgifter neste år",
+      "En del av Grunnloven"
+     ],
+     "a": 2,
+     "w": "Regjeringen legger fram forslaget om høsten, og Stortinget vedtar budsjettet før jul. Nå behandles budsjettet for 2027.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvem holdt finanstalen og la fram regjeringens forslag til statsbudsjett for 2027 i Stortinget 7. oktober 2026?",
+     "o": [
+      "Jonas Gahr Støre",
+      "Erna Solberg",
+      "Jens Stoltenberg",
+      "Trygve Slagsvold Vedum"
+     ],
+     "a": 2,
+     "w": "Jens Stoltenberg (Ap) er finansminister. Det er finansministeren som holder finanstalen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva sa finansministeren at regjeringen gjør med Forsvaret i budsjettforslaget for 2027?",
+     "o": [
+      "Legger ned forsvaret",
+      "Lar forsvaret være helt uendret",
+      "Ruster opp forsvaret",
+      "Halverer forsvaret"
+     ],
+     "a": 2,
+     "w": "Stoltenberg sa i finanstalen at regjeringen ruster opp forsvaret av Norge i en urolig tid.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilken pris, delt ut i Bergen i november 2026, gikk til en gruppe som verner Atrato-elva i Colombia?",
+     "o": [
+      "Holbergprisen",
+      "Nobels fredspris",
+      "Raftoprisen",
+      "Spellemannprisen"
+     ],
+     "a": 2,
+     "w": "Raftoprisen er en menneskerettighetspris. Vinnerne kjemper mot miljøødeleggelser og for rettighetene til urfolk og afrocolombianere ved elva.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvem er stortingspresident – den som leder Stortingets møter?",
+     "o": [
+      "Kong Harald",
+      "Masud Gharahkhani",
+      "Jens Stoltenberg",
+      "Erna Solberg",
+      "Jonas Gahr Støre"
+     ],
+     "a": 1,
+     "w": "Stortingspresidenten har det høyeste vervet i Stortinget. Masud Gharahkhani (Ap) ledet møtet da statsbudsjettet ble lagt fram.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Sport",
+   "e": "⚽",
+   "c": "#2e6a8a",
+   "q": [
+    {
+     "q": "Hvilket land vant fotball-VM for menn i 2026?",
+     "o": [
+      "Frankrike",
+      "Spania",
+      "Argentina",
+      "Norge"
+     ],
+     "a": 1,
+     "w": "Spania slo Argentina 1–0 etter ekstraomganger i finalen 19. juli 2026. Det var Spanias andre VM-tittel.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvilke tre land arrangerte fotball-VM 2026?",
+     "o": [
+      "USA, Canada og Mexico",
+      "England, Skottland og Wales",
+      "Spania, Portugal og Marokko",
+      "Brasil, Argentina og Chile"
+     ],
+     "a": 0,
+     "w": "VM ble spilt i 16 byer i Nord-Amerika. Finalen ble spilt på stadion i New York/New Jersey.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvem scoret vinnermålet i VM-finalen 2026?",
+     "o": [
+      "Lionel Messi",
+      "Ferran Torres",
+      "Kylian Mbappé",
+      "Rodri"
+     ],
+     "a": 1,
+     "w": "Ferran Torres scoret i det 106. minuttet, i ekstraomgangene. Rodri var Spanias kaptein og løftet pokalen.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva var nytt ved VM 2026?",
+     "o": [
+      "Det var første VM med bare 16 lag",
+      "Det var første VM uten publikum",
+      "Det var første VM med 48 lag",
+      "Det var første VM i Afrika"
+     ],
+     "a": 2,
+     "w": "48 lag spilte 104 kamper. Tidligere VM hadde 32 lag.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva ble Spania den første nasjonen i historien til å gjøre etter VM-seieren?",
+     "o": [
+      "Vinne tre VM på rad",
+      "Vinne VM uten å slippe inn mål",
+      "Vinne VM med bare spillere fra én klubb",
+      "Vinne VM på hjemmebane",
+      "Ha både herrenes og kvinnenes VM-tittel samtidig"
+     ],
+     "a": 4,
+     "w": "Spanias kvinner vant VM i 2023. Med herrenes seier i 2026 hadde Spania begge titlene på samme tid – første gang det har skjedd.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  },
+  {
+   "n": "Kultur og vitenskap",
+   "e": "🏆",
+   "c": "#4a3a6b",
+   "q": [
+    {
+     "q": "Hvilket land vant Eurovision Song Contest 2026 i Wien?",
+     "o": [
+      "Østerrike",
+      "Bulgaria",
+      "Sverige",
+      "Norge"
+     ],
+     "a": 1,
+     "w": "Dara vant med låta «Bangaranga». Det var Bulgarias første seier noensinne. Israel kom på andreplass.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hvem fikk Nobels fredspris for 2026?",
+     "o": [
+      "Greta Thunberg",
+      "Volodymyr Zelenskyj",
+      "Navi Pillay",
+      "María Corina Machado"
+     ],
+     "a": 2,
+     "w": "Navi Pillay er en sørafrikansk jurist. María Corina Machado fikk fredsprisen året før, i 2025.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva fikk Navi Pillay fredsprisen for?",
+     "o": [
+      "Klimaforskning",
+      "Romfart",
+      "Arbeid for fred og internasjonal rett",
+      "Musikk som samler folk"
+     ],
+     "a": 2,
+     "w": "Nobelkomiteen trakk fram at hun har bidratt til at krigsforbrytelser, forbrytelser mot menneskeheten og folkemord straffeforfølges.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Hva var spesielt med romferden Artemis 2, som ble skutt opp i april 2026?",
+     "o": [
+      "Første romturist noensinne",
+      "Første landing på Mars",
+      "Første ferd mot månen med astronauter siden 1972",
+      "Første satellitt i bane rundt jorda"
+     ],
+     "a": 2,
+     "w": "Artemis 2 var NASAs første ferd mot månen med mannskap siden Apollo-programmet tok slutt i 1972.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    },
+    {
+     "q": "Fredsprisen 2026 ble kunngjort 125 år etter at den ble delt ut for første gang. Hvilket år var det?",
+     "o": [
+      "1814",
+      "1945",
+      "1920",
+      "1905",
+      "1901"
+     ],
+     "a": 4,
+     "w": "2026 – 125 = 1901. Fredsprisen deles ut i Oslo 10. desember, på Alfred Nobels dødsdag.",
+     "imgs": [],
+     "vis": "med",
+     "sek": 5,
+     "off": false
+    }
+   ]
+  }
+ ],
+ "lyn": {
+  "1": [
+   {
+    "q": "I hvilken by ble Eurovision 2026 arrangert?",
+    "o": [
+     "Sofia",
+     "Malmö",
+     "Oslo",
+     "Wien"
+    ],
+    "a": 3,
+    "w": "Wien er hovedstaden i Østerrike, som vant Eurovision året før.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "I hvilken by deles Nobels fredspris ut 10. desember?",
+    "o": [
+     "Bergen",
+     "Oslo",
+     "Genève",
+     "Stockholm"
+    ],
+    "a": 1,
+    "w": "De andre nobelprisene deles ut i Stockholm, men fredsprisen deles ut i Oslo rådhus.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilken sport hadde VM-finale mellom Spania og Argentina i juli 2026?",
+    "o": [
+     "Ishockey",
+     "Håndball",
+     "Basketball",
+     "Fotball"
+    ],
+    "a": 3,
+    "w": "Fotball-VM for menn ble spilt i USA, Canada og Mexico.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "2": [
+   {
+    "q": "Hva het låta som vant Eurovision 2026?",
+    "o": [
+     "«Bangaranga»",
+     "«Fire»",
+     "«Michelle»",
+     "«Euphoria»"
+    ],
+    "a": 0,
+    "w": "Dara fra Bulgaria vant med «Bangaranga».",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilket land kommer Navi Pillay fra?",
+    "o": [
+     "Brasil",
+     "India",
+     "Sør-Afrika",
+     "Kenya"
+    ],
+    "a": 2,
+    "w": "Hun ble født i Durban i Sør-Afrika, i en familie med indisk-tamilsk bakgrunn.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilket lag slo Norge 3–1 på Ullevaal 14. november 2026 i Nations League?",
+    "o": [
+     "Italia",
+     "Portugal",
+     "Wales",
+     "Danmark"
+    ],
+    "a": 2,
+    "w": "Erling Haaland scoret det tredje målet på straffe.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "3": [
+   {
+    "q": "Hvilket land tapte VM-finalen 2026?",
+    "o": [
+     "England",
+     "Brasil",
+     "Argentina",
+     "Frankrike"
+    ],
+    "a": 2,
+    "w": "Argentina tapte 0–1 for Spania etter ekstraomganger.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilken by i Tyrkia var vertskap for COP31?",
+    "o": [
+     "Antalya",
+     "Istanbul",
+     "Izmir",
+     "Ankara"
+    ],
+    "a": 0,
+    "w": "Antalya ligger ved Middelhavet i Sør-Tyrkia.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva heter de to kamrene i den amerikanske kongressen?",
+    "o": [
+     "Knesset og Dumaen",
+     "Overhuset og Underhuset",
+     "Stortinget og Lagtinget",
+     "Representantenes hus og Senatet"
+    ],
+    "a": 3,
+    "w": "Overhuset og Underhuset finnes i Storbritannia. Stortinget er Norges nasjonalforsamling.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "4": [
+   {
+    "q": "Hvilken by i Kina var vertskap for APEC-toppmøtet i november 2026, der Trump, Xi og Putin skulle møtes?",
+    "o": [
+     "Shenzhen",
+     "Shanghai",
+     "Beijing",
+     "Hongkong"
+    ],
+    "a": 0,
+    "w": "APEC er et samarbeid mellom land rundt Stillehavet. Møtet ble holdt i Shenzhen i Sør-Kina.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hva heter Israels nasjonalforsamling?",
+    "o": [
+     "Kongressen",
+     "Riksdagen",
+     "Dumaen",
+     "Knesset"
+    ],
+    "a": 3,
+    "w": "Dumaen er Russlands nasjonalforsamling, Riksdagen er Sveriges.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "I hvilket minutt kom vinnermålet i VM-finalen 2026?",
+    "o": [
+     "Det 106. minuttet",
+     "Det 120. minuttet",
+     "Det 45. minuttet",
+     "Det 90. minuttet"
+    ],
+    "a": 0,
+    "w": "Kampen sto 0–0 etter 90 minutter. Ferran Torres avgjorde i ekstraomgangene.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ],
+  "5": [
+   {
+    "q": "Før 2026: Hvilket år var Norge sist med i et fotball-VM for herrer?",
+    "o": [
+     "1998",
+     "1994",
+     "2006",
+     "2014",
+     "1982"
+    ],
+    "a": 0,
+    "w": "Norge kvalifiserte seg til VM 2026 som første gang siden 1998. Erling Haaland scoret 16 mål i kvalifiseringen.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Hvilken dato begynte USAs og Israels angrep på Iran?",
+    "o": [
+     "24. februar 2022",
+     "1. januar 2026",
+     "28. februar 2026",
+     "3. november 2026",
+     "7. oktober 2023"
+    ],
+    "a": 2,
+    "w": "24. februar 2022 er datoen Russland gikk til fullskala invasjon av Ukraina. 3. november 2026 var mellomvalget i USA.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   },
+   {
+    "q": "Omtrent hvor mange tilskuere så kampene på stadion under VM 2026 (ny rekord)?",
+    "o": [
+     "Omtrent 15 millioner",
+     "Omtrent 6,8 millioner",
+     "Omtrent 3,4 millioner",
+     "Omtrent 1 million",
+     "Omtrent 300 000"
+    ],
+    "a": 1,
+    "w": "6 810 966 tilskuere er rekord for en VM-sluttrunde. Det var også flere kamper enn noen gang: 104.",
+    "imgs": [],
+    "vis": "med",
+    "sek": 5,
+    "off": false
+   }
+  ]
+ }
+}

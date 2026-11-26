@@ -32,6 +32,12 @@ const KATALOG = [
         ikon: "🧊",
         beskrivelse: "Reisen i 13 stasjoner og konkurransen JERNTEPPET – forberedelse til prøven",
         lenke: "samfunnsfag/kalde-krigen/index.html"
+      },
+      {
+        navn: "Nyheter i verden",
+        ikon: "📰",
+        beskrivelse: "Konkurransen NYHETSKAMPEN – krig, valg, klima, Norge, sport og kultur høsten 2026",
+        lenke: "samfunnsfag/nyheter/index.html"
       }
     ]
   },
