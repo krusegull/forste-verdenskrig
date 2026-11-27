@@ -706,7 +706,7 @@ function teacherView(){
    ${rows.map(r=>{ const s=st(r.k); return `<tr><td>${esc(r.lag)}</td><td>${esc(r.navn)}</td><td class="n">${r.lp}</td><td class="n">${r.k?s.ans:""}</td><td class="n">${r.k?s.ok:""}</td><td class="n">${r.k?s.pts:""}</td>
      <td style="white-space:nowrap">${r.k?`${sb(r.k,"star",-1,"−")} <b>${s.star||0}</b> ${sb(r.k,"star",1,"+")}`:""}</td>
      <td style="white-space:nowrap">${r.k?`${sb(r.k,"atf",-1,"−")} <b style="color:${(s.atf||0)<0?"#b3261e":(s.atf||0)>0?"#2e7d32":"inherit"}">${(s.atf||0)>0?"+":""}${s.atf||0}</b> ${sb(r.k,"atf",1,"+")}`:""}</td></tr>`; }).join("")}</table></div>
-   <div class="act"><button class="ghost" style="color:#241f17;border-color:#cdbf98" id="cp">📋 Kopier til Excel/Teams</button><button class="ghost" style="color:#241f17;border-color:#cdbf98" id="lrSend">📤 Send til Lærerrommet</button><button class="big" id="tc">Lukk</button></div>
+   <div class="act"><button class="ghost" style="color:#241f17;border-color:#cdbf98" id="cp">📋 Kopier til Excel</button><button class="ghost" style="color:#241f17;border-color:#cdbf98" id="lrSend">📤 Send til Lærerrommet</button><button class="big" id="tc">Lukk</button></div>
    <p class="note" style="color:#6d5a3e;margin:6px 0 0">«Send til Lærerrommet» åpner Lærerrommet i en ny fane (du må være logget inn). Der ser du over poengene og kobler dem til elevene før de lagres. Resultatet huskes også under «Tidligere resultater» på startskjermen, så du kan sende det senere.</p>`);
   $("tc").onclick=closeOv; $("lrSend").onclick=sendToLr;
   $("qb").querySelectorAll("[data-k]").forEach(b=>b.onclick=()=>{ const k=b.dataset.k, f=b.dataset.f; const s=G.studs[k]||(G.studs[k]={ans:0,ok:0,pts:0});
